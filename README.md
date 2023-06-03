@@ -25,7 +25,7 @@ AI 기반 대형폐기물 처리 원터치 서비스 **FuniBuni** 안드로이�
 | Architecture | Multi Module, Clean Architecture, MVVM, Repository Pattern |
 | DI           | Dagger Hilt                                                |
 | Network      | Retrofit2                                                  |
-| DB           | Room                                                       |
+| DB           | Room, DataStore                                            |
 | Jetpack(AAC) | ViewModel, DataBinding, LiveData, Lifecycles, Navigation   |
 | Image        | Glide                                                      |
 | Camera       | -                                                          |
