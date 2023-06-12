@@ -4,7 +4,8 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingHorizontal="24dp">
+        android:paddingHorizontal="24dp"
+        android:background="@color/background_color">
 
 
         <ImageView
@@ -24,6 +25,7 @@
             android:gravity="center"
             android:text="다음과 같이 사진을 찍어주세요"
             android:textSize="20sp"
+            android:background="@color/white"
             app:layout_constraintBottom_toTopOf="@id/card_view"/>
 
         <com.google.android.material.card.MaterialCardView

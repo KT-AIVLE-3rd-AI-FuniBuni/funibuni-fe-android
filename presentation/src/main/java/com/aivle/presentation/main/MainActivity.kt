@@ -46,10 +46,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                 binding.header.btnBack.isVisible = false
                 binding.header.title.isVisible = false
                 binding.header.btnAddress.isVisible = true
+
+                binding.header.title.text = ""
             } else {
                 binding.header.btnBack.isVisible = true
                 binding.header.title.isVisible = true
                 binding.header.btnAddress.isVisible = false
+
+                binding.header.title.text = arguments?.getString("HeaderTitle") ?: ""
             }
         }
     }
