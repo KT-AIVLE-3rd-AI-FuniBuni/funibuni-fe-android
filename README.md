@@ -26,8 +26,9 @@ AI 기반 대형폐기물 처리 원터치 서비스 **FuniBuni** 안드로이�
 | DI           | Dagger Hilt                                                |
 | Network      | Retrofit2                                                  |
 | DB           | Room, DataStore                                            |
+| Async        | Coroutines Flow                                            |
 | Jetpack(AAC) | ViewModel, DataBinding, LiveData, Lifecycles, Navigation   |
 | Image        | Glide                                                      |
-| Camera       | -                                                          |
-| AI           | TensorFlow Lite                                            |
+| Camera       | CameraX                                                    |
+| AI           | TensorFlow Lite, ML Kit                                    |
 | Others       | -                                                          |

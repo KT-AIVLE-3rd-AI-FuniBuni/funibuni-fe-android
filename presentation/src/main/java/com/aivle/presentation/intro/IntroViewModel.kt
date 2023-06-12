@@ -1,6 +1,8 @@
-package com.aivle.presentation.address
+package com.aivle.presentation.intro
 
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.aivle.domain.model.Address
@@ -11,21 +13,26 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class AddressViewModel @Inject constructor(
+class IntroViewModel @Inject constructor(
     private val GetAddressUseCase: GetAddressUseCase,
     private val SetAddressUseCase: SetAddressUseCase,
 ) : ViewModel() {
 
-    fun getAddress() {
+    private val _isRegisteredAddress = MutableLiveData(false)
+    val isRegisteredAddress: LiveData<Boolean>
+        get() = _isRegisteredAddress
+
+    fun loadAddress() {
         viewModelScope.launch {
-            val address = GetAddressUseCase()
-            Log.d("vm", "address=$address")
+            _isRegisteredAddress.value = GetAddressUseCase() != null
         }
     }
 
     fun setAddress(value: String) {
         viewModelScope.launch {
-            SetAddressUseCase(Address(value))
+            val address = Address(value)
+            SetAddressUseCase(address)
+            _isRegisteredAddress.value = true
         }
     }
 }

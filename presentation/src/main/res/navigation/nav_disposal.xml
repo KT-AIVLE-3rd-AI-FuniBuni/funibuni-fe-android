@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_disposal"
+    app:startDestination="@id/disposalFragment">
+
+
+
+    <fragment
+        android:id="@+id/disposalFragment"
+        android:name="com.aivle.presentation.disposal.DisposalFragment"
+        android:label="DisposalFragment"
+        tools:layout="@layout/fragment_disposal"/>
+
+    <action android:id="@+id/action_global_disposalFragment"
+        app:destination="@id/disposalFragment"/>
+
+</navigation>
