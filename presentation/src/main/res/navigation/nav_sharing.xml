@@ -12,6 +12,10 @@
         android:id="@+id/sharingFragment"
         android:name="com.aivle.presentation.sharing.SharingFragment"
         android:label="SharingFragment"
-        tools:layout="@layout/fragment_sharing"/>
+        tools:layout="@layout/fragment_sharing">
+        <argument
+            android:name="IsNavRootFragment"
+            android:defaultValue="true"/>
+    </fragment>
 
 </navigation>

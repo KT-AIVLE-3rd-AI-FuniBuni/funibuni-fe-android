@@ -12,6 +12,10 @@
         android:id="@+id/myProfileFragment"
         android:name="com.aivle.presentation.myprofile.MyProfileFragment"
         android:label="MyProfileFragment"
-        tools:layout="@layout/fragment_my_profile"/>
+        tools:layout="@layout/fragment_my_profile">
+        <argument
+            android:name="IsNavRootFragment"
+            android:defaultValue="true"/>
+    </fragment>
 
 </navigation>
