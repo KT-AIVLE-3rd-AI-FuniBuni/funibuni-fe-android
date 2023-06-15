@@ -1,7 +1,11 @@
 package com.aivle.data.di
 
 import com.aivle.data.repository.AddressRepositoryImpl
+import com.aivle.data.repository.UserRepositoryImpl
+import com.aivle.data.repository.WebTokenRepositoryImpl
 import com.aivle.domain.repository.AddressRepository
+import com.aivle.domain.repository.UserRepository
+import com.aivle.domain.repository.WebTokenRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -15,4 +19,14 @@ interface RepositoryModule {
     fun bindAddressRepository(
         repositoryImpl: AddressRepositoryImpl
     ): AddressRepository
+
+    @Binds
+    fun bindUserRepositoryImpl(
+        repositoryImpl: UserRepositoryImpl
+    ): UserRepository
+
+    @Binds
+    fun bindWebTokenRepositoryImpl(
+        repositoryImpl: WebTokenRepositoryImpl
+    ): WebTokenRepository
 }

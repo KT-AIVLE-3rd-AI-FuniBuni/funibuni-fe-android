@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_disposal_act"
+    app:startDestination="@id/wasteClassificationFragment">
+
+    <fragment
+        android:id="@+id/wasteClassificationFragment"
+        android:name="com.aivle.presentation.disposal.wasteclassification.WasteClassificationFragment"
+        android:label="WasteClassificationFragment"
+        tools:layout="@layout/fragment_waste_classification">
+        <action
+            android:id="@+id/action_wasteClassificationFragment_to_applyChoiceFragment"
+            app:destination="@id/applyChoiceFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/applyChoiceFragment"
+        android:name="com.aivle.presentation.disposal.applychoice.ApplyChoiceFragment"
+        android:label="ApplyChoiceFragment"
+        tools:layout="@layout/fragment_apply_choice">
+        <action
+            android:id="@+id/action_applyChoiceFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.aivle.presentation.user.signup.SignUpFragment"
+        android:label="SignUpFragment"
+        tools:layout="@layout/fragment_sign_up"/>
+
+</navigation>

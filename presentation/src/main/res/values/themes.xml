@@ -8,4 +8,8 @@
     </style>
 
     <style name="Theme.FuniBuni" parent="Base.Theme.FuniBuni" />
+    
+    <style name="ShapeAppearanceCorner4">
+        <item name="cornerSize">4dp</item>
+    </style>
 </resources>

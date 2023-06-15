@@ -16,19 +16,6 @@
         <argument
             android:name="IsNavRootFragment"
             android:defaultValue="true"/>
-        <action
-            android:id="@+id/action_disposalFragment_to_wasteClassificationFragment"
-            app:destination="@id/wasteClassificationFragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/wasteClassificationFragment"
-        android:name="com.aivle.presentation.wasteclassification.WasteClassificationFragment"
-        android:label="WasteClassificationFragment"
-        tools:layout="@layout/fragment_waste_classification">
-        <argument
-            android:name="HeaderTitle"
-            android:defaultValue="대형폐기물 분류"/>
     </fragment>
 
 </navigation>

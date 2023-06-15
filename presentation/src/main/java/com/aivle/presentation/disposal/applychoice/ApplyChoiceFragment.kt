@@ -1,13 +1,13 @@
-package com.aivle.presentation.home
+package com.aivle.presentation.disposal.applychoice
 
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController
 import com.aivle.presentation.R
 import com.aivle.presentation.base.BaseFragment
-import com.aivle.presentation.databinding.FragmentHomeBinding
+import com.aivle.presentation.databinding.FragmentApplyChoiceBinding
 
-class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
+class ApplyChoiceFragment : BaseFragment<FragmentApplyChoiceBinding>(R.layout.fragment_apply_choice) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -17,13 +17,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     private fun initView() {
         binding.btnDisposal.setOnClickListener {
-            findNavController().navigate(R.id.action_global_disposalFragment)
+            signUp()
         }
         binding.btnSharing.setOnClickListener {
-            findNavController().navigate(R.id.action_global_sharingFragment)
+            signUp()
         }
-        binding.btnTest.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_testFragment)
-        }
+    }
+
+    private fun signUp() {
+        findNavController().navigate(R.id.action_applyChoiceFragment_to_signUpFragment)
     }
 }

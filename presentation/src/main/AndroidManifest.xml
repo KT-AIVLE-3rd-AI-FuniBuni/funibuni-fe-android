@@ -12,6 +12,7 @@
         </activity>
 
         <activity android:name=".main.MainActivity"/>
+        <activity android:name=".disposal.DisposalApplyActivity"/>
 
     </application>
 </manifest>

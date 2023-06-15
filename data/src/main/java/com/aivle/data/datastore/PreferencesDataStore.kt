@@ -14,4 +14,13 @@ interface PreferencesDataStore {
     val address: Flow<AddressEntity?>
 
     suspend fun setAddress(address: AddressEntity)
+
+    val refreshToken: Flow<String?>
+
+    suspend fun setRefreshToken(token: String)
+
+    val accessToken: Flow<String?>
+
+    suspend fun setAccessToken(token: String)
+
 }

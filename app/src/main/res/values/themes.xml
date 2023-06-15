@@ -3,7 +3,7 @@
 <!--    <style name="Base.Theme.FuniBuni" parent="Theme.Material3.DayNight.NoActionBar">-->
     <style name="Base.Theme.FuniBuni" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+         <item name="colorPrimary">#31D7C3</item>
     </style>
 
     <style name="Theme.FuniBuni" parent="Base.Theme.FuniBuni" />
