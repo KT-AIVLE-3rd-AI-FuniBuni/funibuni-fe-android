@@ -5,7 +5,6 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.widget.LinearLayout
-import com.aivle.presentation_design.interactive.InteractiveHelper
 
 class InteractiveLinearLayout @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0, defStyleRes: Int = 0

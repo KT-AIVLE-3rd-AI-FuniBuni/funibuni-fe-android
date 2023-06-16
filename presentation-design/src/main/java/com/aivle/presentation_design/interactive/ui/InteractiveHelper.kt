@@ -1,4 +1,4 @@
-package com.aivle.presentation_design.interactive
+package com.aivle.presentation_design.interactive.ui
 
 import android.util.Log
 import android.view.MotionEvent
