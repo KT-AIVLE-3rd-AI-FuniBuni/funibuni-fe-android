@@ -1,4 +1,4 @@
-package com.aivle.funibuni
+package com.aivle.furniburni
 
 import org.junit.Test
 

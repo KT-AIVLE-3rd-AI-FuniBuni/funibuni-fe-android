@@ -1,4 +1,4 @@
-package com.aivle.funibuni
+package com.aivle.furniburni
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

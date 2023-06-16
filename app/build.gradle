@@ -4,14 +4,15 @@ plugins {
     id 'kotlin-kapt'
     id 'com.google.dagger.hilt.android'
     id 'androidx.navigation.safeargs.kotlin'
+    id 'com.google.gms.google-services'
 }
 
 android {
-    namespace 'com.aivle.funibuni'
+    namespace 'com.aivle.furniburni'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.aivle.funibuni"
+        applicationId "com.aivle.furniburni"
         minSdk 24
         targetSdk 33
         versionCode 1
@@ -49,6 +50,12 @@ dependencies {
     implementation 'com.google.android.material:material:1.5.0'
     implementation 'com.google.dagger:hilt-android:2.46'
     kapt 'com.google.dagger:hilt-compiler:2.46'
+
+    // Import the Firebase BoM
+    implementation platform('com.google.firebase:firebase-bom:32.1.0')
+    // TODO: Add the dependencies for Firebase products you want to use
+    // When using the BoM, don't specify versions in Firebase dependencies
+    implementation 'com.google.firebase:firebase-analytics-ktx'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'

@@ -1,10 +1,10 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-<!--    <style name="Base.Theme.FuniBuni" parent="Theme.Material3.DayNight.NoActionBar">-->
-    <style name="Base.Theme.FuniBuni" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+<!--    <style name="Base.Theme.FurniBurni" parent="Theme.Material3.DayNight.NoActionBar">-->
+    <style name="Base.Theme.FurniBurni" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
          <item name="colorPrimary">#31D7C3</item>
     </style>
 
-    <style name="Theme.FuniBuni" parent="Base.Theme.FuniBuni" />
+    <style name="Theme.FurniBurni" parent="Base.Theme.FurniBurni" />
 </resources>
