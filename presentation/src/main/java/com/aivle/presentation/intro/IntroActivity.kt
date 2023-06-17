@@ -8,6 +8,9 @@ import com.aivle.presentation.R
 import com.aivle.presentation.base.BaseActivity
 import com.aivle.presentation.databinding.ActivityIntroBinding
 import com.aivle.presentation.main.MainActivity
+import com.google.firebase.FirebaseApp
+import com.google.firebase.appcheck.FirebaseAppCheck
+import com.google.firebase.appcheck.safetynet.SafetyNetAppCheckProviderFactory
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -19,6 +22,7 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>(R.layout.activity_intro
         super.onCreate(savedInstanceState)
 
         initView()
+        initFirebaseApp()
         observerViewModel()
 
         viewModel.loadAddress()
@@ -32,6 +36,15 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>(R.layout.activity_intro
                 viewModel.setAddress(address)
             }
         }
+    }
+
+    private fun initFirebaseApp() {
+        // Firebase initialize
+        FirebaseApp.initializeApp(this)
+        val firebaseAppCheck = FirebaseAppCheck.getInstance()
+        firebaseAppCheck.installAppCheckProviderFactory(
+            SafetyNetAppCheckProviderFactory.getInstance()
+        )
     }
 
     private fun observerViewModel() {

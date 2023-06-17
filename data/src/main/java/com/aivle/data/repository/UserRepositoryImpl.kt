@@ -1,17 +1,11 @@
 package com.aivle.data.repository
 
 import com.aivle.data.service.UserService
+import com.aivle.domain.model.user.SignInResponse
 import com.aivle.domain.model.user.SignUpResponse
+import com.aivle.domain.model.user.UserForSignIn
 import com.aivle.domain.model.user.UserForSignUp
 import com.aivle.domain.repository.UserRepository
-import com.skydoves.sandwich.ApiResponse
-import com.skydoves.sandwich.onError
-import com.skydoves.sandwich.onException
-import com.skydoves.sandwich.onSuccess
-import com.skydoves.sandwich.suspendOnError
-import com.skydoves.sandwich.suspendOnException
-import com.skydoves.sandwich.suspendOnFailure
-import com.skydoves.sandwich.suspendOnSuccess
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
@@ -21,7 +15,15 @@ class UserRepositoryImpl @Inject constructor(
     private val service: UserService
 ) : UserRepository {
 
-    override suspend fun signUp(user: UserForSignUp): Flow<SignUpResponse> = flow {
+    override suspend fun signIn(userForSignIn: UserForSignIn): Flow<SignInResponse> = flow {
+        when (Random.nextInt(3)) {
+            0 -> emit(SignInResponse.Success)
+            1 -> emit(SignInResponse.Error.NotExistsUser)
+            2 -> emit(SignInResponse.Exception("Exception"))
+        }
+    }
+
+    override suspend fun signUp(userForSignUp: UserForSignUp): Flow<SignUpResponse> = flow {
 //        service.signUp().suspendOnSuccess {
 //            emit(SignUpResponse.Success)
 //        }.suspendOnError {
@@ -29,10 +31,11 @@ class UserRepositoryImpl @Inject constructor(
 //        }.suspendOnException {
 //            emit(SignUpResponse.Exception(message))
 //        }
-        when (Random.nextInt(3)) {
+        when (Random.nextInt(4)) {
             0 -> emit(SignUpResponse.Success)
             1 -> emit(SignUpResponse.Error.DuplicateID)
-            2 -> emit(SignUpResponse.Exception("Exception"))
+            2 -> emit(SignUpResponse.Error.DuplicatePhoneNumber)
+            3 -> emit(SignUpResponse.Exception("Exception"))
         }
     }
 }

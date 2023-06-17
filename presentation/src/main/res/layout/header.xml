@@ -19,8 +19,7 @@
             android:layout_marginStart="4dp"
             android:padding="12dp"
             android:src="@drawable/arrow_back_24"
-            android:visibility="gone"
-            tools:visibility="visible"
+            android:visibility="visible"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>

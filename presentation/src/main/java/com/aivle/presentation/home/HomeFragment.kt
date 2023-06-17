@@ -1,11 +1,14 @@
 package com.aivle.presentation.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController
 import com.aivle.presentation.R
 import com.aivle.presentation.base.BaseFragment
 import com.aivle.presentation.databinding.FragmentHomeBinding
+import com.aivle.presentation.user.sign.SignActivity
+import com.aivle.presentation_design.interactive.ui.BottomUpDialog
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
@@ -23,7 +26,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             findNavController().navigate(R.id.action_global_sharingFragment)
         }
         binding.btnTest.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_testFragment)
+            startActivity(Intent(requireActivity(), SignActivity::class.java))
         }
     }
 }

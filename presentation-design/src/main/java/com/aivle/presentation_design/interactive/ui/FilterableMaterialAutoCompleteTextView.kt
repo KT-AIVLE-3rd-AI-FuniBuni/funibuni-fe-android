@@ -34,7 +34,7 @@ class FilterableMaterialAutoCompleteTextView : MaterialAutoCompleteTextView {
     private val errorColorText = ColorStateList.valueOf(Color.rgb(211, 47, 47))
 
     private val shakeErrorAnim = TranslateAnimation(0f, 20f, 0f, 0f).apply {
-        duration = 300
+        duration = 250
         interpolator = CycleInterpolator(2f)
     }
 
@@ -128,7 +128,9 @@ class FilterableMaterialAutoCompleteTextView : MaterialAutoCompleteTextView {
         val ancestor = findTextInputLayoutAncestor()
         if (ancestor != null) {
             ancestor.error = error
-            ancestor.startAnimation(shakeErrorAnim)
+            if (error != null) {
+                ancestor.startAnimation(shakeErrorAnim)
+            }
         } else {
             super.setError(error)
         }
@@ -139,7 +141,9 @@ class FilterableMaterialAutoCompleteTextView : MaterialAutoCompleteTextView {
         if (ancestor != null) {
             ancestor.errorIconDrawable = icon
             ancestor.error = error
-            ancestor.startAnimation(shakeErrorAnim)
+            if (error != null) {
+                ancestor.startAnimation(shakeErrorAnim)
+            }
         } else {
             super.setError(error, icon)
         }

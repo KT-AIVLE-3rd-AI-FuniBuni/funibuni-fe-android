@@ -7,7 +7,7 @@ import androidx.datastore.preferences.preferencesDataStore
 import com.aivle.data.entity.AddressEntity
 import kotlinx.coroutines.flow.Flow
 
-val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "FuniBuni")
+val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "FurniBurni")
 
 interface PreferencesDataStore {
 

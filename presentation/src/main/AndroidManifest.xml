@@ -13,6 +13,8 @@
 
         <activity android:name=".main.MainActivity"/>
         <activity android:name=".disposal.DisposalApplyActivity"/>
+        <activity android:name=".user.sign.SignActivity"
+            android:windowSoftInputMode="adjustResize"/>
 
     </application>
 </manifest>

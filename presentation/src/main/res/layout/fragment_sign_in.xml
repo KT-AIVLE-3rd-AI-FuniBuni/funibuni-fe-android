@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="48dp"
+            android:paddingHorizontal="24dp">
+
+            <TextView
+                android:id="@+id/guide_message_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="22sp"
+                android:textColor="@color/black"
+                android:text="로그인이 필요합니다"
+                tools:text="로그인이 필요합니다"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:id="@+id/guide_message_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="22sp"
+                android:textColor="@color/black"
+                android:text="휴대폰 번호를 입력해주세요 :)"
+                tools:text="휴대폰 번호를 입력해주세요 :)"
+                app:layout_constraintTop_toBottomOf="@id/guide_message_1"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense.ExposedDropdownMenu"
+                android:id="@+id/edt_layout_phone_auth_code"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:hint="인증 번호 (6자리)"
+                android:visibility="gone"
+                tools:visibility="visible"
+                android:alpha="0"
+                tools:alpha="0.3"
+                app:boxBackgroundMode="filled"
+                app:boxBackgroundColor="@android:color/transparent"
+                app:endIconMode="clear_text"
+                app:counterEnabled="true"
+                app:counterMaxLength="6"
+                app:errorTextColor="@android:color/holo_red_light"
+                app:boxStrokeErrorColor="@android:color/holo_red_light"
+                app:layout_constraintTop_toTopOf="@id/edt_layout_phone_number">
+
+                <com.aivle.presentation_design.interactive.ui.FilterableMaterialAutoCompleteTextView
+                    android:id="@+id/edt_phone_auth_code"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal"
+                    android:textSize="22sp"
+                    android:textStyle="bold"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_retry_phone_auth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="인증 문자 다시 받기 (00:00)"
+                android:visibility="gone"
+                tools:visibility="visible"
+                android:alpha="0"
+                tools:alpha="0.3"
+                android:enabled="false"
+                app:layout_constraintTop_toBottomOf="@id/edt_layout_phone_auth_code"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense.ExposedDropdownMenu"
+                android:id="@+id/edt_layout_phone_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="48dp"
+                android:hint="휴대폰 번호"
+                app:boxBackgroundMode="filled"
+                app:boxBackgroundColor="@color/white"
+                app:endIconMode="clear_text"
+                app:errorTextColor="@android:color/holo_red_light"
+                app:boxStrokeErrorColor="@android:color/holo_red_light"
+                app:layout_constraintTop_toBottomOf="@id/guide_message_2">
+
+                <com.aivle.presentation_design.interactive.ui.FilterableMaterialAutoCompleteTextView
+                    android:id="@+id/edt_phone_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="phone"
+                    android:textSize="22sp"
+                    android:textStyle="bold"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_auth"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:gravity="center"
+            android:text="인증 문자 받기"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:background="@drawable/bg_ripple_sign_button"
+            android:enabled="false"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
