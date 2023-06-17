@@ -1,5 +1,9 @@
 package com.aivle.presentation.user.sign
 
+import android.animation.Animator
+import android.animation.ObjectAnimator
+import android.animation.PropertyValuesHolder
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -40,6 +44,12 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
     }
 
     private fun initView() {
+        binding.guideMessage1.animateFadeInWithAfter {
+            binding.guideMessage2.animateFadeInWithAfter {
+                binding.edtLayoutPhoneNumber.animateFadeIn()
+            }
+        }
+
         binding.edtPhoneNumber.addTextChangedListener(EditTextWatcher(binding.edtPhoneNumber))
         binding.edtPhoneAuthCode.addTextChangedListener(EditTextWatcher(binding.edtPhoneAuthCode))
 
@@ -88,7 +98,9 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
                 binding.edtPhoneAuthCode.requestFocus()
             }
             is Event.RequestSms.UpdateTimer -> {
-                updateRetryAuthButtonTimer(event.remainingTime)
+                if (binding.btnRetryPhoneAuth.isEnabled) {
+                    updateRetryAuthButtonTimer(event.remainingTime)
+                }
             }
             is Event.RequestSms.IncorrectCode -> {
                 binding.edtPhoneAuthCode.error = "인증번호가 맞지 않습니다. 다시 확인해주세요."
@@ -98,14 +110,18 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
                 enablePhoneAuthButton(false)
             }
             is Event.RequestSms.Exception -> {
-
+                showToast(event.message)
+                enableRetryAuthButton(false)
+                enablePhoneAuthButton(false)
             }
             is Event.SignIn.Succeed -> {
                 showToast("SignInSucceed")
                 enableRetryAuthButton(false)
+                enablePhoneAuthButton(false)
             }
             is Event.SignIn.NotExistsUser -> {
                 showToast("SignInFailure")
+                enableRetryAuthButton(false)
                 binding.btnAuth.text = "다음"
             }
             is Event.SignIn.Exception -> {
@@ -116,8 +132,8 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
     }
 
     private fun showInputPhoneAuthCode() {
-        binding.edtLayoutPhoneAuthCode.animateSettle()
-        binding.btnRetryPhoneAuth.animateSettle()
+        binding.edtLayoutPhoneAuthCode.animateSettle(requireContext())
+        binding.btnRetryPhoneAuth.animateSettle(requireContext())
     }
 
     private fun enableRetryAuthButton(isEnabled: Boolean) {
@@ -157,16 +173,6 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
         }}
     }
 
-    private fun View.animateSettle() {
-        this.animate()
-            .translationY(68f.dpToPixels(requireContext()))
-            .alpha(1f)
-            .setDuration(300L)
-            .setInterpolator(AccelerateDecelerateInterpolator())
-            .withStartAction { this.isVisible = true }
-            .start()
-    }
-
     private inner class EditTextWatcher(
         private val editText: FilterableMaterialAutoCompleteTextView
     ) : TextWatcher {
@@ -187,4 +193,37 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
             }
         }
     }
+}
+
+private fun View.animateSettle(context: Context) {
+    this.animate()
+        .translationY(38f.dpToPixels(context))
+        .alpha(1f)
+        .setDuration(500L)
+        .setInterpolator(AccelerateDecelerateInterpolator())
+        .withStartAction { this.isVisible = true }
+        .start()
+}
+
+private fun View.animateFadeIn() {
+    animateFadeInWithAfter(null)
+}
+
+private fun View.animateFadeInWithAfter(action: (() -> Unit)?) {
+    visibility = View.VISIBLE
+    val alpha = PropertyValuesHolder.ofFloat(View.ALPHA, 0f, 0.2f, 1f)
+    val translate = PropertyValuesHolder.ofFloat(View.TRANSLATION_Y, -100f, 0f)
+
+    ObjectAnimator.ofPropertyValuesHolder(this, alpha, translate).apply {
+        duration = 500
+        interpolator = AccelerateDecelerateInterpolator()
+        addListener(object : Animator.AnimatorListener {
+            override fun onAnimationStart(animation: Animator) {}
+            override fun onAnimationEnd(animation: Animator) {
+                action?.invoke()
+            }
+            override fun onAnimationCancel(animation: Animator) {}
+            override fun onAnimationRepeat(animation: Animator) {}
+        })
+    }.start()
 }

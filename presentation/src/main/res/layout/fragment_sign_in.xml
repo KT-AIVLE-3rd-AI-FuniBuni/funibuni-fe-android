@@ -20,6 +20,8 @@
                 android:textColor="@color/black"
                 android:text="로그인이 필요합니다"
                 tools:text="로그인이 필요합니다"
+                android:visibility="invisible"
+                tools:visibility="visible"
                 app:layout_constraintTop_toTopOf="parent"/>
 
             <TextView
@@ -30,6 +32,8 @@
                 android:textColor="@color/black"
                 android:text="휴대폰 번호를 입력해주세요 :)"
                 tools:text="휴대폰 번호를 입력해주세요 :)"
+                android:visibility="invisible"
+                tools:visibility="visible"
                 app:layout_constraintTop_toBottomOf="@id/guide_message_1"/>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -37,7 +41,8 @@
                 android:id="@+id/edt_layout_phone_auth_code"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="50dp"
+                tools:translationY="38dp"
                 android:hint="인증 번호 (6자리)"
                 android:visibility="gone"
                 tools:visibility="visible"
@@ -67,6 +72,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
+                tools:translationY="38dp"
                 android:text="인증 문자 다시 받기 (00:00)"
                 android:visibility="gone"
                 tools:visibility="visible"
@@ -82,6 +88,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="48dp"
                 android:hint="휴대폰 번호"
+                android:visibility="invisible"
+                tools:visibility="visible"
                 app:boxBackgroundMode="filled"
                 app:boxBackgroundColor="@color/white"
                 app:endIconMode="clear_text"
