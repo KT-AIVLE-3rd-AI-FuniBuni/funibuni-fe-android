@@ -1,5 +1,6 @@
 package com.aivle.data.di
 
+import com.aivle.data.service.SignService
 import com.aivle.data.service.UserService
 import com.aivle.domain.repository.WebTokenRepository
 import com.skydoves.sandwich.adapters.ApiResponseCallAdapterFactory
@@ -14,6 +15,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
 import java.util.concurrent.TimeUnit
+import javax.inject.Named
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -64,6 +67,11 @@ object NetworkServiceModule {
 
     @Provides
     fun provideUserService(retrofit: Retrofit): UserService {
+        return retrofit.create()
+    }
+
+    @Provides
+    fun provideSignService(retrofit: Retrofit): SignService {
         return retrofit.create()
     }
 }

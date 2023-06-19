@@ -36,11 +36,11 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense.ExposedDropdownMenu"
-                android:id="@+id/edt_layout_phone_number"
+                android:id="@+id/edt_layout_user_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="48dp"
-                android:hint="휴대폰 번호"
+                android:hint="이름"
                 android:visibility="invisible"
                 tools:visibility="visible"
                 app:boxBackgroundMode="filled"
@@ -51,16 +51,29 @@
                 app:layout_constraintTop_toBottomOf="@id/guide_message_2">
 
                 <com.aivle.presentation_design.interactive.ui.FilterableMaterialAutoCompleteTextView
-                    android:id="@+id/edt_phone_number"
+                    android:id="@+id/edt_user_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="phone"
+                    android:inputType="text"
                     android:textSize="22sp"
                     android:textStyle="bold"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_sign_up"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:gravity="center"
+            android:text="시작하기"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:background="@drawable/bg_ripple_sign_button"
+            android:enabled="false"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

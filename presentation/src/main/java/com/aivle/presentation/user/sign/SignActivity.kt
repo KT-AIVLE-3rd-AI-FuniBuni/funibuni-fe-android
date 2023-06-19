@@ -3,15 +3,11 @@ package com.aivle.presentation.user.sign
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
-import androidx.navigation.findNavController
 import com.aivle.presentation.R
 import com.aivle.presentation.base.BaseActivity
 import com.aivle.presentation.databinding.ActivitySignBinding
-import com.aivle.presentation.user.firebase.FirebasePhoneAuth
 import com.aivle.presentation.user.firebase.SmsRetrieveHelper
-import com.google.firebase.FirebaseException
 import dagger.hilt.android.AndroidEntryPoint
 
 private const val TAG = "SignActivity"
@@ -59,13 +55,13 @@ class SignActivity : BaseActivity<ActivitySignBinding>(R.layout.activity_sign) {
 
         override fun onPickedPhone(phoneNumber: String) {
             Log.d(TAG, "onPickedPhone(): phoneNumber=$phoneNumber")
-            viewModel.setPhoneNumber(phoneNumber)
+            viewModel.sendPhoneNumber(phoneNumber)
         }
 
         override fun onSmsRetrieved(message: String, smsCode: String?) {
             Log.d(TAG, "onSmsRetrieved(): message=$message, smsCode=$smsCode")
             if (smsCode != null) {
-                viewModel.setSmsCode(smsCode)
+                viewModel.sendSmsCode(smsCode)
             }
         }
     }

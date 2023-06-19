@@ -2,7 +2,7 @@ package com.aivle.domain.repository
 
 import com.aivle.domain.model.sign.SignIn
 import com.aivle.domain.model.sign.SignUp
-import com.aivle.domain.response.GeneralResponse
+import com.aivle.domain.response.NothingResponse
 import com.aivle.domain.response.SignInAutoResponse
 import com.aivle.domain.response.SignInResponse
 import com.aivle.domain.response.SignUpResponse
@@ -16,7 +16,7 @@ interface SignRepository {
 
     suspend fun signUp(signUp: SignUp): Flow<SignUpResponse>
 
-    suspend fun signOut(): Flow<GeneralResponse<Nothing>>
+    suspend fun signOut(): Flow<NothingResponse>
 
-    suspend fun withdrawal(): Flow<GeneralResponse<Nothing>>
+    suspend fun withdrawal(): Flow<NothingResponse>
 }

@@ -1,6 +1,7 @@
 package com.aivle.data.service
 
 import com.aivle.data.entity.user.UserEntity
+import com.aivle.domain.model.user.User
 import com.skydoves.sandwich.ApiResponse
 import retrofit2.http.GET
 import retrofit2.http.PUT
@@ -11,5 +12,5 @@ interface UserService {
     suspend fun getUserInfo(): ApiResponse<UserEntity>
 
     @PUT("api/user/info")
-    suspend fun updateUserInfo(): ApiResponse<String>
+    suspend fun updateUserInfo(user: User): ApiResponse<String>
 }

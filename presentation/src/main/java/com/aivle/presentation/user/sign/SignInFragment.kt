@@ -16,6 +16,7 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.aivle.presentation.R
 import com.aivle.presentation.base.BaseFragment
 import com.aivle.presentation.common.dpToPixels
@@ -130,11 +131,15 @@ class SignInFragment : BaseSignFragment<FragmentSignInBinding>(R.layout.fragment
                 showToast("SignInSucceed")
                 enableRetryAuthButton(false)
                 enablePhoneAuthButton(false)
+
+                (requireActivity() as SignActivity).finish()
             }
             is Event.SignIn.NotExistsUser -> {
-                showToast("SignInFailure")
+                showToast("NotExistsUser")
                 enableRetryAuthButton(false)
                 binding.btnAuth.text = "다음"
+
+                findNavController().navigate(R.id.action_signInFragment_to_signUpFragment)
             }
             is Event.SignIn.Exception -> {
                 showToast(event.message)
