@@ -5,8 +5,8 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.aivle.domain.response.SignInResponse
-import com.aivle.domain.model.user.UserForSignIn
-import com.aivle.domain.usecase.user.SignInUseCase
+import com.aivle.domain.model.sign.SignIn
+import com.aivle.domain.usecase.sign.SignInUseCase
 import com.aivle.presentation.user.firebase.FirebasePhoneAuth
 import com.google.firebase.FirebaseException
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -148,8 +148,8 @@ class SignInViewModel @Inject constructor(
             Log.d(TAG, "onPhoneAuthSucceed()")
 
             viewModelScope.launch {
-                val userForSignIn = UserForSignIn(_authenticatingPhoneNumber)
-                SignInUseCase(userForSignIn)
+                val signIn = SignIn(_authenticatingPhoneNumber)
+                SignInUseCase(signIn)
                     .catch {
                         _eventFlow.emit(Event.ShowToast(it.message))
                     }

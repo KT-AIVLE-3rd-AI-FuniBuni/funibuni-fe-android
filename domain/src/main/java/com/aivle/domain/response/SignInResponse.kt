@@ -1,4 +1,4 @@
-package com.aivle.domain.model.user
+package com.aivle.domain.response
 
 sealed class SignInResponse {
 

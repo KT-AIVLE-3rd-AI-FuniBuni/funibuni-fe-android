@@ -1,9 +1,8 @@
 package com.aivle.domain.model.user
 
-data class User(
+data class User constructor(
     val id: Long,
-    val userId: String,
-    val userPassword: String,
     val phoneNumber: String,
     val name: String,
+    val nickname: String,
 )

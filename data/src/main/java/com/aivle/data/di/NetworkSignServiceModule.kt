@@ -1,6 +1,6 @@
 package com.aivle.data.di
 
-import com.aivle.data.service.UserService
+import com.aivle.data.service.SignService
 import com.aivle.domain.repository.WebTokenRepository
 import com.skydoves.sandwich.adapters.ApiResponseCallAdapterFactory
 import dagger.Module
@@ -17,9 +17,9 @@ import java.util.concurrent.TimeUnit
 
 @Module
 @InstallIn(SingletonComponent::class)
-object NetworkServiceModule {
+object NetworkSignServiceModule {
 
-    private const val TAG = "NetworkServiceModule"
+    private const val TAG = "SignNetworkServiceModule"
     private const val BASE_URL = "https://jsonplaceholder.typicode.com/"
     private const val TIME_OUT = 10L
     private const val AUTHORIZATION = "Authorization"
@@ -49,13 +49,13 @@ object NetworkServiceModule {
 
     @Provides
     fun provideTokenInterceptor(repository: WebTokenRepository): Interceptor = Interceptor { chain ->
-        val accessToken = repository.getAccessToken()
+        val token = repository.getRefreshToken()
 
-        val request = if (accessToken == null) {
+        val request = if (token == null) {
             chain.request()
         } else {
             chain.request().newBuilder()
-                .addHeader(AUTHORIZATION, "$BEARER $accessToken")
+                .addHeader(AUTHORIZATION, "$BEARER $token")
                 .build()
         }
 
@@ -63,7 +63,7 @@ object NetworkServiceModule {
     }
 
     @Provides
-    fun provideUserService(retrofit: Retrofit): UserService {
+    fun provideSignService(retrofit: Retrofit): SignService {
         return retrofit.create()
     }
 }

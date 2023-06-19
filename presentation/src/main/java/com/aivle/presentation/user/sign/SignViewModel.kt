@@ -3,7 +3,7 @@ package com.aivle.presentation.user.sign
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.aivle.domain.usecase.user.SignUpUseCase
+import com.aivle.domain.usecase.sign.SignUpUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
