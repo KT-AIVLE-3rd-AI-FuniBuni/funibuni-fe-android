@@ -1,130 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingHorizontal="36dp"
-        android:orientation="vertical"
-        android:gravity="center">
+        android:layout_height="match_parent">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/edt_layout_user_id"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:hint="아이디"
-            app:boxBackgroundMode="outline"
-            app:boxBackgroundColor="@color/white"
-            app:endIconMode="clear_text">
+            android:layout_height="match_parent"
+            android:paddingTop="48dp"
+            android:paddingHorizontal="24dp">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edt_user_id"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/edt_layout_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:hint="비밀번호"
-            app:helperText="영문자 + 숫자 + 특수문자 조합 (8자리 이상)"
-            app:boxBackgroundMode="outline"
-            app:boxBackgroundColor="@color/white"
-            app:endIconMode="password_toggle">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edt_password"
+            <TextView
+                android:id="@+id/guide_message_1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword"/>
+                android:textSize="22sp"
+                android:textColor="@color/black"
+                android:text="회원가입이 필요합니다"
+                android:visibility="invisible"
+                tools:visibility="visible"
+                app:layout_constraintTop_toTopOf="parent"/>
 
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/edt_layout_password_confirm"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:hint="비밀번호 확인"
-            app:helperText="비밀번호를 한 번 더 입력해주세요"
-            app:boxBackgroundMode="outline"
-            app:boxBackgroundColor="@color/white"
-            app:endIconMode="password_toggle">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edt_password_confirm"
+            <TextView
+                android:id="@+id/guide_message_2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword"/>
+                android:textSize="22sp"
+                android:textColor="@color/black"
+                android:text="이름을 입력해주세요 :)"
+                android:visibility="invisible"
+                tools:visibility="visible"
+                app:layout_constraintTop_toBottomOf="@id/guide_message_1"/>
 
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/edt_layout_user_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:hint="이름"
-            app:boxBackgroundMode="outline"
-            app:boxBackgroundColor="@color/white"
-            app:endIconMode="clear_text">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edt_user_name"
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense.ExposedDropdownMenu"
+                android:id="@+id/edt_layout_phone_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"/>
+                android:layout_marginTop="48dp"
+                android:hint="휴대폰 번호"
+                android:visibility="invisible"
+                tools:visibility="visible"
+                app:boxBackgroundMode="filled"
+                app:boxBackgroundColor="@color/white"
+                app:endIconMode="clear_text"
+                app:errorTextColor="@android:color/holo_red_light"
+                app:boxStrokeErrorColor="@android:color/holo_red_light"
+                app:layout_constraintTop_toBottomOf="@id/guide_message_2">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.aivle.presentation_design.interactive.ui.FilterableMaterialAutoCompleteTextView
+                    android:id="@+id/edt_phone_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="phone"
+                    android:textSize="22sp"
+                    android:textStyle="bold"/>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/edt_layout_phone_number"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:hint="휴대폰번호"
-            app:boxBackgroundMode="outline"
-            app:boxBackgroundColor="@color/white"
-            app:endIconMode="clear_text">
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edt_phone_number"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="phone"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/edt_layout_phone_auth_number"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:hint="문자 인증 번호"
-            app:boxBackgroundMode="outline"
-            app:boxBackgroundColor="@color/white"
-            app:endIconMode="clear_text">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edt_phone_auth_code"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="numberDecimal"/>
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <Button
-            android:id="@+id/btn_sign_up"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:text="가입하기"/>
-
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

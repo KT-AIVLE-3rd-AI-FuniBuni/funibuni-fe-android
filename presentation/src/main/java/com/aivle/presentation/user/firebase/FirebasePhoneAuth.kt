@@ -3,6 +3,7 @@ package com.aivle.presentation.user.firebase
 import android.app.Activity
 import android.util.Log
 import com.google.firebase.FirebaseException
+import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.*
 import com.google.firebase.auth.FirebaseAuth
 import java.text.DecimalFormat
@@ -131,6 +132,16 @@ class FirebasePhoneAuth @Inject constructor() {
             // This callback is invoked in an invalid request for verification is made,
             // for instance if the the phone number format is not valid.
             Log.e(TAG, "onVerificationFailed(): $e")
+
+            if (e is FirebaseAuthInvalidCredentialsException) {
+                // Invalid request
+            } else if (e is FirebaseTooManyRequestsException) {
+                // The SMS quota for the project has been exceeded
+            } else if (e is FirebaseAuthMissingActivityForRecaptchaException) {
+                // reCAPTCHA verification attempted with null Activity
+            }
+
+            // Show a message and update the UI
             userCallback?.onVerificationFailed(e)
         }
 

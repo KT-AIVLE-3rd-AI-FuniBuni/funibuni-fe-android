@@ -31,7 +31,7 @@ class SmsRetrieveHelper(private val activity: Activity) {
         override fun onReceive(context: Context, intent: Intent) {
             Log.d(TAG, "onReceive(): $intent")
             Log.d(TAG, "onReceive(): ${intent.action}")
-            if (SmsRetriever.SMS_RETRIEVED_ACTION == intent.action) {
+            if (intent.action == SmsRetriever.SMS_RETRIEVED_ACTION) {
                 val extras = intent.extras
                 val smsRetrieverStatus = extras?.get(SmsRetriever.EXTRA_STATUS) as Status
                 Log.d(TAG, "onReceive(): $extras, $smsRetrieverStatus, ${smsRetrieverStatus.statusCode}")
@@ -138,9 +138,8 @@ class SmsRetrieveHelper(private val activity: Activity) {
                     // Extract one-time code from the message and complete verification
                     // `message` contains the entire text of the SMS message, so you will need
                     // to parse the string.
-                    Log.d(TAG, "handleActivityResult(): message=$message")
+                    Log.d(TAG, "handleActivityResult(): message=$message, parse(message)=${parseOneTimeCode(message)}")
                     if (message != null) {
-                        Log.d(TAG, "handleActivityResult(): parseOneTimeCode(message)=${parseOneTimeCode(message)}")
                         callback?.onSmsRetrieved(message, parseOneTimeCode(message))
                     }
 
@@ -152,7 +151,7 @@ class SmsRetrieveHelper(private val activity: Activity) {
         }
     }
 
-    private fun parseOneTimeCode(message: String): String? {
+    private fun parseOneTimeCode(message: String?): String? {
         return null
     }
 

@@ -11,6 +11,7 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".base.BaseActivity"/>
         <activity android:name=".main.MainActivity"/>
         <activity android:name=".disposal.DisposalApplyActivity"/>
         <activity android:name=".user.sign.SignActivity"

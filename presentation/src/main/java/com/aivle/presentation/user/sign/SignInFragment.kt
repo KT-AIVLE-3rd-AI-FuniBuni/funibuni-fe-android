@@ -30,7 +30,7 @@ import kotlinx.coroutines.flow.collectLatest
 private const val TAG = "SignInFragment"
 
 @AndroidEntryPoint
-class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sign_in) {
+class SignInFragment : BaseSignFragment<FragmentSignInBinding>(R.layout.fragment_sign_in) {
 
     private val activityViewModel: SignViewModel by activityViewModels()
     private val viewModel: SignInViewModel by viewModels()
@@ -56,9 +56,9 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
         binding.btnAuth.setOnClickListener {
             if (!binding.edtLayoutPhoneAuthCode.isVisible) { // 인증 문자 받기
                 val phoneNumber = binding.edtPhoneNumber.text.toString()
+
+                startSmsUserConsent(phoneNumber)
                 viewModel.send(requireActivity(), phoneNumber)
-
-
             } else { // 인증하기
                 val smsCode = binding.edtPhoneAuthCode.text.toString()
                 viewModel.authenticateAndSignIn(requireActivity(), smsCode)
@@ -72,6 +72,10 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
             val phoneNumber = binding.edtPhoneNumber.text.toString()
             viewModel.resend(requireActivity(), phoneNumber)
         }
+    }
+
+    private fun startSmsUserConsent(phoneNumber: String) {
+        (requireActivity() as SignActivity).startSmsUserConsent(phoneNumber)
     }
 
     private fun handleUiEvent() = repeatOnStarted {
@@ -96,6 +100,14 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
                 // 로딩중 해제
                 binding.edtPhoneAuthCode.text?.clear()
                 binding.edtPhoneAuthCode.requestFocus()
+            }
+            is Event.RequestSms.OnVerificationCompleted -> {
+                setSmsCode(event.smsCode)
+            }
+            is Event.RequestSms.OnVerificationFailed -> {
+                showToast(event.message)
+                enableRetryAuthButton(false)
+                enablePhoneAuthButton(false)
             }
             is Event.RequestSms.UpdateTimer -> {
                 if (binding.btnRetryPhoneAuth.isEnabled) {
@@ -136,6 +148,11 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
         binding.btnRetryPhoneAuth.animateSettle(requireContext())
     }
 
+    private fun setSmsCode(smsCode: String) {
+        binding.edtPhoneAuthCode.setText(smsCode)
+        binding.edtPhoneAuthCode.setSelection(smsCode.length)
+    }
+
     private fun enableRetryAuthButton(isEnabled: Boolean) {
         binding.btnRetryPhoneAuth.isEnabled = isEnabled
     }
@@ -163,12 +180,13 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
         activityViewModel.dataEventFlow.collect { event -> when (event) {
             is SignViewModel.Event.PhoneNumber -> {
                 Log.d(TAG, "SignViewModel.Event.PhoneNumber")
-                binding.edtPhoneNumber.setText(event.value)
+                val phoneNumber = event.value
+                binding.edtPhoneNumber.setText(phoneNumber)
             }
             is SignViewModel.Event.SmsCode -> {
                 Log.d(TAG, "SignViewModel.Event.SmsCode")
-                binding.edtPhoneAuthCode.setText(event.value)
-                binding.edtPhoneAuthCode.setSelection(event.value.length)
+                val smsCode = event.value
+                setSmsCode(smsCode)
             }
         }}
     }
@@ -193,37 +211,4 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
             }
         }
     }
-}
-
-private fun View.animateSettle(context: Context) {
-    this.animate()
-        .translationY(38f.dpToPixels(context))
-        .alpha(1f)
-        .setDuration(500L)
-        .setInterpolator(AccelerateDecelerateInterpolator())
-        .withStartAction { this.isVisible = true }
-        .start()
-}
-
-private fun View.animateFadeIn() {
-    animateFadeInWithAfter(null)
-}
-
-private fun View.animateFadeInWithAfter(action: (() -> Unit)?) {
-    visibility = View.VISIBLE
-    val alpha = PropertyValuesHolder.ofFloat(View.ALPHA, 0f, 0.2f, 1f)
-    val translate = PropertyValuesHolder.ofFloat(View.TRANSLATION_Y, -100f, 0f)
-
-    ObjectAnimator.ofPropertyValuesHolder(this, alpha, translate).apply {
-        duration = 500
-        interpolator = AccelerateDecelerateInterpolator()
-        addListener(object : Animator.AnimatorListener {
-            override fun onAnimationStart(animation: Animator) {}
-            override fun onAnimationEnd(animation: Animator) {
-                action?.invoke()
-            }
-            override fun onAnimationCancel(animation: Animator) {}
-            override fun onAnimationRepeat(animation: Animator) {}
-        })
-    }.start()
 }

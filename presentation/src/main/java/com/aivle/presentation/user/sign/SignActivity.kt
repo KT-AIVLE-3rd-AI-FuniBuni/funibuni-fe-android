@@ -43,6 +43,10 @@ class SignActivity : BaseActivity<ActivitySignBinding>(R.layout.activity_sign) {
         smsRetrieveHelper.handleActivityResult(requestCode, resultCode, data)
     }
 
+    fun startSmsUserConsent(phoneNumber: String) {
+        smsRetrieveHelper.startSmsUserConsent(phoneNumber)
+    }
+
     private fun initView() {
         binding.header.btnBack.setOnClickListener {
             finish()

@@ -4,7 +4,7 @@ import android.app.Activity
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.aivle.domain.model.user.SignInResponse
+import com.aivle.domain.response.SignInResponse
 import com.aivle.domain.model.user.UserForSignIn
 import com.aivle.domain.usecase.user.SignInUseCase
 import com.aivle.presentation.user.firebase.FirebasePhoneAuth
@@ -74,6 +74,8 @@ class SignInViewModel @Inject constructor(
                 object Loading : Retry()
                 object Started : Retry()
             }
+            data class OnVerificationCompleted(val smsCode: String) : Event()
+            data class OnVerificationFailed(val message: String?) : Event()
             object IncorrectCode : RequestSms()
             object Timeout : RequestSms()
             data class UpdateTimer(val remainingTime: String) : RequestSms()
@@ -93,7 +95,9 @@ class SignInViewModel @Inject constructor(
         override fun onVerificationCompleted(smsCode: String) {
             Log.d(TAG, "onVerificationCompleted(): smsCode=$smsCode")
 
-            // view.setSmsCode(smsCode)
+            viewModelScope.launch {
+                _eventFlow.emit(Event.RequestSms.OnVerificationCompleted(smsCode))
+            }
         }
 
         override fun onVerificationFailed(e: FirebaseException) {
@@ -101,7 +105,7 @@ class SignInViewModel @Inject constructor(
             _authenticatingPhoneNumber = ""
 
             viewModelScope.launch {
-                _eventFlow.emit(Event.RequestSms.Exception(e.message))
+                _eventFlow.emit(Event.RequestSms.OnVerificationFailed(e.message))
             }
         }
 
