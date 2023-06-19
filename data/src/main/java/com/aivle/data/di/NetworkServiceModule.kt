@@ -1,5 +1,6 @@
 package com.aivle.data.di
 
+import com.aivle.data.service.SharingPostService
 import com.aivle.data.service.SignService
 import com.aivle.data.service.UserService
 import com.aivle.domain.repository.WebTokenRepository
@@ -66,12 +67,11 @@ object NetworkServiceModule {
     }
 
     @Provides
-    fun provideUserService(retrofit: Retrofit): UserService {
-        return retrofit.create()
-    }
+    fun provideUserService(retrofit: Retrofit): UserService = retrofit.create()
 
     @Provides
-    fun provideSignService(retrofit: Retrofit): SignService {
-        return retrofit.create()
-    }
+    fun provideSignService(retrofit: Retrofit): SignService = retrofit.create()
+
+    @Provides
+    fun provideSharingPostService(retrofit: Retrofit): SharingPostService = retrofit.create()
 }

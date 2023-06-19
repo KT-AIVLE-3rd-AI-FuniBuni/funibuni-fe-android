@@ -3,16 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_sharing"
-    app:startDestination="@id/sharingFragment">
+    app:startDestination="@id/sharingPostListFragment">
 
-    <action android:id="@+id/action_global_sharingFragment"
-        app:destination="@id/sharingFragment"/>
+    <action android:id="@+id/action_global_sharingPostListFragment"
+        app:destination="@id/sharingPostListFragment"/>
 
     <fragment
-        android:id="@+id/sharingFragment"
-        android:name="com.aivle.presentation.sharing.SharingFragment"
-        android:label="SharingFragment"
-        tools:layout="@layout/fragment_sharing">
+        android:id="@+id/sharingPostListFragment"
+        android:name="com.aivle.presentation.sharing.SharingPostListFragment"
+        android:label="SharingPostListFragment"
+        tools:layout="@layout/fragment_sharing_post_list">
         <argument
             android:name="IsNavRootFragment"
             android:defaultValue="true"/>

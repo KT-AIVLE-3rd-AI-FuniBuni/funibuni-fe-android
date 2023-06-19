@@ -8,9 +8,9 @@ import retrofit2.http.PUT
 
 interface UserService {
 
-    @GET("api/user/info")
+    @GET("user/info")
     suspend fun getUserInfo(): ApiResponse<UserEntity>
 
-    @PUT("api/user/info")
+    @PUT("user/info")
     suspend fun updateUserInfo(user: User): ApiResponse<String>
 }

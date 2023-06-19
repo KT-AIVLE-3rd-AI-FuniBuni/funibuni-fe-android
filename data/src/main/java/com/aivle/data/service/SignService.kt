@@ -8,18 +8,18 @@ import retrofit2.http.POST
 
 interface SignService {
 
-    @POST("api/user/signup")
+    @POST("user/signup")
     suspend fun signUp(signUp: SignUp): ApiResponse<WebTokenEntity>
 
-    @POST("api/user/signin")
+    @POST("user/signin")
     suspend fun signIn(signIn: SignIn): ApiResponse<WebTokenEntity>
 
-    @POST("api/user/auto-signin")
+    @POST("user/auto-signin")
     suspend fun signInAuto(): ApiResponse<String>
 
-    @POST("api/user/signout")
+    @POST("user/signout")
     suspend fun signOut(): ApiResponse<String>
 
-    @POST("api/user/withdrawal")
+    @POST("user/withdrawal")
     suspend fun withdrawal(): ApiResponse<String>
 }

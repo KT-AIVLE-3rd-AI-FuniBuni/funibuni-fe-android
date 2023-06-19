@@ -1,10 +1,12 @@
 package com.aivle.data.di
 
 import com.aivle.data.repository.AddressRepositoryImpl
+import com.aivle.data.repository.SharingPostRepositoryImpl
 import com.aivle.data.repository.SignRepositoryImpl
 import com.aivle.data.repository.UserRepositoryImpl
 import com.aivle.data.repository.WebTokenRepositoryImpl
 import com.aivle.domain.repository.AddressRepository
+import com.aivle.domain.repository.SharingPostRepository
 import com.aivle.domain.repository.SignRepository
 import com.aivle.domain.repository.UserRepository
 import com.aivle.domain.repository.WebTokenRepository
@@ -36,4 +38,9 @@ interface RepositoryModule {
     fun bindWebTokenRepositoryImpl(
         repositoryImpl: WebTokenRepositoryImpl
     ): WebTokenRepository
+
+    @Binds
+    fun bindSharingPostRepositoryImpl(
+        repository: SharingPostRepositoryImpl
+    ): SharingPostRepository
 }

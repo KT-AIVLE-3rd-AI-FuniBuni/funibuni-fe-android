@@ -6,7 +6,7 @@
     <data>
         <variable
             name="post"
-            type="com.aivle.domain.model.Post" />
+            type="com.aivle.domain.model.SharingPostItem" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

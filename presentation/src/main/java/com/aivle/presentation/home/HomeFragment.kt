@@ -23,7 +23,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             findNavController().navigate(R.id.action_global_disposalFragment)
         }
         binding.btnSharing.setOnClickListener {
-            findNavController().navigate(R.id.action_global_sharingFragment)
+            findNavController().navigate(R.id.action_global_sharingPostListFragment)
         }
         binding.btnTest.setOnClickListener {
             startActivity(Intent(requireActivity(), SignActivity::class.java))

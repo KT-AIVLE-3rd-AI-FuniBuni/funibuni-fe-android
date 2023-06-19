@@ -12,7 +12,7 @@
             android:id="@+id/post_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:listitem="@layout/item_post"
+            tools:listitem="@layout/item_sharing_post"
             tools:itemCount="10"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintTop_toTopOf="parent"/>
