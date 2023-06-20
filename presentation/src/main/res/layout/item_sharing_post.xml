@@ -9,62 +9,110 @@
             type="com.aivle.domain.model.SharingPostItem" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.aivle.presentation_design.interactive.ui.InteractiveConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="94dp">
+        android:layout_height="132dp"
+        android:paddingHorizontal="16dp">
 
         <!-- Thumbnail -->
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/thumbnail"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_marginStart="12dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:src="@drawable/placeholder_360"
             app:shapeAppearance="@style/ShapeAppearanceCorner4"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
 
+        <!-- Product Category -->
+        <TextView
+            android:id="@+id/product_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:paddingVertical="3dp"
+            android:paddingHorizontal="10dp"
+            android:gravity="center"
+            android:textSize="12sp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:background="@drawable/bg_product_category"
+            android:text="@{post.productMidCategory}"
+            tools:text="TV"
+            app:layout_constraintTop_toTopOf="@id/thumbnail"
+            app:layout_constraintStart_toEndOf="@id/thumbnail"/>
+
         <!-- Title -->
         <TextView
             android:id="@+id/title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
             android:textSize="18sp"
             android:textColor="@color/black"
             android:maxLines="1"
             android:ellipsize="end"
             android:text="@{post.title}"
             tools:text="Title"
-            app:layout_constraintTop_toTopOf="@id/thumbnail"
-            app:layout_constraintStart_toEndOf="@id/thumbnail"/>
+            app:layout_constraintTop_toBottomOf="@id/product_category"
+            app:layout_constraintStart_toStartOf="@id/product_category"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
-        <!-- Address -->
+        <!-- Address & Date -->
         <TextView
-            android:id="@+id/address"
+            android:id="@+id/address_and_date"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textSize="14sp"
             android:textColor="@color/text_dark_gray"
             android:maxLines="1"
             android:ellipsize="end"
-            android:text="○○구 ○○○동"
-            tools:text="○○구 ○○○동"
+            android:text="@{post.addressAndDate}"
+            tools:text="송파구 잠실1동 · 6월 17일"
             app:layout_constraintTop_toBottomOf="@id/title"
-            app:layout_constraintStart_toStartOf="@id/title"/>
+            app:layout_constraintStart_toStartOf="@id/title"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
-        <!-- Date -->
-        <TextView
-            android:id="@+id/date"
+        <!-- Comments & Likes -->
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:textColor="@color/text_dark_gray"
-            android:text="@{post.createdDate}"
-            tools:text="1시간 전"
-            app:layout_constraintTop_toBottomOf="@id/address"
-            app:layout_constraintStart_toStartOf="@id/title"/>
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="@id/thumbnail"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@drawable/comments_icon_48"/>
+
+            <TextView
+                android:id="@+id/comment_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="2dp"
+                android:layout_marginBottom="1dp"
+                android:gravity="center"
+                android:text="@{Integer.toString(post.commentCount)}"
+                tools:text="10"/>
+
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginStart="3dp"
+                android:src="@drawable/heart_icon_48"/>
+
+            <TextView
+                android:id="@+id/like_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="2dp"
+                android:layout_marginBottom="1dp"
+                android:gravity="center"
+                android:text="@{Integer.toString(post.likeCount)}"
+                tools:text="5"/>
+
+        </LinearLayout>
 
         <com.google.android.material.divider.MaterialDivider
             android:layout_width="match_parent"
@@ -73,5 +121,5 @@
             app:dividerThickness="1dp"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.aivle.presentation_design.interactive.ui.InteractiveConstraintLayout>
 </layout>

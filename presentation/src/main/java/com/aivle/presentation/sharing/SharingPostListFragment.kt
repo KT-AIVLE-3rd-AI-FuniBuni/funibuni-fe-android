@@ -4,11 +4,13 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import com.aivle.domain.model.SharingPostItem
 import com.aivle.presentation.R
 import com.aivle.presentation.base.BaseFragment
 import com.aivle.presentation.common.repeatOnStarted
 import com.aivle.presentation.databinding.FragmentSharingPostListBinding
 import com.aivle.presentation.sharing.SharingPostListViewModel.Event
+import com.aivle.presentation.sharingPostDetail.SharingPostDetailActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -34,9 +36,18 @@ class SharingPostListFragment : BaseFragment<FragmentSharingPostListBinding>(R.l
     private fun handleEvent() = repeatOnStarted {
         viewModel.eventFlow.collect { event -> when (event) {
             is Event.None -> {}
-            is Event.Success -> listAdapter.submitList(event.posts)
+            is Event.Success -> {
+                val posts = event.posts.onEach { it.onClick = ::onClickPost }
+                listAdapter.submitList(posts)
+            }
             is Event.Failure -> showToast(event.message)
         }}
+    }
+
+    private fun onClickPost(postId: Int) {
+        startActivity(
+            SharingPostDetailActivity.getIntent(requireActivity(), postId)
+        )
     }
 
     private fun showToast(message: String?) {

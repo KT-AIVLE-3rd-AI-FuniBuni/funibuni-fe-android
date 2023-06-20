@@ -3,7 +3,7 @@ package com.aivle.data.datastore
 import android.content.Context
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
-import com.aivle.data.entity.AddressEntity
+import com.aivle.data.entity.address.AddressEntity
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map

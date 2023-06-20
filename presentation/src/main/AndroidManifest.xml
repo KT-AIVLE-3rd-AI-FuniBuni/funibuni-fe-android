@@ -16,6 +16,7 @@
         <activity android:name=".disposal.DisposalApplyActivity"/>
         <activity android:name=".user.sign.SignActivity"
             android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".sharingPostDetail.SharingPostDetailActivity"/>
 
     </application>
 </manifest>

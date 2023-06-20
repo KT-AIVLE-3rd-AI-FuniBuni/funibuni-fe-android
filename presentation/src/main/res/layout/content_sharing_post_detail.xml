@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="post"
+            type="com.aivle.domain.model.SharingPost" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/sticky_scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:showIn="@layout/activity_sharing_post_detail">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="18dp">
+
+            <!-- User Profile Image -->
+            <ImageView
+                android:id="@+id/user_profile"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/profile_icon_360"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <!-- User Nickname -->
+            <TextView
+                android:id="@+id/user_nickname"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:text="@{post.user.nickname}"
+                tools:text="김버니"
+                app:layout_constraintVertical_chainStyle="packed"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/address"
+                app:layout_constraintStart_toEndOf="@id/user_profile"/>
+
+            <!-- Address -->
+            <TextView
+                android:id="@+id/address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:text="@{post.title}"
+                tools:text="송파구 잠실1동"
+                app:layout_constraintTop_toBottomOf="@id/user_nickname"
+                app:layout_constraintBottom_toTopOf="@id/user_profile_divider"
+                app:layout_constraintStart_toStartOf="@id/user_nickname"/>
+
+            <!-- Divider -->
+            <View
+                android:id="@+id/user_profile_divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/divider_light_gray"
+                app:layout_constraintTop_toBottomOf="@id/user_profile"/>
+
+            <!-- Post Title -->
+            <TextView
+                android:id="@+id/post_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                tools:text="허먼밀러 뉴 에어론 체어, 풀, 그라파이트"
+                app:layout_constraintTop_toBottomOf="@id/user_profile_divider"/>
+
+            <!-- Product Category -->
+            <TextView
+                android:id="@+id/product_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                tools:text="의자"
+                app:layout_constraintTop_toBottomOf="@id/post_title"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <!-- Content -->
+            <TextView
+                android:id="@+id/content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:textColor="@color/black"
+                android:text="@string/large_text"
+                tools:text="@string/small_text"
+                app:layout_constraintTop_toBottomOf="@id/product_category"/>
+
+            <!-- Divider -->
+            <View
+                android:id="@+id/content_divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="24dp"
+                android:background="@color/divider_light_gray"
+                app:layout_constraintTop_toBottomOf="@id/content"/>
+
+            <!-- Comment ListView -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/comment_list_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                tools:listitem="@layout/item_comment"
+                tools:itemCount="5"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@id/content_divider"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+</layout>

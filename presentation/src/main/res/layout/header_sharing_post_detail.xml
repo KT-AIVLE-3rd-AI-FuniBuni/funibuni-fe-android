@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:showIn="@layout/activity_sharing_post_detail">
+
+        <!-- System StatusBar Guideline -->
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/status_bar_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="0dp"/>
+
+        <!-- 상단바 영역 하얀/투명 배경 -->
+        <View
+            android:id="@+id/top_area_background"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/white"
+            android:elevation="2dp"
+            android:alpha="0"
+            tools:alpha="1"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/top_bar_barrier"/>
+
+        <!-- 뒤로 버튼 -->
+        <ImageView
+            style="?actionButtonStyle"
+            android:id="@+id/btn_back"
+            android:layout_width="@dimen/app_bar_size"
+            android:layout_height="@dimen/app_bar_size"
+            android:padding="16dp"
+            android:src="@drawable/arrow_back_24"
+            android:elevation="2dp"
+            app:tint="@color/white"
+            app:layout_constraintTop_toTopOf="@id/status_bar_guideline"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <!-- 더보기 버튼 -->
+        <ImageView
+            style="?actionButtonStyle"
+            android:id="@+id/btn_the_more"
+            android:layout_width="@dimen/app_bar_size"
+            android:layout_height="@dimen/app_bar_size"
+            android:src="@drawable/the_more_24"
+            android:elevation="2dp"
+            android:padding="16dp"
+            tools:tint="@color/black"
+            app:tint="@color/white"
+            app:layout_constraintTop_toTopOf="@id/status_bar_guideline"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <!-- Bottom Barrier -->
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/top_bar_barrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="btn_back, btn_the_more"
+            app:barrierDirection="bottom"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

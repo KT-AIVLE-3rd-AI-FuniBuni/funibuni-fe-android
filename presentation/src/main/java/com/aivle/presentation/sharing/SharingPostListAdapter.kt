@@ -27,6 +27,14 @@ class SharingPostListAdapter : ListAdapter<SharingPostItem, SharingPostListItemV
 
 class SharingPostListItemViewHolder(private val binding: ItemSharingPostBinding) : RecyclerView.ViewHolder(binding.root) {
 
+    init {
+        binding.root.setOnClickListener {
+            binding.post?.let { post ->
+                post.onClick!!.invoke(post.postId)
+            }
+        }
+    }
+
     fun bind(postItem: SharingPostItem) {
         binding.post = postItem
         binding.executePendingBindings()

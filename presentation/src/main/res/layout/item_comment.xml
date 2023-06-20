@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="9dp">
+
+        <!-- Profile Icon -->
+        <ImageView
+            android:id="@+id/profile_icon"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/profile_icon_360"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <!-- User Nickname -->
+        <TextView
+            android:id="@+id/nickname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:textSize="12sp"
+            tools:text="김버니"
+            app:layout_constraintTop_toTopOf="@id/profile_icon"
+            app:layout_constraintStart_toEndOf="@id/profile_icon"/>
+
+        <!-- Time -->
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            tools:text=" · 3시간 전"
+            app:layout_constraintTop_toTopOf="@id/nickname"
+            app:layout_constraintBottom_toBottomOf="@id/nickname"
+            app:layout_constraintStart_toEndOf="@id/nickname"/>
+
+        <!-- Comment -->
+        <TextView
+            android:id="@+id/comment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            tools:text="@string/small_text"
+            app:layout_constraintTop_toBottomOf="@id/nickname"
+            app:layout_constraintStart_toStartOf="@id/nickname"
+            app:layout_constraintEnd_toStartOf="@id/btn_the_more"/>
+
+        <!-- Reply Count -->
+        <TextView
+            android:id="@+id/reply_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textSize="16sp"
+            android:textColor="@color/blue600"
+            android:textStyle="bold"
+            tools:text="답글 7개"
+            app:layout_constraintTop_toBottomOf="@id/comment"
+            app:layout_constraintStart_toStartOf="@id/nickname"/>
+
+        <!-- The More Button -->
+        <ImageView
+            style="?actionButtonStyle"
+            android:id="@+id/btn_the_more"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/the_more_icon_mid_36_72"
+            app:layout_constraintTop_toTopOf="@id/profile_icon"
+            app:layout_constraintBottom_toBottomOf="@id/profile_icon"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
