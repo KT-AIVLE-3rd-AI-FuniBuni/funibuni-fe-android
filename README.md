@@ -31,4 +31,5 @@ AI 기반 대형폐기물 처리 원터치 서비스 **FurniBurni** 안드로이
 | Image        | Glide                                                      |
 | Camera       | CameraX                                                    |
 | AI           | TensorFlow Lite, ML Kit                                    |
+| AR           | AR Core                                                    |
 | Others       | -                                                          |
