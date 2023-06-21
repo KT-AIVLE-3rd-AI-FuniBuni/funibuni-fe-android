@@ -2,16 +2,24 @@
 <layout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="comment"
+            type="com.aivle.domain.model.sharingPost.Comment" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingVertical="9dp">
+        android:paddingVertical="10dp"
+        android:background="?attr/selectableItemBackground">
 
         <!-- Profile Icon -->
         <ImageView
             android:id="@+id/profile_icon"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:src="@drawable/profile_icon_360"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
@@ -23,6 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:textSize="12sp"
+            android:text="@{comment.user.nickname}"
             tools:text="김버니"
             app:layout_constraintTop_toTopOf="@id/profile_icon"
             app:layout_constraintStart_toEndOf="@id/profile_icon"/>
@@ -33,6 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="12sp"
+            android:text="@{` · ` + comment.createdAt}"
             tools:text=" · 3시간 전"
             app:layout_constraintTop_toTopOf="@id/nickname"
             app:layout_constraintBottom_toBottomOf="@id/nickname"
@@ -40,11 +50,12 @@
 
         <!-- Comment -->
         <TextView
-            android:id="@+id/comment"
+            android:id="@+id/tv_comment"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textSize="16sp"
             android:textColor="@color/black"
+            android:text="@{comment.comment}"
             tools:text="@string/small_text"
             app:layout_constraintTop_toBottomOf="@id/nickname"
             app:layout_constraintStart_toStartOf="@id/nickname"
@@ -55,12 +66,14 @@
             android:id="@+id/reply_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:textSize="16sp"
-            android:textColor="@color/blue600"
+            android:layout_marginTop="6dp"
+            android:textSize="15sp"
+            android:textColor="@color/blue800"
             android:textStyle="bold"
+            android:text="@{`답글 ` + Integer.toString(comment.replyCount) + `개`}"
+            android:visibility="@{comment.replyCount == 0 ? View.GONE : View.VISIBLE}"
             tools:text="답글 7개"
-            app:layout_constraintTop_toBottomOf="@id/comment"
+            app:layout_constraintTop_toBottomOf="@id/tv_comment"
             app:layout_constraintStart_toStartOf="@id/nickname"/>
 
         <!-- The More Button -->
@@ -69,7 +82,7 @@
             android:id="@+id/btn_the_more"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@drawable/the_more_icon_mid_36_72"
+            android:src="@drawable/the_more_24"
             app:layout_constraintTop_toTopOf="@id/profile_icon"
             app:layout_constraintBottom_toBottomOf="@id/profile_icon"
             app:layout_constraintEnd_toEndOf="parent"/>

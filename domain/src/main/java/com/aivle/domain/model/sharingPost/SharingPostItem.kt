@@ -1,4 +1,4 @@
-package com.aivle.domain.model
+package com.aivle.domain.model.sharingPost
 
 import com.aivle.domain.model.user.User
 

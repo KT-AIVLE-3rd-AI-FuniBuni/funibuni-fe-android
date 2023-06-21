@@ -5,8 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.aivle.domain.model.SharingPost
-import com.aivle.domain.model.SharingPostItem
+import com.aivle.domain.model.sharingPost.SharingPostItem
 import com.aivle.presentation.databinding.ItemSharingPostBinding
 
 private val DiffCallback = object : DiffUtil.ItemCallback<SharingPostItem>() {

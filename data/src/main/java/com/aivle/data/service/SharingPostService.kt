@@ -1,7 +1,7 @@
 package com.aivle.data.service
 
-import com.aivle.domain.model.SharingPost
-import com.aivle.domain.model.SharingPostItem
+import com.aivle.domain.model.sharingPost.SharingPost
+import com.aivle.domain.model.sharingPost.SharingPostItem
 import com.skydoves.sandwich.ApiResponse
 import retrofit2.http.DELETE
 import retrofit2.http.GET

@@ -1,6 +1,6 @@
 package com.aivle.domain.repository
 
-import com.aivle.domain.model.Address
+import com.aivle.domain.model.address.Address
 
 interface AddressRepository {
 

@@ -62,7 +62,7 @@ class SharingPostDetailHeaderAdapter constructor(
     private fun animateTitleBar(isShow: Boolean) {
         isShowingTitleBar = isShow
 
-        binding.topAreaBackground.animate().setInterpolator(AccelerateDecelerateInterpolator())
+        binding.backgroundWhite.animate().setInterpolator(AccelerateDecelerateInterpolator())
             .setDuration(150L)
             .alpha(if (isShow) 1f else 0f)
             .start()

@@ -1,10 +1,13 @@
 package com.aivle.domain.repository
 
-import com.aivle.domain.model.SharingPostItem
+import com.aivle.domain.model.sharingPost.SharingPostDetail
+import com.aivle.domain.model.sharingPost.SharingPostItem
 import com.aivle.domain.response.DataResponse
 import kotlinx.coroutines.flow.Flow
 
 interface SharingPostRepository {
 
-    fun getSharingPostList(): Flow<DataResponse<List<SharingPostItem>>>
+    suspend fun getSharingPostList(): Flow<DataResponse<List<SharingPostItem>>>
+
+    suspend fun getSharingPostDetail(postId: Int): Flow<DataResponse<SharingPostDetail>>
 }

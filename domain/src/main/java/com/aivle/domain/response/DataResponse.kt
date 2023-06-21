@@ -6,10 +6,15 @@ sealed class DataResponse<out T> {
 
     data class Success<out T>(val data: T) : DataResponse<T>()
 
-    data class Failure(val message: String?): DataResponse<Nothing>()
+    sealed class Failure : DataResponse<Nothing>() {
 
-    data class Exception(
-        val throwable: Throwable,
-        val message: String?
-    ) : DataResponse<Nothing>()
+        abstract val message: String?
+
+        data class Error(override val message: String?): Failure()
+
+        data class Exception(
+            override val message: String?,
+            val throwable: Throwable,
+        ) : Failure()
+    }
 }

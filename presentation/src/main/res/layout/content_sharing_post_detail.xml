@@ -4,8 +4,8 @@
 
     <data>
         <variable
-            name="post"
-            type="com.aivle.domain.model.SharingPost" />
+            name="postDetail"
+            type="com.aivle.domain.model.sharingPost.SharingPostDetail" />
     </data>
 
     <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -35,11 +35,11 @@
                 android:id="@+id/user_nickname"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="12dp"
                 android:textSize="16sp"
                 android:textColor="@color/black"
                 android:textStyle="bold"
-                android:text="@{post.user.nickname}"
+                android:text="@{postDetail.post.user.nickname}"
                 tools:text="김버니"
                 app:layout_constraintVertical_chainStyle="packed"
                 app:layout_constraintTop_toTopOf="parent"
@@ -53,8 +53,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:textSize="14sp"
-                android:textColor="@color/black"
-                android:text="@{post.title}"
+                android:text="@{postDetail.post.address}"
                 tools:text="송파구 잠실1동"
                 app:layout_constraintTop_toBottomOf="@id/user_nickname"
                 app:layout_constraintBottom_toTopOf="@id/user_profile_divider"
@@ -78,6 +77,7 @@
                 android:textSize="20sp"
                 android:textColor="@color/black"
                 android:textStyle="bold"
+                android:text="@{postDetail.post.title}"
                 tools:text="허먼밀러 뉴 에어론 체어, 풀, 그라파이트"
                 app:layout_constraintTop_toBottomOf="@id/user_profile_divider"/>
 
@@ -87,6 +87,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
+                android:text="@{postDetail.post.productCategory}"
                 tools:text="의자"
                 app:layout_constraintTop_toBottomOf="@id/post_title"
                 app:layout_constraintStart_toStartOf="parent"/>
@@ -97,8 +98,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
+                android:textSize="16sp"
                 android:textColor="@color/black"
-                android:text="@string/large_text"
+                android:text="@{postDetail.post.content}"
                 tools:text="@string/small_text"
                 app:layout_constraintTop_toBottomOf="@id/product_category"/>
 
@@ -116,7 +118,7 @@
                 android:id="@+id/comment_list_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="22dp"
                 tools:listitem="@layout/item_comment"
                 tools:itemCount="5"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

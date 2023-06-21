@@ -2,6 +2,12 @@
 <layout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="postDetail"
+            type="com.aivle.domain.model.sharingPost.SharingPostDetail" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,13 +21,21 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_begin="0dp"/>
 
-        <!-- 상단바 영역 하얀/투명 배경 -->
+        <!-- 상단바 영역 그라데이션 배경 -->
         <View
-            android:id="@+id/top_area_background"
+            android:id="@+id/background_gradient"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@drawable/post_detail_top_gradient"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/top_bar_barrier"/>
+
+        <!-- 상단바 영역 흰 배경 -->
+        <View
+            android:id="@+id/background_white"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:background="@color/white"
-            android:elevation="2dp"
             android:alpha="0"
             tools:alpha="1"
             app:layout_constraintTop_toTopOf="parent"
@@ -35,7 +49,6 @@
             android:layout_height="@dimen/app_bar_size"
             android:padding="16dp"
             android:src="@drawable/arrow_back_24"
-            android:elevation="2dp"
             app:tint="@color/white"
             app:layout_constraintTop_toTopOf="@id/status_bar_guideline"
             app:layout_constraintStart_toStartOf="parent"/>
@@ -47,7 +60,6 @@
             android:layout_width="@dimen/app_bar_size"
             android:layout_height="@dimen/app_bar_size"
             android:src="@drawable/the_more_24"
-            android:elevation="2dp"
             android:padding="16dp"
             tools:tint="@color/black"
             app:tint="@color/white"

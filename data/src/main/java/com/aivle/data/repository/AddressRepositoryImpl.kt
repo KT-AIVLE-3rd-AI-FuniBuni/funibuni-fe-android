@@ -3,7 +3,7 @@ package com.aivle.data.repository
 import com.aivle.data.datastore.PreferencesDataStore
 import com.aivle.data.mapper.toEntity
 import com.aivle.data.mapper.toModel
-import com.aivle.domain.model.Address
+import com.aivle.domain.model.address.Address
 import com.aivle.domain.repository.AddressRepository
 import kotlinx.coroutines.flow.first
 import javax.inject.Inject

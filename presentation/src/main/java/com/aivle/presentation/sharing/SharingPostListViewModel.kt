@@ -2,14 +2,13 @@ package com.aivle.presentation.sharing
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.aivle.domain.model.SharingPostItem
+import com.aivle.domain.model.sharingPost.SharingPostItem
 import com.aivle.domain.response.DataResponse
 import com.aivle.domain.usecase.sharing.GetSharingPostListUserCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -30,7 +29,6 @@ class SharingPostListViewModel @Inject constructor(
                 .collect { response -> when (response) {
                     is DataResponse.Success -> _eventFlow.emit(Event.Success(response.data))
                     is DataResponse.Failure -> _eventFlow.emit(Event.Failure(response.message))
-                    is DataResponse.Exception -> _eventFlow.emit(Event.Failure(response.message))
                 }}
         }
     }
