@@ -3,8 +3,17 @@
 <!--    <style name="Base.Theme.FurniBurni" parent="Theme.Material3.DayNight.NoActionBar">-->
     <style name="Base.Theme.FurniBurni" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-         <item name="colorPrimary">#31D7C3</item>
+        <item name="colorPrimary">#31D7C3</item>
+        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
     </style>
 
     <style name="Theme.FurniBurni" parent="Base.Theme.FurniBurni" />
+
+    <style name="AppBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AppModalStyle</item>
+    </style>
+
+    <style name="AppModalStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/bottom_sheet_background</item>
+    </style>
 </resources>

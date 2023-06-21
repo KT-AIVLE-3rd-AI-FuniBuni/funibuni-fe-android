@@ -1,4 +1,4 @@
-package com.aivle.presentation.sharing
+package com.aivle.presentation.sharingPostDetail
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -28,7 +28,7 @@ class CommentViewHolder(private val binding: ItemCommentBinding) : RecyclerView.
 
     init {
         itemView.setOnClickListener {
-            binding.comment?.commentId
+            binding.comment?.let { it.onClick?.invoke(it) }
         }
     }
 

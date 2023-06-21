@@ -2,6 +2,7 @@ package com.aivle.data.repository
 
 import com.aivle.data._util.SampleData
 import com.aivle.data.service.SharingPostService
+import com.aivle.domain.model.sharingPost.Reply
 import com.aivle.domain.model.sharingPost.SharingPost
 import com.aivle.domain.model.sharingPost.SharingPostDetail
 import com.aivle.domain.model.sharingPost.SharingPostItem
@@ -22,6 +23,11 @@ class SharingPostRepositoryImpl @Inject constructor(
 
     override suspend fun getSharingPostDetail(postId: Int): Flow<DataResponse<SharingPostDetail>> = flow {
         val data = SampleData.getSharingPostDetail()
+        emit(DataResponse.Success(data))
+    }
+
+    override suspend fun getReplyList(commentId: Int): Flow<DataResponse<List<Reply>>> = flow {
+        val data = SampleData.getReplies(commentId)
         emit(DataResponse.Success(data))
     }
 }

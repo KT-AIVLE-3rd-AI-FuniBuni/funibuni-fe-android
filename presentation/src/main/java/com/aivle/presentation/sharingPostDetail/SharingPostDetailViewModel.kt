@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.aivle.domain.model.sharingPost.SharingPostDetail
 import com.aivle.domain.response.DataResponse
-import com.aivle.domain.usecase.sharing.GetSharingPostUseCase
+import com.aivle.domain.usecase.sharingPost.GetSharingPostUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

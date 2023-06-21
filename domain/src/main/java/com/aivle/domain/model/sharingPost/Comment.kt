@@ -9,4 +9,6 @@ data class Comment constructor(
     val comment: String,
     val replyCount: Int,
     val createdAt: String,
-)
+) {
+    var onClick: ((comment: Comment) -> Unit)? = null
+}

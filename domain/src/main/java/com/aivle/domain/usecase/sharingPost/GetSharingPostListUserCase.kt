@@ -1,4 +1,4 @@
-package com.aivle.domain.usecase.sharing
+package com.aivle.domain.usecase.sharingPost
 
 import com.aivle.domain.repository.SharingPostRepository
 import javax.inject.Inject

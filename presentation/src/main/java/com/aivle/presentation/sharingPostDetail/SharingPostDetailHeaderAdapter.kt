@@ -19,6 +19,9 @@ class SharingPostDetailHeaderAdapter constructor(
     var isShowingTitleBar = false
         private set
 
+    var systemBarHeight = 0
+        private set
+
     private var offset = 0
     private var userOffset = 0
 
@@ -37,8 +40,9 @@ class SharingPostDetailHeaderAdapter constructor(
         WindowCompat.setDecorFitsSystemWindows(window, false)
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { _, windowInsets ->
             val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
+            systemBarHeight = insets.top
 
-            binding.statusBarGuideline.setGuidelineBegin(insets.top)
+            binding.statusBarGuideline.setGuidelineBegin(systemBarHeight)
             binding.root.updateLayoutParams<ViewGroup.MarginLayoutParams> { bottomMargin = insets.bottom }
 
             WindowInsetsCompat.CONSUMED

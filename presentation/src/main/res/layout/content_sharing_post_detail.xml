@@ -113,16 +113,29 @@
                 android:background="@color/divider_light_gray"
                 app:layout_constraintTop_toBottomOf="@id/content"/>
 
+            <!-- Comment Label -->
+            <TextView
+                android:id="@+id/comment_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="댓글"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/content_divider"
+                app:layout_constraintStart_toStartOf="parent"/>
+
             <!-- Comment ListView -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/comment_list_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="22dp"
+                android:layout_marginTop="16dp"
                 tools:listitem="@layout/item_comment"
                 tools:itemCount="5"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintTop_toBottomOf="@id/content_divider"/>
+                app:layout_constraintTop_toBottomOf="@id/comment_label"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
