@@ -1,4 +1,4 @@
-package com.aivle.presentation.user.sign
+package com.aivle.presentation.intro.sign
 
 import android.app.Activity
 import android.util.Log
@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.aivle.domain.response.SignInResponse
 import com.aivle.domain.model.sign.SignIn
 import com.aivle.domain.usecase.sign.SignInUseCase
-import com.aivle.presentation.user.firebase.FirebasePhoneAuth
+import com.aivle.presentation.intro.firebase.FirebasePhoneAuth
 import com.google.firebase.FirebaseException
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -156,7 +156,11 @@ class SignInViewModel @Inject constructor(
                     .collect { response -> when (response) {
                         is SignInResponse.Success -> _eventFlow.emit(Event.SignIn.Succeed)
                         is SignInResponse.Error.NotExistsUser -> _eventFlow.emit(Event.SignIn.NotExistsUser)
-                        is SignInResponse.Exception -> _eventFlow.emit(Event.SignIn.Exception(response.message))
+                        is SignInResponse.Exception -> _eventFlow.emit(
+                            Event.SignIn.Exception(
+                                response.message
+                            )
+                        )
                     }}
             }
         }

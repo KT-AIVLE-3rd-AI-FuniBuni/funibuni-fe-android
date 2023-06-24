@@ -26,8 +26,8 @@ object InteractiveHelper {
         view.animate()
             .setInterpolator(AccelerateDecelerateInterpolator())
             .setDuration(100)
-            .scaleX(if (down) 0.90f else 1f)
-            .scaleY(if (down) 0.90f else 1f)
+            .scaleX(if (down) 0.94f else 1f)
+            .scaleY(if (down) 0.94f else 1f)
             .start()
     }
 }

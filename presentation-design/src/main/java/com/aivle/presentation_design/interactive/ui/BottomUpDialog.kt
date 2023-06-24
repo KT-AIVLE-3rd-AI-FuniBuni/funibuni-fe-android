@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.*
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import com.aivle.presentation_design.R
 import com.aivle.presentation_design.databinding.DialogBottomUpNoMaterialBinding
@@ -108,17 +109,21 @@ class BottomUpDialog private constructor(
             Type.ONE_BUTTON ->
                 confirmButtonListener?.run()
             Type.TWO_BUTTON ->
-                if (isPositive)
+                if (isPositive) {
                     positiveButtonListener?.run()
-                else
+                } else if (isNegative) {
                     negativeButtonListener?.run()
+                }
         }
     }
 
     private fun Int.dpToPixels(context: Context): Int =
         (this * (context.resources.displayMetrics.densityDpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT)).toInt()
 
-    class Builder(private val fragmentManager: FragmentManager) {
+    class Builder {
+
+        private val fragmentManager: FragmentManager
+
         private var title: String? = null
         private var subtitle: String? = null
 
@@ -130,6 +135,13 @@ class BottomUpDialog private constructor(
 
         private var confirmButtonLabel: String? = null
         private var confirmButtonListener: Runnable? = null
+
+        constructor(fragmentActivity: FragmentActivity) {
+            this.fragmentManager = fragmentActivity.supportFragmentManager
+        }
+        constructor(fragmentManager: FragmentManager) {
+            this.fragmentManager = fragmentManager
+        }
 
         fun title(title: String) = also { this.title = title }
         fun subtitle(subtitle: String) = also { this.subtitle = subtitle }

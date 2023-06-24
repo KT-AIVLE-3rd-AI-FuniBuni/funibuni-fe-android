@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/profile_icon"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:padding="14dp"
+            android:src="@drawable/profile_icon_360"
+            app:layout_constraintBottom_toBottomOf="@id/bottom"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <FrameLayout
+            android:id="@+id/edt_comment_container"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingVertical="8dp"
+            android:minHeight="56dp"
+            app:layout_constraintBottom_toBottomOf="@id/bottom"
+            app:layout_constraintStart_toEndOf="@id/profile_icon"
+            app:layout_constraintEnd_toStartOf="@id/btn_add_reply">
+
+            <EditText
+                android:id="@+id/edt_comment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="10dp"
+                android:background="@drawable/bg_input_comment"
+                android:textSize="14sp"
+                android:hint="댓글 입력"
+                android:textColorHint="@color/gray400"
+                android:maxLines="4"/>
+
+        </FrameLayout>
+
+        <ImageView
+            android:id="@+id/btn_add_reply"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:padding="18dp"
+            android:src="@drawable/send_icon_48"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            app:layout_constraintBottom_toBottomOf="@id/bottom"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <ImageView
+            android:id="@+id/bottom"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray50"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

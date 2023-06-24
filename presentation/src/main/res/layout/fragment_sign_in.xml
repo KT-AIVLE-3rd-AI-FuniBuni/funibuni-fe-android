@@ -119,7 +119,7 @@
             android:textColor="@color/white"
             android:textStyle="bold"
             android:background="@drawable/bg_ripple_sign_button"
-            android:enabled="false"
+            android:enabled="true"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

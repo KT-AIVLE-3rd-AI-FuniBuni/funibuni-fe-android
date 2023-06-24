@@ -1,4 +1,4 @@
-package com.aivle.presentation.user.sign
+package com.aivle.presentation.intro.sign
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -17,6 +17,7 @@ class SignViewModel @Inject constructor() : ViewModel() {
     val dataEventFlow: StateFlow<Event> get() = _dataEventFlow
 
     var phoneNumber: String = ""
+    var userName: String = ""
 
     fun sendPhoneNumber(phoneNumber: String) {
         viewModelScope.launch {

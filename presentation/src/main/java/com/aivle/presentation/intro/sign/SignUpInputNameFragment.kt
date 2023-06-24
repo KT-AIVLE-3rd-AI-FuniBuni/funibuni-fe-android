@@ -1,42 +1,63 @@
-package com.aivle.presentation.user.sign
+package com.aivle.presentation.intro.sign
 
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.aivle.presentation.R
 import com.aivle.presentation.common.repeatOnStarted
-import com.aivle.presentation.databinding.FragmentSignUpBinding
-import com.aivle.presentation.user.sign.SignUpViewModel.Event
+import com.aivle.presentation.databinding.FragmentSignUpInputNameBinding
+import com.aivle.presentation.intro.sign.SignUpViewModel.Event
 import dagger.hilt.android.AndroidEntryPoint
 
-private const val TAG = "SignUpFragment"
+private const val TAG = "SignUpInputNameFragment"
 
 @AndroidEntryPoint
-class SignUpFragment : BaseSignFragment<FragmentSignUpBinding>(R.layout.fragment_sign_up) {
+class SignUpInputNameFragment : BaseSignFragment<FragmentSignUpInputNameBinding>(R.layout.fragment_sign_up_input_name) {
 
     private val activityViewModel: SignViewModel by activityViewModels()
     private val viewModel: SignUpViewModel by viewModels()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        Log.d(TAG, "onCreate()")
+        super.onCreate(savedInstanceState)
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        Log.d(TAG, "onCreateView()")
+        return super.onCreateView(inflater, container, savedInstanceState)
+    }
+
+    override fun onDestroyView() {
+        Log.d(TAG, "onDestroyView()")
+        super.onDestroyView()
+    }
+
+    override fun onDestroy() {
+        Log.d(TAG, "onDestroy()")
+        super.onDestroy()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        Log.d(TAG, "onViewCreated()")
         initView()
         initAnimation()
         handleEvent()
     }
 
     private fun initView() {
-        binding.btnSignUp.setOnClickListener {
-            val phoneNumber = activityViewModel.phoneNumber
-            val userName = binding.edtUserName.text.toString()
-            viewModel.signUp(phoneNumber, userName)
+        binding.btnNext.setOnClickListener {
+            activityViewModel.userName = binding.edtUserName.text.toString()
+            moveNextPage()
         }
         binding.edtUserName.addTextChangedListener {
-            binding.btnSignUp.isEnabled = binding.edtUserName.text.isNotBlank()
+            binding.btnNext.isEnabled = binding.edtUserName.text.isNotBlank()
         }
     }
 

@@ -1,4 +1,4 @@
-package com.aivle.presentation.user.firebase
+package com.aivle.presentation.intro.firebase
 
 import android.app.Activity
 import android.content.*

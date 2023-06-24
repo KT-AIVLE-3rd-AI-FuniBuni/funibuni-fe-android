@@ -1,4 +1,4 @@
-package com.aivle.presentation.user.sign
+package com.aivle.presentation.intro.sign
 
 import android.animation.Animator
 import android.animation.ObjectAnimator
@@ -15,6 +15,14 @@ import com.aivle.presentation.common.dpToPixels
 abstract class BaseSignFragment<T : ViewDataBinding>(
     @LayoutRes private val layoutResId: Int
 ) : BaseFragment<T>(layoutResId) {
+
+    protected fun moveNextPage() {
+        (requireActivity() as SignActivity).moveNextPage()
+    }
+
+    protected fun startSmsUserConsent(phoneNumber: String) {
+        (requireActivity() as SignActivity).startSmsUserConsent(phoneNumber)
+    }
 
     protected fun View.animateSettle(context: Context) {
         this.animate()

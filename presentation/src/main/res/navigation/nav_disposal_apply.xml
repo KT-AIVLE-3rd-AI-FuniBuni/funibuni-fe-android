@@ -27,8 +27,8 @@
 
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.aivle.presentation.user.sign.SignUpFragment"
+        android:name="com.aivle.presentation.intro.sign.SignUpInputNameFragment"
         android:label="SignUpFragment"
-        tools:layout="@layout/fragment_sign_up"/>
+        tools:layout="@layout/fragment_sign_up_input_name"/>
 
 </navigation>

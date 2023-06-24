@@ -1,28 +1,23 @@
-package com.aivle.presentation.user.sign
+package com.aivle.presentation.intro.sign
 
-import android.animation.Animator
-import android.animation.ObjectAnimator
-import android.animation.PropertyValuesHolder
-import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
-import android.view.animation.AccelerateDecelerateInterpolator
-import android.view.animation.DecelerateInterpolator
-import android.widget.EditText
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.aivle.presentation.R
-import com.aivle.presentation.base.BaseFragment
-import com.aivle.presentation.common.dpToPixels
 import com.aivle.presentation.common.repeatOnStarted
 import com.aivle.presentation.databinding.FragmentSignInBinding
-import com.aivle.presentation.user.sign.SignInViewModel.Event
+import com.aivle.presentation.intro.intro.IntroActivity
+import com.aivle.presentation.intro.intro.IntroViewModel
+import com.aivle.presentation.intro.sign.SignInViewModel.Event
 import com.aivle.presentation_design.interactive.ui.FilterableMaterialAutoCompleteTextView
 import com.aivle.presentation_design.interactive.ui.MySnackBar
 import dagger.hilt.android.AndroidEntryPoint
@@ -36,8 +31,29 @@ class SignInFragment : BaseSignFragment<FragmentSignInBinding>(R.layout.fragment
     private val activityViewModel: SignViewModel by activityViewModels()
     private val viewModel: SignInViewModel by viewModels()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        Log.d(TAG, "onCreate()")
+        super.onCreate(savedInstanceState)
+    }
+
+    override fun onCreateView(inflater: LayoutInflater,container: ViewGroup?,savedInstanceState: Bundle?): View {
+        Log.d(TAG, "onCreateView()")
+        return super.onCreateView(inflater, container, savedInstanceState)
+    }
+
+    override fun onDestroyView() {
+        Log.d(TAG, "onDestroyView()")
+        super.onDestroyView()
+    }
+
+    override fun onDestroy() {
+        Log.d(TAG, "onDestroy()")
+        super.onDestroy()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        Log.d(TAG, "onViewCreated()")
 
         initView()
         handleUiEvent()
@@ -54,16 +70,18 @@ class SignInFragment : BaseSignFragment<FragmentSignInBinding>(R.layout.fragment
         binding.edtPhoneNumber.addTextChangedListener(EditTextWatcher(binding.edtPhoneNumber))
         binding.edtPhoneAuthCode.addTextChangedListener(EditTextWatcher(binding.edtPhoneAuthCode))
 
+        binding.btnAuth.isEnabled = true // TODO(지우기)
         binding.btnAuth.setOnClickListener {
-            if (!binding.edtLayoutPhoneAuthCode.isVisible) { // 인증 문자 받기
-                val phoneNumber = binding.edtPhoneNumber.text.toString()
-
-                startSmsUserConsent(phoneNumber)
-                viewModel.send(requireActivity(), phoneNumber)
-            } else { // 인증하기
-                val smsCode = binding.edtPhoneAuthCode.text.toString()
-                viewModel.authenticateAndSignIn(requireActivity(), smsCode)
-            }
+            moveNextPage()
+//            if (!binding.edtLayoutPhoneAuthCode.isVisible) { // 인증 문자 받기
+//                val phoneNumber = binding.edtPhoneNumber.text.toString()
+//
+//                startSmsUserConsent(phoneNumber)
+//                viewModel.send(requireActivity(), phoneNumber)
+//            } else { // 인증하기
+//                val smsCode = binding.edtPhoneAuthCode.text.toString()
+//                viewModel.authenticateAndSignIn(requireActivity(), smsCode)
+//            }
         }
 
         binding.btnRetryPhoneAuth.setOnClickListener {
@@ -73,10 +91,6 @@ class SignInFragment : BaseSignFragment<FragmentSignInBinding>(R.layout.fragment
             val phoneNumber = binding.edtPhoneNumber.text.toString()
             viewModel.resend(requireActivity(), phoneNumber)
         }
-    }
-
-    private fun startSmsUserConsent(phoneNumber: String) {
-        (requireActivity() as SignActivity).startSmsUserConsent(phoneNumber)
     }
 
     private fun handleUiEvent() = repeatOnStarted {
@@ -167,7 +181,8 @@ class SignInFragment : BaseSignFragment<FragmentSignInBinding>(R.layout.fragment
     }
 
     private fun enablePhoneAuthButton(isEnabled: Boolean) {
-        binding.btnAuth.isEnabled = isEnabled
+//        binding.btnAuth.isEnabled = isEnabled
+        binding.btnAuth.isEnabled = true
     }
 
     private fun showSnackBar(message: String) {

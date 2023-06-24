@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-    <application >
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <application>
         <activity
-            android:name=".intro.IntroActivity"
+            android:name=".intro.intro.IntroActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -14,7 +16,7 @@
         <activity android:name=".base.BaseActivity"/>
         <activity android:name=".main.MainActivity"/>
         <activity android:name=".disposal.DisposalApplyActivity"/>
-        <activity android:name=".user.sign.SignActivity"
+        <activity android:name=".intro.sign.SignActivity"
             android:windowSoftInputMode="adjustResize"/>
         <activity android:name=".sharingPostDetail.SharingPostDetailActivity"/>
 

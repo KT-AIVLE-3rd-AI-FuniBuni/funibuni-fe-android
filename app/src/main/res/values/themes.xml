@@ -2,9 +2,20 @@
     <!-- Base application theme. -->
 <!--    <style name="Base.Theme.FurniBurni" parent="Theme.Material3.DayNight.NoActionBar">-->
     <style name="Base.Theme.FurniBurni" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/theme_color</item>
+        <item name="colorPrimaryVariant">@color/theme_color</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/theme_color</item>
+        <item name="colorSecondaryVariant">@color/theme_color</item>
+        <item name="colorOnSecondary">@color/black</item>
+
         <!-- Customize your light theme here. -->
-        <item name="colorPrimary">#31D7C3</item>
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
+
+        <!-- Status Bar Color -->
+        <item name="android:statusBarColor">@color/theme_color</item>
+        <item name="android:windowLightStatusBar">false</item>
     </style>
 
     <style name="Theme.FurniBurni" parent="Base.Theme.FurniBurni" />

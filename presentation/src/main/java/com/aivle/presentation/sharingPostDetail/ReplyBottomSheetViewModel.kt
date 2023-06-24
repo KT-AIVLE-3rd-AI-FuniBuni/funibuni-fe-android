@@ -35,6 +35,10 @@ class ReplyBottomSheetViewModel @Inject constructor(
         }
     }
 
+    fun addReply(content: String) {
+
+    }
+
     sealed class Event {
         object None : Event()
 

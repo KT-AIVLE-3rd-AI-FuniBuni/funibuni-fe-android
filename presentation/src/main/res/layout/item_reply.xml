@@ -20,6 +20,7 @@
             android:id="@+id/profile_icon"
             android:layout_width="24dp"
             android:layout_height="24dp"
+            android:layout_marginTop="2dp"
             android:src="@drawable/profile_icon_360"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
@@ -33,7 +34,7 @@
             android:textSize="12sp"
             android:text="@{reply.user.nickname}"
             tools:text="김버니"
-            app:layout_constraintTop_toTopOf="@id/profile_icon"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toEndOf="@id/profile_icon"/>
 
         <!-- Time -->
@@ -53,7 +54,7 @@
             android:id="@+id/tv_reply"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
+            android:textSize="15sp"
             android:textColor="@color/black"
             android:text="@{reply.reply}"
             tools:text="@string/very_small_text"
@@ -67,7 +68,8 @@
             android:id="@+id/btn_the_more"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@drawable/the_more_24"
+            android:layout_marginEnd="8dp"
+            android:src="@drawable/the_more_thin_24"
             app:layout_constraintTop_toTopOf="@id/profile_icon"
             app:layout_constraintBottom_toBottomOf="@id/profile_icon"
             app:layout_constraintEnd_toEndOf="parent"/>

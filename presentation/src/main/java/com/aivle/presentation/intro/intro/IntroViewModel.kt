@@ -1,4 +1,4 @@
-package com.aivle.presentation.intro
+package com.aivle.presentation.intro.intro
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

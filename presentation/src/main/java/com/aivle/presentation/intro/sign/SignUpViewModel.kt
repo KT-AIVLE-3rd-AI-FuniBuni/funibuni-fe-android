@@ -1,4 +1,4 @@
-package com.aivle.presentation.user.sign
+package com.aivle.presentation.intro.sign
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

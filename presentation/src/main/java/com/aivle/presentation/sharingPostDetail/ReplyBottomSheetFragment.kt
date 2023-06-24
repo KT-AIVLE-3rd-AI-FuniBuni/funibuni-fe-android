@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
 import com.aivle.domain.model.sharingPost.Comment
+import com.aivle.domain.model.sharingPost.Reply
 import com.aivle.presentation.common.repeatOnStarted
 import com.aivle.presentation.databinding.BottomSheetReplyBinding
 import com.aivle.presentation.sharingPostDetail.ReplyBottomSheetViewModel.Event
@@ -57,6 +58,7 @@ class ReplyBottomSheetFragment private constructor(
         bottomSheet.layoutParams = layoutParams
         behavior.state = BottomSheetBehavior.STATE_EXPANDED
         behavior.skipCollapsed = true
+        behavior.isDraggable = false
         behavior.disableShapeAnimations()
     }
 
@@ -83,6 +85,14 @@ class ReplyBottomSheetFragment private constructor(
         binding.btnClose.setOnClickListener { dismiss() }
         binding.replyListView.adapter = ReplyListAdapter().also {
             replyListAdapter = it
+        }
+        binding.btnInputReply.setOnClickListener {
+            InputCommentBottomSheetFragment { reply ->
+                val oldList = replyListAdapter.currentList
+                val oldLastReply = oldList.last()
+                val newList = oldList + listOf(Reply(oldLastReply.replyId + 1, oldLastReply.commentId, oldLastReply.user, reply, "방금 전"))
+                replyListAdapter.submitList(newList)
+            }.show(parentFragmentManager, "reply-comment-bottom-sheet")
         }
         binding.comment = comment
     }

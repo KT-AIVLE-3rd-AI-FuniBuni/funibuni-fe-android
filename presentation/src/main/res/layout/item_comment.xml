@@ -82,7 +82,7 @@
             android:id="@+id/btn_the_more"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@drawable/the_more_24"
+            android:src="@drawable/the_more_thin_24"
             app:layout_constraintTop_toTopOf="@id/profile_icon"
             app:layout_constraintBottom_toBottomOf="@id/profile_icon"
             app:layout_constraintEnd_toEndOf="parent"/>

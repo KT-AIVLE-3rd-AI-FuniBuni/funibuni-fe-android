@@ -63,11 +63,11 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_sign_up"
+            android:id="@+id/btn_next"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:gravity="center"
-            android:text="시작하기"
+            android:text="다음으로"
             android:textSize="18sp"
             android:textColor="@color/white"
             android:textStyle="bold"

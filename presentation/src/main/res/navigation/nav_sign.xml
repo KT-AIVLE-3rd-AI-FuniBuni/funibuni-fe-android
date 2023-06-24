@@ -7,21 +7,21 @@
 
     <fragment
         android:id="@+id/signInFragment"
-        android:name="com.aivle.presentation.user.sign.SignInFragment"
+        android:name="com.aivle.presentation.intro.sign.SignInFragment"
         android:label="SignInFragment"
         tools:layout="@layout/fragment_sign_in">
         <action
             android:id="@+id/action_signInFragment_to_signUpFragment"
             app:destination="@id/signUpFragment"
-            app:exitAnim="@anim/slide_left"
-            app:popEnterAnim="@anim/slide_right"
-            app:popExitAnim="@anim/slide_left" />
+            app:exitAnim="@anim/slide_left_out"
+            app:popEnterAnim="@anim/slide_right_in"
+            app:popExitAnim="@anim/slide_left_out" />
     </fragment>
 
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.aivle.presentation.user.sign.SignUpFragment"
+        android:name="com.aivle.presentation.intro.sign.SignUpInputNameFragment"
         android:label="SignUpFragment"
-        tools:layout="@layout/fragment_sign_up"/>
+        tools:layout="@layout/fragment_sign_up_input_name"/>
 
 </navigation>
