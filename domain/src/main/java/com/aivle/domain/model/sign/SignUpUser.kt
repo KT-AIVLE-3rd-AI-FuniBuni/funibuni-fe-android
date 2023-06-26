@@ -1,6 +1,6 @@
 package com.aivle.domain.model.sign
 
-data class SignUp constructor(
+data class SignUpUser constructor(
     val phoneNumber: String,
     val name: String,
 )

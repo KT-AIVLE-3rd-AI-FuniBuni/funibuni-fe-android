@@ -8,27 +8,25 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.constraintlayout.widget.Guideline
 import androidx.core.view.isVisible
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.aivle.presentation.R
-import com.aivle.presentation.common.repeatOnStarted
+import com.aivle.presentation._common.repeatOnStarted
 import com.aivle.presentation.databinding.FragmentSignInBinding
-import com.aivle.presentation.intro.intro.IntroActivity
-import com.aivle.presentation.intro.intro.IntroViewModel
 import com.aivle.presentation.intro.sign.SignInViewModel.Event
 import com.aivle.presentation_design.interactive.ui.FilterableMaterialAutoCompleteTextView
 import com.aivle.presentation_design.interactive.ui.MySnackBar
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collectLatest
 
 private const val TAG = "SignInFragment"
 
 @AndroidEntryPoint
 class SignInFragment : BaseSignFragment<FragmentSignInBinding>(R.layout.fragment_sign_in) {
 
-    private val activityViewModel: SignViewModel by activityViewModels()
+    override val bottomButtonGuideLine: Guideline
+        get() = binding.bottomButtonGuideline
+
     private val viewModel: SignInViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -70,18 +68,18 @@ class SignInFragment : BaseSignFragment<FragmentSignInBinding>(R.layout.fragment
         binding.edtPhoneNumber.addTextChangedListener(EditTextWatcher(binding.edtPhoneNumber))
         binding.edtPhoneAuthCode.addTextChangedListener(EditTextWatcher(binding.edtPhoneAuthCode))
 
-        binding.btnAuth.isEnabled = true // TODO(지우기)
+//        binding.btnAuth.isEnabled = true // TODO(지우기)
         binding.btnAuth.setOnClickListener {
-            moveNextPage()
-//            if (!binding.edtLayoutPhoneAuthCode.isVisible) { // 인증 문자 받기
-//                val phoneNumber = binding.edtPhoneNumber.text.toString()
-//
-//                startSmsUserConsent(phoneNumber)
-//                viewModel.send(requireActivity(), phoneNumber)
-//            } else { // 인증하기
-//                val smsCode = binding.edtPhoneAuthCode.text.toString()
-//                viewModel.authenticateAndSignIn(requireActivity(), smsCode)
-//            }
+//            moveNextPage()
+            if (!binding.edtLayoutPhoneAuthCode.isVisible) { // 인증 문자 받기
+                val phoneNumber = binding.edtPhoneNumber.text.toString()
+
+                startSmsUserConsent(phoneNumber)
+                viewModel.send(requireActivity(), phoneNumber)
+            } else { // 인증하기
+                val smsCode = binding.edtPhoneAuthCode.text.toString()
+                viewModel.authenticateAndSignIn(requireActivity(), smsCode)
+            }
         }
 
         binding.btnRetryPhoneAuth.setOnClickListener {
@@ -142,18 +140,15 @@ class SignInFragment : BaseSignFragment<FragmentSignInBinding>(R.layout.fragment
                 enablePhoneAuthButton(false)
             }
             is Event.SignIn.Succeed -> {
-                showToast("SignInSucceed")
-                enableRetryAuthButton(false)
-                enablePhoneAuthButton(false)
-
-                (requireActivity() as SignActivity).finish()
+                signActivity.finishForSignIn()
             }
             is Event.SignIn.NotExistsUser -> {
                 showToast("NotExistsUser")
                 enableRetryAuthButton(false)
-                binding.btnAuth.text = "다음"
+                binding.btnAuth.text = "다음으로"
+                signViewModel.phoneNumber = viewModel.authenticatingPhoneNumber
 
-                findNavController().navigate(R.id.action_signInFragment_to_signUpFragment)
+                moveNextPage()
             }
             is Event.SignIn.Exception -> {
                 showToast(event.message)
@@ -181,8 +176,8 @@ class SignInFragment : BaseSignFragment<FragmentSignInBinding>(R.layout.fragment
     }
 
     private fun enablePhoneAuthButton(isEnabled: Boolean) {
-//        binding.btnAuth.isEnabled = isEnabled
-        binding.btnAuth.isEnabled = true
+        binding.btnAuth.isEnabled = isEnabled
+//        binding.btnAuth.isEnabled = true // TODO: 지우기
     }
 
     private fun showSnackBar(message: String) {
@@ -197,7 +192,7 @@ class SignInFragment : BaseSignFragment<FragmentSignInBinding>(R.layout.fragment
     }
 
     private fun handleActivityViewModelEvent() = repeatOnStarted {
-        activityViewModel.dataEventFlow.collect { event -> when (event) {
+        signViewModel.dataEventFlow.collect { event -> when (event) {
             is SignViewModel.Event.PhoneNumber -> {
                 Log.d(TAG, "SignViewModel.Event.PhoneNumber")
                 val phoneNumber = event.value
@@ -215,7 +210,9 @@ class SignInFragment : BaseSignFragment<FragmentSignInBinding>(R.layout.fragment
         private val editText: FilterableMaterialAutoCompleteTextView
     ) : TextWatcher {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
         override fun afterTextChanged(s: Editable?) {}
+
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
             val isEnabled = if (!binding.btnRetryPhoneAuth.isVisible) { // 문자 요청 전
                 binding.edtPhoneNumber.text.toString().length == 13

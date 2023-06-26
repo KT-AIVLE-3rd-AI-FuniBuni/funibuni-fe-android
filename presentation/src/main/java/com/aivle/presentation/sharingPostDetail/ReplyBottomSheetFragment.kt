@@ -1,7 +1,6 @@
 package com.aivle.presentation.sharingPostDetail
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.app.Dialog
 import android.os.Bundle
 import android.util.DisplayMetrics
@@ -13,7 +12,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
 import com.aivle.domain.model.sharingPost.Comment
 import com.aivle.domain.model.sharingPost.Reply
-import com.aivle.presentation.common.repeatOnStarted
+import com.aivle.presentation._common.repeatOnStarted
 import com.aivle.presentation.databinding.BottomSheetReplyBinding
 import com.aivle.presentation.sharingPostDetail.ReplyBottomSheetViewModel.Event
 import com.google.android.material.bottomsheet.BottomSheetBehavior

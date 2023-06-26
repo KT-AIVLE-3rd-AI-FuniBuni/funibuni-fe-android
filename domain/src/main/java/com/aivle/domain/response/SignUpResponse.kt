@@ -4,10 +4,9 @@ sealed class SignUpResponse {
 
     object Success : SignUpResponse()
 
-    sealed class Error : SignUpResponse() {
-        object DuplicateID : Error()
-        object DuplicatePhoneNumber : Error()
-    }
+//    sealed class Error : SignUpResponse() {
+//        object DuplicatePhoneNumber : Error()
+//    }
 
-    data class Exception(val message: String?) : SignUpResponse()
+    data class Failure(val message: String?) : SignUpResponse()
 }

@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.aivle.presentation.R
-import com.aivle.presentation.base.BaseFragment
+import com.aivle.presentation._base.BaseFragment
 import com.aivle.presentation.databinding.FragmentDisposalBinding
 
 class DisposalFragment : BaseFragment<FragmentDisposalBinding>(R.layout.fragment_disposal) {

@@ -120,7 +120,14 @@
             android:textStyle="bold"
             android:background="@drawable/bg_ripple_sign_button"
             android:enabled="true"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintBottom_toBottomOf="@id/bottom_button_guideline"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/bottom_button_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_end="0dp"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

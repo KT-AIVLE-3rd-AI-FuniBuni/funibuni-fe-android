@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController
 import com.aivle.presentation.R
-import com.aivle.presentation.base.BaseFragment
+import com.aivle.presentation._base.BaseFragment
 import com.aivle.presentation.databinding.FragmentApplyChoiceBinding
 
 class ApplyChoiceFragment : BaseFragment<FragmentApplyChoiceBinding>(R.layout.fragment_apply_choice) {

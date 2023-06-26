@@ -5,8 +5,8 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.aivle.presentation.R
-import com.aivle.presentation.base.BaseFragment
-import com.aivle.presentation.common.repeatOnStarted
+import com.aivle.presentation._base.BaseFragment
+import com.aivle.presentation._common.repeatOnStarted
 import com.aivle.presentation.databinding.FragmentSharingPostListBinding
 import com.aivle.presentation.sharing.SharingPostListViewModel.Event
 import com.aivle.presentation.sharingPostDetail.SharingPostDetailActivity

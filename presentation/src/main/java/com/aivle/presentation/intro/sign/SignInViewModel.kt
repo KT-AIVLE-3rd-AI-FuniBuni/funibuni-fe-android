@@ -4,8 +4,8 @@ import android.app.Activity
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.aivle.domain.model.sign.SignInUser
 import com.aivle.domain.response.SignInResponse
-import com.aivle.domain.model.sign.SignIn
 import com.aivle.domain.usecase.sign.SignInUseCase
 import com.aivle.presentation.intro.firebase.FirebasePhoneAuth
 import com.google.firebase.FirebaseException
@@ -27,7 +27,8 @@ class SignInViewModel @Inject constructor(
     private val _eventFlow: MutableStateFlow<Event> = MutableStateFlow(Event.None)
     val eventFlow: StateFlow<Event> get() = _eventFlow
 
-    private var _authenticatingPhoneNumber: String = ""
+    var authenticatingPhoneNumber: String = ""
+        private set
 
     init {
         phoneAuth.init()
@@ -55,7 +56,7 @@ class SignInViewModel @Inject constructor(
     }
 
     fun isSameAuthenticatingPhoneNumber(phoneNumber: String): Boolean {
-        return phoneNumber == _authenticatingPhoneNumber.drop(4).replace("-", " ")
+        return phoneNumber == authenticatingPhoneNumber.drop(4).replace("-", " ")
     }
 
     private fun String.toFirebasePhoneFormat(): String {
@@ -102,7 +103,7 @@ class SignInViewModel @Inject constructor(
 
         override fun onVerificationFailed(e: FirebaseException) {
             Log.d(TAG, "onVerificationFailed(): e=$e")
-            _authenticatingPhoneNumber = ""
+            authenticatingPhoneNumber = ""
 
             viewModelScope.launch {
                 _eventFlow.emit(Event.RequestSms.OnVerificationFailed(e.message))
@@ -111,7 +112,7 @@ class SignInViewModel @Inject constructor(
 
         override fun onStarted(phoneNumber: String) {
             Log.d(TAG, "onStarted(): $phoneNumber")
-            _authenticatingPhoneNumber = phoneNumber
+            authenticatingPhoneNumber = phoneNumber
 
             viewModelScope.launch {
                 _eventFlow.emit(Event.RequestSms.FirstTry.Started)
@@ -120,7 +121,7 @@ class SignInViewModel @Inject constructor(
 
         override fun onReStarted(phoneNumber: String) {
             Log.d(TAG, "onReStarted(): $phoneNumber")
-            _authenticatingPhoneNumber = phoneNumber
+            authenticatingPhoneNumber = phoneNumber
 
             viewModelScope.launch {
                 _eventFlow.emit(Event.RequestSms.Retry.Started)
@@ -137,7 +138,7 @@ class SignInViewModel @Inject constructor(
 
         override fun onTimeout() {
             Log.d(TAG, "onTimeout()")
-            _authenticatingPhoneNumber = ""
+            authenticatingPhoneNumber = ""
 
             viewModelScope.launch {
                 _eventFlow.emit(Event.RequestSms.Timeout)
@@ -148,8 +149,8 @@ class SignInViewModel @Inject constructor(
             Log.d(TAG, "onPhoneAuthSucceed()")
 
             viewModelScope.launch {
-                val signIn = SignIn(_authenticatingPhoneNumber)
-                SignInUseCase(signIn)
+                val signInUser = SignInUser(authenticatingPhoneNumber)
+                SignInUseCase(signInUser)
                     .catch {
                         _eventFlow.emit(Event.ShowToast(it.message))
                     }

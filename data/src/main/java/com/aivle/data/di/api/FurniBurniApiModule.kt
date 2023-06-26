@@ -1,8 +1,8 @@
-package com.aivle.data.di
+package com.aivle.data.di.api
 
-import com.aivle.data.service.SharingPostService
-import com.aivle.data.service.SignService
-import com.aivle.data.service.UserService
+import com.aivle.data.api.SharingPostApi
+import com.aivle.data.api.SignApi
+import com.aivle.data.api.UserApi
 import com.aivle.domain.repository.WebTokenRepository
 import com.skydoves.sandwich.adapters.ApiResponseCallAdapterFactory
 import dagger.Module
@@ -16,21 +16,22 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
 import java.util.concurrent.TimeUnit
-import javax.inject.Named
-import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object NetworkServiceModule {
+object FurniBurniApiModule {
 
-    private const val TAG = "NetworkServiceModule"
+    private const val TAG = "FurniBurniApiModule"
     private const val BASE_URL = "https://jsonplaceholder.typicode.com/"
     private const val TIME_OUT = 10L
     private const val AUTHORIZATION = "Authorization"
     private const val BEARER = "Bearer"
 
+    @FurniBurniApiProvider
     @Provides
-    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
+    fun provideRetrofit(
+        @FurniBurniApiProvider okHttpClient: OkHttpClient
+    ): Retrofit {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(okHttpClient)
@@ -39,8 +40,11 @@ object NetworkServiceModule {
             .build()
     }
 
+    @FurniBurniApiProvider
     @Provides
-    fun provideOkHttpClient(tokenInterceptor: Interceptor): OkHttpClient {
+    fun provideOkHttpClient(
+        @FurniBurniApiProvider tokenInterceptor: Interceptor
+    ): OkHttpClient {
         return OkHttpClient.Builder()
             .connectTimeout(TIME_OUT, TimeUnit.SECONDS)
             .readTimeout(TIME_OUT, TimeUnit.SECONDS)
@@ -51,8 +55,11 @@ object NetworkServiceModule {
             .build()
     }
 
+    @FurniBurniApiProvider
     @Provides
-    fun provideTokenInterceptor(repository: WebTokenRepository): Interceptor = Interceptor { chain ->
+    fun provideTokenInterceptor(
+        @FurniBurniApiProvider repository: WebTokenRepository
+    ): Interceptor = Interceptor { chain ->
         val accessToken = repository.getAccessToken()
 
         val request = if (accessToken == null) {
@@ -66,12 +73,15 @@ object NetworkServiceModule {
         chain.proceed(request)
     }
 
+    @FurniBurniApiProvider
     @Provides
-    fun provideUserService(retrofit: Retrofit): UserService = retrofit.create()
+    fun provideUserApi(
+        @FurniBurniApiProvider retrofit: Retrofit
+    ): UserApi = retrofit.create()
 
+    @FurniBurniApiProvider
     @Provides
-    fun provideSignService(retrofit: Retrofit): SignService = retrofit.create()
-
-    @Provides
-    fun provideSharingPostService(retrofit: Retrofit): SharingPostService = retrofit.create()
+    fun provideSharingPostApi(
+        @FurniBurniApiProvider retrofit: Retrofit
+    ): SharingPostApi = retrofit.create()
 }

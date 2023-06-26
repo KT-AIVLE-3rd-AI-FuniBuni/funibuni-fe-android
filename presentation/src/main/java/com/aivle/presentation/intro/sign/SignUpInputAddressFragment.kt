@@ -1,101 +1,247 @@
 package com.aivle.presentation.intro.sign
 
 import android.Manifest
-import android.content.Context
-import android.content.pm.PackageManager
-import android.location.LocationManager
+import android.animation.ValueAnimator
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.animation.AccelerateDecelerateInterpolator
+import android.view.inputmethod.EditorInfo
 import android.widget.Toast
-import androidx.core.app.ActivityCompat
+import androidx.activity.OnBackPressedCallback
+import androidx.constraintlayout.widget.Guideline
+import androidx.core.view.isVisible
+import androidx.fragment.app.viewModels
+import com.aivle.domain.model.kakao.KakaoAddressDocument
 import com.aivle.presentation.R
-import com.aivle.presentation.databinding.FragmentInputAddressBinding
+import com.aivle.presentation._common.dpToPixels
+import com.aivle.presentation._common.repeatOnStarted
+import com.aivle.presentation._common.showToast
 import com.aivle.presentation.databinding.FragmentSignUpInputAddressBinding
+import com.aivle.presentation.intro.sign.SignUpInputAddressViewModel.Event
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.gun0912.tedpermission.PermissionListener
 import com.gun0912.tedpermission.normal.TedPermission
+import dagger.hilt.android.AndroidEntryPoint
 
 private const val TAG = "InputAddressFragment"
 
+@AndroidEntryPoint
 class SignUpInputAddressFragment : BaseSignFragment<FragmentSignUpInputAddressBinding>(R.layout.fragment_sign_up_input_address) {
 
+    override val bottomButtonGuideLine: Guideline? = null
+
+    private val viewModel: SignUpInputAddressViewModel by viewModels()
+
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private lateinit var addressListAdapter: KakaoAddressListAdapter
+
+    private var uiState: ContentUiState = ContentUiState.GuideMessageShown
+
+    private val isInitialUiState: Boolean
+        get() = uiState == ContentUiState.GuideMessageShown
+
+    private val backPressedCallback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            if (isInitialUiState) {
+                (requireActivity() as SignActivity).moveBackPage()
+            } else {
+                updateUiState(ContentUiState.GuideMessageShown)
+            }
+        }
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        Log.d(TAG, "onViewCreated()")
 
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
+        fusedLocationClient = LocationServices
+            .getFusedLocationProviderClient(requireActivity())
+
+        requireActivity().onBackPressedDispatcher
+            .addCallback(viewLifecycleOwner, backPressedCallback)
 
         initView()
+        handleUiEvent()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        backPressedCallback.isEnabled = true
+    }
+
+    override fun onPause() {
+        super.onPause()
+        backPressedCallback.isEnabled = false
     }
 
     private fun initView() {
+        // binding.header.layoutTransition.setDuration(LayoutTransition.DISAPPEARING, 100L)
         binding.btnCurrentLocation.setOnClickListener {
             checkLocationPermissions()
+        }
+        binding.listView.adapter = KakaoAddressListAdapter().also {
+            addressListAdapter = it
+        }
+        binding.edtAddress.setOnFocusChangeListener { v, hasFocus ->
+            if (isInitialUiState && hasFocus) {
+                updateUiState(ContentUiState.GuideMessageHidden)
+            }
+        }
+        binding.edtAddress.setOnEditorActionListener { v, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                val address = binding.edtAddress.text.toString()
+                if (address.isBlank()) {
+                    showToast("검색어를 입력해주세요")
+                    true
+                } else {
+                    viewModel.searchAddress(address)
+                    false
+                }
+            } else {
+                false
+            }
+        }
+    }
+
+    private fun handleUiEvent() = repeatOnStarted {
+        viewModel.eventFlow.collect { event ->
+            if (event is Event.Loading) {
+                binding.progressIndicator.show()
+            } else {
+                binding.progressIndicator.hide()
+            }
+
+            when (event) {
+                is Event.Init -> {
+                }
+                is Event.Loading -> {
+                }
+                is Event.Success.SearchAddress -> {
+                    updateUiState(ContentUiState.SearchResult)
+
+                    val documents = event.documents.onEach {
+                        it.onClick = ::moveNextDetailPage
+                    }
+                    addressListAdapter.submitList(documents)
+                }
+                is Event.Success.CoordinateToAddress -> {
+                    updateUiState(ContentUiState.SearchResult)
+
+                    binding.edtAddress.setText(event.addressName)
+                }
+                is Event.Success.Empty -> {
+                    updateUiState(ContentUiState.NoSearchResult)
+
+                    addressListAdapter.submitList(emptyList())
+                }
+                is Event.Failure -> {
+                    showToast(event.message)
+                }
+            }
+        }
+    }
+
+    private fun updateUiState(contentUiState: ContentUiState) {
+        if (uiState == contentUiState) {
+            return
+        }
+        if (isShowingKeyboard) {
+            hideKeyboard()
+        }
+
+        when (contentUiState) {
+            is ContentUiState.GuideMessageShown -> {
+                updateVisibleGuideMessage(true)
+                binding.background.isVisible = true
+                binding.noContent.isVisible = false
+            }
+            is ContentUiState.GuideMessageHidden -> {
+                updateVisibleGuideMessage(false)
+                binding.noContent.isVisible = false
+            }
+            is ContentUiState.SearchResult -> {
+                updateVisibleGuideMessage(false)
+                binding.background.isVisible = false
+                binding.noContent.isVisible = false
+            }
+            is ContentUiState.NoSearchResult -> {
+                updateVisibleGuideMessage(false)
+                binding.background.isVisible = false
+                binding.noContent.isVisible = true
+            }
+        }
+
+        uiState = contentUiState
+    }
+
+    private fun updateVisibleGuideMessage(isShow: Boolean) {
+        if (isShow == isInitialUiState) {
+            return
+        }
+        if (isShow) {
+            binding.edtAddress.text?.clear()
+            binding.edtAddress.clearFocus()
+            addressListAdapter.submitList(emptyList())
+        }
+
+        val from = if (isShow) 0 else dp(80)
+        val dest = if (isShow) dp(80) else 0
+
+        ValueAnimator.ofInt(from, dest).apply {
+            interpolator = AccelerateDecelerateInterpolator()
+            duration = 250L
+            addUpdateListener {
+                binding.guidelineAddress.setGuidelineBegin(it.animatedValue as Int)
+            }
+        }.start()
+
+        binding.guideMessageContainer.animate()
+            .setInterpolator(AccelerateDecelerateInterpolator())
+            .setDuration(150L)
+            .alpha(if (isShow) 1f else 0f)
+            .start()
+    }
+
+    private fun moveNextDetailPage(address: KakaoAddressDocument) {
+        if (address.road_address != null) {
+            signViewModel.sendAddress(address.road_address!!)
+            moveNextPage()
         }
     }
 
     private fun checkLocationPermissions() {
-        val listener = object : PermissionListener {
-            override fun onPermissionGranted() {
-                showToast("onPermissionGranted()")
-                getLastLocation()
-            }
-
-            override fun onPermissionDenied(deniedPermissions: MutableList<String>?) {
-                showToast("onPermissionGranted(): $deniedPermissions")
-                Log.e(TAG, "onPermissionDenied(): $deniedPermissions")
-            }
-        }
-
         TedPermission.create()
             .setPermissions(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION)
-            .setPermissionListener(listener)
+            .setPermissionListener(object : PermissionListener {
+                override fun onPermissionGranted() {
+                    getLastLocation()
+                }
+
+                override fun onPermissionDenied(deniedPermissions: MutableList<String>?) {
+                    showToast("onPermissionGranted(): $deniedPermissions")
+                }
+            })
             .check()
     }
 
+    @SuppressLint("MissingPermission")
     private fun getLastLocation() {
-        if (ActivityCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            Log.w(TAG, "PERMISSION_DENIED")
-            return
+        fusedLocationClient.lastLocation.addOnSuccessListener {
+            viewModel.coordinateToAddress(it.longitude, it.latitude)
         }
-        fusedLocationClient.lastLocation
-            .addOnSuccessListener {
-                Log.d(TAG, "location=${it}")
-                Log.d(TAG, "longitude=${it.longitude}, latitude=${it.latitude}, accuracy=${it.accuracy}, time=${it.time}")
-            }
     }
 
-    private fun getLastLocationOld() {
-        if (ActivityCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            Log.w(TAG, "PERMISSION_DENIED")
-            return
-        }
-        val locationManager = requireContext().getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        val lastLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
-            ?: return
-
-
-        Log.d(TAG, "getLastLocation(): longitude=${lastLocation.longitude}, latitude=${lastLocation.latitude}")
+    private fun dp(pixels: Int): Int {
+        return pixels.dpToPixels(requireContext())
     }
 
-    private fun showToast(message: String?) {
-        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+    private sealed class ContentUiState {
+        object GuideMessageShown : ContentUiState()
+        object GuideMessageHidden : ContentUiState()
+        object SearchResult : ContentUiState()
+        object NoSearchResult : ContentUiState()
     }
 }

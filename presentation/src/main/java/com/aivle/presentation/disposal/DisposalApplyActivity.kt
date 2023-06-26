@@ -2,7 +2,7 @@ package com.aivle.presentation.disposal
 
 import android.os.Bundle
 import com.aivle.presentation.R
-import com.aivle.presentation.base.BaseActivity
+import com.aivle.presentation._base.BaseActivity
 import com.aivle.presentation.databinding.ActivityDisposalBinding
 import dagger.hilt.android.AndroidEntryPoint
 

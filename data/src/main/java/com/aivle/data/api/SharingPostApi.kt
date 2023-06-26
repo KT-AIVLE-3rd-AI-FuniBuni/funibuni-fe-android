@@ -1,4 +1,4 @@
-package com.aivle.data.service
+package com.aivle.data.api
 
 import com.aivle.domain.model.sharingPost.SharingPost
 import com.aivle.domain.model.sharingPost.SharingPostItem
@@ -8,7 +8,7 @@ import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.PUT
 
-interface SharingPostService {
+interface SharingPostApi {
 
     @POST("posts-create1")
     fun createPosts1(): ApiResponse<SharingPost>

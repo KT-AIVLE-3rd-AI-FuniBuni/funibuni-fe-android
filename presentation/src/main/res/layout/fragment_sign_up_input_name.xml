@@ -18,7 +18,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="22sp"
                 android:textColor="@color/black"
-                android:text="회원가입이 필요합니다"
+                android:text="퍼니버니에 오신걸 환영합니다 :)"
                 android:visibility="invisible"
                 tools:visibility="visible"
                 app:layout_constraintTop_toTopOf="parent"/>
@@ -29,7 +29,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="22sp"
                 android:textColor="@color/black"
-                android:text="이름을 입력해주세요 :)"
+                android:text="당신의 이름을 입력해주세요"
                 android:visibility="invisible"
                 tools:visibility="visible"
                 app:layout_constraintTop_toBottomOf="@id/guide_message_1"/>
@@ -73,7 +73,14 @@
             android:textStyle="bold"
             android:background="@drawable/bg_ripple_sign_button"
             android:enabled="false"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintBottom_toBottomOf="@id/bottom_button_guideline"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/bottom_button_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_end="0dp"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -1,4 +1,4 @@
-package com.aivle.presentation.common
+package com.aivle.presentation._common
 
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner

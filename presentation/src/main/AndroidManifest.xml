@@ -13,11 +13,11 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".base.BaseActivity"/>
+        <activity android:name="._base.BaseActivity"/>
         <activity android:name=".main.MainActivity"/>
         <activity android:name=".disposal.DisposalApplyActivity"/>
         <activity android:name=".intro.sign.SignActivity"
-            android:windowSoftInputMode="adjustResize"/>
+            android:windowSoftInputMode="adjustNothing"/>
         <activity android:name=".sharingPostDetail.SharingPostDetailActivity"/>
 
     </application>

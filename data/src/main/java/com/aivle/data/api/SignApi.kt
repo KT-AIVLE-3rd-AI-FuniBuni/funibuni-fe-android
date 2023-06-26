@@ -1,18 +1,18 @@
-package com.aivle.data.service
+package com.aivle.data.api
 
 import com.aivle.data.entity.token.WebTokenEntity
-import com.aivle.domain.model.sign.SignIn
-import com.aivle.domain.model.sign.SignUp
+import com.aivle.domain.model.sign.SignInUser
+import com.aivle.domain.model.sign.SignUpUser
 import com.skydoves.sandwich.ApiResponse
 import retrofit2.http.POST
 
-interface SignService {
+interface SignApi {
 
     @POST("user/signup")
-    suspend fun signUp(signUp: SignUp): ApiResponse<WebTokenEntity>
+    suspend fun signUp(signUpUser: SignUpUser): ApiResponse<WebTokenEntity>
 
     @POST("user/signin")
-    suspend fun signIn(signIn: SignIn): ApiResponse<WebTokenEntity>
+    suspend fun signIn(signInUser: SignInUser): ApiResponse<WebTokenEntity>
 
     @POST("user/auto-signin")
     suspend fun signInAuto(): ApiResponse<String>
