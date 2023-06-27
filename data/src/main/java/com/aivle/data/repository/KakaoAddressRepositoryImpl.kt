@@ -2,7 +2,7 @@ package com.aivle.data.repository
 
 import com.aivle.data.mapper.toModel
 import com.aivle.data.api.KakaoApi
-import com.aivle.data.di.api.KakaoApiProvider
+import com.aivle.data.di.api.KakaoApiQualifier
 import com.aivle.domain.model.kakao.KakaoAddress
 import com.aivle.domain.model.kakao.KakaoCoord2Address
 import com.aivle.domain.repository.KakaoAddressRepository
@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class KakaoAddressRepositoryImpl @Inject constructor(
-    @KakaoApiProvider private val api: KakaoApi
+    @KakaoApiQualifier private val api: KakaoApi
 ) : KakaoAddressRepository {
 
     override suspend fun searchAddress(

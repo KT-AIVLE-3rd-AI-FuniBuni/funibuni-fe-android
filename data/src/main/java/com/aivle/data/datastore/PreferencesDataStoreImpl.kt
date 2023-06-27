@@ -23,7 +23,6 @@ class PreferencesDataStoreImpl @Inject constructor(
         }
     }
 
-
     override val refreshToken: Flow<String?> = context.dataStore.data.map { preferences ->
         preferences[REFRESH_TOKEN]
     }
@@ -50,3 +49,5 @@ class PreferencesDataStoreImpl @Inject constructor(
         private val ACCESS_TOKEN = stringPreferencesKey("access_token")
     }
 }
+
+

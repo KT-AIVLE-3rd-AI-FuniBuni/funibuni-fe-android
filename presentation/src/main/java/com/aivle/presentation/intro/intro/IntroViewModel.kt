@@ -1,37 +1,68 @@
 package com.aivle.presentation.intro.intro
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.aivle.domain.model.address.Address
-import com.aivle.domain.usecase.address.GetAddressUseCase
-import com.aivle.domain.usecase.address.SetAddressUseCase
+import com.aivle.domain.response.SignInWithTokenResponse
+import com.aivle.domain.usecase.sign.SignInWithTokenUseCase
+import com.aivle.domain.usecase.token.GetRefreshTokenUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class IntroViewModel @Inject constructor(
-    private val GetAddressUseCase: GetAddressUseCase,
-    private val SetAddressUseCase: SetAddressUseCase,
+    private val GetRefreshTokenUseCase: GetRefreshTokenUseCase,
+    private val SignInWithTokenUseCase: SignInWithTokenUseCase,
 ) : ViewModel() {
 
-    private val _isRegisteredAddress = MutableLiveData(false)
-    val isRegisteredAddress: LiveData<Boolean>
-        get() = _isRegisteredAddress
+    private val _eventFlow: MutableSharedFlow<Event> = MutableSharedFlow()
+    val eventFlow: SharedFlow<Event> get() = _eventFlow
 
-    fun loadAddress() {
+    fun checkRefreshTokenIfExistsSignIn() {
         viewModelScope.launch {
-            _isRegisteredAddress.value = GetAddressUseCase() != null
+            val refreshToken = GetRefreshTokenUseCase()
+            if (refreshToken == null) {
+                _eventFlow.emit(Event.RefreshToken.NotExists)
+            } else {
+                signInWithToken()
+            }
         }
     }
 
-    fun setAddress(value: String) {
-        viewModelScope.launch {
-            val address = Address(value)
-            SetAddressUseCase(address)
-            _isRegisteredAddress.value = true
+    private suspend fun signInWithToken() {
+        SignInWithTokenUseCase()
+            .catch { _eventFlow.emit(Event.SignIn.Failure(it.message)) }
+            .collect { response -> when (response) {
+                is SignInWithTokenResponse.Success -> {
+                    _eventFlow.emit(Event.SignIn.Succeed)
+                }
+                is SignInWithTokenResponse.Failure.ExpiredToken -> {
+                    _eventFlow.emit(Event.RefreshToken.Invalid)
+                }
+                is SignInWithTokenResponse.Failure.InvalidToken -> {
+                    _eventFlow.emit(Event.RefreshToken.Expired)
+                }
+                is SignInWithTokenResponse.Failure.NotFoundUser -> {
+                    _eventFlow.emit(Event.SignIn.Failure("Not found user"))
+                }
+                is SignInWithTokenResponse.Exception -> {
+                    _eventFlow.emit(Event.SignIn.Failure(response.message))
+                }
+            }}
+    }
+
+    sealed class Event {
+        sealed class RefreshToken : Event() {
+            object NotExists : RefreshToken()
+            object Invalid : RefreshToken()
+            object Expired : RefreshToken()
+        }
+        sealed class SignIn : Event() {
+            object Succeed : SignIn()
+            data class Failure(val message: String?) : SignIn()
         }
     }
 }

@@ -156,7 +156,7 @@ class SignInViewModel @Inject constructor(
                     }
                     .collect { response -> when (response) {
                         is SignInResponse.Success -> _eventFlow.emit(Event.SignIn.Succeed)
-                        is SignInResponse.Error.NotExistsUser -> _eventFlow.emit(Event.SignIn.NotExistsUser)
+                        is SignInResponse.Error.NotFoundUser -> _eventFlow.emit(Event.SignIn.NotExistsUser)
                         is SignInResponse.Exception -> _eventFlow.emit(
                             Event.SignIn.Exception(
                                 response.message

@@ -25,10 +25,10 @@ object KakaoApiModule {
     private const val KakaoAK = "KakaoAK"
     private const val API_KEY = "98e4ead29f1e35c1f1e494d250e4bff0"
 
-    @KakaoApiProvider
+    @KakaoApiQualifier
     @Provides
     fun provideRetrofit(
-        @KakaoApiProvider okHttpClient: OkHttpClient
+        @KakaoApiQualifier okHttpClient: OkHttpClient
     ): Retrofit {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
@@ -38,10 +38,10 @@ object KakaoApiModule {
             .build()
     }
 
-    @KakaoApiProvider
+    @KakaoApiQualifier
     @Provides
     fun provideOkhttpClient(
-        @KakaoApiProvider tokenInterceptor: Interceptor
+        @KakaoApiQualifier tokenInterceptor: Interceptor
     ): OkHttpClient {
         return OkHttpClient.Builder()
             .connectTimeout(TIME_OUT, TimeUnit.SECONDS)
@@ -53,7 +53,7 @@ object KakaoApiModule {
             .build()
     }
 
-    @KakaoApiProvider
+    @KakaoApiQualifier
     @Provides
     fun provideTokenInterceptor(): Interceptor = Interceptor { chain ->
         val newRequest = chain.request().newBuilder()
@@ -63,9 +63,9 @@ object KakaoApiModule {
         chain.proceed(newRequest)
     }
 
-    @KakaoApiProvider
+    @KakaoApiQualifier
     @Provides
     fun provideKakaoAddressApi(
-        @KakaoApiProvider retrofit: Retrofit
+        @KakaoApiQualifier retrofit: Retrofit
     ): KakaoApi = retrofit.create()
 }

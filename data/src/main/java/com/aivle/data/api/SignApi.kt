@@ -13,13 +13,4 @@ interface SignApi {
 
     @POST("user/signin")
     suspend fun signIn(signInUser: SignInUser): ApiResponse<WebTokenEntity>
-
-    @POST("user/auto-signin")
-    suspend fun signInAuto(): ApiResponse<String>
-
-    @POST("user/signout")
-    suspend fun signOut(): ApiResponse<String>
-
-    @POST("user/withdrawal")
-    suspend fun withdrawal(): ApiResponse<String>
 }

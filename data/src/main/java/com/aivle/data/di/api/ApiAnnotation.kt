@@ -4,12 +4,16 @@ import javax.inject.Qualifier
 
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
-annotation class FurniBurniSignApiProvider
+annotation class FuniBuniSignApiQualifier
 
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
-annotation class FurniBurniApiProvider
+annotation class FuniBuniSignWithTokenApiQualifier
 
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
-annotation class KakaoApiProvider
+annotation class FuniBuniApiQualifier
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class KakaoApiQualifier

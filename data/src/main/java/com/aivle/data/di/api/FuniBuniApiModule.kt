@@ -1,9 +1,8 @@
 package com.aivle.data.di.api
 
 import com.aivle.data.api.SharingPostApi
-import com.aivle.data.api.SignApi
 import com.aivle.data.api.UserApi
-import com.aivle.domain.repository.WebTokenRepository
+import com.aivle.domain.repository.AccessTokenRepository
 import com.skydoves.sandwich.adapters.ApiResponseCallAdapterFactory
 import dagger.Module
 import dagger.Provides
@@ -19,35 +18,31 @@ import java.util.concurrent.TimeUnit
 
 @Module
 @InstallIn(SingletonComponent::class)
-object FurniBurniApiModule {
+object FuniBuniApiModule {
 
     private const val TAG = "FurniBurniApiModule"
-    private const val BASE_URL = "https://jsonplaceholder.typicode.com/"
-    private const val TIME_OUT = 10L
-    private const val AUTHORIZATION = "Authorization"
-    private const val BEARER = "Bearer"
 
-    @FurniBurniApiProvider
+    @FuniBuniApiQualifier
     @Provides
     fun provideRetrofit(
-        @FurniBurniApiProvider okHttpClient: OkHttpClient
+        @FuniBuniApiQualifier okHttpClient: OkHttpClient
     ): Retrofit {
         return Retrofit.Builder()
-            .baseUrl(BASE_URL)
+            .baseUrl(ApiConstants.BASE_URL)
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(ApiResponseCallAdapterFactory.create())
             .build()
     }
 
-    @FurniBurniApiProvider
+    @FuniBuniApiQualifier
     @Provides
     fun provideOkHttpClient(
-        @FurniBurniApiProvider tokenInterceptor: Interceptor
+        @FuniBuniApiQualifier tokenInterceptor: Interceptor
     ): OkHttpClient {
         return OkHttpClient.Builder()
-            .connectTimeout(TIME_OUT, TimeUnit.SECONDS)
-            .readTimeout(TIME_OUT, TimeUnit.SECONDS)
+            .connectTimeout(ApiConstants.TIME_OUT, TimeUnit.SECONDS)
+            .readTimeout(ApiConstants.TIME_OUT, TimeUnit.SECONDS)
             .addInterceptor(tokenInterceptor)
             .addInterceptor(HttpLoggingInterceptor().apply {
                 level = HttpLoggingInterceptor.Level.BODY
@@ -55,10 +50,10 @@ object FurniBurniApiModule {
             .build()
     }
 
-    @FurniBurniApiProvider
+    @FuniBuniApiQualifier
     @Provides
     fun provideTokenInterceptor(
-        @FurniBurniApiProvider repository: WebTokenRepository
+        repository: AccessTokenRepository
     ): Interceptor = Interceptor { chain ->
         val accessToken = repository.getAccessToken()
 
@@ -66,22 +61,22 @@ object FurniBurniApiModule {
             chain.request()
         } else {
             chain.request().newBuilder()
-                .addHeader(AUTHORIZATION, "$BEARER $accessToken")
+                .addHeader(ApiConstants.AUTHORIZATION, "${ApiConstants.BEARER} $accessToken")
                 .build()
         }
 
         chain.proceed(request)
     }
 
-    @FurniBurniApiProvider
+    @FuniBuniApiQualifier
     @Provides
     fun provideUserApi(
-        @FurniBurniApiProvider retrofit: Retrofit
+        @FuniBuniApiQualifier retrofit: Retrofit
     ): UserApi = retrofit.create()
 
-    @FurniBurniApiProvider
+    @FuniBuniApiQualifier
     @Provides
     fun provideSharingPostApi(
-        @FurniBurniApiProvider retrofit: Retrofit
+        @FuniBuniApiQualifier retrofit: Retrofit
     ): SharingPostApi = retrofit.create()
 }

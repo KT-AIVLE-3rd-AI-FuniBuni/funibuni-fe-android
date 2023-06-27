@@ -5,11 +5,16 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.core.view.isVisible
 import com.aivle.presentation.R
 import com.aivle.presentation._base.BaseActivity
+import com.aivle.presentation._common.repeatOnStarted
+import com.aivle.presentation._common.showToast
 import com.aivle.presentation.databinding.ActivityIntroBinding
+import com.aivle.presentation.intro.intro.IntroViewModel.Event
 import com.aivle.presentation.intro.sign.SignActivity
 import com.aivle.presentation.main.MainActivity
+
 import com.google.firebase.FirebaseApp
 import com.google.firebase.appcheck.FirebaseAppCheck
 import com.google.firebase.appcheck.safetynet.SafetyNetAppCheckProviderFactory
@@ -34,6 +39,8 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>(R.layout.activity_intro
         initView()
         initFirebaseApp()
         observeViewModel()
+
+        viewModel.checkRefreshTokenIfExistsSignIn()
     }
 
     private fun initView() {
@@ -51,8 +58,27 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>(R.layout.activity_intro
         )
     }
 
-    private fun observeViewModel() {
+    private fun observeViewModel() = repeatOnStarted {
+        viewModel.eventFlow.collect { event ->
+            binding.btnStart.isVisible = (event !is Event.SignIn.Succeed)
 
+            when (event) {
+                is Event.RefreshToken.NotExists -> {
+                }
+                is Event.RefreshToken.Expired -> {
+                    showToast("Token is expired")
+                }
+                is Event.RefreshToken.Invalid -> {
+                    showToast("Token is invalid")
+                }
+                is Event.SignIn.Failure -> {
+                    showToast(event.message)
+                }
+                is Event.SignIn.Succeed -> {
+                    startMainActivity()
+                }
+            }
+        }
     }
 
     private fun startMainActivity() {

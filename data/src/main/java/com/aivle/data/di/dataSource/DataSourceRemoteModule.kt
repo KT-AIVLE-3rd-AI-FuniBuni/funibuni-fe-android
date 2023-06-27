@@ -1,4 +1,4 @@
-package com.aivle.data.di
+package com.aivle.data.di.dataSource
 
 import dagger.Module
 import dagger.hilt.InstallIn

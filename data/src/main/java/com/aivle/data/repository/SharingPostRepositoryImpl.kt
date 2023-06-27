@@ -2,7 +2,7 @@ package com.aivle.data.repository
 
 import com.aivle.data._util.SampleData
 import com.aivle.data.api.SharingPostApi
-import com.aivle.data.di.api.FurniBurniApiProvider
+import com.aivle.data.di.api.FuniBuniApiQualifier
 import com.aivle.domain.model.sharingPost.Reply
 import com.aivle.domain.model.sharingPost.SharingPostDetail
 import com.aivle.domain.model.sharingPost.SharingPostItem
@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class SharingPostRepositoryImpl @Inject constructor(
-    @FurniBurniApiProvider private val service: SharingPostApi
+    @FuniBuniApiQualifier private val api: SharingPostApi
 ) : SharingPostRepository {
 
     override suspend fun getSharingPostList(): Flow<DataResponse<List<SharingPostItem>>> = flow {
