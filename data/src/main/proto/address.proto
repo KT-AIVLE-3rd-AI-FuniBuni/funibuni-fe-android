@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+option java_package = "com.aivle.data";
+option java_multiple_files = true;
+
+message AddressProto {
+  int64 address_id = 1;
+  string postal_code = 2;
+  string road_address = 3;
+  string land_address = 4;
+  string city = 5;
+  string district = 6;
+  string dong = 7;
+  string disposal_location = 8;
+}

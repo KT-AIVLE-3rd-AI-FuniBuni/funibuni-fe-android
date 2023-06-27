@@ -1,5 +1,6 @@
 package com.aivle.data.di.dataSource
 
+import com.aivle.data.datastore.AddressDatastoreImpl
 import com.aivle.data.datastore.PreferencesDatastore
 import com.aivle.data.datastore.PreferencesDatastoreImpl
 import dagger.Binds
@@ -16,4 +17,9 @@ interface LocalDataSourceModule {
     fun providePreferencesDatastore(
         datastoreImpl: PreferencesDatastoreImpl
     ): PreferencesDatastore
+
+    @Binds
+    fun provideAddressDatastore(
+        datastoreImpl: AddressDatastoreImpl
+    ): AddressDatastoreImpl
 }
