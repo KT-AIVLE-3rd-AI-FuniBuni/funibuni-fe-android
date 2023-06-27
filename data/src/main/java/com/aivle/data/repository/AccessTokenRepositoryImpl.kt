@@ -1,14 +1,13 @@
 package com.aivle.data.repository
 
-import com.aivle.data.datastore.PreferencesDataStore
-import com.aivle.data.di.api.FuniBuniApiQualifier
+import com.aivle.data.datastore.PreferencesDatastore
 import com.aivle.domain.repository.AccessTokenRepository
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
 class AccessTokenRepositoryImpl @Inject constructor(
-    private val dataStore: PreferencesDataStore
+    private val dataStore: PreferencesDatastore
 ) : AccessTokenRepository {
 
     override fun getAccessToken(): String? {
@@ -19,4 +18,3 @@ class AccessTokenRepositoryImpl @Inject constructor(
         runBlocking { dataStore.setAccessToken(token) }
     }
 }
-

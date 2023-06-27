@@ -1,41 +1,41 @@
 {
   "project_info": {
-    "project_number": "213305497272",
-    "project_id": "kt-furniburni",
-    "storage_bucket": "kt-furniburni.appspot.com"
+    "project_number": "485637022569",
+    "project_id": "kt-funibuni",
+    "storage_bucket": "kt-funibuni.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:213305497272:android:86de2f70ede0a49f8a464d",
+        "mobilesdk_app_id": "1:485637022569:android:3b6bef39e5618f6fb8d3f8",
         "android_client_info": {
-          "package_name": "com.aivle.furniburni"
+          "package_name": "com.aivle.funibuni"
         }
       },
       "oauth_client": [
         {
-          "client_id": "213305497272-thap5trvf7iavo88cdrkr71oh95k2oro.apps.googleusercontent.com",
+          "client_id": "485637022569-b8v2f9kjmpik7ikstgg1oh14epal6d2s.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.aivle.furniburni",
+            "package_name": "com.aivle.funibuni",
             "certificate_hash": "5567f501caee0375f5cf63d77f59ab03fb97e4cb"
           }
         },
         {
-          "client_id": "213305497272-tbg8ilg9cse9keni58odslqpqvtdp0pj.apps.googleusercontent.com",
+          "client_id": "485637022569-7u2vqj23v3m235953o7u5fnvajkl1jq1.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAbIQQP8Rv1XIlJU2ppkZpRceS_YZaD81o"
+          "current_key": "AIzaSyAMBnCE9kAkqUhXELr8jeac1Co2zFt5dtE"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "213305497272-tbg8ilg9cse9keni58odslqpqvtdp0pj.apps.googleusercontent.com",
+              "client_id": "485637022569-7u2vqj23v3m235953o7u5fnvajkl1jq1.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

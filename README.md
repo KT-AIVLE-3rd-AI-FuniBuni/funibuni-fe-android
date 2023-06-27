@@ -1,8 +1,8 @@
-# FurniBurni Android App
+# FuniBuni Android App
 
 <앱 사진>
 
-AI 기반 대형폐기물 처리 원터치 서비스 **FurniBurni** 안드로이드 앱 입니다.
+AI 기반 대형폐기물 처리 원터치 서비스 **FuniBuni** 안드로이드 앱 입니다.
 
 
 ## Service Flow

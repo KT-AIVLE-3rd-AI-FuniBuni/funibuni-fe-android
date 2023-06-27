@@ -1,5 +1,6 @@
 package com.aivle.presentation.intro.intro
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.aivle.domain.response.SignInWithTokenResponse
@@ -12,6 +13,8 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+private const val TAG = "IntroViewModel"
+
 @HiltViewModel
 class IntroViewModel @Inject constructor(
     private val GetRefreshTokenUseCase: GetRefreshTokenUseCase,
@@ -22,8 +25,11 @@ class IntroViewModel @Inject constructor(
     val eventFlow: SharedFlow<Event> get() = _eventFlow
 
     fun checkRefreshTokenIfExistsSignIn() {
+
         viewModelScope.launch {
+            Log.d(TAG, "viewModelScope.launch")
             val refreshToken = GetRefreshTokenUseCase()
+            Log.d(TAG, "viewModelScope.launch: $refreshToken")
             if (refreshToken == null) {
                 _eventFlow.emit(Event.RefreshToken.NotExists)
             } else {

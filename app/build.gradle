@@ -8,11 +8,11 @@ plugins {
 }
 
 android {
-    namespace 'com.aivle.furniburni'
+    namespace 'com.aivle.funibuni'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.aivle.furniburni"
+        applicationId "com.aivle.funibuni"
         minSdk 24
         targetSdk 33
         versionCode 1

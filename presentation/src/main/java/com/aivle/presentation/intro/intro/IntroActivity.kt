@@ -64,6 +64,7 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>(R.layout.activity_intro
 
             when (event) {
                 is Event.RefreshToken.NotExists -> {
+                    showToast("Not exists token")
                 }
                 is Event.RefreshToken.Expired -> {
                     showToast("Token is expired")
