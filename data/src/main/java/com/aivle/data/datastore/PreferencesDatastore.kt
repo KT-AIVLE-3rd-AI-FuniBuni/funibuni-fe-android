@@ -12,10 +12,13 @@ interface PreferencesDatastore {
 
     val refreshToken: Flow<String?>
 
-    suspend fun setRefreshToken(token: String)
+    suspend fun saveRefreshToken(token: String)
 
     val accessToken: Flow<String?>
 
-    suspend fun setAccessToken(token: String)
+    suspend fun saveAccessToken(token: String)
 
+    suspend fun saveAuthTokens(refresh: String, access: String)
+
+    suspend fun deleteAuthTokens()
 }

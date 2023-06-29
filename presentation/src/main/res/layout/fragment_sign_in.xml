@@ -118,7 +118,7 @@
             android:textSize="18sp"
             android:textColor="@color/white"
             android:textStyle="bold"
-            android:background="@drawable/bg_ripple_sign_button"
+            android:background="@drawable/bg_ripple"
             android:enabled="true"
             app:layout_constraintBottom_toBottomOf="@id/bottom_button_guideline"/>
 

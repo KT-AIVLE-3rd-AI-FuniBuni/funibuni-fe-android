@@ -29,26 +29,6 @@ class SignInFragment : BaseSignFragment<FragmentSignInBinding>(R.layout.fragment
 
     private val viewModel: SignInViewModel by viewModels()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        Log.d(TAG, "onCreate()")
-        super.onCreate(savedInstanceState)
-    }
-
-    override fun onCreateView(inflater: LayoutInflater,container: ViewGroup?,savedInstanceState: Bundle?): View {
-        Log.d(TAG, "onCreateView()")
-        return super.onCreateView(inflater, container, savedInstanceState)
-    }
-
-    override fun onDestroyView() {
-        Log.d(TAG, "onDestroyView()")
-        super.onDestroyView()
-    }
-
-    override fun onDestroy() {
-        Log.d(TAG, "onDestroy()")
-        super.onDestroy()
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Log.d(TAG, "onViewCreated()")
@@ -68,9 +48,7 @@ class SignInFragment : BaseSignFragment<FragmentSignInBinding>(R.layout.fragment
         binding.edtPhoneNumber.addTextChangedListener(EditTextWatcher(binding.edtPhoneNumber))
         binding.edtPhoneAuthCode.addTextChangedListener(EditTextWatcher(binding.edtPhoneAuthCode))
 
-//        binding.btnAuth.isEnabled = true // TODO(지우기)
         binding.btnAuth.setOnClickListener {
-//            moveNextPage()
             if (!binding.edtLayoutPhoneAuthCode.isVisible) { // 인증 문자 받기
                 val phoneNumber = binding.edtPhoneNumber.text.toString()
 
@@ -140,10 +118,10 @@ class SignInFragment : BaseSignFragment<FragmentSignInBinding>(R.layout.fragment
                 enablePhoneAuthButton(false)
             }
             is Event.SignIn.Succeed -> {
+                showToast("Event.SignIn.Succeed")
                 signActivity.finishForSignIn()
             }
             is Event.SignIn.NotExistsUser -> {
-                showToast("NotExistsUser")
                 enableRetryAuthButton(false)
                 binding.btnAuth.text = "다음으로"
                 signViewModel.phoneNumber = viewModel.authenticatingPhoneNumber

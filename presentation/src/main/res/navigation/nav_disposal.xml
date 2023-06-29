@@ -10,7 +10,7 @@
 
     <fragment
         android:id="@+id/disposalFragment"
-        android:name="com.aivle.presentation.disposal.DisposalFragment"
+        android:name="com.aivle.presentation.disposal.disposalTab.DisposalTabFragment"
         android:label="DisposalFragment"
         tools:layout="@layout/fragment_disposal">
         <argument

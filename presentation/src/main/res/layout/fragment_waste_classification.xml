@@ -5,42 +5,39 @@
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingHorizontal="24dp"
+        android:clipToPadding="false"
         android:background="@color/background_color">
 
         <!-- Waste Image CardView -->
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/waste_image_card_view"
+            android:id="@+id/waste_image_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="4dp"
+            android:layout_marginTop="24dp"
+            app:cardMaxElevation="20dp"
+            app:cardElevation="20dp"
+            app:cardCornerRadius="8dp"
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <!-- Placeholder -->
-                <ImageView
-                    android:id="@+id/placeholder"
-                    android:layout_width="match_parent"
-                    android:layout_height="160dp"
-                    android:padding="30dp"
-                    android:src="@drawable/bunny_icon_gray_240"
-                    android:background="@color/placeholder_background_gray"
-                    app:layout_constraintTop_toTopOf="parent"/>
-
                 <!-- Waste Image -->
                 <ImageView
                     android:id="@+id/waste_image"
                     android:layout_width="match_parent"
-                    android:layout_height="160dp"
+                    android:layout_height="0dp"
                     android:scaleType="centerCrop"
+                    tools:src="@drawable/placeholder_1440"
+                    app:layout_constraintDimensionRatio="5:3"
                     app:layout_constraintTop_toTopOf="parent"/>
 
                 <!-- CardView Footer -->
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="80dp"
                     app:layout_constraintTop_toBottomOf="@id/waste_image">
 
                     <TextView
@@ -48,12 +45,24 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="24dp"
-                        android:textSize="18sp"
+                        android:textSize="20sp"
                         android:textColor="@color/black"
-                        tools:text="의자가 맞을까요?"
+                        android:textStyle="bold"
+                        android:text="의자(회전의자)"
+                        tools:text="의자(회전의자)"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:textSize="16sp"
+                        android:textColor="@color/black"
+                        android:text="가(이) 맞을까요?"
+                        app:layout_constraintStart_toEndOf="@id/waste_name"
+                        app:layout_constraintBottom_toBottomOf="@id/waste_name"/>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -61,15 +70,196 @@
 
         </com.google.android.material.card.MaterialCardView>
 
-        <!--  -->
+        <!-- 대분류 -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/large_category_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            app:cardMaxElevation="20dp"
+            app:cardElevation="20dp"
+            app:cardCornerRadius="12dp"
+            app:layout_constraintTop_toBottomOf="@id/waste_image_container">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingHorizontal="18dp"
+                android:orientation="vertical">
+
+                <!-- 대분류 Label -->
+                <TextView
+                    android:id="@+id/large_category_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:gravity="center_vertical"
+                    android:text="대분류"
+                    android:textColor="@color/black"
+                    android:textSize="22sp"
+                    android:textStyle="bold"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                    <!-- Large Cat Container - 1st -->
+                    <FrameLayout
+                        android:id="@+id/large_cat_1st_container"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <!-- Large Cat Button - 1st -->
+                        <com.aivle.presentation_design.interactive.ui.InteractiveLinearLayout
+                            android:id="@+id/large_cat_1st"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:padding="10dp"
+                            android:orientation="vertical"
+                            android:layout_gravity="center"
+                            android:gravity="center">
+
+                            <ImageView
+                                android:id="@+id/iv_large_cat_1st"
+                                android:layout_width="wrap_content"
+                                android:layout_height="0dp"
+                                android:layout_weight="1"
+                                android:adjustViewBounds="true"
+                                android:src="@drawable/icon_chair_circle"/>
+
+                            <TextView
+                                android:id="@+id/tv_large_cat_1st_name"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:paddingTop="4sp"
+                                android:gravity="center"
+                                android:textSize="18sp"
+                                android:textColor="@color/black"
+                                android:text="의자"
+                                tools:text="의자"/>
+
+                            <TextView
+                                android:id="@+id/tv_large_cat_1st_prob"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:paddingBottom="4dp"
+                                android:gravity="center_horizontal|top"
+                                android:text="82%"
+                                tools:text="82%"/>
+
+                        </com.aivle.presentation_design.interactive.ui.InteractiveLinearLayout>
+
+                    </FrameLayout>
+
+                    <!-- Large Cat Container - 1st -->
+                    <FrameLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <!-- Large Cat Button - 1st -->
+                        <com.aivle.presentation_design.interactive.ui.InteractiveLinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:padding="10dp"
+                            android:orientation="vertical"
+                            android:layout_gravity="center"
+                            android:gravity="center">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="0dp"
+                                android:layout_weight="1"
+                                android:adjustViewBounds="true"
+                                android:src="@drawable/icon_desk_circle_gray"/>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:paddingTop="4sp"
+                                android:gravity="center"
+                                android:textSize="18sp"
+                                android:textColor="@color/black"
+                                android:text="책상"
+                                tools:text="책상"/>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:paddingBottom="4dp"
+                                android:gravity="center_horizontal|top"
+                                android:text="30%"
+                                tools:text="30%"/>
+
+                        </com.aivle.presentation_design.interactive.ui.InteractiveLinearLayout>
+
+                    </FrameLayout>
+
+                    <!-- Large Cat Container - 1st -->
+                    <FrameLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:visibility="visible">
+
+                        <!-- Large Cat Button - 1st -->
+                        <com.aivle.presentation_design.interactive.ui.InteractiveLinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:padding="10dp"
+                            android:orientation="vertical"
+                            android:layout_gravity="center"
+                            android:gravity="center">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="0dp"
+                                android:layout_weight="1"
+                                android:adjustViewBounds="true"
+                                android:src="@drawable/icon_tv_circle_gray"/>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:paddingTop="4sp"
+                                android:gravity="center"
+                                android:textSize="18sp"
+                                android:textColor="@color/black"
+                                android:text="의자"
+                                tools:text="의자"/>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:paddingBottom="4dp"
+                                android:gravity="center_horizontal|top"
+                                android:text="16%"
+                                tools:text="16%"/>
+
+                        </com.aivle.presentation_design.interactive.ui.InteractiveLinearLayout>
+
+                    </FrameLayout>
+
+                </LinearLayout>
+
+                <!-- 더보기 텍스트 버튼 -->
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- 소분류 -->
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/subcategory_container"
+            android:id="@+id/small_category_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:background="@color/white"
             android:visibility="gone"
-            app:layout_constraintTop_toBottomOf="@id/waste_image_card_view">
+            app:layout_constraintTop_toBottomOf="@id/waste_image_container">
 
             <TextView
                 android:id="@+id/subcategory_title"
@@ -82,10 +272,11 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <!-- Next Button -->
-        <Button
+        <com.aivle.presentation_design.interactive.ui.InteractiveTextButton
             android:id="@+id/btn_next"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="56dp"
+            android:layout_marginBottom="24dp"
             android:text="다음"
             app:layout_constraintBottom_toBottomOf="parent"/>
 

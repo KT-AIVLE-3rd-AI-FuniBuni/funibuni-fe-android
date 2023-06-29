@@ -56,11 +56,15 @@ class SignInViewModel @Inject constructor(
     }
 
     fun isSameAuthenticatingPhoneNumber(phoneNumber: String): Boolean {
-        return phoneNumber == authenticatingPhoneNumber.drop(4).replace("-", " ")
+        return phoneNumber == authenticatingPhoneNumber.replace("-", " ")
     }
 
     private fun String.toFirebasePhoneFormat(): String {
         return "+82 " + this.replace(" ", "-")
+    }
+
+    private fun String.toFuniBuniPhoneFormat(): String {
+        return this.drop(4)
     }
 
     sealed class Event {
@@ -112,7 +116,7 @@ class SignInViewModel @Inject constructor(
 
         override fun onStarted(phoneNumber: String) {
             Log.d(TAG, "onStarted(): $phoneNumber")
-            authenticatingPhoneNumber = phoneNumber
+            authenticatingPhoneNumber = phoneNumber.toFuniBuniPhoneFormat()
 
             viewModelScope.launch {
                 _eventFlow.emit(Event.RequestSms.FirstTry.Started)
@@ -121,7 +125,7 @@ class SignInViewModel @Inject constructor(
 
         override fun onReStarted(phoneNumber: String) {
             Log.d(TAG, "onReStarted(): $phoneNumber")
-            authenticatingPhoneNumber = phoneNumber
+            authenticatingPhoneNumber = phoneNumber.toFuniBuniPhoneFormat()
 
             viewModelScope.launch {
                 _eventFlow.emit(Event.RequestSms.Retry.Started)

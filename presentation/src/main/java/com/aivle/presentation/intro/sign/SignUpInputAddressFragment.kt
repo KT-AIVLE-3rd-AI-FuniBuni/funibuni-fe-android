@@ -207,7 +207,7 @@ class SignUpInputAddressFragment : BaseSignFragment<FragmentSignUpInputAddressBi
 
     private fun moveNextDetailPage(address: KakaoAddressDocument) {
         if (address.road_address != null) {
-            signViewModel.sendAddress(address.road_address!!)
+            signViewModel.sendAddress(address)
             moveNextPage()
         }
     }

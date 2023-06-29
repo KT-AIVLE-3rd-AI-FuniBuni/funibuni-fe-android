@@ -40,8 +40,8 @@ class SignUpInputAddressDetailFragment
     private fun handleEvent() = repeatOnStarted {
         signViewModel.addressEventFlow.collectLatest { address ->
             Log.d(TAG, "addressEventFlow.collectLatest: $address")
-            val addressName = address.address_name
-            val roadAddressName = address.address_name
+            val addressName = address.road_address!!.address_name
+            val roadAddressName = address.road_address!!.address_name
 
             binding.addressName = addressName
             binding.roadAddressName = roadAddressName

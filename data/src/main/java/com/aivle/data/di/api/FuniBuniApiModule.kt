@@ -1,7 +1,9 @@
 package com.aivle.data.di.api
 
+import android.util.Log
 import com.aivle.data.api.SharingPostApi
 import com.aivle.data.api.UserApi
+import com.aivle.data.api.WasteApi
 import com.aivle.domain.repository.AccessTokenRepository
 import com.skydoves.sandwich.adapters.ApiResponseCallAdapterFactory
 import dagger.Module
@@ -45,7 +47,7 @@ object FuniBuniApiModule {
             .readTimeout(ApiConstants.TIME_OUT, TimeUnit.SECONDS)
             .addInterceptor(tokenInterceptor)
             .addInterceptor(HttpLoggingInterceptor().apply {
-                level = HttpLoggingInterceptor.Level.BODY
+                level = HttpLoggingInterceptor.Level.HEADERS
             })
             .build()
     }
@@ -64,6 +66,8 @@ object FuniBuniApiModule {
                 .addHeader(ApiConstants.AUTHORIZATION, "${ApiConstants.BEARER} $accessToken")
                 .build()
         }
+        Log.d(TAG, "TokenInterceptor: request=$request")
+        Log.d(TAG, "TokenInterceptor: accessToken=$accessToken")
 
         chain.proceed(request)
     }
@@ -79,4 +83,10 @@ object FuniBuniApiModule {
     fun provideSharingPostApi(
         @FuniBuniApiQualifier retrofit: Retrofit
     ): SharingPostApi = retrofit.create()
+
+    @FuniBuniApiQualifier
+    @Provides
+    fun provideWasteApi(
+        @FuniBuniApiQualifier retrofit: Retrofit
+    ): WasteApi = retrofit.create()
 }

@@ -15,10 +15,11 @@
 
         <activity android:name="._base.BaseActivity"/>
         <activity android:name=".main.MainActivity"/>
-        <activity android:name=".disposal.DisposalApplyActivity"/>
+        <activity android:name=".disposal.DisposalActivity"/>
+        <activity android:name=".sharingPostDetail.SharingPostDetailActivity"/>
+        <activity android:name=".myprofileDetail.MyProfileDetailActivity"/>
         <activity android:name=".intro.sign.SignActivity"
             android:windowSoftInputMode="adjustNothing"/>
-        <activity android:name=".sharingPostDetail.SharingPostDetailActivity"/>
 
     </application>
 </manifest>

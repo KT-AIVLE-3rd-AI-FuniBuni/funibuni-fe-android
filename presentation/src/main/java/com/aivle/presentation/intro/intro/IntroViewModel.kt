@@ -8,7 +8,9 @@ import com.aivle.domain.usecase.sign.SignInWithTokenUseCase
 import com.aivle.domain.usecase.token.GetRefreshTokenUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -21,16 +23,16 @@ class IntroViewModel @Inject constructor(
     private val SignInWithTokenUseCase: SignInWithTokenUseCase,
 ) : ViewModel() {
 
-    private val _eventFlow: MutableSharedFlow<Event> = MutableSharedFlow()
-    val eventFlow: SharedFlow<Event> get() = _eventFlow
+    private val _eventFlow: MutableStateFlow<Event> = MutableStateFlow(Event.None)
+    val eventFlow: StateFlow<Event> get() = _eventFlow
 
     fun checkRefreshTokenIfExistsSignIn() {
-
         viewModelScope.launch {
             Log.d(TAG, "viewModelScope.launch")
             val refreshToken = GetRefreshTokenUseCase()
             Log.d(TAG, "viewModelScope.launch: $refreshToken")
             if (refreshToken == null) {
+                Log.d(TAG, "viewModelScope.launch: refreshToken == null")
                 _eventFlow.emit(Event.RefreshToken.NotExists)
             } else {
                 signInWithToken()
@@ -61,6 +63,7 @@ class IntroViewModel @Inject constructor(
     }
 
     sealed class Event {
+        object None : Event()
         sealed class RefreshToken : Event() {
             object NotExists : RefreshToken()
             object Invalid : RefreshToken()

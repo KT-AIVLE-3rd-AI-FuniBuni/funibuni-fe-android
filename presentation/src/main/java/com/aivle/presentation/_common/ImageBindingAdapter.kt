@@ -10,9 +10,9 @@ object ImageBindingAdapter {
 
     @BindingAdapter("imageUrl")
     @JvmStatic
-    fun imageUrl(imageView: ImageView, url: String) {
+    fun imageUrl(imageView: ImageView, imageUrl: String) {
         Glide.with(imageView.context)
-            .load(url)
+            .load(imageUrl)
             .centerCrop()
             .error(R.drawable.placeholder_1440)
             .diskCacheStrategy(DiskCacheStrategy.ALL)

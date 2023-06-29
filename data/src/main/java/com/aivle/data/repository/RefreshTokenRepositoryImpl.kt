@@ -15,6 +15,6 @@ class RefreshTokenRepositoryImpl @Inject constructor(
     }
 
     override fun setRefreshToken(token: String) {
-        runBlocking { dataStore.setRefreshToken(token) }
+        runBlocking { dataStore.saveRefreshToken(token) }
     }
 }

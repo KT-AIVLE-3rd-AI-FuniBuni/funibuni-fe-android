@@ -7,6 +7,7 @@ import com.aivle.data.repository.SharingPostRepositoryImpl
 import com.aivle.data.repository.SignRepositoryImpl
 import com.aivle.data.repository.UserRepositoryImpl
 import com.aivle.data.repository.RefreshTokenRepositoryImpl
+import com.aivle.data.repository.WasteRepositoryImpl
 import com.aivle.domain.repository.AccessTokenRepository
 import com.aivle.domain.repository.AddressLocalRepository
 import com.aivle.domain.repository.KakaoAddressRepository
@@ -14,6 +15,7 @@ import com.aivle.domain.repository.SharingPostRepository
 import com.aivle.domain.repository.SignRepository
 import com.aivle.domain.repository.UserRepository
 import com.aivle.domain.repository.RefreshTokenRepository
+import com.aivle.domain.repository.WasteRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -50,11 +52,16 @@ interface RepositoryModule {
 
     @Binds
     fun bindSharingPostRepositoryImpl(
-        repository: SharingPostRepositoryImpl
+        repositoryImpl: SharingPostRepositoryImpl
     ): SharingPostRepository
 
     @Binds
     fun bindKakaoAddressRepositoryImpl(
-        repository: KakaoAddressRepositoryImpl
+        repositoryImpl: KakaoAddressRepositoryImpl
     ): KakaoAddressRepository
+
+    @Binds
+    fun bindWasteRepositoryImpl(
+        repositoryImpl: WasteRepositoryImpl
+    ): WasteRepository
 }

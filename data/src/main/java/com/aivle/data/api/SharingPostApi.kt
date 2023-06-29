@@ -11,56 +11,56 @@ import retrofit2.http.PUT
 interface SharingPostApi {
 
     @POST("posts-create1")
-    fun createPosts1(): ApiResponse<SharingPost>
+    suspend fun createPosts1(): ApiResponse<SharingPost>
 
     @POST("posts-create2")
-    fun createPosts2(): ApiResponse<SharingPost>
+    suspend fun createPosts2(): ApiResponse<SharingPost>
 
     @GET("posts")
-    fun getPosts(): ApiResponse<List<SharingPostItem>>
+    suspend fun getPosts(): ApiResponse<List<SharingPostItem>>
 
     @GET("posts/{post_id}")
-    fun getPost(): ApiResponse<SharingPost>
+    suspend fun getPost(): ApiResponse<SharingPost>
 
     @PUT("posts/{post_id}")
-    fun updatePost(): ApiResponse<String>
+    suspend fun updatePost(): ApiResponse<String>
 
     @DELETE("posts/{post_id}")
-    fun deletePost(): ApiResponse<String>
+    suspend fun deletePost(): ApiResponse<String>
 
     @POST("posts/{post_id}/report")
-    fun reportPost(): ApiResponse<String>
+    suspend fun reportPost(): ApiResponse<String>
 
     @POST("posts/{post_id}/like")
-    fun likePost(): ApiResponse<String>
+    suspend fun likePost(): ApiResponse<String>
 
     @DELETE("posts/{post_id}/like")
-    fun unlikePost(): ApiResponse<String>
+    suspend fun unlikePost(): ApiResponse<String>
 
     @POST("posts/{post_id}/comments")
-    fun addComment(): ApiResponse<String>
+    suspend fun addComment(): ApiResponse<String>
 
     @PUT("posts/{post_id}/comments/{comment_id}")
-    fun updateComment(): ApiResponse<String>
+    suspend fun updateComment(): ApiResponse<String>
 
     @DELETE("posts/{post_id}/comments/{comment_id}")
-    fun deleteComment(): ApiResponse<String>
+    suspend fun deleteComment(): ApiResponse<String>
 
     @POST("posts/{post_id}/comments/{comment_id}/report")
-    fun reportComment(): ApiResponse<String>
+    suspend fun reportComment(): ApiResponse<String>
 
     @GET("posts/{post_id}/comments/{comment_id}/replies")
-    fun getReply(): ApiResponse<String>
+    suspend fun getReply(): ApiResponse<String>
 
     @POST("posts/{post_id}/comments/{comment_id}/replies")
-    fun addReply(): ApiResponse<String>
+    suspend fun addReply(): ApiResponse<String>
 
     @PUT("posts/{post_id}/comments/{comment_id}/replies/{reply_id}")
-    fun updateReply(): ApiResponse<String>
+    suspend fun updateReply(): ApiResponse<String>
 
     @DELETE("posts/{post_id}/comments/{comment_id}/replies/{reply_id}")
-    fun deleteReply(): ApiResponse<String>
+    suspend fun deleteReply(): ApiResponse<String>
 
     @POST("posts/{post_id}/comments/{comment_id}/replies/{reply_id}/report")
-    fun reportReply(): ApiResponse<String>
+    suspend fun reportReply(): ApiResponse<String>
 }

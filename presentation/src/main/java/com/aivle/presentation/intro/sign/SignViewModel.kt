@@ -3,7 +3,7 @@ package com.aivle.presentation.intro.sign
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.aivle.domain.model.kakao.KakaoRoadAddress
+import com.aivle.domain.model.kakao.KakaoAddressDocument
 import com.aivle.domain.model.sign.SignUpUser
 import com.aivle.domain.response.SignUpResponse
 import com.aivle.domain.usecase.sign.SignUpUseCase
@@ -29,12 +29,12 @@ class SignViewModel @Inject constructor(
     private val _dataEventFlow: MutableStateFlow<Event> = MutableStateFlow(Event.PhoneNumber(""))
     val dataEventFlow: StateFlow<Event> get() = _dataEventFlow
 
-    private val _addressEventFlow: MutableSharedFlow<KakaoRoadAddress> = MutableSharedFlow()
-    val addressEventFlow: SharedFlow<KakaoRoadAddress> get() = _addressEventFlow
+    private val _addressEventFlow: MutableSharedFlow<KakaoAddressDocument> = MutableSharedFlow()
+    val addressEventFlow: SharedFlow<KakaoAddressDocument> get() = _addressEventFlow
 
     var phoneNumber: String = ""
     var userName: String = ""
-    var address: KakaoRoadAddress? = null
+    var address: KakaoAddressDocument? = null
 
     fun sendPhoneNumber(phoneNumber: String) {
         viewModelScope.launch {
@@ -48,7 +48,7 @@ class SignViewModel @Inject constructor(
         }
     }
 
-    fun sendAddress(address: KakaoRoadAddress) {
+    fun sendAddress(address: KakaoAddressDocument) {
         this.address = address
         viewModelScope.launch {
             _addressEventFlow.emit(address)
@@ -58,7 +58,7 @@ class SignViewModel @Inject constructor(
     fun signUp(addressDetail: String) {
         Log.d(TAG, "signUp(): phoneNumber=$phoneNumber, userName=$userName, address=$address, addressDetail=$addressDetail")
         viewModelScope.launch {
-            val signUpUser = SignUpUser(phoneNumber, userName)
+            val signUpUser = SignUpUser(phoneNumber, userName, address!!, addressDetail)
 
             SignUpUseCase(signUpUser)
                 .catch { _signUpEventFlow.emit(SignUpEvent.Failure(it.message)) }

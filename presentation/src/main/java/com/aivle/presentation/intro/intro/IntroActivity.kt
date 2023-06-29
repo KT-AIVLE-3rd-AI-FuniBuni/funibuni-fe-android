@@ -3,6 +3,9 @@ package com.aivle.presentation.intro.intro
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.util.Log
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
@@ -19,6 +22,8 @@ import com.google.firebase.FirebaseApp
 import com.google.firebase.appcheck.FirebaseAppCheck
 import com.google.firebase.appcheck.safetynet.SafetyNetAppCheckProviderFactory
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlin.concurrent.timer
 
 private const val TAG = "IntroActivity"
 
@@ -41,11 +46,14 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>(R.layout.activity_intro
         observeViewModel()
 
         viewModel.checkRefreshTokenIfExistsSignIn()
+//        Handler(Looper.getMainLooper()).postDelayed({
+//            startMainActivity()
+//        }, 1000)
     }
 
     private fun initView() {
         binding.btnStart.setOnClickListener {
-            startSignActivity()
+             startSignActivity()
         }
     }
 
@@ -63,8 +71,9 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>(R.layout.activity_intro
             binding.btnStart.isVisible = (event !is Event.SignIn.Succeed)
 
             when (event) {
+                is Event.None -> {
+                }
                 is Event.RefreshToken.NotExists -> {
-                    showToast("Not exists token")
                 }
                 is Event.RefreshToken.Expired -> {
                     showToast("Token is expired")

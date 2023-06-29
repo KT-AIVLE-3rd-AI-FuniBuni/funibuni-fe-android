@@ -15,6 +15,6 @@ class AccessTokenRepositoryImpl @Inject constructor(
     }
 
     override fun setAccessToken(token: String) {
-        runBlocking { dataStore.setAccessToken(token) }
+        runBlocking { dataStore.saveAccessToken(token) }
     }
 }

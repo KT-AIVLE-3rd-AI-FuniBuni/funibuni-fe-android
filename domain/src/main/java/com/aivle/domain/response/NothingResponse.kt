@@ -4,10 +4,16 @@ sealed class NothingResponse {
 
     object Success : NothingResponse()
 
-    data class Failure(val message: String?): NothingResponse()
+    sealed class Failure : NothingResponse() {
+        abstract val message: String?
 
-    data class Exception(
-        val throwable: Throwable,
-        val message: String?
-    ) : NothingResponse()
+        data class Error(
+            override val message: String?
+        ) : Failure()
+
+        data class Exception(
+            val throwable: Throwable,
+            override val message: String?
+        ) : Failure()
+    }
 }

@@ -4,6 +4,8 @@ import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
+import androidx.appcompat.content.res.AppCompatResources
+import com.aivle.presentation_design.R
 
 object InteractiveHelper {
 
@@ -11,6 +13,7 @@ object InteractiveHelper {
 
     fun init(view: View) {
         view.isClickable = true
+        view.background = AppCompatResources.getDrawable(view.context, R.drawable.bg_ripple_white)
     }
 
     fun onTouchEvent(view: View, event: MotionEvent?) {
