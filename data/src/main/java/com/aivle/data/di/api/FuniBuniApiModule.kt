@@ -47,7 +47,7 @@ object FuniBuniApiModule {
             .readTimeout(ApiConstants.TIME_OUT, TimeUnit.SECONDS)
             .addInterceptor(tokenInterceptor)
             .addInterceptor(HttpLoggingInterceptor().apply {
-                level = HttpLoggingInterceptor.Level.HEADERS
+                level = HttpLoggingInterceptor.Level.BODY
             })
             .build()
     }
@@ -66,8 +66,6 @@ object FuniBuniApiModule {
                 .addHeader(ApiConstants.AUTHORIZATION, "${ApiConstants.BEARER} $accessToken")
                 .build()
         }
-        Log.d(TAG, "TokenInterceptor: request=$request")
-        Log.d(TAG, "TokenInterceptor: accessToken=$accessToken")
 
         chain.proceed(request)
     }

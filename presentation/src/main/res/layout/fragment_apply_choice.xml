@@ -4,44 +4,53 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:paddingHorizontal="24dp"
+        android:clipToPadding="false"
+        android:background="@color/background_color">
 
-        <com.google.android.material.card.MaterialCardView
+        <com.aivle.presentation_design.interactive.ui.InteractiveMaterialCardView
             android:id="@+id/waste_image_card_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginTop="12dp"
-            app:cardCornerRadius="4dp"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_marginBottom="12dp"
+            app:cardMaxElevation="20dp"
+            app:cardElevation="20dp"
+            app:cardCornerRadius="8dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/guideline_half">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
 
                 <!-- Placeholder -->
                 <ImageView
                     android:id="@+id/placeholder"
                     android:layout_width="match_parent"
-                    android:layout_height="160dp"
-                    android:padding="30dp"
+                    android:layout_height="0dp"
+                    android:padding="90dp"
                     android:src="@drawable/bunny_icon_gray_240"
                     android:background="@color/placeholder_background_gray"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/disposal_label"/>
 
                 <!-- Waste Image -->
                 <ImageView
                     android:id="@+id/waste_image"
                     android:layout_width="match_parent"
-                    android:layout_height="160dp"
+                    android:layout_height="0dp"
                     android:scaleType="centerCrop"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/disposal_label"/>
 
                 <!-- CardView Footer -->
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
-                    android:background="@color/white"
-                    app:layout_constraintTop_toBottomOf="@id/waste_image">
+                    android:background="@drawable/bg_waste_apply_choice_card_view_text_gradient"
+                    app:layout_constraintBottom_toBottomOf="@id/waste_image">
 
                     <!-- Waste Name -->
                     <TextView
@@ -50,8 +59,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="24dp"
                         android:textSize="18sp"
-                        android:textColor="@color/black"
-                        tools:text="의자가 맞을까요?"
+                        android:textColor="@color/white"
+                        tools:text="의자 (장의자)"
                         app:layout_constraintVertical_chainStyle="packed"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toTopOf="@id/disposal_fee"
@@ -63,6 +72,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
+                        android:textColor="@color/white"
                         tools:text="8,000원"
                         app:layout_constraintTop_toBottomOf="@id/waste_name"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -70,56 +80,98 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
+                <!-- 배출 신청하기 -->
+                <TextView
+                    android:id="@+id/disposal_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:gravity="center"
+                    android:text="배출 신청하기"
+                    android:textSize="16sp"
+                    android:textStyle="normal"
+                    android:textColor="@color/white"
+                    android:background="@color/theme_color"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </com.google.android.material.card.MaterialCardView>
+        </com.aivle.presentation_design.interactive.ui.InteractiveMaterialCardView>
 
-        <Button
-            android:id="@+id/btn_disposal"
-            android:layout_width="match_parent"
+        <!-- Guideline: Half -->
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_half"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="배출하기"
-            app:layout_constraintTop_toBottomOf="@id/waste_image_card_view"/>
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.5"/>
 
-        <com.google.android.material.card.MaterialCardView
+        <com.aivle.presentation_design.interactive.ui.InteractiveMaterialCardView
             android:id="@+id/sharing_card_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            app:cardCornerRadius="4dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="24dp"
+            app:cardMaxElevation="20dp"
+            app:cardElevation="20dp"
+            app:cardCornerRadius="8dp"
             app:cardBackgroundColor="@color/white"
-            app:layout_constraintTop_toBottomOf="@id/btn_disposal">
+            app:layout_constraintTop_toBottomOf="@id/guideline_half"
+            app:layout_constraintBottom_toBottomOf="parent">
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingVertical="16dp"
-                android:paddingHorizontal="24dp"
-                android:orientation="vertical">
+                android:layout_height="match_parent">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="지구 살리기"
-                    android:textSize="18sp"
-                    android:textColor="@color/black"/>
+                <ImageView
+                    android:id="@+id/sharing_background_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:src="@drawable/eco_image_1"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/sharing_label"/>
 
-                <TextView
+                <!-- CardView Footer -->
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="@string/waste_sharing_message"/>
+                    android:paddingVertical="16dp"
+                    android:paddingHorizontal="24dp"
+                    android:orientation="vertical"
+                    android:background="@drawable/bg_waste_apply_choice_card_view_text_gradient"
+                    app:layout_constraintBottom_toBottomOf="@id/sharing_background_image">
 
-            </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="지구 살리기"
+                        android:textSize="18sp"
+                        android:textColor="@color/white"/>
 
-        </com.google.android.material.card.MaterialCardView>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/waste_sharing_message"
+                        android:textColor="@color/white"/>
 
-        <Button
-            android:id="@+id/btn_sharing"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="나눔해보기"
-            app:layout_constraintTop_toBottomOf="@id/sharing_card_view"/>
+                </LinearLayout>
+
+                <!-- Sharing Label -->
+                <TextView
+                    android:id="@+id/sharing_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:gravity="center"
+                    android:text="나눔해보기"
+                    android:textSize="16sp"
+                    android:textColor="@color/white"
+                    android:background="@color/theme_color"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.aivle.presentation_design.interactive.ui.InteractiveMaterialCardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

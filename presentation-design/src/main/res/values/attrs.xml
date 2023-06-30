@@ -1,3 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <declare-styleable name="InteractiveTextButton">
+        <attr name="buttonType" format="enum">
+            <enum name="dark" value="0"/>
+            <enum name="light" value="1"/>
+        </attr>
+        <attr name="touch_scale" format="float"/>
+    </declare-styleable>
 </resources>

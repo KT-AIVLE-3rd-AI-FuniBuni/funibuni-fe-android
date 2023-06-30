@@ -9,9 +9,9 @@
         <TextView
             android:id="@+id/category_group_name"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:gravity="center_vertical"
-            android:textSize="20sp"
+            android:layout_height="42dp"
+            android:gravity="bottom"
+            android:textSize="22sp"
             android:textStyle="bold"
             android:textColor="@color/black"
             tools:text="대분류 그룹"

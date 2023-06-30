@@ -3,6 +3,7 @@ package com.aivle.domain.model.waste
 data class WasteClassificationDocument(
     val image_title: String,
     val image_url: String,
+    val labels: List<WasteClassificationRank>,
     val first_large_category_name: String,
     val waste_id: Int,
     val user: Int,

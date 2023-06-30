@@ -1,13 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="theme_color">#31D7C3</color>
-    <color name="theme_ripple_color">#31D7C3</color>
-    <color name="theme_ripple_color_light">#8031D7C3</color>
+    <color name="theme_color_light">@color/app_color_spot_3</color>
+    <color name="theme_color_dark">@color/app_color_spot_2</color>
+
+    <color name="theme_color_a30">#4D31D7C3</color>
+    <color name="theme_ripple_color">#C3FCF2</color>
+    <color name="theme_ripple_color_light">#6631D7C3</color>
+
+    <color name="toss_button_light_color">#E9F3FF</color>
+
+    <color name="text_dark_gray">#868B94</color>
+
+    <!-- FuniBuni Color Palettes -->
+    <!-- FuniBuni Color Palettes: Generic Gradient -->
+    <color name="app_color_gradient_1">#31D7C3</color>
+    <color name="app_color_gradient_2">#56E1B4</color>
+    <color name="app_color_gradient_3">#7DEAA2</color>
+    <color name="app_color_gradient_4">#A5F18F</color>
+    <color name="app_color_gradient_5">#CEF67D</color>
+    <color name="app_color_gradient_6">#F9F871</color>
+
+    <!-- FuniBuni Color Palettes: Spot Palette -->
+    <color name="app_color_spot_1">#31D7C3</color>
+    <color name="app_color_spot_2">#009F8D</color>
+    <color name="app_color_spot_3">#C3FCF2</color>
+    <color name="app_color_spot_4">#820080</color>
 
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-
-    <color name="text_dark_gray">#868B94</color>
 
     <!-- 2014 Material Design color palettes -->
     <color name="gray50">#FAFAFA</color>

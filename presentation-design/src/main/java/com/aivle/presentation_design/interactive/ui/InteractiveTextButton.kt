@@ -17,11 +17,25 @@ class InteractiveTextButton @JvmOverloads constructor(
 
     init {
         InteractiveHelper.init(this)
-        background = AppCompatResources.getDrawable(context, R.drawable.bg_button)
-        gravity = Gravity.CENTER
-        textSize = 18f
-        setTextColor(Color.WHITE)
-//        setTypeface(typeface, Typeface.BOLD)
+
+        context.obtainStyledAttributes(attrs, R.styleable.InteractiveTextButton).use { typedArray ->
+            val type = typedArray.getInteger(R.styleable.InteractiveTextButton_buttonType, 0)
+             when (type) {
+                0 -> { // type: dark
+                    background = AppCompatResources.getDrawable(context, R.drawable.bg_button)
+                    setTextColor(Color.WHITE)
+                }
+                1 -> { // type: light
+                    background = AppCompatResources.getDrawable(context, R.drawable.bg_button_light)
+                    setTextColor(context.getColor(R.color.theme_color_dark))
+                }
+                else -> throw IllegalArgumentException("type=$type")
+            }
+
+            gravity = Gravity.CENTER
+            textSize = 20f
+            // setTypeface(typeface, Typeface.BOLD)
+        }
     }
 
     @SuppressLint("ClickableViewAccessibility")

@@ -5,13 +5,14 @@
     <com.aivle.presentation_design.interactive.ui.InteractiveConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="12dp">
+        android:padding="18dp"
+        tools:layout_width="150dp">
 
         <ImageView
             android:id="@+id/icon"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:src="@drawable/icon_bed"
+            android:transitionName="shared_element"
             tools:src="@drawable/icon_bed"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintVertical_chainStyle="packed"
@@ -21,14 +22,25 @@
         <TextView
             android:id="@+id/large_category_name"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:paddingVertical="10dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:gravity="center"
-            android:autoSizeTextType="uniform"
+            android:textSize="22sp"
             android:textColor="@color/black"
-            android:text="의자"
             tools:text="의자"
             app:layout_constraintTop_toBottomOf="@id/icon"
+            app:layout_constraintBottom_toTopOf="@id/large_category_name_sub"/>
+
+        <TextView
+            android:id="@+id/large_category_name_sub"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|center_horizontal"
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:visibility="visible"
+            tools:text="(안락의자)"
+            app:layout_constraintTop_toBottomOf="@id/large_category_name"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
     </com.aivle.presentation_design.interactive.ui.InteractiveConstraintLayout>

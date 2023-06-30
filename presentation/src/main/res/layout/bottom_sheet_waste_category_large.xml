@@ -6,7 +6,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingHorizontal="16dp">
+        android:paddingHorizontal="18dp">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/list_view"
@@ -15,7 +15,7 @@
             android:overScrollMode="never"
             tools:listitem="@layout/item_waste_category_group"
             tools:itemCount="3"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"/>
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

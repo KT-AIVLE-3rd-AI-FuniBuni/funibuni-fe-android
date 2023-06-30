@@ -5,6 +5,7 @@ import com.aivle.data.api.WasteApi
 import com.aivle.data.di.api.FuniBuniApiQualifier
 import com.aivle.data.mapper.toModel
 import com.aivle.domain.model.waste.WasteClassificationDocument
+import com.aivle.domain.model.waste.WasteSpec
 import com.aivle.domain.repository.WasteRepository
 import com.aivle.domain.response.DataResponse
 import com.skydoves.sandwich.suspendOnFailure
@@ -32,8 +33,19 @@ class WasteRepositoryImpl @Inject constructor(
 
         api.imageUpload(imagePart)
             .suspendOnSuccess {
+                Log.d(TAG, "classifyWasteImage.suspendOnSuccess: $data")
                 val response = DataResponse.Success(data.toModel())
                 emit(response)
+            }
+            .suspendOnFailure {
+                emit(DataResponse.Failure.Error(this))
+            }
+    }
+
+    override suspend fun getWasteSpecTable(): Flow<DataResponse<List<WasteSpec>>> = flow {
+        api.wasteSpecTable()
+            .suspendOnSuccess {
+                emit(DataResponse.Success(data))
             }
             .suspendOnFailure {
                 emit(DataResponse.Failure.Error(this))

@@ -14,7 +14,7 @@
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
 
         <!-- Status Bar Color -->
-        <item name="android:statusBarColor">@color/theme_color</item>
+        <item name="android:statusBarColor">@color/theme_color_dark</item>
         <item name="android:windowLightStatusBar">false</item>
     </style>
 

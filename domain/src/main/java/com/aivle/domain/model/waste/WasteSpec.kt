@@ -13,4 +13,7 @@ data class WasteSpec(
     val is_exists_small_cat_model: Boolean,
     val type: String,
     val fee: Int,
-)
+) {
+    var onClick1: ((WasteSpec) -> Unit)? = null
+    var onClick2: ((WasteSpec) -> Unit)? = null
+}

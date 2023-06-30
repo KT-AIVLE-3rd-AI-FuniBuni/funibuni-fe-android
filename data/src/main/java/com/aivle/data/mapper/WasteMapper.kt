@@ -13,12 +13,13 @@ import com.aivle.domain.model.waste.WasteSpec
 
 fun WasteClassificationDocumentEntity.toModel() =
     WasteClassificationDocument(
-        image_title, image_url, first_large_category_name, waste_id, user,
+        image_title, image_url, labels.map { it.toModel() },
+        first_large_category_name, waste_id, user,
         first_large_category_waste_specs.map { it.toModel() }, all_waste_specs.map { it.toModel() }
     )
 
 fun WasteClassificationRankEntity.toModel() =
-    WasteClassificationRank(large_category.map { it.toModel() }, small_category.map { it.toModel() })
+    WasteClassificationRank(large_category.toModel(), small_category.toModel())
 
 fun LargeCategoryResultEntity.toModel() =
     LargeCategoryResult(index_large_category, large_category_name, probability)

@@ -10,25 +10,26 @@
         android:name="com.aivle.presentation.disposal.wasteclassification.WasteClassificationFragment"
         android:label="WasteClassificationFragment"
         tools:layout="@layout/fragment_waste_classification">
+        <argument android:name="title"
+            app:argType="string"
+            android:defaultValue="품목 고르기"/>
         <action
             android:id="@+id/action_wasteClassificationFragment_to_applyChoiceFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
             app:destination="@id/applyChoiceFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/applyChoiceFragment"
-        android:name="com.aivle.presentation.disposal.applychoice.ApplyChoiceFragment"
+        android:name="com.aivle.presentation.disposal.applyChoice.ApplyChoiceFragment"
         android:label="ApplyChoiceFragment"
         tools:layout="@layout/fragment_apply_choice">
-        <action
-            android:id="@+id/action_applyChoiceFragment_to_signUpFragment"
-            app:destination="@id/signUpFragment" />
+        <argument android:name="title"
+            app:argType="string"
+            android:defaultValue="배출 수수료 확인"/>
     </fragment>
-
-    <fragment
-        android:id="@+id/signUpFragment"
-        android:name="com.aivle.presentation.intro.sign.SignUpInputNameFragment"
-        android:label="SignUpFragment"
-        tools:layout="@layout/fragment_sign_up_input_name"/>
 
 </navigation>

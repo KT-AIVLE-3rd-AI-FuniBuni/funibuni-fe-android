@@ -13,10 +13,10 @@ abstract class BaseDisposalFragment<T : ViewDataBinding>(
     @LayoutRes layoutResId: Int
 ) : BaseFragment<T>(layoutResId) {
 
-    protected val parentViewModel: DisposalViewModel by activityViewModels()
+    protected val activityViewModel: DisposalViewModel by activityViewModels()
 
     protected val wasteImageBitmap: Bitmap?
-        get() = getImageBitmapFrom(parentViewModel.wasteImageUri)
+        get() = getImageBitmapFrom(activityViewModel.wasteImageUri)
 
     private fun getImageBitmapFrom(path: String): Bitmap? {
         return try {
