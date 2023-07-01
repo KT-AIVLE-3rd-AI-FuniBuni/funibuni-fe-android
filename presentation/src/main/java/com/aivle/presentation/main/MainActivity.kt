@@ -7,7 +7,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.aivle.presentation.R
-import com.aivle.presentation._base.BaseActivity
+import com.aivle.presentation.base.BaseActivity
 import com.aivle.presentation.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 

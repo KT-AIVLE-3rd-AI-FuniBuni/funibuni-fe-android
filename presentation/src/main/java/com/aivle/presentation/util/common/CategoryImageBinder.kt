@@ -1,4 +1,4 @@
-package com.aivle.presentation._common
+package com.aivle.presentation.util.common
 
 import androidx.annotation.DrawableRes
 import com.aivle.presentation.R

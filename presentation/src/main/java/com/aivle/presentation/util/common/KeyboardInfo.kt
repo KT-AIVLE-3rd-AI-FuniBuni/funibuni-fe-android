@@ -1,4 +1,4 @@
-package com.aivle.presentation._util
+package com.aivle.presentation.util.common
 
 object KeyboardInfo {
     const val HEIGHT_NOT_COMPUTED = -1

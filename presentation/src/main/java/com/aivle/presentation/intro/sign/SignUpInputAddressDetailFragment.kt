@@ -5,9 +5,8 @@ import android.util.Log
 import android.view.View
 import androidx.constraintlayout.widget.Guideline
 import androidx.core.widget.addTextChangedListener
-import androidx.fragment.app.activityViewModels
 import com.aivle.presentation.R
-import com.aivle.presentation._common.repeatOnStarted
+import com.aivle.presentation.common.repeatOnStarted
 import com.aivle.presentation.databinding.FragmentSignUpInputAddressDetailBinding
 import kotlinx.coroutines.flow.collectLatest
 

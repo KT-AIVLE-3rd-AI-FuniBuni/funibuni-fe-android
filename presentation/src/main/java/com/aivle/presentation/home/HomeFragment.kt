@@ -1,13 +1,11 @@
 package com.aivle.presentation.home
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController
 import com.aivle.presentation.R
-import com.aivle.presentation._base.BaseFragment
+import com.aivle.presentation.base.BaseFragment
 import com.aivle.presentation.databinding.FragmentHomeBinding
-import com.aivle.presentation.intro.sign.SignActivity
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 

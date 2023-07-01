@@ -3,16 +3,13 @@ package com.aivle.presentation.intro.intro
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.util.Log
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import com.aivle.presentation.R
-import com.aivle.presentation._base.BaseActivity
-import com.aivle.presentation._common.repeatOnStarted
-import com.aivle.presentation._common.showToast
+import com.aivle.presentation.base.BaseActivity
+import com.aivle.presentation.common.repeatOnStarted
+import com.aivle.presentation.common.showToast
 import com.aivle.presentation.databinding.ActivityIntroBinding
 import com.aivle.presentation.intro.intro.IntroViewModel.Event
 import com.aivle.presentation.intro.sign.SignActivity
@@ -22,8 +19,6 @@ import com.google.firebase.FirebaseApp
 import com.google.firebase.appcheck.FirebaseAppCheck
 import com.google.firebase.appcheck.safetynet.SafetyNetAppCheckProviderFactory
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collectLatest
-import kotlin.concurrent.timer
 
 private const val TAG = "IntroActivity"
 

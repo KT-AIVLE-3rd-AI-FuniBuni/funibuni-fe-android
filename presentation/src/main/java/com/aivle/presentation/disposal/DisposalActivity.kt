@@ -6,7 +6,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.navigation.fragment.NavHostFragment
 import com.aivle.presentation.R
-import com.aivle.presentation._base.BaseActivity
+import com.aivle.presentation.base.BaseActivity
 import com.aivle.presentation.databinding.ActivityDisposalBinding
 import com.aivle.presentation_design.interactive.ui.BottomUpDialog
 import dagger.hilt.android.AndroidEntryPoint

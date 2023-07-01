@@ -9,8 +9,8 @@ import androidx.activity.viewModels
 import com.aivle.domain.model.sharingPost.Comment
 import com.aivle.domain.model.sharingPost.SharingPostDetail
 import com.aivle.presentation.R
-import com.aivle.presentation._base.BaseActivity
-import com.aivle.presentation._common.repeatOnStarted
+import com.aivle.presentation.base.BaseActivity
+import com.aivle.presentation.common.repeatOnStarted
 import com.aivle.presentation.databinding.ActivitySharingPostDetailBinding
 import com.aivle.presentation.sharingPostDetail.SharingPostDetailViewModel.Event
 import dagger.hilt.android.AndroidEntryPoint

@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.aivle.domain.model.waste.WasteSpec
-import com.aivle.presentation._common.CategoryImageBinder
+import com.aivle.presentation.util.common.CategoryImageBinder
 import com.aivle.presentation.databinding.ItemWasteCategoryBinding
 import com.aivle.presentation.databinding.ItemWasteCategoryGroupBinding
 

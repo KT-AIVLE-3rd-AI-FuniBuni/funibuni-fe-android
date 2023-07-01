@@ -13,7 +13,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="._base.BaseActivity"/>
+        <activity android:name=".base.BaseActivity"/>
         <activity android:name=".main.MainActivity"/>
         <activity android:name=".disposal.DisposalActivity"/>
         <activity android:name=".sharingPostDetail.SharingPostDetailActivity"/>

@@ -1,4 +1,4 @@
-package com.aivle.presentation._common
+package com.aivle.presentation.util.common
 
 sealed class UiState<out T> {
     object Loading: UiState<Nothing>()

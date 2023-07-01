@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import com.aivle.domain.model.waste.WasteSpec
 import com.aivle.presentation.R
-import com.aivle.presentation._base.BaseFragment
+import com.aivle.presentation.base.BaseFragment
 import com.aivle.presentation.databinding.BottomSheetWasteCategoryLargeBinding
 
 class WasteCategoryLargeFragment(

@@ -5,7 +5,7 @@ import android.graphics.BitmapFactory
 import androidx.annotation.LayoutRes
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.activityViewModels
-import com.aivle.presentation._base.BaseFragment
+import com.aivle.presentation.base.BaseFragment
 import com.aivle.presentation.disposal.DisposalViewModel
 import java.io.IOException
 

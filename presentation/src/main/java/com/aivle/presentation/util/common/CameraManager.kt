@@ -1,4 +1,4 @@
-package com.aivle.presentation._common
+package com.aivle.presentation.util.common
 
 import android.Manifest
 import android.app.Activity
@@ -16,6 +16,7 @@ import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
+import com.aivle.presentation.common.showToast
 import com.gun0912.tedpermission.PermissionListener
 import com.gun0912.tedpermission.normal.TedPermission
 import java.io.File

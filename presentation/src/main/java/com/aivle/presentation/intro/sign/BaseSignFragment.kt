@@ -12,9 +12,9 @@ import androidx.constraintlayout.widget.Guideline
 import androidx.core.view.isVisible
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.activityViewModels
-import com.aivle.presentation._base.BaseFragment
-import com.aivle.presentation._common.dpToPixels
-import com.aivle.presentation._util.KeyboardHeightProvider
+import com.aivle.presentation.base.BaseFragment
+import com.aivle.presentation.common.dpToPixels
+import com.aivle.presentation.util.common.KeyboardHeightProvider
 
 private const val TAG = "BaseSignFragment"
 

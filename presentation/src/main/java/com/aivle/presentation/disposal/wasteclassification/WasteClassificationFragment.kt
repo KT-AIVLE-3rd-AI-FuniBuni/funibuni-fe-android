@@ -7,14 +7,12 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import com.aivle.domain.model.waste.LargeCategoryResult
-import com.aivle.domain.model.waste.SmallCategoryResult
 import com.aivle.domain.model.waste.WasteClassificationDocument
 import com.aivle.domain.model.waste.WasteSpec
 import com.aivle.presentation.R
-import com.aivle.presentation._common.repeatOnStarted
-import com.aivle.presentation._common.showToast
-import com.aivle.presentation._util.BitmapUtil
+import com.aivle.presentation.common.repeatOnStarted
+import com.aivle.presentation.common.showToast
+import com.aivle.presentation.util.common.BitmapUtil
 import com.aivle.presentation.databinding.FragmentWasteClassificationBinding
 import com.aivle.presentation.disposal.wasteclassification.WasteClassificationViewModel.Event
 import com.aivle.presentation.disposal.base.BaseDisposalFragment

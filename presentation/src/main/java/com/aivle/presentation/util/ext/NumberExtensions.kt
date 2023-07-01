@@ -1,4 +1,4 @@
-package com.aivle.presentation._common
+package com.aivle.presentation.common
 
 import android.content.Context
 import android.util.DisplayMetrics

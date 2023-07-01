@@ -1,10 +1,9 @@
-package com.aivle.presentation._util
+package com.aivle.presentation.util.common
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Matrix
 import android.media.ExifInterface
-import java.io.IOException
 
 
 object BitmapUtil {

@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import com.aivle.presentation.R
-import com.aivle.presentation._base.BaseFragment
+import com.aivle.presentation.base.BaseFragment
 import com.aivle.presentation.databinding.FragmentMyProfileBinding
 import com.aivle.presentation.myprofileDetail.MyProfileDetailActivity
 import dagger.hilt.android.AndroidEntryPoint

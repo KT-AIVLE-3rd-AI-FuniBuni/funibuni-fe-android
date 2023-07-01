@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.aivle.domain.model.waste.LargeCategoryResult
-import com.aivle.presentation._common.CategoryImageBinder
+import com.aivle.presentation.util.common.CategoryImageBinder
 import com.aivle.presentation.databinding.ItemResultLargeCategoryBinding
 import kotlin.math.roundToInt
 

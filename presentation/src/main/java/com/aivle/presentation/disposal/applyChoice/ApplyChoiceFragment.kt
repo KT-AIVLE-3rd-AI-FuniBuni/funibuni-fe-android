@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController
 import com.aivle.presentation.R
-import com.aivle.presentation._util.BitmapUtil
+import com.aivle.presentation.util.common.BitmapUtil
 import com.aivle.presentation.databinding.FragmentApplyChoiceBinding
 import com.aivle.presentation.disposal.base.BaseDisposalFragment
 import java.text.DecimalFormat

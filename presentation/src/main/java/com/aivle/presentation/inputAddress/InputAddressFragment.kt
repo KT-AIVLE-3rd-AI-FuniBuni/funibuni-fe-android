@@ -10,7 +10,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import com.aivle.presentation.R
-import com.aivle.presentation._base.BaseFragment
+import com.aivle.presentation.base.BaseFragment
 import com.aivle.presentation.databinding.FragmentInputAddressBinding
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.gun0912.tedpermission.PermissionListener

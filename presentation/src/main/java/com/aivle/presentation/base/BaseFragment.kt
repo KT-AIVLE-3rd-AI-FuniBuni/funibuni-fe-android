@@ -1,4 +1,4 @@
-package com.aivle.presentation._base
+package com.aivle.presentation.base
 
 import android.os.Bundle
 import android.view.LayoutInflater

@@ -6,7 +6,7 @@ import android.view.View
 import androidx.activity.OnBackPressedCallback
 import com.aivle.domain.model.waste.WasteSpec
 import com.aivle.presentation.R
-import com.aivle.presentation._base.BaseFragment
+import com.aivle.presentation.base.BaseFragment
 import com.aivle.presentation.databinding.BottomSheetWasteCategorySmallBinding
 
 private const val TAG = "WasteCategorySmallFragment"

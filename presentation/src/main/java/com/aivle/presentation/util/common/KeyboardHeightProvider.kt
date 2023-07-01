@@ -1,4 +1,4 @@
-package com.aivle.presentation._util
+package com.aivle.presentation.util.common
 
 import android.app.Activity
 import android.content.Context

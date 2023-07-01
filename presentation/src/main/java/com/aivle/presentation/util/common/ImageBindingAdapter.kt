@@ -1,4 +1,4 @@
-package com.aivle.presentation._common
+package com.aivle.presentation.util.common
 
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter

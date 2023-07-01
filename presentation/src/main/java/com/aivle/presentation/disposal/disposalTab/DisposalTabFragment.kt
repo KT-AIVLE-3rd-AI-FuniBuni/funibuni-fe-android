@@ -8,9 +8,9 @@ import android.view.View
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import com.aivle.presentation.R
-import com.aivle.presentation._base.BaseFragment
-import com.aivle.presentation._common.CameraManager
-import com.aivle.presentation._common.showToast
+import com.aivle.presentation.base.BaseFragment
+import com.aivle.presentation.util.common.CameraManager
+import com.aivle.presentation.common.showToast
 import com.aivle.presentation.databinding.FragmentDisposalBinding
 import com.aivle.presentation.disposal.DisposalActivity
 
