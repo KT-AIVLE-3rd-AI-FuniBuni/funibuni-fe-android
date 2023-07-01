@@ -2,7 +2,7 @@
 //
 //import androidx.room.Database
 //import androidx.room.RoomDatabase
-//import com.aivle.data.entity.address.AddressRoomEntity
+//import com.aivle.data._legacy.AddressRoomEntity
 //
 //@Database(entities = [AddressRoomEntity::class], version = 1, exportSchema = false)
 //

@@ -28,7 +28,6 @@ class WasteClassificationFragment : BaseDisposalFragment<FragmentWasteClassifica
 
     private val viewModel: WasteClassificationViewModel by viewModels()
     private lateinit var loadingDialog: ProgressDialog
-    // private lateinit var largeCatListAdapter: LargeCategoryResultListAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

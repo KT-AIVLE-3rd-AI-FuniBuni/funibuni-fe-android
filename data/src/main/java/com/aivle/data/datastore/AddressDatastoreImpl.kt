@@ -19,7 +19,7 @@ class AddressDatastoreImpl @Inject constructor(
                 .setAddressId(address.addressId.toLong())
                 .setPostalCode(address.postalCode)
                 .setRoadAddress(address.roadAddress)
-                .setLandAddress(address.lendAddress)
+                .setLandAddress(address.landAddress)
                 .setCity(address.city)
                 .setDistrict(address.district)
                 .setDong(address.dong)

@@ -20,14 +20,6 @@ data class WasteSpecWrapper(
 ) {
     var onClick1: ((ImageView, WasteSpec) -> Unit)? = null
     var onClick2: ((WasteSpec) -> Unit)? = null
-
-    companion object {
-
-        val DiffCallback = object : DiffUtil.ItemCallback<WasteSpecWrapper>() {
-            override fun areItemsTheSame(oldItem: WasteSpecWrapper, newItem: WasteSpecWrapper): Boolean = oldItem.waste_spec_id == newItem.waste_spec_id
-            override fun areContentsTheSame(oldItem: WasteSpecWrapper, newItem: WasteSpecWrapper): Boolean = oldItem.waste_spec_id == newItem.waste_spec_id
-        }
-    }
 }
 
 fun WasteSpecWrapper.toOrigin() = WasteSpec(waste_spec_id, index_large_category, index_small_category, city, district, top_category, large_category, small_category, size_range, is_exists_small_cat_model, type, fee)

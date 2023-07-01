@@ -8,12 +8,14 @@ import com.aivle.data.di.api.FuniBuniSignApiQualifier
 import com.aivle.data.di.api.FuniBuniSignWithTokenApiQualifier
 import com.aivle.data.entity.token.AuthTokenEntity
 import com.aivle.data.mapper.toEntity
+import com.aivle.data.mapper.toModel
+import com.aivle.domain.model.address.Address
 import com.aivle.domain.model.sign.SignInUser
 import com.aivle.domain.model.sign.SignUpUser
 import com.aivle.domain.repository.SignRepository
 import com.aivle.domain.response.NothingResponse
-import com.aivle.domain.response.SignInWithTokenResponse
 import com.aivle.domain.response.SignInResponse
+import com.aivle.domain.response.SignInWithTokenResponse
 import com.aivle.domain.response.SignUpResponse
 import com.skydoves.sandwich.suspendOnError
 import com.skydoves.sandwich.suspendOnException
@@ -31,24 +33,19 @@ class SignRepositoryImpl @Inject constructor(
     @FuniBuniSignWithTokenApiQualifier
     private val signApiWithToken: SignWithTokenApi,
     private val datastore: PreferencesDatastore,
+    //private val addressLocalRepository: AddressLocalRepository,
 ) : SignRepository {
 
     override suspend fun signIn(signInUser: SignInUser): Flow<SignInResponse> = flow {
-        Log.d(TAG, "signIn(): signInUser=$signInUser")
-        Log.d(TAG, "signApi: ${signApi}")
-
         signApi.signIn(signInUser.toEntity())
             .suspendOnSuccess {
-                Log.d(TAG, "suspendOnSuccess: $data")
                 saveAuthTokens(data)
                 emit(SignInResponse.Success)
             }
             .suspendOnError {
-                Log.d(TAG, "suspendOnError")
                 emit(SignInResponse.Error.NotFoundUser)
             }
             .suspendOnException {
-                Log.d(TAG, "suspendOnException")
                 emit(SignInResponse.Exception(message))
             }
     }
@@ -72,7 +69,10 @@ class SignRepositoryImpl @Inject constructor(
     override suspend fun signUp(signUpUser: SignUpUser): Flow<SignUpResponse> = flow {
         signApi.signUp(signUpUser.toEntity())
             .suspendOnSuccess {
-                saveAuthTokens(data)
+                val authToken = AuthTokenEntity(data.refresh_token, data.access_token)
+                saveAuthTokens(authToken)
+                saveAddress(data.address.toModel())
+
                 emit(SignUpResponse.Success)
             }
             .suspendOnFailure {
@@ -111,5 +111,9 @@ class SignRepositoryImpl @Inject constructor(
 
     private suspend fun deleteAuthTokens() {
         datastore.deleteAuthTokens()
+    }
+
+    private suspend fun saveAddress(address: Address) {
+        //addressLocalRepository.setAddress(address)
     }
 }

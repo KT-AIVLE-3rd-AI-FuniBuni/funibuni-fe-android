@@ -25,11 +25,9 @@ class WasteRepositoryImpl @Inject constructor(
 ) : WasteRepository {
 
     override suspend fun classifyWasteImage(imageUri: String): Flow<DataResponse<WasteClassificationDocument>> = flow {
-        Log.d(TAG, "classifyWasteImage(): $imageUri")
         val imageFile = File(imageUri)
         val requestFile = RequestBody.create("image/*".toMediaType(), imageFile)
         val imagePart = MultipartBody.Part.createFormData("image", imageFile.name, requestFile)
-        Log.d(TAG, "classifyWasteImage(): $imageFile")
 
         api.imageUpload(imagePart)
             .suspendOnSuccess {

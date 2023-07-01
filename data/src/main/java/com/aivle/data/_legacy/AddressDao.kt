@@ -3,7 +3,7 @@
 //import androidx.room.Insert
 //import androidx.room.OnConflictStrategy
 //import androidx.room.Query
-//import com.aivle.data.entity.address.AddressRoomEntity
+//import com.aivle.data._legacy.AddressRoomEntity
 //import kotlinx.coroutines.flow.Flow
 //
 //interface AddressDao {

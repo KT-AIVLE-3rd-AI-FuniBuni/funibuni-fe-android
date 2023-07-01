@@ -1,14 +1,17 @@
 package com.aivle.presentation.main
 
 import android.os.Bundle
-import android.util.Log
+import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import com.aivle.domain.model.address.Address
 import com.aivle.presentation.R
 import com.aivle.presentation.base.BaseActivity
+import com.aivle.presentation.common.repeatOnStarted
 import com.aivle.presentation.databinding.ActivityMainBinding
+import com.aivle.presentation.main.MainViewModel.Event
 import dagger.hilt.android.AndroidEntryPoint
 
 private const val TAG = "MainActivity"
@@ -16,13 +19,15 @@ private const val TAG = "MainActivity"
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
+    private val viewModel: MainViewModel by viewModels()
     private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         initNavigation()
-        initHeader()
+        initView()
+        handleViewModelEvent()
     }
 
     private fun initNavigation() {
@@ -30,32 +35,24 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             .navController
 
         binding.bottomNav.setupWithNavController(navController)
+    }
 
-        navController.addOnDestinationChangedListener { controller, destination, arguments ->
-            Log.d(TAG, "onDestinationChanged(): $destination")
-            Log.d(TAG, "onDestinationChanged(): $arguments")
-            Log.d(TAG, "onDestinationChanged(): ${destination.id}")
-            Log.d(TAG, "onDestinationChanged(): ${destination.label}")
-            Log.d(TAG, "onDestinationChanged(): ${destination.displayName}")
-
-            if (arguments?.getBoolean("IsNavRootFragment") == true) {
-                binding.header.btnBack.isVisible = false
-                binding.header.title.isVisible = false
-                binding.header.btnAddress.isVisible = true
-
-                binding.header.title.text = ""
-            } else {
-                binding.header.btnBack.isVisible = true
-                binding.header.title.isVisible = true
-                binding.header.btnAddress.isVisible = false
-
-                binding.header.title.text = arguments?.getString("HeaderTitle") ?: ""
-            }
+    private fun initView() {
+        binding.header.addressToggle.setOnClickListener {
+            // TODO
         }
     }
 
-    private fun initHeader() {
-        binding.header.address.text = "송파구"
-        binding.header.btnAddress.setOnClickListener {  }
+    private fun handleViewModelEvent() = repeatOnStarted {
+        viewModel.eventFlow.collect { event -> when (event) {
+            is Event.AddressLoaded -> {
+                setHeader(event.address)
+            }
+        }}
+    }
+
+    private fun setHeader(address: Address) {
+        binding.header.address.text = address.roadAddress
+        binding.header.addressToggle.isVisible = true
     }
 }

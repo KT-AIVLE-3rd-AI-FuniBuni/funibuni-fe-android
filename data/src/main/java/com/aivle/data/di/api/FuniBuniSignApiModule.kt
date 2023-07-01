@@ -1,7 +1,6 @@
 package com.aivle.data.di.api
 
 import com.aivle.data.api.SignApi
-import com.aivle.data.api.SignApi2
 import com.skydoves.sandwich.adapters.ApiResponseCallAdapterFactory
 import dagger.Module
 import dagger.Provides

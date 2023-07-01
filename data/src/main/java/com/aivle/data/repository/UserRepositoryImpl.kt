@@ -28,7 +28,12 @@ class UserRepositoryImpl @Inject constructor(
     }
 
     override suspend fun updateUserInfo(user: User): Flow<NothingResponse> = flow {
-        // service.updateUserInfo(user)
-        emit(NothingResponse.Success)
+        api.updateUserInfo(user)
+            .suspendOnSuccess {
+                emit(NothingResponse.Success)
+            }
+            .suspendOnFailure {
+                emit(NothingResponse.Failure.Error(this))
+            }
     }
 }

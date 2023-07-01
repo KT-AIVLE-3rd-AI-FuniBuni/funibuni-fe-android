@@ -21,9 +21,6 @@ class WasteDisposalApplyFragment : BaseDisposalFragment<FragmentWasteDisposalApp
     }
 
     private fun initView() {
-        binding.calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
-            Log.d(TAG, "onDataChanged(): year=$year, month=$month, dayOfMonth=$dayOfMonth")
-        }
         binding.btnApply.setOnClickListener {
             applyWasteDisposal()
         }
