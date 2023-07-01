@@ -43,7 +43,7 @@ class MyProfileDetailActivity : BaseActivity<ActivityMyProfileDetailBinding>(R.l
             BottomUpDialog.Builder(supportFragmentManager)
                 .title("정말로 회원탈퇴를 하시겠습니까?")
                 .subtitle("지금 탈퇴하시면 그동안의 기록이 모두 사라지게 됩니다.")
-                .positiveButton { viewModel.signOut() }
+                .positiveButton { viewModel.withdrawal() }
                 .show()
         }
     }

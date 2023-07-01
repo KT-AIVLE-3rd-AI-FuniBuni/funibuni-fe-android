@@ -1,5 +1,6 @@
 package com.aivle.data.di.dataSource
 
+import com.aivle.data.datastore.AddressDatastore
 import com.aivle.data.datastore.AddressDatastoreImpl
 import com.aivle.data.datastore.PreferencesDatastore
 import com.aivle.data.datastore.PreferencesDatastoreImpl
@@ -21,5 +22,5 @@ interface LocalDataSourceModule {
     @Binds
     fun provideAddressDatastore(
         datastoreImpl: AddressDatastoreImpl
-    ): AddressDatastoreImpl
+    ): AddressDatastore
 }

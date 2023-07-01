@@ -28,6 +28,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         initNavigation()
         initView()
         handleViewModelEvent()
+
+        viewModel.loadAddress()
     }
 
     private fun initNavigation() {
@@ -52,7 +54,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     }
 
     private fun setHeader(address: Address) {
-        binding.header.address.text = address.roadAddress
+        binding.header.address.text = "${address.city} ${address.district}"
         binding.header.addressToggle.isVisible = true
     }
 }

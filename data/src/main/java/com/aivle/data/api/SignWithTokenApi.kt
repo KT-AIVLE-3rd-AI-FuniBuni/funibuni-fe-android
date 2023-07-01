@@ -3,6 +3,7 @@ package com.aivle.data.api
 import com.aivle.data.entity.token.AuthTokenEntity
 import com.skydoves.sandwich.ApiResponse
 import retrofit2.Call
+import retrofit2.http.DELETE
 import retrofit2.http.POST
 
 interface SignWithTokenApi {
@@ -13,6 +14,6 @@ interface SignWithTokenApi {
     @POST("user/signout")
     suspend fun signOut(): ApiResponse<Map<String, String>>
 
-    @POST("user/withdrawal")
+    @DELETE("user/withdrawal")
     suspend fun withdrawal(): ApiResponse<Map<String, String>>
 }

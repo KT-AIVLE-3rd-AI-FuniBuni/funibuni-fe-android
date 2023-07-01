@@ -10,9 +10,11 @@ import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+private const val TAG = "MainViewModel"
+
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    //private val GetAddressFromLocalUseCase: GetAddressFromLocalUseCase,
+    private val GetAddressFromLocalUseCase: GetAddressFromLocalUseCase,
 ) : ViewModel() {
 
     private val _eventFlow: MutableSharedFlow<Event> = MutableSharedFlow()
@@ -20,8 +22,8 @@ class MainViewModel @Inject constructor(
 
     fun loadAddress() {
         viewModelScope.launch {
-//            val address = GetAddressFromLocalUseCase()
-//            _eventFlow.emit(Event.AddressLoaded(address))
+            val address = GetAddressFromLocalUseCase()
+            _eventFlow.emit(Event.AddressLoaded(address))
         }
     }
 

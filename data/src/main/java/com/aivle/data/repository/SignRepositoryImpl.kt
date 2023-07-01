@@ -3,6 +3,7 @@ package com.aivle.data.repository
 import android.util.Log
 import com.aivle.data.api.SignApi
 import com.aivle.data.api.SignWithTokenApi
+import com.aivle.data.datastore.AddressDatastore
 import com.aivle.data.datastore.PreferencesDatastore
 import com.aivle.data.di.api.FuniBuniSignApiQualifier
 import com.aivle.data.di.api.FuniBuniSignWithTokenApiQualifier
@@ -22,6 +23,7 @@ import com.skydoves.sandwich.suspendOnException
 import com.skydoves.sandwich.suspendOnFailure
 import com.skydoves.sandwich.suspendOnSuccess
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
@@ -33,7 +35,7 @@ class SignRepositoryImpl @Inject constructor(
     @FuniBuniSignWithTokenApiQualifier
     private val signApiWithToken: SignWithTokenApi,
     private val datastore: PreferencesDatastore,
-    //private val addressLocalRepository: AddressLocalRepository,
+    private val addressDatastore: AddressDatastore,
 ) : SignRepository {
 
     override suspend fun signIn(signInUser: SignInUser): Flow<SignInResponse> = flow {
@@ -83,12 +85,10 @@ class SignRepositoryImpl @Inject constructor(
     override suspend fun signOut(): Flow<NothingResponse> = flow {
         signApiWithToken.signOut()
             .suspendOnSuccess {
-                Log.d(TAG, "signOut: suspendOnSuccess")
                 deleteAuthTokens()
                 emit(NothingResponse.Success)
             }
             .suspendOnFailure {
-                Log.d(TAG, "signOut: suspendOnFailure")
                 emit(NothingResponse.Failure.Error(this))
             }
     }
@@ -114,6 +114,6 @@ class SignRepositoryImpl @Inject constructor(
     }
 
     private suspend fun saveAddress(address: Address) {
-        //addressLocalRepository.setAddress(address)
+        addressDatastore.setAddress(address)
     }
 }
