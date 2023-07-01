@@ -17,14 +17,12 @@
             android:name="IsNavRootFragment"
             android:defaultValue="true"/>
         <action
-            android:id="@+id/action_homeFragment_to_testFragment"
-            app:destination="@id/testFragment" />
+            android:id="@+id/action_homeFragment_to_wasteDisposalApplyFragment2"
+            app:destination="@id/wasteDisposalApplyFragment2" />
     </fragment>
-
     <fragment
-        android:id="@+id/testFragment"
-        android:name="com.aivle.presentation._test.TestFragment"
-        android:label="TestFragment"
-        tools:layout="@layout/fragment_test"/>
+        android:id="@+id/wasteDisposalApplyFragment2"
+        android:name="com.aivle.presentation.disposal.apply.WasteDisposalApplyFragment"
+        android:label="WasteDisposalApplyFragment" />
 
 </navigation>

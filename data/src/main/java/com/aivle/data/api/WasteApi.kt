@@ -17,6 +17,6 @@ interface WasteApi {
         @Part image: MultipartBody.Part
     ): ApiResponse<WasteClassificationDocumentEntity>
 
-    @GET("waste/table")
+    @POST("waste/table")
     suspend fun wasteSpecTable(): ApiResponse<List<WasteSpec>>
 }

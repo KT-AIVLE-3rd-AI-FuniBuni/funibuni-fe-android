@@ -55,19 +55,20 @@
                         android:textSize="22sp"
                         android:textColor="@color/black"
                         android:textStyle="bold"
-                        android:text="의자(회전의자)"
                         tools:text="의자(회전의자)"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"/>
 
                     <TextView
+                        android:id="@+id/waste_name_sub_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:textSize="16sp"
                         android:textColor="@color/black"
                         android:text="가(이) 맞나요?"
+                        android:visibility="gone"
                         app:layout_constraintStart_toEndOf="@id/waste_name"
                         app:layout_constraintBottom_toBottomOf="@id/waste_name"/>
 
@@ -125,25 +126,50 @@
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/small_category_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="8dp"
-            android:visibility="gone"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:visibility="visible"
+            app:cardMaxElevation="6dp"
+            app:cardElevation="20dp"
             app:cardCornerRadius="@dimen/app_radius"
-            app:layout_constraintTop_toBottomOf="@id/waste_image_container">
+            app:layout_constraintTop_toBottomOf="@id/large_category_container">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingVertical="18dp"
+                android:paddingHorizontal="24dp">
 
                 <TextView
-                    android:id="@+id/subcategory_title"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/small_category_title"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:text="소분류 - 사이즈 입력"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"/>
+                    android:paddingBottom="12dp"
+                    android:gravity="center_vertical"
+                    android:text="소분류"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"/>
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/small_category_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    tools:text="1인용 침대"
+                    android:textSize="20sp"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:id="@+id/small_category_probability"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    tools:text="60%"
+                    android:textSize="14sp"
+                    android:textColor="@color/black"/>
+
+            </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>
 

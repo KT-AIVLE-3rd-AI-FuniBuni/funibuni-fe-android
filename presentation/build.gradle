@@ -76,10 +76,9 @@ dependencies {
     implementation 'io.github.ParkSangGwon:tedpermission-normal:3.3.0'
     // TedPermission - Coroutine
     implementation 'io.github.ParkSangGwon:tedpermission-coroutine:3.3.0'
-    // TedImagePicker
-//    implementation 'io.github.ParkSangGwon:tedimagepicker:1.1.10'
-//    implementation 'gun0912.ted:tedpermission-rx2:2.2.2'
-//    implementation 'gun0912.ted:tedonactivityresult-rx2:1.0.6'
+    // Lottie
+    implementation 'com.airbnb.android:lottie:6.0.1'
+
 
     // Google Play Service - Location
     implementation 'com.google.android.gms:play-services-location:21.0.1'

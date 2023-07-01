@@ -40,7 +40,11 @@ class WasteClassificationViewModel @Inject constructor(
                         _allWasteSpecs.clear()
                         _allWasteSpecs.addAll(data.all_waste_specs)
 
-                        _eventFlow.emit(Event.ClassificationResult(data))
+                        if (data.labels.isEmpty()) {
+                            _eventFlow.emit(Event.ImageClassification.Empty)
+                        } else {
+                            _eventFlow.emit(Event.ImageClassification.Result(data))
+                        }
 
                         Log.d(TAG, response.data.toString())
                     }
@@ -53,6 +57,8 @@ class WasteClassificationViewModel @Inject constructor(
 
     fun loadWasteSpecTable() {
         viewModelScope.launch {
+            _eventFlow.emit(Event.ImageClassification.Loading)
+
             GetWasteSpecTableUseCase()
                 .catch { _eventFlow.emit(Event.Failure(it.message)) }
                 .collect { response -> when (response) {
@@ -70,7 +76,13 @@ class WasteClassificationViewModel @Inject constructor(
 
     sealed class Event {
         object None : Event()
-        data class ClassificationResult(val document: WasteClassificationDocument) : Event()
+
+        sealed class ImageClassification : Event() {
+            object Loading: Event()
+            object Empty : ImageClassification()
+            data class Result(val document: WasteClassificationDocument) : ImageClassification()
+
+        }
         data class WasteSpecTable(val specs: List<WasteSpec>) : Event()
         data class Failure(val message: String?) : Event()
     }

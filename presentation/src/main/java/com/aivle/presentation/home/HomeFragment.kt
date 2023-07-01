@@ -19,13 +19,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     private fun initView() {
         binding.btnDisposal.setOnClickListener {
-            findNavController().navigate(R.id.action_global_disposalFragment)
+            // findNavController().navigate(R.id.action_global_disposalFragment)
         }
         binding.btnSharing.setOnClickListener {
-            findNavController().navigate(R.id.action_global_sharingPostListFragment)
+            // findNavController().navigate(R.id.action_global_sharingPostListFragment)
         }
         binding.btnTest.setOnClickListener {
-            startActivity(Intent(requireActivity(), SignActivity::class.java))
+            findNavController().navigate(R.id.action_homeFragment_to_wasteDisposalApplyFragment2)
         }
     }
 }

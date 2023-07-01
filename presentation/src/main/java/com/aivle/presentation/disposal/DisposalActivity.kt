@@ -21,7 +21,7 @@ class DisposalActivity : BaseActivity<ActivityDisposalBinding>(R.layout.activity
         super.onCreate(savedInstanceState)
 
         val imageUri = intent.getStringExtra(IMAGE_URI)!!
-        viewModel.wasteImageUri = imageUri
+        viewModel.wasteImageLocalUri = imageUri
 
         initView()
     }

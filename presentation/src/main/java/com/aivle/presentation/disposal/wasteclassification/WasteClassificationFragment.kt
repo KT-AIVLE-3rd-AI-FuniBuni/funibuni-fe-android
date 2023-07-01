@@ -1,7 +1,9 @@
 package com.aivle.presentation.disposal.wasteclassification
 
+import android.app.ProgressDialog
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -18,6 +20,7 @@ import com.aivle.presentation.disposal.wasteclassification.WasteClassificationVi
 import com.aivle.presentation.disposal.base.BaseDisposalFragment
 import com.aivle.presentation.disposal.wasteclassification.bottomsheet.WasteCategoryBottomSheetFragment
 import dagger.hilt.android.AndroidEntryPoint
+import kotlin.math.roundToInt
 
 private const val TAG = "WasteClassificationFragment"
 
@@ -26,6 +29,7 @@ class WasteClassificationFragment : BaseDisposalFragment<FragmentWasteClassifica
     R.layout.fragment_waste_classification) {
 
     private val viewModel: WasteClassificationViewModel by viewModels()
+    private lateinit var loadingDialog: ProgressDialog
     // private lateinit var largeCatListAdapter: LargeCategoryResultListAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -34,12 +38,12 @@ class WasteClassificationFragment : BaseDisposalFragment<FragmentWasteClassifica
         initView()
         handleViewModelEvent()
 
-        // viewModel.classifyWasteImage(activityViewModel.wasteImageUri)
-        viewModel.loadWasteSpecTable()
+        viewModel.classifyWasteImage(activityViewModel.wasteImageLocalUri)
+        //viewModel.loadWasteSpecTable()
     }
 
     private fun initView() {
-        val wasteImageBitmap = BitmapUtil.decodeFile(activityViewModel.wasteImageUri)
+        val wasteImageBitmap = BitmapUtil.decodeFile(activityViewModel.wasteImageLocalUri)
         binding.wasteImage.setImageBitmap(wasteImageBitmap)
 
         binding.btnReselect.setOnClickListener {
@@ -47,39 +51,86 @@ class WasteClassificationFragment : BaseDisposalFragment<FragmentWasteClassifica
         }
 
         binding.btnNext.setOnClickListener {
+            activityViewModel.selectedWasteSpec?.let {
+                moveNext(it)
+            }
+        }
 
-            moveNext(viewModel.allWasteSpecs.first())
+        loadingDialog = ProgressDialog(requireContext()).also {
+            it.setContentView(R.layout.dialog_progress_ai)
+            it.setCancelable(false)
         }
     }
 
     private fun handleViewModelEvent() = repeatOnStarted {
-        viewModel.eventFlow.collect { event -> when (event) {
-            is Event.None -> {
+        viewModel.eventFlow.collect { event ->
+            if (event is Event.ImageClassification.Loading) {
+                loadingDialog(true)
+            } else {
+                loadingDialog(false)
             }
-            is Event.ClassificationResult -> {
-                showClassificationResult(event.document)
+
+            when (event) {
+                is Event.None -> {
+                }
+                is Event.ImageClassification.Loading -> {
+                }
+                is Event.ImageClassification.Result -> {
+                    showClassificationResult(event.document)
+                }
+                is Event.ImageClassification.Empty -> {
+                    showClassificationResultEmpty()
+                }
+                is Event.WasteSpecTable -> {
+                }
+                is Event.Failure -> {
+                    showToast(event.message)
+                }
             }
-            is Event.WasteSpecTable -> {
-            }
-            is Event.Failure -> {
-                showToast(event.message)
-            }
-        }}
+        }
+    }
+
+    private fun loadingDialog(isShow: Boolean) {
+        if (isShow) {
+            loadingDialog.show()
+        } else {
+            loadingDialog.hide()
+        }
     }
 
     private fun showClassificationResult(document: WasteClassificationDocument) {
-        binding.wasteName.text = document.first_large_category_name
+        activityViewModel.classificationResult = document
 
+        binding.wasteName.text = document.first_large_category_name
+            ?: return
+        binding.wasteNameSubLabel.isVisible = true
+
+        // 이미지 대분류 결과 목록
         val largeResults = document.labels.map { it.large_category }
         binding.largeCategoryResultList.layoutManager = GridLayoutManager(requireContext(), largeResults.size)
         binding.largeCategoryResultList.adapter = LargeCategoryResultListAdapter().apply {
             submitList(largeResults)
         }
-        val smallResults = document.labels.map { it.small_category }
+
+        // 이미지 소분류 결과
+        val smallResult = document.labels.firstOrNull { it.small_category != null }
+            ?.small_category
+        if (smallResult == null) {
+            val firstLargeCategoryIndex = largeResults.first().index_large_category
+            val wasteSpec = document.all_waste_specs.find { it.index_large_category == firstLargeCategoryIndex }
+            activityViewModel.selectedWasteSpec = wasteSpec
+        } else {
+            binding.smallCategoryName.text = smallResult.small_category_name
+            binding.smallCategoryProbability.text = "${(smallResult.probability * 100).roundToInt()}%"
+
+            val firstSmallCategoryIndex = smallResult.index_small_category
+            val wasteSpec = document.all_waste_specs.find { it.index_small_category == firstSmallCategoryIndex }
+            activityViewModel.selectedWasteSpec = wasteSpec
+        }
     }
 
-    private fun foo(largeResults: List<LargeCategoryResult>, smallResults: List<SmallCategoryResult>) {
-
+    private fun showClassificationResultEmpty() {
+        showToast("사진에서 이미지를 검출하지 못했습니다ㅜㅜ")
     }
 
     private fun showSelectCategoryBottomSheet() {

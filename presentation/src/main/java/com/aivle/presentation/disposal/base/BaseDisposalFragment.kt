@@ -16,7 +16,7 @@ abstract class BaseDisposalFragment<T : ViewDataBinding>(
     protected val activityViewModel: DisposalViewModel by activityViewModels()
 
     protected val wasteImageBitmap: Bitmap?
-        get() = getImageBitmapFrom(activityViewModel.wasteImageUri)
+        get() = getImageBitmapFrom(activityViewModel.wasteImageLocalUri)
 
     private fun getImageBitmapFrom(path: String): Bitmap? {
         return try {

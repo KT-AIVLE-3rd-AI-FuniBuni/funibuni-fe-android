@@ -1,6 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="RtlSymmetry" >
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:overScrollMode="never">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- 대형폐기물 배출 신청하기 -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:paddingHorizontal="16dp"
+                android:gravity="center_vertical"
+                android:text="대형폐기물 배출 신청하기"
+                android:textSize="24sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"/>
+
+            <!-- 대분류 -->
+            <LinearLayout style="@style/WasteDisposalApplyFragmentStyle.LinearLayout">
+
+                <TextView style="@style/WasteDisposalApplyFragmentStyle.Label"
+                    android:text="품목 (대분류)"/>
+
+                <TextView
+                    style="@style/WasteDisposalApplyFragmentStyle.Content"
+                    android:id="@+id/large_category_name"
+                    tools:text="의자"/>
+
+            </LinearLayout>
+
+            <!-- 소분류 -->
+            <LinearLayout style="@style/WasteDisposalApplyFragmentStyle.LinearLayout">
+
+                <TextView style="@style/WasteDisposalApplyFragmentStyle.Label"
+                    android:text="품목 (소분류)"/>
+
+                <TextView
+                    style="@style/WasteDisposalApplyFragmentStyle.Content"
+                    android:id="@+id/small_category_name"
+                    tools:text="회전 의자"/>
+
+            </LinearLayout>
+
+            <!-- 수수료 금액 -->
+            <LinearLayout style="@style/WasteDisposalApplyFragmentStyle.LinearLayout">
+
+                <TextView style="@style/WasteDisposalApplyFragmentStyle.Label"
+                    android:text="수수료 금액"/>
+
+                <TextView
+                    style="@style/WasteDisposalApplyFragmentStyle.Content"
+                    android:id="@+id/disposal_fee"
+                    tools:text="8,000원"/>
+
+            </LinearLayout>
+
+            <!-- 주소 -->
+            <LinearLayout style="@style/WasteDisposalApplyFragmentStyle.LinearLayout">
+
+                <TextView style="@style/WasteDisposalApplyFragmentStyle.Label"
+                    android:text="주소"/>
+
+                <TextView
+                    style="@style/WasteDisposalApplyFragmentStyle.Content"
+                    android:id="@+id/address"
+                    tools:text="서울 송파구 XXX로 10-5\n101동 1201호"/>
+
+            </LinearLayout>
+
+            <!-- 배출 상세 위치 -->
+            <LinearLayout style="@style/WasteDisposalApplyFragmentStyle.LinearLayout">
+
+                <TextView style="@style/WasteDisposalApplyFragmentStyle.Label"
+                    android:text="배출 상세위치"/>
+                
+                <EditText
+                    android:id="@+id/edt_disposal_detail_location"
+                    android:hint="배출할 상세 위치 (필수 입력)"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="18sp"
+                    android:textColorHint="@color/gray400"/>
+
+            </LinearLayout>
+
+            <View style="@style/WasteDisposalApplyFragmentStyle.Divider"/>
+
+            <!-- 배출 날짜 -->
+            <TextView style="@style/WasteDisposalApplyFragmentStyle.Title"
+                android:text="배출 날짜"/>
+
+            <CalendarView
+                android:id="@+id/calendar_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weekNumberColor="@color/red400"
+                android:weekSeparatorLineColor="@color/red400"
+                android:focusedMonthDateColor="@color/red400"
+                android:selectedWeekBackgroundColor="#4DEF5350"
+                android:visibility="visible"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <View style="@style/WasteDisposalApplyFragmentStyle.Divider"/>
+
+            <!-- 배출 시간 -->
+            <TextView style="@style/WasteDisposalApplyFragmentStyle.Title"
+                android:text="배출 시간"/>
+
+            <com.aivle.presentation_design.interactive.customView.TimeSelectorChipView
+                android:id="@+id/time_selector"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <View style="@style/WasteDisposalApplyFragmentStyle.Divider"/>
+
+            <!-- 요청 사항 (선택) -->
+            <TextView style="@style/WasteDisposalApplyFragmentStyle.Title"
+                android:layout_marginBottom="18dp"
+                android:text="요청 사항 (선택)"/>
+
+            <EditText
+                android:id="@+id/edt_memo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="18dp"
+                android:hint="추가로 요청할 내용이 있으면 적어주세요"
+                android:textColorHint="@color/gray400"/>
+
+            <com.aivle.presentation_design.interactive.ui.InteractiveTextButton
+                android:id="@+id/btn_apply"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="36dp"
+                android:layout_marginBottom="24dp"
+                android:layout_marginHorizontal="18dp"
+                android:text="신청하기"/>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+</layout>

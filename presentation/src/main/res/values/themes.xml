@@ -21,4 +21,72 @@
     <style name="ShapeAppearanceCorner4">
         <item name="cornerSize">4dp</item>
     </style>
+
+    <!-- ShapeableImageView -->
+    <style name="ShapeableImageView_CornerCommon">
+        <item name="cornerSize">@dimen/app_radius</item>
+    </style>
+
+    <!-- WasteDisposalApplyFragment -->
+    <style name="WasteDisposalApplyFragmentStyle"/>
+    <style name="WasteDisposalApplyFragmentStyle.LinearLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">top</item>
+        <item name="android:paddingVertical">4dp</item>
+        <item name="android:paddingHorizontal">18dp</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+    <style name="WasteDisposalApplyFragmentStyle.Title">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingHorizontal">18dp</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="WasteDisposalApplyFragmentStyle.Label">
+        <item name="android:layout_width">140dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/gray600</item>
+    </style>
+    <style name="WasteDisposalApplyFragmentStyle.Content">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+    <style name="WasteDisposalApplyFragmentStyle.Divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">6dp</item>
+        <item name="android:layout_marginVertical">24dp</item>
+        <item name="android:background">@color/divider_light_gray</item>
+    </style>
+
+    <!-- WasteDisposalApplyDetailFragmentStyle_LinearLayout -->
+    <style name="WasteDisposalApplyDetailFragmentStyle_LinearLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:paddingVertical">6dp</item>
+    </style>
+    <!-- WasteDisposalApplyDetailFragmentStyle_Label (Left) -->
+    <style name="WasteDisposalApplyDetailFragmentStyle_Label">
+        <item name="android:layout_width">140dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/gray600</item>
+    </style>
+    <!-- WasteDisposalApplyDetailFragmentStyle_Content (Right) -->
+    <style name="WasteDisposalApplyDetailFragmentStyle_Content">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">end</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 </resources>

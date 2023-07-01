@@ -19,7 +19,7 @@ fun WasteClassificationDocumentEntity.toModel() =
     )
 
 fun WasteClassificationRankEntity.toModel() =
-    WasteClassificationRank(large_category.toModel(), small_category.toModel())
+    WasteClassificationRank(large_category.toModel(), small_category?.toModel())
 
 fun LargeCategoryResultEntity.toModel() =
     LargeCategoryResult(index_large_category, large_category_name, probability)

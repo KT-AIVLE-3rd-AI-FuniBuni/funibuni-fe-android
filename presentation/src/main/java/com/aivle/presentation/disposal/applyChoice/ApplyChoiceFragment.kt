@@ -2,6 +2,7 @@ package com.aivle.presentation.disposal.applyChoice
 
 import android.os.Bundle
 import android.view.View
+import androidx.navigation.fragment.findNavController
 import com.aivle.presentation.R
 import com.aivle.presentation._util.BitmapUtil
 import com.aivle.presentation.databinding.FragmentApplyChoiceBinding
@@ -21,7 +22,7 @@ class ApplyChoiceFragment : BaseDisposalFragment<FragmentApplyChoiceBinding>(R.l
 
     private fun initView() {
         val wasteSpec = activityViewModel.selectedWasteSpec ?: return
-        val wasteImageBitmap = BitmapUtil.decodeFile(activityViewModel.wasteImageUri)
+        val wasteImageBitmap = BitmapUtil.decodeFile(activityViewModel.wasteImageLocalUri)
         val categoryName = "${wasteSpec.large_category} (${wasteSpec.small_category})"
         val wasteFee = DecimalFormat("#,###").format(wasteSpec.fee) + "원"
 
@@ -32,7 +33,7 @@ class ApplyChoiceFragment : BaseDisposalFragment<FragmentApplyChoiceBinding>(R.l
 
     private fun initListener() {
         binding.wasteImageCardView.setOnClickListener {
-
+            findNavController().navigate(R.id.action_applyChoiceFragment_to_wasteDisposalApplyFragment)
         }
         binding.sharingCardView.setOnClickListener {
 

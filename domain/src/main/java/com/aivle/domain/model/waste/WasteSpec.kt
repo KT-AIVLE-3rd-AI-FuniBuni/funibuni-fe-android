@@ -1,5 +1,7 @@
 package com.aivle.domain.model.waste
 
+import java.text.DecimalFormat
+
 data class WasteSpec(
     val waste_spec_id: Int,
     val index_large_category: Int,
@@ -14,6 +16,8 @@ data class WasteSpec(
     val type: String,
     val fee: Int,
 ) {
+    val feeString: String = DecimalFormat("#,###").format(fee) + "원"
+
     var onClick1: ((WasteSpec) -> Unit)? = null
     var onClick2: ((WasteSpec) -> Unit)? = null
 }
