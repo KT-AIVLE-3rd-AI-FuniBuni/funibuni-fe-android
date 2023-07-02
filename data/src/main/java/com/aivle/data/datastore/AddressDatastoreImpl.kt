@@ -23,6 +23,7 @@ class AddressDatastoreImpl @Inject constructor(
                 .setCity(address.city)
                 .setDistrict(address.district)
                 .setDong(address.dong)
+                .setDetail(address.detail)
                 .setDisposalLocation(address.disposalLocation)
                 .build()
         }

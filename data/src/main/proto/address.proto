@@ -11,5 +11,6 @@ message AddressProto {
   string city = 5;
   string district = 6;
   string dong = 7;
-  string disposal_location = 8;
+  string detail = 8;
+  string disposal_location = 9;
 }

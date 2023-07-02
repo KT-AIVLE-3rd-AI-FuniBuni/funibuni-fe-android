@@ -114,6 +114,7 @@ class SignRepositoryImpl @Inject constructor(
     }
 
     private suspend fun saveAddress(address: Address) {
+        Log.d(TAG, "saveAddress(): $address")
         addressDatastore.setAddress(address)
     }
 }

@@ -1,13 +1,16 @@
 package com.aivle.data.repository
 
-import android.util.Log
 import com.aivle.data.api.WasteApi
 import com.aivle.data.di.api.FuniBuniApiQualifier
+import com.aivle.data.mapper.toEntity
 import com.aivle.data.mapper.toModel
 import com.aivle.domain.model.waste.WasteClassificationDocument
+import com.aivle.domain.model.waste.WasteDisposalApply
+import com.aivle.domain.model.waste.WasteDisposalApplyDetail
 import com.aivle.domain.model.waste.WasteSpec
 import com.aivle.domain.repository.WasteRepository
 import com.aivle.domain.response.DataResponse
+import com.aivle.domain.response.NothingResponse
 import com.skydoves.sandwich.suspendOnFailure
 import com.skydoves.sandwich.suspendOnSuccess
 import kotlinx.coroutines.flow.Flow
@@ -31,7 +34,6 @@ class WasteRepositoryImpl @Inject constructor(
 
         api.imageUpload(imagePart)
             .suspendOnSuccess {
-                Log.d(TAG, "classifyWasteImage.suspendOnSuccess: $data")
                 val response = DataResponse.Success(data.toModel())
                 emit(response)
             }
@@ -47,6 +49,36 @@ class WasteRepositoryImpl @Inject constructor(
             }
             .suspendOnFailure {
                 emit(DataResponse.Failure.Error(this))
+            }
+    }
+
+    override suspend fun applyWasteDisposal(apply: WasteDisposalApply): Flow<DataResponse<WasteDisposalApply>> = flow {
+        api.applyWasteDisposal(apply.toEntity())
+            .suspendOnSuccess {
+                emit(DataResponse.Success(data.toModel()))
+            }
+            .suspendOnFailure {
+                emit(DataResponse.Failure.Error(this))
+            }
+    }
+
+    override suspend fun getWasteDisposalApplyDetail(wasteApplyId: Int): Flow<DataResponse<WasteDisposalApplyDetail>> = flow {
+        api.getWasteDisposalApplyDetail(wasteApplyId)
+            .suspendOnSuccess {
+                emit(DataResponse.Success(data.toModel()))
+            }
+            .suspendOnFailure {
+                emit(DataResponse.Failure.Error(this))
+            }
+    }
+
+    override suspend fun cancelWasteDisposalApply(wasteApplyId: Int): Flow<NothingResponse> = flow {
+        api.cancelWasteDisposalApply(wasteApplyId)
+            .suspendOnSuccess {
+                emit(NothingResponse.Success)
+            }
+            .suspendOnFailure {
+                emit(NothingResponse.Failure.Error(this))
             }
     }
 }

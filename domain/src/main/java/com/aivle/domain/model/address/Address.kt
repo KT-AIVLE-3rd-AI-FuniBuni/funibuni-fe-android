@@ -1,6 +1,6 @@
 package com.aivle.domain.model.address
 
-data class Address(
+data class Address constructor(
     val addressId: Int,
     val postalCode: String,
     val roadAddress: String,
@@ -8,5 +8,6 @@ data class Address(
     val city: String,
     val district: String,
     val dong: String,
+    val detail: String,
     val disposalLocation: String,
 )

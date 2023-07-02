@@ -8,5 +8,6 @@ data class AddressEntity(
     val address_city: String,
     val address_district: String,
     val address_dong: String,
+    val address_detail: String,
     val disposal_location: String?,
 )

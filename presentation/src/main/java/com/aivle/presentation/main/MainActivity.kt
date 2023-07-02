@@ -1,6 +1,7 @@
 package com.aivle.presentation.main
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import androidx.navigation.NavController
@@ -47,6 +48,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     private fun handleViewModelEvent() = repeatOnStarted {
         viewModel.eventFlow.collect { event -> when (event) {
+            is Event.None -> {
+            }
             is Event.AddressLoaded -> {
                 setHeader(event.address)
             }
@@ -54,6 +57,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     }
 
     private fun setHeader(address: Address) {
+        Log.d(TAG, "setHeader(): $address")
         binding.header.address.text = "${address.city} ${address.district}"
         binding.header.addressToggle.isVisible = true
     }

@@ -6,7 +6,9 @@ import com.aivle.domain.model.address.Address
 import com.aivle.domain.usecase.address.GetAddressFromLocalUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -17,8 +19,8 @@ class MainViewModel @Inject constructor(
     private val GetAddressFromLocalUseCase: GetAddressFromLocalUseCase,
 ) : ViewModel() {
 
-    private val _eventFlow: MutableSharedFlow<Event> = MutableSharedFlow()
-    val eventFlow: SharedFlow<Event> get() = _eventFlow
+    private val _eventFlow: MutableStateFlow<Event> = MutableStateFlow(Event.None)
+    val eventFlow: StateFlow<Event> get() = _eventFlow
 
     fun loadAddress() {
         viewModelScope.launch {
@@ -28,6 +30,7 @@ class MainViewModel @Inject constructor(
     }
 
     sealed class Event {
+        object None : Event()
         data class AddressLoaded(val address: Address) : Event()
     }
 }
