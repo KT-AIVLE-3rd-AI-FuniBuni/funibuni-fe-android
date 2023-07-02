@@ -3,18 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="detail"
+            type="com.aivle.domain.model.waste.WasteDisposalApplyDetail" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingHorizontal="18dp"
-        android:paddingBottom="18dp">
+        android:paddingBottom="18dp"
+        android:clipToPadding="false">
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:fadingEdge="vertical"
-            android:fadingEdgeLength="18dp"
-            android:requiresFadingEdge="vertical"
             android:clipToPadding="false"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@id/barrier_bottom">
@@ -22,7 +26,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingVertical="24dp"
+                android:paddingBottom="24dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -35,21 +39,24 @@
                     android:textStyle="bold"/>
 
                 <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/waste_image"
                     android:layout_width="match_parent"
                     android:layout_height="240dp"
                     android:layout_marginVertical="24dp"
                     android:scaleType="centerCrop"
-                    app:shapeAppearanceOverlay="@style/ShapeableImageView_CornerCommon"
-                    tools:src="@drawable/placeholder_1440"/>
+                    android:src="@drawable/placeholder_1440"
+                    app:shapeAppearanceOverlay="@style/ShapeableImageView_CornerCommon"/>
+                    <!--app:imageUrl="@{detail.image_url}"-->
 
                 <LinearLayout
                     style="@style/WasteDisposalApplyDetailFragmentStyle_LinearLayout">
 
                     <TextView
                         style="@style/WasteDisposalApplyDetailFragmentStyle_Label"
-                        tools:text="품목(대분류)"/>
+                        android:text="품목(대분류)"/>
                     <TextView
                         style="@style/WasteDisposalApplyDetailFragmentStyle_Content"
+                        android:text="@{detail.waste_spec.large_category}"
                         tools:text="의자"/>
 
                 </LinearLayout>
@@ -59,9 +66,10 @@
 
                     <TextView
                         style="@style/WasteDisposalApplyDetailFragmentStyle_Label"
-                        tools:text="품목(소분류)"/>
+                        android:text="품목(소분류)"/>
                     <TextView
                         style="@style/WasteDisposalApplyDetailFragmentStyle_Content"
+                        android:text="@{detail.waste_spec.small_category}"
                         tools:text="회전 의자"/>
 
                 </LinearLayout>
@@ -71,9 +79,10 @@
 
                     <TextView
                         style="@style/WasteDisposalApplyDetailFragmentStyle_Label"
-                        tools:text="수수료 금액"/>
+                        android:text="수수료 금액"/>
                     <TextView
                         style="@style/WasteDisposalApplyDetailFragmentStyle_Content"
+                        android:text="@{detail.waste_spec.feeString}"
                         tools:text="8,000원"/>
 
                 </LinearLayout>
@@ -81,7 +90,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_marginVertical="6dp"
+                    android:layout_marginVertical="18dp"
                     android:background="@color/divider_light_gray"/>
 
                 <LinearLayout
@@ -89,9 +98,10 @@
 
                     <TextView
                         style="@style/WasteDisposalApplyDetailFragmentStyle_Label"
-                        tools:text="주소"/>
+                        android:text="주소"/>
                     <TextView
                         style="@style/WasteDisposalApplyDetailFragmentStyle_Content"
+                        android:text="@{detail.address_road_detail_two_lines}"
                         tools:text="서울 송파구 ○○○로 10-5\n101동 1201호"/>
 
                 </LinearLayout>
@@ -101,9 +111,10 @@
 
                     <TextView
                         style="@style/WasteDisposalApplyDetailFragmentStyle_Label"
-                        tools:text="배출 상세위치"/>
+                        android:text="배출 상세위치"/>
                     <TextView
                         style="@style/WasteDisposalApplyDetailFragmentStyle_Content"
+                        android:text="@{detail.disposal_location}"
                         tools:text="경비실 앞"/>
 
                 </LinearLayout>
@@ -113,9 +124,10 @@
 
                     <TextView
                         style="@style/WasteDisposalApplyDetailFragmentStyle_Label"
-                        tools:text="배출 일시"/>
+                        android:text="배출 일시"/>
                     <TextView
                         style="@style/WasteDisposalApplyDetailFragmentStyle_Content"
+                        android:text="@{detail.disposal_datetime_formatting_two_lines}"
                         tools:text="2023년 7월 14일\n오후 4시 30분"/>
 
                 </LinearLayout>
@@ -125,10 +137,10 @@
 
                     <TextView
                         style="@style/WasteDisposalApplyDetailFragmentStyle_Label"
-                        tools:text="추가 요청사항"/>
+                        android:text="추가 요청사항"/>
                     <TextView
                         style="@style/WasteDisposalApplyDetailFragmentStyle_Content"
-                        tools:text="수거해가실 때 연락 한 번 주세요!"/>
+                        tools:text="@{detail.memo}"/>
 
                 </LinearLayout>
 

@@ -10,7 +10,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import com.aivle.presentation.R
 import com.aivle.presentation.base.BaseFragment
 import com.aivle.presentation.util.common.CameraManager
-import com.aivle.presentation.common.showToast
+import com.aivle.presentation.util.ext.showToast
 import com.aivle.presentation.databinding.FragmentDisposalBinding
 import com.aivle.presentation.disposal.DisposalActivity
 

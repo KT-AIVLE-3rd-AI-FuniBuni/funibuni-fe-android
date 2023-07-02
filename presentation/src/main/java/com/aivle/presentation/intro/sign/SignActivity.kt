@@ -14,8 +14,8 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.aivle.presentation.R
 import com.aivle.presentation.base.BaseActivity
-import com.aivle.presentation.common.repeatOnStarted
-import com.aivle.presentation.common.showToast
+import com.aivle.presentation.util.ext.repeatOnStarted
+import com.aivle.presentation.util.ext.showToast
 import com.aivle.presentation.util.common.KeyboardHeightProvider
 import com.aivle.presentation.databinding.ActivitySignBinding
 import com.aivle.presentation.intro.firebase.SmsRetrieveHelper

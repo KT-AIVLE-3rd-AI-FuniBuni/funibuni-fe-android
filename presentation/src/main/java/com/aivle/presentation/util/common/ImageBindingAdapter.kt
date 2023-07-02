@@ -5,6 +5,7 @@ import androidx.databinding.BindingAdapter
 import com.aivle.presentation.R
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.google.android.material.imageview.ShapeableImageView
 
 object ImageBindingAdapter {
 

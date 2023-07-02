@@ -14,9 +14,9 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import com.aivle.domain.model.kakao.KakaoAddressDocument
 import com.aivle.presentation.R
-import com.aivle.presentation.common.dpToPixels
-import com.aivle.presentation.common.repeatOnStarted
-import com.aivle.presentation.common.showToast
+import com.aivle.presentation.util.ext.dpToPixels
+import com.aivle.presentation.util.ext.repeatOnStarted
+import com.aivle.presentation.util.ext.showToast
 import com.aivle.presentation.databinding.FragmentSignUpInputAddressBinding
 import com.aivle.presentation.intro.sign.SignUpInputAddressViewModel.Event
 import com.google.android.gms.location.FusedLocationProviderClient

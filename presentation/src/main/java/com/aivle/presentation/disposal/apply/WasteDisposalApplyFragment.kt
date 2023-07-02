@@ -3,11 +3,13 @@ package com.aivle.presentation.disposal.apply
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.aivle.domain.model.address.Address
 import com.aivle.presentation.R
-import com.aivle.presentation.common.repeatOnStarted
-import com.aivle.presentation.common.showToast
+import com.aivle.presentation.util.ext.repeatOnStarted
+import com.aivle.presentation.util.ext.showToast
 import com.aivle.presentation.databinding.FragmentWasteDisposalApplyBinding
 import com.aivle.presentation.disposal.base.BaseDisposalFragment
 import com.aivle.presentation.util.common.DatetimeUtil
@@ -56,7 +58,7 @@ class WasteDisposalApplyFragment : BaseDisposalFragment<FragmentWasteDisposalApp
                 showAddress(event.address)
             }
             is Event.Apply.Success -> {
-                activityViewModel.completeApplication(event.applyId)
+                moveApplyDetailFragment(event.applyId)
             }
             is Event.Apply.Failure -> {
                 showToast(event.message)
@@ -91,5 +93,8 @@ class WasteDisposalApplyFragment : BaseDisposalFragment<FragmentWasteDisposalApp
 
     private fun moveApplyDetailFragment(applyId: Int) {
         Log.d(TAG, "moveApplyDetailFragment(): applyId=$applyId")
+        findNavController().navigate(R.id.action_wasteDisposalApplyFragment_to_wasteDisposalApplyDetailFragment, bundleOf(
+            "wasteDisposalApplyId" to applyId
+        ))
     }
 }

@@ -10,7 +10,7 @@ import androidx.constraintlayout.widget.Guideline
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import com.aivle.presentation.R
-import com.aivle.presentation.common.repeatOnStarted
+import com.aivle.presentation.util.ext.repeatOnStarted
 import com.aivle.presentation.databinding.FragmentSignInBinding
 import com.aivle.presentation.intro.sign.SignInViewModel.Event
 import com.aivle.presentation_design.interactive.ui.FilterableMaterialAutoCompleteTextView

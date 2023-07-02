@@ -8,8 +8,8 @@ import androidx.activity.viewModels
 import com.aivle.domain.model.user.User
 import com.aivle.presentation.R
 import com.aivle.presentation.base.BaseActivity
-import com.aivle.presentation.common.repeatOnStarted
-import com.aivle.presentation.common.showToast
+import com.aivle.presentation.util.ext.repeatOnStarted
+import com.aivle.presentation.util.ext.showToast
 import com.aivle.presentation.databinding.ActivityMyProfileDetailBinding
 import com.aivle.presentation.intro.intro.IntroActivity
 import com.aivle.presentation.myprofileDetail.MyProfileDetailViewModel.Event

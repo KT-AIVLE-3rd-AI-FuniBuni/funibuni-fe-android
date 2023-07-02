@@ -10,8 +10,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.aivle.domain.model.waste.WasteClassificationDocument
 import com.aivle.domain.model.waste.WasteSpec
 import com.aivle.presentation.R
-import com.aivle.presentation.common.repeatOnStarted
-import com.aivle.presentation.common.showToast
+import com.aivle.presentation.util.ext.repeatOnStarted
+import com.aivle.presentation.util.ext.showToast
 import com.aivle.presentation.util.common.BitmapUtil
 import com.aivle.presentation.databinding.FragmentWasteClassificationBinding
 import com.aivle.presentation.disposal.wasteclassification.WasteClassificationViewModel.Event

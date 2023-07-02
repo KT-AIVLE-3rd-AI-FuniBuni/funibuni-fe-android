@@ -10,4 +10,6 @@ data class Address constructor(
     val dong: String,
     val detail: String,
     val disposalLocation: String,
-)
+) {
+    val roadAddressDetailTwoLines: String = "${roadAddress}\n${detail}"
+}

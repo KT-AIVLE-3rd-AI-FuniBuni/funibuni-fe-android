@@ -1,4 +1,4 @@
-package com.aivle.presentation.common
+package com.aivle.presentation.util.ext
 
 import android.app.Activity
 import android.util.Log

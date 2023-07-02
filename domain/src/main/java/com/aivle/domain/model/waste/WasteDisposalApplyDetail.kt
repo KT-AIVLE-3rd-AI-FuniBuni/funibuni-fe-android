@@ -1,6 +1,7 @@
 package com.aivle.domain.model.waste
 
 import com.aivle.domain.model.user.User
+import com.aivle.domain.model.util.DatetimeUtil
 
 data class WasteDisposalApplyDetail(
     val waste_id: Int,
@@ -20,4 +21,7 @@ data class WasteDisposalApplyDetail(
     val disposal_datetime: String,
     val memo: String,
     val created_at: String,
-)
+) {
+    val address_road_detail_two_lines: String = "${address_full_street}\n${address_detail}"
+    val disposal_datetime_formatting_two_lines: String? = DatetimeUtil.formatDatetimeFullStringTwoLines(disposal_datetime)
+}
