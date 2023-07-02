@@ -1,4 +1,4 @@
-package com.aivle.presentation.sharingPostDetail
+package com.aivle.presentation.sharing.postDetail
 
 import android.animation.ValueAnimator
 import android.graphics.Color
@@ -7,8 +7,6 @@ import android.view.ViewTreeObserver
 import android.view.Window
 import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.core.view.*
-import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.LifecycleOwner
 import com.aivle.presentation.databinding.HeaderSharingPostDetailBinding
 import com.google.android.material.appbar.AppBarLayout
 

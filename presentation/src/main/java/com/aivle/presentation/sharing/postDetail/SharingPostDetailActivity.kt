@@ -1,4 +1,4 @@
-package com.aivle.presentation.sharingPostDetail
+package com.aivle.presentation.sharing.postDetail
 
 import android.content.Context
 import android.content.Intent
@@ -12,7 +12,7 @@ import com.aivle.presentation.R
 import com.aivle.presentation.base.BaseActivity
 import com.aivle.presentation.util.ext.repeatOnStarted
 import com.aivle.presentation.databinding.ActivitySharingPostDetailBinding
-import com.aivle.presentation.sharingPostDetail.SharingPostDetailViewModel.Event
+import com.aivle.presentation.sharing.postDetail.SharingPostDetailViewModel.Event
 import dagger.hilt.android.AndroidEntryPoint
 
 private const val TAG = "SharingPostDetailActivity"

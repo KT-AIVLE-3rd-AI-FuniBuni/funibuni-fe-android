@@ -2,11 +2,10 @@ package com.aivle.data.entity.sharingPost
 
 import com.aivle.data.entity.user.UserEntity
 
-data class CommentEntity(
-    val comment_id: Int,
-    val post_id: Int,
+data class ReplyEntity(
+    val reply_id: Int,
     val user: UserEntity,
-    val comment: String,
-    val reply_count: Int = 0,
+    val comment_id: Int,
+    val reply: String,
     val created_at: String,
 )

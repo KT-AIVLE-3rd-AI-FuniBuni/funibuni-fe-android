@@ -10,7 +10,7 @@
 
     <item android:id="@android:id/background">
         <shape android:shape="rectangle">
-            <solid android:color="@color/theme_color"/>
+            <solid android:color="@color/selector_text_button_dark_background"/>
             <corners android:radius="18dp"/>
         </shape>
     </item>

@@ -1,4 +1,4 @@
-package com.aivle.presentation.sharingPostDetail
+package com.aivle.presentation.sharing.postDetail
 
 import android.annotation.SuppressLint
 import android.app.Dialog
@@ -14,7 +14,7 @@ import com.aivle.domain.model.sharingPost.Comment
 import com.aivle.domain.model.sharingPost.Reply
 import com.aivle.presentation.util.ext.repeatOnStarted
 import com.aivle.presentation.databinding.BottomSheetReplyBinding
-import com.aivle.presentation.sharingPostDetail.ReplyBottomSheetViewModel.Event
+import com.aivle.presentation.sharing.postDetail.ReplyBottomSheetViewModel.Event
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment

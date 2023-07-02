@@ -2,6 +2,7 @@ package com.aivle.domain.model.sharingPost
 
 import com.aivle.domain.model.user.User
 
+/* 안쓰는거 */
 data class SharingPost constructor(
     val postId: Int,
     val user: User,

@@ -2,8 +2,6 @@ package com.aivle.presentation_design.interactive.ui
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Color
-import android.graphics.Typeface
 import android.util.AttributeSet
 import android.view.Gravity
 import android.view.MotionEvent
@@ -16,17 +14,18 @@ class InteractiveTextButton @JvmOverloads constructor(
 ) : AppCompatTextView(context, attrs, defStyleAttr) {
 
     init {
-        InteractiveHelper.init(this)
+        isClickable = true
 
         context.obtainStyledAttributes(attrs, R.styleable.InteractiveTextButton).use { typedArray ->
             val type = typedArray.getInteger(R.styleable.InteractiveTextButton_buttonType, 0)
              when (type) {
                 0 -> { // type: dark
-                    background = AppCompatResources.getDrawable(context, R.drawable.bg_button)
-                    setTextColor(Color.WHITE)
+                    background = AppCompatResources.getDrawable(context, R.drawable.bg_text_button)
+                    setTextColor(AppCompatResources.getColorStateList(context, R.color.selector_text_button_dark_text))
+
                 }
                 1 -> { // type: light
-                    background = AppCompatResources.getDrawable(context, R.drawable.bg_button_light)
+                    background = AppCompatResources.getDrawable(context, R.drawable.bg_text_button_light)
                     setTextColor(context.getColor(R.color.theme_color_dark))
                 }
                 else -> throw IllegalArgumentException("type=$type")
@@ -38,9 +37,16 @@ class InteractiveTextButton @JvmOverloads constructor(
         }
     }
 
-    @SuppressLint("ClickableViewAccessibility")
-    override fun onTouchEvent(event: MotionEvent?): Boolean {
-        InteractiveHelper.onTouchEvent(this, event)
-        return super.onTouchEvent(event)
+    override fun dispatchTouchEvent(event: MotionEvent?): Boolean {
+        return if (!isEnabled) {
+            true
+        } else {
+            InteractiveHelper.onTouchEvent(this, event)
+            return super.onTouchEvent(event)
+        }
+    }
+
+    private fun updateView(isEnabled: Boolean) {
+
     }
 }

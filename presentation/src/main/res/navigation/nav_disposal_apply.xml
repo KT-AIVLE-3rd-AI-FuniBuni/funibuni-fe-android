@@ -37,7 +37,15 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_applyChoiceFragment_to_createSharingPostFragment"
+            app:destination="@id/createSharingPostFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
+
     <fragment
         android:id="@+id/wasteDisposalApplyFragment"
         android:name="com.aivle.presentation.disposal.apply.WasteDisposalApplyFragment"
@@ -46,6 +54,10 @@
         <argument android:name="title"
             app:argType="string"
             android:defaultValue="배출 신청 상세정보 입력"/>
+        <argument
+            android:name="wasteDisposalApplyId"
+            app:argType="integer"
+            android:defaultValue="-1"/>
         <action
             android:id="@+id/action_wasteDisposalApplyFragment_to_wasteDisposalApplyDetailFragment"
             app:destination="@id/wasteDisposalApplyDetailFragment"
@@ -55,15 +67,25 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
-        <argument
-            android:name="wasteDisposalApplyId"
-            app:argType="integer"
-            android:defaultValue="-1" />
     </fragment>
+
     <fragment
         android:id="@+id/wasteDisposalApplyDetailFragment"
         android:name="com.aivle.presentation.disposal.applyDetail.WasteDisposalApplyDetailFragment"
         android:label="WasteDisposalApplyDetailFragment"
-        tools:layout="@layout/fragment_waste_disposal_apply_detail"/>
+        tools:layout="@layout/fragment_waste_disposal_apply_detail">
+        <argument android:name="title"
+            app:argType="string"
+            android:defaultValue="배출 신청 정보"/>
+    </fragment>
+    <fragment
+        android:id="@+id/createSharingPostFragment"
+        android:name="com.aivle.presentation.sharing.postCreate.CreateSharingPostFragment"
+        android:label="CreateSharingPostFragment"
+        tools:layout="@layout/fragment_create_sharing_post">
+        <argument android:name="title"
+            app:argType="string"
+            android:defaultValue="나눔 게시글 작성"/>
+    </fragment>
 
 </navigation>

@@ -1,66 +1,122 @@
 package com.aivle.data.api
 
-import com.aivle.domain.model.sharingPost.SharingPost
-import com.aivle.domain.model.sharingPost.SharingPostItem
+import com.aivle.data.entity.sharingPost.CommentEntity
+import com.aivle.data.entity.sharingPost.ReplyEntity
+import com.aivle.data.entity.sharingPost.SharingPostCreateEntity
+import com.aivle.data.entity.sharingPost.SharingPostDetailEntity
+import com.aivle.data.entity.sharingPost.SharingPostItemEntity
 import com.skydoves.sandwich.ApiResponse
+import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.PUT
+import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface SharingPostApi {
 
-    @POST("posts-create1")
-    suspend fun createPosts1(): ApiResponse<SharingPost>
-
-    @POST("posts-create2")
-    suspend fun createPosts2(): ApiResponse<SharingPost>
+    @POST("posts/create")
+    suspend fun createPost(post: SharingPostCreateEntity): ApiResponse<SharingPostItemEntity>
 
     @GET("posts")
-    suspend fun getPosts(): ApiResponse<List<SharingPostItem>>
+    suspend fun getPosts(
+        @Query("address_district") district: String
+    ): ApiResponse<List<SharingPostItemEntity>>
 
     @GET("posts/{post_id}")
-    suspend fun getPost(): ApiResponse<SharingPost>
+    suspend fun getPostDetail(
+        @Path("post_id") post_id: Int
+    ): ApiResponse<SharingPostDetailEntity>
 
     @PUT("posts/{post_id}")
-    suspend fun updatePost(): ApiResponse<String>
+    suspend fun updatePost(
+        @Path("post_id") post_id: Int,
+        @Body post: SharingPostDetailEntity,
+    ): ApiResponse<Map<String, String>>
 
     @DELETE("posts/{post_id}")
-    suspend fun deletePost(): ApiResponse<String>
+    suspend fun deletePost(
+        @Path("post_id") post_id: Int
+    ): ApiResponse<Map<String, Int>>
+
+    @PUT("posts/{post_id}/sharing")
+    suspend fun completeSharingPost(
+        @Path("post_id") post_id: Int
+    ): ApiResponse<Map<String, Int>>
 
     @POST("posts/{post_id}/report")
-    suspend fun reportPost(): ApiResponse<String>
+    suspend fun reportPost(
+        @Path("post_id") post_id: Int
+    ): ApiResponse<Map<String, Int>>
 
     @POST("posts/{post_id}/like")
-    suspend fun likePost(): ApiResponse<String>
+    suspend fun likePost(
+        @Path("post_id") post_id: Int
+    ): ApiResponse<Map<String, Int>>
 
     @DELETE("posts/{post_id}/like")
-    suspend fun unlikePost(): ApiResponse<String>
+    suspend fun unlikePost(
+        @Path("post_id") post_id: Int
+    ): ApiResponse<Map<String, String>>
 
     @POST("posts/{post_id}/comments")
-    suspend fun addComment(): ApiResponse<String>
+    suspend fun addComment(
+        @Path("post_id") post_id: Int,
+        @Body comment: Map<String, String>, // "comment":"test"
+    ): ApiResponse<CommentEntity>
 
     @PUT("posts/{post_id}/comments/{comment_id}")
-    suspend fun updateComment(): ApiResponse<String>
+    suspend fun updateComment(
+        @Path("post_id") post_id: Int,
+        @Path("comment_id") comment_id: Int,
+        @Body comment: Map<String, String>, // "comment":"test"
+    ): ApiResponse<CommentEntity>
 
     @DELETE("posts/{post_id}/comments/{comment_id}")
-    suspend fun deleteComment(): ApiResponse<String>
+    suspend fun deleteComment(
+        @Path("post_id") post_id: Int,
+        @Path("comment_id") comment_id: Int,
+    ): ApiResponse<Map<String, Int>>
 
     @POST("posts/{post_id}/comments/{comment_id}/report")
-    suspend fun reportComment(): ApiResponse<String>
+    suspend fun reportComment(
+        @Path("post_id") post_id: Int,
+        @Path("comment_id") comment_id: Int,
+    ): ApiResponse<Map<String, Int>>
 
     @GET("posts/{post_id}/comments/{comment_id}/replies")
-    suspend fun getReply(): ApiResponse<String>
+    suspend fun getReplies(
+        @Path("post_id") post_id: Int,
+        @Path("comment_id") comment_id: Int,
+    ): ApiResponse<List<ReplyEntity>>
 
     @POST("posts/{post_id}/comments/{comment_id}/replies")
-    suspend fun addReply(): ApiResponse<String>
+    suspend fun addReply(
+        @Path("post_id") post_id: Int,
+        @Path("comment_id") comment_id: Int,
+        @Body reply: Map<String, String>, // "reply": "test"
+    ): ApiResponse<ReplyEntity>
 
     @PUT("posts/{post_id}/comments/{comment_id}/replies/{reply_id}")
-    suspend fun updateReply(): ApiResponse<String>
+    suspend fun updateReply(
+        @Path("post_id") post_id: Int,
+        @Path("comment_id") comment_id: Int,
+        @Path("reply_id") reply_id: Int,
+        @Body reply: Map<String, String> // "reply": "수정된 대댓글 내용~~~"
+    ): ApiResponse<ReplyEntity>
 
     @DELETE("posts/{post_id}/comments/{comment_id}/replies/{reply_id}")
-    suspend fun deleteReply(): ApiResponse<String>
+    suspend fun deleteReply(
+        @Path("post_id") post_id: Int,
+        @Path("comment_id") comment_id: Int,
+        @Path("reply_id") reply_id: Int,
+    ): ApiResponse<Map<String, Int>>
 
     @POST("posts/{post_id}/comments/{comment_id}/replies/{reply_id}/report")
-    suspend fun reportReply(): ApiResponse<String>
+    suspend fun reportReply(
+        @Path("post_id") post_id: Int,
+        @Path("comment_id") comment_id: Int,
+        @Path("reply_id") reply_id: Int,
+    ): ApiResponse<Map<String, Int>>
 }

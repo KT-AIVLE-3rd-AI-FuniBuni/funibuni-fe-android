@@ -14,6 +14,7 @@ import com.aivle.presentation.base.BaseActivity
 import com.aivle.presentation.util.ext.repeatOnStarted
 import com.aivle.presentation.databinding.ActivityMainBinding
 import com.aivle.presentation.main.MainViewModel.Event
+import com.aivle.presentation.util.model.FuniBuniDate
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.Locale
@@ -29,10 +30,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val datetimeString = "2023-07-02T14:03:05.575598+09:00"
-        val formatting = DatetimeUtil.formatDatetimeFullStringTwoLines(datetimeString)
-        Log.d(TAG, "onCreate(): $datetimeString")
-        Log.d(TAG, "onCreate(): $formatting")
+        val today = FuniBuniDate.today()
+        val other = FuniBuniDate(2023, 6, 3, 23)
+        Log.d(TAG, "onCreate(): $today")
+        Log.d(TAG, "onCreate(): $other")
+        Log.d(TAG, "onCreate(): ${other - today}")
 
         initNavigation()
         initView()

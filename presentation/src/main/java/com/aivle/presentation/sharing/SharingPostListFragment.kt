@@ -9,7 +9,7 @@ import com.aivle.presentation.base.BaseFragment
 import com.aivle.presentation.util.ext.repeatOnStarted
 import com.aivle.presentation.databinding.FragmentSharingPostListBinding
 import com.aivle.presentation.sharing.SharingPostListViewModel.Event
-import com.aivle.presentation.sharingPostDetail.SharingPostDetailActivity
+import com.aivle.presentation.sharing.postDetail.SharingPostDetailActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

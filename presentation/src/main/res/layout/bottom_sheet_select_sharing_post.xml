@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="vertical">-->
+
+<!--            <RadioGroup-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:checkedButton="@id/toggle_1">-->
+
+<!--                <com.google.android.material.radiobutton.MaterialRadioButton-->
+<!--                    style="@style/RadioButton_RightIconStyle"-->
+<!--                    android:id="@+id/toggle_1"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="56dp"-->
+<!--                    android:text="1일"/>-->
+
+<!--                <com.google.android.material.radiobutton.MaterialRadioButton-->
+<!--                    style="@style/RadioButton_RightIconStyle"-->
+<!--                    android:id="@+id/toggle_1"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="56dp"-->
+<!--                    android:text="1일"/>-->
+
+<!--                <com.google.android.material.radiobutton.MaterialRadioButton-->
+<!--                    style="@style/RadioButton_RightIconStyle"-->
+<!--                    android:id="@+id/toggle_1"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="56dp"-->
+<!--                    android:text="1일"/>-->
+
+<!--            </RadioGroup>-->
+
+<!--        </LinearLayout>-->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

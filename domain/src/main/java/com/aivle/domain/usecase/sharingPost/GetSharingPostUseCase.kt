@@ -6,5 +6,5 @@ import javax.inject.Inject
 class GetSharingPostUseCase @Inject constructor(
     private val repository: SharingPostRepository
 ) {
-    suspend operator fun invoke(postId: Int) = repository.getSharingPostDetail(postId)
+    suspend operator fun invoke(postId: Int) = repository.getPostDetail(postId)
 }

@@ -21,15 +21,15 @@ class DisposalViewModel @Inject constructor(
 
     var wasteImageLocalUri: String = ""
 
-    private val _wasteSpecs: MutableList<WasteSpec> = mutableListOf()
-    val wasteSpecs: List<WasteSpec> = _wasteSpecs
+    private val _wasteSpecTable: MutableList<WasteSpec> = mutableListOf()
+    val wasteSpecTable: List<WasteSpec> = _wasteSpecTable
 
     var classificationResult: WasteClassificationDocument? = null
     var selectedWasteSpec: WasteSpec? = null
 
     fun updateWasteSpecs(wasteSpecs: List<WasteSpec>) {
-        _wasteSpecs.clear()
-        _wasteSpecs.addAll(wasteSpecs)
+        _wasteSpecTable.clear()
+        _wasteSpecTable.addAll(wasteSpecs)
     }
 
     fun completeApplication(wasteApplyId: Int) {

@@ -36,7 +36,10 @@ class ApplyChoiceFragment : BaseDisposalFragment<FragmentApplyChoiceBinding>(R.l
             findNavController().navigate(R.id.action_applyChoiceFragment_to_wasteDisposalApplyFragment)
         }
         binding.sharingCardView.setOnClickListener {
-
+            if (activityViewModel.classificationResult == null || activityViewModel.selectedWasteSpec == null) {
+                return@setOnClickListener
+            }
+            findNavController().navigate(R.id.action_applyChoiceFragment_to_createSharingPostFragment)
         }
     }
 }
