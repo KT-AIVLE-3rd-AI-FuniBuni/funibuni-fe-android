@@ -20,6 +20,8 @@
         <activity android:name=".myprofile.detail.MyProfileDetailActivity"/>
         <activity android:name=".intro.sign.SignActivity"
             android:windowSoftInputMode="adjustNothing"/>
+        <activity android:name=".myprofile.postList.MySharingPostListActivity"/>
+        <activity android:name=".myprofile.applyList.WasteDisposalApplyListActivity"/>
 
     </application>
 </manifest>

@@ -1,8 +1,7 @@
-package com.aivle.presentation.sharing.tab
+package com.aivle.presentation.sharing.postList
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -11,7 +10,7 @@ import com.aivle.presentation.base.BaseFragment
 import com.aivle.presentation.util.ext.repeatOnStarted
 import com.aivle.presentation.databinding.FragmentSharingPostListBinding
 import com.aivle.presentation.main.MainViewModel
-import com.aivle.presentation.sharing.tab.SharingPostListViewModel.Event
+import com.aivle.presentation.sharing.postList.SharingPostListViewModel.Event
 import com.aivle.presentation.sharing.postDetail.SharingPostDetailActivity
 import com.aivle.presentation.util.ext.showToast
 import dagger.hilt.android.AndroidEntryPoint

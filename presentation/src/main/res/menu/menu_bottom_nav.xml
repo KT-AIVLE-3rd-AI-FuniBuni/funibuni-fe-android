@@ -9,12 +9,12 @@
     <item
         android:id="@+id/nav_disposal"
         android:icon="@drawable/selector_disposal_tab"
-        android:title="배출"/>
+        android:title="버리기"/>
 
     <item
         android:id="@+id/nav_sharing"
         android:icon="@drawable/selector_sharing_tab"
-        android:title="나눔"/>
+        android:title="나누기"/>
 
     <item
         android:id="@+id/nav_my_profile"

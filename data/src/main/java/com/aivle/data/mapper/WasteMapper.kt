@@ -6,6 +6,7 @@ import com.aivle.data.entity.waste.WasteClassificationDocumentEntity
 import com.aivle.data.entity.waste.WasteClassificationRankEntity
 import com.aivle.data.entity.waste.WasteDisposalApplyDetailEntity
 import com.aivle.data.entity.waste.WasteDisposalApplyEntity
+import com.aivle.data.entity.waste.WasteDisposalApplyItemEntity
 import com.aivle.data.entity.waste.WasteSpecEntity
 import com.aivle.domain.model.user.User
 import com.aivle.domain.model.waste.LargeCategoryResult
@@ -14,6 +15,7 @@ import com.aivle.domain.model.waste.WasteClassificationDocument
 import com.aivle.domain.model.waste.WasteClassificationRank
 import com.aivle.domain.model.waste.WasteDisposalApply
 import com.aivle.domain.model.waste.WasteDisposalApplyDetail
+import com.aivle.domain.model.waste.WasteDisposalApplyItem
 import com.aivle.domain.model.waste.WasteSpec
 
 fun WasteClassificationDocumentEntity.toModel() =
@@ -51,4 +53,9 @@ fun WasteDisposalApply.toEntity() = WasteDisposalApplyEntity(
 fun WasteDisposalApplyDetailEntity.toModel() = WasteDisposalApplyDetail(
     waste_id, apply_binary, user.toModel(), waste_spec.toModel(), image_title, image_url, postal_code, address_full_lend, address_full_street,
     address_city, address_district, address_dong, address_detail, disposal_location, disposal_datetime, memo, created_at,
+)
+
+/* WasteDisposalApplyItem */
+fun WasteDisposalApplyItemEntity.toModel() = WasteDisposalApplyItem(
+    waste_id, apply_binary, user.toModel(), waste_spec.toModel(), image_title, image_url, postal_code, address_full_lend, address_full_street, address_city, address_district, address_dong, address_detail, disposal_location, disposal_datetime, memo, created_at
 )

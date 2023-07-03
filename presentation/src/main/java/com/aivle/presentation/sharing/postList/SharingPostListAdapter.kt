@@ -1,4 +1,4 @@
-package com.aivle.presentation.sharing.tab
+package com.aivle.presentation.sharing.postList
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -30,14 +30,14 @@ class SharingPostListItemViewHolder(private val binding: ItemSharingPostBinding)
 
     init {
         binding.root.setOnClickListener {
-            binding.post?.let { post ->
+            binding.postItem?.let { post ->
                 post.onClick!!.invoke(post.post_id)
             }
         }
     }
 
     fun bind(postItem: SharingPostItem) {
-        binding.post = postItem
+        binding.postItem = postItem
         binding.executePendingBindings()
     }
 }

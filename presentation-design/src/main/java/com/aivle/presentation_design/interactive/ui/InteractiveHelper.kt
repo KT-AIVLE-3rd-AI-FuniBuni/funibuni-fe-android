@@ -21,7 +21,6 @@ object InteractiveHelper {
     }
 
     fun onTouchEvent(view: View, event: MotionEvent?) {
-        Log.d(TAG, "onTouchEvent(): $event")
         when (event?.action) {
             MotionEvent.ACTION_DOWN -> animateScale(view, true)
             MotionEvent.ACTION_CANCEL,
@@ -30,7 +29,6 @@ object InteractiveHelper {
     }
 
     private fun animateScale(view: View, down: Boolean) {
-        Log.d(TAG, "animateScale(down=$down)")
         view.animate()
             .setInterpolator(AccelerateDecelerateInterpolator())
             .setDuration(100)

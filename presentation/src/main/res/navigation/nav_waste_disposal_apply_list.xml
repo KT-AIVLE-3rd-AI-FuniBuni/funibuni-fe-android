@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_waste_disposal_apply_list"
+    app:startDestination="@id/wasteDisposalApplyListFragment">
+
+    <fragment
+        android:id="@+id/wasteDisposalApplyListFragment"
+        android:name="com.aivle.presentation.myprofile.applyList.WasteDisposalApplyListFragment"
+        android:label="WasteDisposalApplyListFragment"
+        tools:layout="@layout/fragment_waste_disposal_apply_list">
+        <argument android:name="title"
+            app:argType="string"
+            android:defaultValue="대형폐기물 배출 신청 목록"/>
+
+        <action
+            android:id="@+id/action_wasteDisposalApplyListFragment_to_wasteDisposalApplyDetailFragment2"
+            app:destination="@id/wasteDisposalApplyDetailFragment2"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right">
+            <argument android:name="wasteDisposalApplyId"
+                app:argType="integer"
+                android:defaultValue="-1"/>
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/wasteDisposalApplyDetailFragment2"
+        android:name="com.aivle.presentation.disposal.applyDetail.WasteDisposalApplyDetailFragment"
+        android:label="WasteDisposalApplyDetailFragment"
+        tools:layout="@layout/fragment_waste_disposal_apply_detail"/>
+</navigation>

@@ -1,4 +1,4 @@
-package com.aivle.presentation.sharing.tab
+package com.aivle.presentation.sharing.postList
 
 import androidx.lifecycle.ViewModel
 import com.aivle.domain.model.sharingPost.SharingPostItem

@@ -5,7 +5,7 @@
 
     <data>
         <variable
-            name="post"
+            name="postItem"
             type="com.aivle.domain.model.sharingPost.SharingPostItem" />
     </data>
 
@@ -20,7 +20,7 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:src="@drawable/placeholder_360"
-            app:imageUrl="@{post.image_url}"
+            app:imageUrl="@{postItem.image_url}"
             app:shapeAppearance="@style/ShapeAppearanceCorner4"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -39,7 +39,7 @@
             android:textColor="@color/white"
             android:textStyle="bold"
             android:background="@drawable/bg_product_category"
-            android:text="@{post.product_mid_category}"
+            android:text="@{postItem.product_mid_category}"
             tools:text="TV"
             app:layout_constraintTop_toTopOf="@id/thumbnail"
             app:layout_constraintStart_toEndOf="@id/thumbnail"/>
@@ -53,7 +53,7 @@
             android:textColor="@color/black"
             android:maxLines="1"
             android:ellipsize="end"
-            android:text="@{post.title}"
+            android:text="@{postItem.title}"
             tools:text="Title"
             app:layout_constraintTop_toBottomOf="@id/product_category"
             app:layout_constraintStart_toStartOf="@id/product_category"
@@ -66,7 +66,7 @@
             android:layout_height="wrap_content"
             android:textSize="14sp"
             android:textColor="@color/text_dark_gray"
-            android:text="@{post.addressAndDate}"
+            android:text="@{postItem.addressAndDate}"
             tools:text="송파구 잠실1동 · 6월 17일"
             app:layout_constraintTop_toBottomOf="@id/title"
             app:layout_constraintStart_toStartOf="@id/title"
@@ -92,7 +92,7 @@
                 android:layout_marginHorizontal="2dp"
                 android:layout_marginBottom="1dp"
                 android:gravity="center"
-                android:text="@{Integer.toString(post.comments_count)}"
+                android:text="@{Integer.toString(postItem.comments_count)}"
                 tools:text="10"/>
 
             <ImageView
@@ -108,7 +108,7 @@
                 android:layout_marginHorizontal="2dp"
                 android:layout_marginBottom="1dp"
                 android:gravity="center"
-                android:text="@{Integer.toString(post.likes_count)}"
+                android:text="@{Integer.toString(postItem.likes_count)}"
                 tools:text="5"/>
 
         </LinearLayout>

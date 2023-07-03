@@ -17,12 +17,19 @@
             android:name="IsNavRootFragment"
             android:defaultValue="true"/>
         <action
-            android:id="@+id/action_homeFragment_to_wasteDisposalApplyFragment2"
-            app:destination="@id/wasteDisposalApplyFragment2" />
+            android:id="@+id/action_homeFragment_to_disposalTabFragment"
+            app:destination="@id/disposalTabFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_sharingPostListFragment2"
+            app:destination="@id/sharingPostListFragment2" />
     </fragment>
     <fragment
-        android:id="@+id/wasteDisposalApplyFragment2"
-        android:name="com.aivle.presentation.disposal.apply.WasteDisposalApplyFragment"
-        android:label="WasteDisposalApplyFragment" />
+        android:id="@+id/disposalTabFragment"
+        android:name="com.aivle.presentation.disposal.disposalTab.DisposalTabFragment"
+        android:label="DisposalTabFragment" />
+    <fragment
+        android:id="@+id/sharingPostListFragment2"
+        android:name="com.aivle.presentation.sharing.postList.SharingPostListFragment"
+        android:label="SharingPostListFragment" />
 
 </navigation>

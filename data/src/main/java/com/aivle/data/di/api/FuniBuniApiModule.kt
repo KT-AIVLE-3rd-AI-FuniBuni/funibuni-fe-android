@@ -1,6 +1,7 @@
 package com.aivle.data.di.api
 
 import android.util.Log
+import com.aivle.data.api.MyBuniApi
 import com.aivle.data.api.SharingPostApi
 import com.aivle.data.api.UserApi
 import com.aivle.data.api.WasteApi
@@ -87,4 +88,10 @@ object FuniBuniApiModule {
     fun provideWasteApi(
         @FuniBuniApiQualifier retrofit: Retrofit
     ): WasteApi = retrofit.create()
+
+    @FuniBuniApiQualifier
+    @Provides
+    fun provideMyBuniApi(
+        @FuniBuniApiQualifier retrofit: Retrofit
+    ): MyBuniApi = retrofit.create()
 }
