@@ -3,12 +3,17 @@ package com.aivle.data.mapper
 import com.aivle.data.entity.user.SignInUserEntity
 import com.aivle.data.entity.user.SignUpUserEntity
 import com.aivle.data.entity.user.UserEntity
+import com.aivle.data.entity.user.UserInfoEntity
 import com.aivle.domain.model.sign.SignInUser
 import com.aivle.domain.model.sign.SignUpUser
 import com.aivle.domain.model.user.User
+import com.aivle.domain.usecase.user.UserInfo
 
 fun UserEntity.toModel(): User = User(user_id, phone_number, name, nickname)
 fun User.toEntity(): UserEntity = UserEntity(id, phoneNumber, name, nickname)
+
+fun UserInfoEntity.toModel() = UserInfo(user.toModel(), address.toModel())
+fun UserInfo.toEntity() = UserInfoEntity(user.toEntity(), address.toEntity())
 
 fun SignUpUser.toEntity() = SignUpUserEntity(
     phoneNumber,

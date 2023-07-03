@@ -17,7 +17,9 @@ import retrofit2.http.Query
 interface SharingPostApi {
 
     @POST("posts/create")
-    suspend fun createPost(post: SharingPostCreateEntity): ApiResponse<SharingPostItemEntity>
+    suspend fun createPost(
+        @Body post: SharingPostCreateEntity
+    ): ApiResponse<SharingPostItemEntity>
 
     @GET("posts")
     suspend fun getPosts(

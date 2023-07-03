@@ -1,9 +1,13 @@
 package com.aivle.presentation_design.interactive.ui
 
+import android.animation.ObjectAnimator
+import android.animation.ValueAnimator
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
+import android.view.ViewPropertyAnimator
 import android.view.animation.AccelerateDecelerateInterpolator
+import android.widget.ViewAnimator
 import androidx.appcompat.content.res.AppCompatResources
 import com.aivle.presentation_design.R
 
@@ -17,6 +21,7 @@ object InteractiveHelper {
     }
 
     fun onTouchEvent(view: View, event: MotionEvent?) {
+        Log.d(TAG, "onTouchEvent(): $event")
         when (event?.action) {
             MotionEvent.ACTION_DOWN -> animateScale(view, true)
             MotionEvent.ACTION_CANCEL,

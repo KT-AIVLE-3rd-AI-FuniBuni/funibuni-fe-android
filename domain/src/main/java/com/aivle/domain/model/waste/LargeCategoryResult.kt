@@ -7,5 +7,6 @@ data class LargeCategoryResult(
 ) {
     val large_category_simple_name: String = large_category_name.split("(").first()
 
-    var onClick: ((index_large_category: Int) -> Unit)? = null
+    var onClick: ((result: LargeCategoryResult) -> Unit)? = null
+    var isSelected: Boolean = false
 }

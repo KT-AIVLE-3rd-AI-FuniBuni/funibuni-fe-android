@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="user"
+            type="com.aivle.domain.model.user.User" />
+        <variable
+            name="address"
+            type="com.aivle.domain.model.address.Address" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/barrier_bottom">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/profile_icon_360"/>
+
+                </FrameLayout>
+
+                <!-- 이름 -->
+                <LinearLayout
+                    style="@style/MyProfileDetail_LinearLayout">
+
+                    <TextView style="@style/MyProfileDetail_TextViewLeft"
+                        android:text="이름"/>
+
+                    <TextView style="@style/MyProfileDetail_TextViewRight"
+                        android:text="@{user.name}"
+                        tools:text="김민수"/>
+
+                </LinearLayout>
+
+                <!-- 닉네임 -->
+                <LinearLayout
+                    style="@style/MyProfileDetail_LinearLayout">
+
+                    <TextView style="@style/MyProfileDetail_TextViewLeft"
+                        android:text="닉네임"/>
+
+                    <TextView style="@style/MyProfileDetail_TextViewRight"
+                        android:text="@{user.nickname}"
+                        tools:text="김퍼니버니"/>
+
+                </LinearLayout>
+
+                <!-- 휴대폰 번호 -->
+                <LinearLayout
+                    style="@style/MyProfileDetail_LinearLayout">
+
+                    <TextView style="@style/MyProfileDetail_TextViewLeft"
+                        android:text="휴대폰 번호"/>
+
+                    <TextView style="@style/MyProfileDetail_TextViewRight"
+                        android:text="@{user.phoneNumber}"
+                        tools:text="010-1234-5678"/>
+
+                </LinearLayout>
+
+                <View style="@style/MyProfileDetail_Divider"/>
+
+                <!-- 집 주소 -->
+                <LinearLayout
+                    style="@style/MyProfileDetail_LinearLayout">
+
+                    <TextView style="@style/MyProfileDetail_TextViewLeft"
+                        android:text="집 주소"/>
+
+                    <TextView style="@style/MyProfileDetail_TextViewRight"
+                        android:text="@{address.roadAddress}"
+                        tools:text="서울 송파구 ○○로 10-5 ○○아파트"/>
+
+                </LinearLayout>
+
+                <!-- 집 상세주소 -->
+                <LinearLayout
+                    style="@style/MyProfileDetail_LinearLayout">
+
+                    <TextView style="@style/MyProfileDetail_TextViewLeft"
+                        android:text="집 상세주소"/>
+
+                    <TextView style="@style/MyProfileDetail_TextViewRight"
+                        android:text="@{address.detail}"
+                        tools:text="101동 1201호"/>
+
+                </LinearLayout>
+
+                <View style="@style/MyProfileDetail_Divider"/>
+
+                <!-- 로그아웃 -->
+                <com.aivle.presentation_design.interactive.ui.InteractiveLinearLayout
+                    style="@style/MyProfileDetail_LinearLayout_Large"
+                    android:id="@+id/btn_sign_out">
+
+                    <TextView style="@style/MyProfileDetail_TextViewLeft"
+                        android:text="로그아웃"/>
+
+                    <View style="@style/MyProfileDetail_MiddleSpace"/>
+
+                    <ImageView style="@style/MyProfileDetail_ArrowIcon"/>
+
+                </com.aivle.presentation_design.interactive.ui.InteractiveLinearLayout>
+
+                <!-- 회원탈퇴 -->
+                <com.aivle.presentation_design.interactive.ui.InteractiveLinearLayout
+                    style="@style/MyProfileDetail_LinearLayout_Large"
+                    android:id="@+id/btn_withdrawal">
+
+                    <TextView style="@style/MyProfileDetail_TextViewLeft"
+                        android:text="회원탈퇴"/>
+
+                    <View style="@style/MyProfileDetail_MiddleSpace"/>
+
+                    <ImageView style="@style/MyProfileDetail_ArrowIcon"/>
+
+                </com.aivle.presentation_design.interactive.ui.InteractiveLinearLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier_bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="btn_edit_profile"
+            app:barrierDirection="top"
+            app:barrierMargin="-18dp"/>
+
+        <com.aivle.presentation_design.interactive.ui.InteractiveTextButton
+            android:id="@+id/btn_edit_profile"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_margin="18dp"
+            android:text="회원 정보 수정"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

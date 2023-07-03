@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_my_profile_detail"
+    app:startDestination="@id/myProfileDetailFragment">
+
+    <fragment
+        android:id="@+id/myProfileDetailFragment"
+        android:name="com.aivle.presentation.myprofile.detail.MyProfileDetailFragment"
+        android:label="MyProfileDetailFragment"
+        tools:layout="@layout/fragment_my_profile_detail">
+        <argument android:name="title"
+            app:argType="string"
+            android:defaultValue="내 상세 정보"/>
+        <action
+            android:id="@+id/action_myProfileDetailFragment_to_updateMyProfileFragment"
+            app:destination="@id/updateMyProfileFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/updateMyProfileFragment"
+        android:name="com.aivle.presentation.myprofile.edit.UpdateMyProfileFragment"
+        android:label="UpdateMyProfileFragment"
+        tools:layout="@layout/fragment_update_my_profile">
+        <argument android:name="title"
+            app:argType="string"
+            android:defaultValue="내 정보 수정"/>
+    </fragment>
+</navigation>

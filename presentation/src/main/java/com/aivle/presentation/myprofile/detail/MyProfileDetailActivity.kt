@@ -1,18 +1,21 @@
-package com.aivle.presentation.myprofileDetail
+package com.aivle.presentation.myprofile.detail
 
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
-import com.aivle.domain.model.user.User
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import com.aivle.domain.usecase.user.UserInfo
 import com.aivle.presentation.R
 import com.aivle.presentation.base.BaseActivity
 import com.aivle.presentation.util.ext.repeatOnStarted
 import com.aivle.presentation.util.ext.showToast
 import com.aivle.presentation.databinding.ActivityMyProfileDetailBinding
 import com.aivle.presentation.intro.intro.IntroActivity
-import com.aivle.presentation.myprofileDetail.MyProfileDetailViewModel.Event
+import com.aivle.presentation.myprofile.detail.MyProfileDetailViewModel.Event
 import com.aivle.presentation_design.interactive.ui.BottomUpDialog
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -22,6 +25,7 @@ private const val TAG = "MyProfileDetailActivity"
 class MyProfileDetailActivity : BaseActivity<ActivityMyProfileDetailBinding>(R.layout.activity_my_profile_detail) {
 
     private val viewModel: MyProfileDetailViewModel by viewModels()
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,22 +33,18 @@ class MyProfileDetailActivity : BaseActivity<ActivityMyProfileDetailBinding>(R.l
         initView()
         handleViewModelEvent()
 
-        viewModel.loadMyProfileDetail()
+        navController = (supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment).navController
+        navController.addOnDestinationChangedListener { _, _, args ->
+            binding.title.text = args?.getString("title")
+        }
     }
 
     private fun initView() {
-        binding.btnSignOut.setOnClickListener {
-            BottomUpDialog.Builder(supportFragmentManager)
-                .title("로그아웃 하시겠습니까?")
-                .positiveButton { viewModel.signOut() }
-                .show()
-        }
-        binding.btnWithdrawal.setOnClickListener {
-            BottomUpDialog.Builder(supportFragmentManager)
-                .title("정말로 회원탈퇴를 하시겠습니까?")
-                .subtitle("지금 탈퇴하시면 그동안의 기록이 모두 사라지게 됩니다.")
-                .positiveButton { viewModel.withdrawal() }
-                .show()
+        binding.btnBack.setOnClickListener {
+            val isRemainingStack = navController.popBackStack()
+            if (!isRemainingStack) {
+                finish()
+            }
         }
     }
 
@@ -56,7 +56,8 @@ class MyProfileDetailActivity : BaseActivity<ActivityMyProfileDetailBinding>(R.l
                 showToast(event.message)
             }
             is Event.MyProfile -> {
-                showMyProfile(event.myProfile)
+            }
+            is Event.UpdateProfile -> {
             }
             is Event.SignOut -> {
                 signOut()
@@ -65,10 +66,6 @@ class MyProfileDetailActivity : BaseActivity<ActivityMyProfileDetailBinding>(R.l
                 withdrawal()
             }
         }}
-    }
-
-    private fun showMyProfile(user: User) {
-        Log.d(TAG, user.toString())
     }
 
     private fun signOut() {

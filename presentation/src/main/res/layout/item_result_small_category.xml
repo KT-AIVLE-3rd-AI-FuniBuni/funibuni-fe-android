@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="result"
+            type="com.aivle.presentation.util.model.AiResult" />
+    </data>
+
+    <com.aivle.presentation_design.interactive.ui.InteractiveConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/interactive_container"
+        android:layout_width="match_parent"
+        android:layout_height="56dp">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="48dp"/>
+
+        <View
+            android:id="@+id/background"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/bg_item_small_cat_selected"/>
+
+        <!-- Small Category Name -->
+        <TextView
+            android:id="@+id/small_category_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="1dp"
+            android:layout_marginStart="24dp"
+            android:text="@{result.categoryName}"
+            tools:text="1인용 의자"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <!-- Small Category Probability -->
+        <TextView
+            android:id="@+id/small_category_probability"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="@{result.percentStringBracket}"
+            android:visibility="@{result.percent == 0 ? View.GONE : View.VISIBLE}"
+            tools:text="(86%)"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/small_category_name"/>
+
+        <!-- Medal Icon -->
+        <ImageView
+            android:id="@+id/medal_icon"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginStart="8dp"
+            android:src="@drawable/medal_gold"
+            android:visibility="@{result.percent == 0 ? View.GONE : View.VISIBLE}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/small_category_probability"/>
+
+    </com.aivle.presentation_design.interactive.ui.InteractiveConstraintLayout>
+</layout>

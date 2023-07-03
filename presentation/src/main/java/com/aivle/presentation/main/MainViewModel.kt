@@ -16,16 +16,19 @@ private const val TAG = "MainViewModel"
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val GetAddressFromLocalUseCase: GetAddressFromLocalUseCase,
+    private val getAddressFromLocalUseCase: GetAddressFromLocalUseCase,
 ) : ViewModel() {
 
     private val _eventFlow: MutableStateFlow<Event> = MutableStateFlow(Event.None)
     val eventFlow: StateFlow<Event> get() = _eventFlow
 
+    var address: Address? = null
+        private set
+
     fun loadAddress() {
         viewModelScope.launch {
-            val address = GetAddressFromLocalUseCase()
-            _eventFlow.emit(Event.AddressLoaded(address))
+            address = getAddressFromLocalUseCase()
+            _eventFlow.emit(Event.AddressLoaded(address!!))
         }
     }
 

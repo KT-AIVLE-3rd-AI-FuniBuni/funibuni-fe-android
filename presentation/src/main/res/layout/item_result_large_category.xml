@@ -2,11 +2,19 @@
 <layout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="result"
+            type="com.aivle.presentation.util.model.AiResult" />
+    </data>
+
     <com.aivle.presentation_design.interactive.ui.InteractiveConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/interactive_container"
         android:layout_width="match_parent"
         tools:layout_width="180dp"
         android:layout_height="180dp"
-        android:padding="8dp">
+        android:padding="8dp"
+        android:clipToPadding="false">
 
         <androidx.constraintlayout.utils.widget.ImageFilterView
             android:id="@+id/icon"
@@ -20,6 +28,30 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier_icon_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierMargin="-4dp"
+            app:constraint_referenced_ids="icon"
+            app:barrierDirection="top"/>
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier_icon_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="icon"
+            app:barrierDirection="start"
+            app:barrierMargin="-4dp"/>
+
+        <ImageView
+            android:id="@+id/icon_medal"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            tools:src="@drawable/medal_gold"
+            app:layout_constraintTop_toTopOf="@id/barrier_icon_top"
+            app:layout_constraintStart_toStartOf="@id/barrier_icon_start"/>
+
         <TextView
             android:id="@+id/large_category_name"
             android:layout_width="match_parent"
@@ -28,6 +60,7 @@
             android:gravity="center"
             android:textSize="20sp"
             android:textColor="@color/black"
+            android:text="@{result.categoryName}"
             tools:text="침대"
             app:layout_constraintTop_toBottomOf="@id/icon"
             app:layout_constraintBottom_toTopOf="@id/large_category_name_sub"/>
@@ -37,9 +70,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="top|center_horizontal"
-            android:textSize="14sp"
+            android:textSize="15sp"
             android:textColor="@color/black"
             android:visibility="visible"
+            android:text="@{result.percentString}"
             tools:text="82%"
             app:layout_constraintTop_toBottomOf="@id/large_category_name"
             app:layout_constraintBottom_toBottomOf="parent"/>

@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.aivle.domain.model.sharingPost.SharingPostDetail
 import com.aivle.domain.response.DataResponse
 import com.aivle.domain.usecase.sharingPost.GetSharingPostUseCase
+import com.aivle.presentation.util.ext.launchDefault
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -14,21 +15,25 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SharingPostDetailViewModel @Inject constructor(
-    private val GetSharingPostUseCase: GetSharingPostUseCase
+    private val getSharingPostUseCase: GetSharingPostUseCase
 ) : ViewModel() {
 
     private val _eventFlow: MutableStateFlow<Event> = MutableStateFlow(Event.None)
     val eventFlow: StateFlow<Event> get() = _eventFlow
 
-    fun loadSharingPostDetail(postId: Int) {
-        viewModelScope.launch {
-            GetSharingPostUseCase(postId)
-                .catch { _eventFlow.emit(Event.LoadPost.Failure(it.message)) }
-                .collect { response -> when (response) {
-                    is DataResponse.Success -> _eventFlow.emit(Event.LoadPost.Success(response.data))
-                    is DataResponse.Failure -> _eventFlow.emit(Event.LoadPost.Failure(response.message))
-                }}
-        }
+    fun loadSharingPostDetail(postId: Int) = launchDefault {
+        getSharingPostUseCase(postId)
+            .catch {
+                _eventFlow.emit(Event.LoadPost.Failure(it.message))
+            }
+            .collect { response -> when (response) {
+                is DataResponse.Success -> {
+                    _eventFlow.emit(Event.LoadPost.Success(response.data))
+                }
+                is DataResponse.Failure -> {
+                    _eventFlow.emit(Event.LoadPost.Failure(response.message))
+                }
+            }}
     }
 
     sealed class Event {

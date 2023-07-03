@@ -10,6 +10,7 @@ import com.aivle.domain.model.waste.WasteSpec
 import com.aivle.domain.response.DataResponse
 import com.aivle.domain.usecase.address.GetAddressFromLocalUseCase
 import com.aivle.domain.usecase.waste.ApplyWasteDisposalUseCase
+import com.aivle.presentation.util.model.ClassificationResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -39,7 +40,7 @@ class WasteDisposalApplyViewModel @Inject constructor(
     }
 
     fun applyWasteDisposal(
-        classificationDocument: WasteClassificationDocument,
+        classificationResult: ClassificationResult,
         wasteSpec: WasteSpec,
         datetime: String,
         disposalLocation: String,
@@ -49,10 +50,10 @@ class WasteDisposalApplyViewModel @Inject constructor(
 
         viewModelScope.launch {
             val applyFormat = WasteDisposalApply(
-                classificationDocument.waste_id,
+                classificationResult.wasteId,
                 wasteSpec.waste_spec_id,
-                classificationDocument.image_title,
-                classificationDocument.image_url,
+                classificationResult.imageTitle,
+                classificationResult.imageUrl,
                 address.postalCode,
                 address.landAddress,
                 address.roadAddress,

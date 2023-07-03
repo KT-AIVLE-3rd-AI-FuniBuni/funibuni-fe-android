@@ -101,4 +101,56 @@
         <item name="android:textColor">@color/black</item>
         <item name="android:textStyle">bold</item>
     </style>
+
+    <!-- MyProfileDetail_LinearLayout -->
+    <style name="MyProfileDetail_LinearLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">42dp</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:paddingHorizontal">18sp</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+    <!-- MyProfileDetail_LinearLayout_Large -->
+    <style name="MyProfileDetail_LinearLayout_Large">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">56dp</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:paddingHorizontal">18sp</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+    <!-- MyProfileDetail_TextViewLeft -->
+    <style name="MyProfileDetail_TextViewLeft">
+        <item name="android:layout_width">100dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/gray600</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+    <!-- MyProfileDetail_TextViewRight -->
+    <style name="MyProfileDetail_TextViewRight">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:gravity">end</item>
+    </style>
+    <!-- MyProfileDetail_Divider -->
+    <style name="MyProfileDetail_Divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">8dp</item>
+        <item name="android:layout_marginVertical">16dp</item>
+        <item name="android:background">@color/gray200</item>
+    </style>
+    <style name="MyProfileDetail_MiddleSpace">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+    <!-- MyProfileDetail_ArrowIcon -->
+    <style name="MyProfileDetail_ArrowIcon">
+        <item name="android:layout_width">20dp</item>
+        <item name="android:layout_height">20dp</item>
+        <item name="android:src">@drawable/arrow_forward_ios_24</item>
+        <item name="tint">@color/gray400</item>
+    </style>
 </resources>

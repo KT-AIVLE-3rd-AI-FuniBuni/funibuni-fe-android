@@ -9,7 +9,7 @@ import com.aivle.domain.model.sharingPost.Comment
 import com.aivle.presentation.databinding.ItemCommentBinding
 
 private val DiffCallback = object : DiffUtil.ItemCallback<Comment>() {
-    override fun areItemsTheSame(oldItem: Comment, newItem: Comment): Boolean = oldItem.commentId == newItem.commentId
+    override fun areItemsTheSame(oldItem: Comment, newItem: Comment): Boolean = oldItem.comment_id == newItem.comment_id
     override fun areContentsTheSame(oldItem: Comment, newItem: Comment): Boolean = oldItem == newItem
 }
 

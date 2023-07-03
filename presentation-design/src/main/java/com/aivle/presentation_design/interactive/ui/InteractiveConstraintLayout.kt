@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.view.MotionEvent
+import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.constraintlayout.widget.ConstraintLayout
 
 class InteractiveConstraintLayout @JvmOverloads constructor(
@@ -18,5 +19,14 @@ class InteractiveConstraintLayout @JvmOverloads constructor(
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         InteractiveHelper.onTouchEvent(this, event)
         return super.onTouchEvent(event)
+    }
+
+    fun scaleUpForced() {
+        this.animate()
+            .setInterpolator(AccelerateDecelerateInterpolator())
+            .setDuration(100)
+            .scaleX(1f)
+            .scaleY(1f)
+            .start()
     }
 }

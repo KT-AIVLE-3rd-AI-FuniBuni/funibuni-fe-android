@@ -7,7 +7,6 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import com.aivle.domain.model.waste.WasteClassificationDocument
 import com.aivle.domain.model.waste.WasteSpec
 import com.aivle.presentation.R
 import com.aivle.presentation.util.ext.repeatOnStarted
@@ -17,8 +16,9 @@ import com.aivle.presentation.databinding.FragmentWasteClassificationBinding
 import com.aivle.presentation.disposal.wasteclassification.WasteClassificationViewModel.Event
 import com.aivle.presentation.disposal.base.BaseDisposalFragment
 import com.aivle.presentation.disposal.wasteclassification.bottomsheet.WasteCategoryBottomSheetFragment
+import com.aivle.presentation.util.model.AiResult
+import com.aivle.presentation.util.model.ClassificationResult
 import dagger.hilt.android.AndroidEntryPoint
-import kotlin.math.roundToInt
 
 private const val TAG = "WasteClassificationFragment"
 
@@ -27,6 +27,7 @@ class WasteClassificationFragment : BaseDisposalFragment<FragmentWasteClassifica
     R.layout.fragment_waste_classification) {
 
     private val viewModel: WasteClassificationViewModel by viewModels()
+    private lateinit var smallCatListAdapter: SmallCategoryResultListAdapter
     private lateinit var loadingDialog: ProgressDialog
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -35,13 +36,17 @@ class WasteClassificationFragment : BaseDisposalFragment<FragmentWasteClassifica
         initView()
         handleViewModelEvent()
 
-        viewModel.classifyWasteImage(activityViewModel.wasteImageLocalUri)
-        //viewModel.loadWasteSpecTable()
+        if (activityViewModel.classificationResult == null) {
+            viewModel.classifyWasteImage(activityViewModel.wasteImageLocalUri)
+        }
     }
 
     private fun initView() {
         val wasteImageBitmap = BitmapUtil.decodeFile(activityViewModel.wasteImageLocalUri)
         binding.wasteImage.setImageBitmap(wasteImageBitmap)
+
+        smallCatListAdapter = SmallCategoryResultListAdapter()
+        binding.smallCategoryList.adapter = smallCatListAdapter
 
         binding.btnReselect.setOnClickListener {
             showSelectCategoryBottomSheet()
@@ -73,7 +78,7 @@ class WasteClassificationFragment : BaseDisposalFragment<FragmentWasteClassifica
                 is Event.ImageClassification.Loading -> {
                 }
                 is Event.ImageClassification.Result -> {
-                    showClassificationResult(event.document)
+                    showClassificationResult(event.result)
                 }
                 is Event.ImageClassification.Empty -> {
                     showClassificationResultEmpty()
@@ -95,35 +100,59 @@ class WasteClassificationFragment : BaseDisposalFragment<FragmentWasteClassifica
         }
     }
 
-    private fun showClassificationResult(document: WasteClassificationDocument) {
-        activityViewModel.classificationResult = document
+    private fun showClassificationResult(classificationResult: ClassificationResult) {
+        activityViewModel.classificationResult = classificationResult
 
-        binding.wasteName.text = document.first_large_category_name
+        val firstLargeCategoryName = classificationResult.groups.firstOrNull()?.largeCategory?.categoryName
             ?: return
+        binding.wasteName.text = firstLargeCategoryName
         binding.wasteNameSubLabel.isVisible = true
 
         // 이미지 대분류 결과 목록
-        val largeResults = document.labels.map { it.large_category }
+        val largeResults = classificationResult.groups.map { it.largeCategory }
+            .onEachIndexed { index, result ->
+                result.onClick = ::onChangedLargeCategorySelection
+                result.isSelected = (index == 0)
+            }
+
         binding.largeCategoryResultList.layoutManager = GridLayoutManager(requireContext(), largeResults.size)
         binding.largeCategoryResultList.adapter = LargeCategoryResultListAdapter().apply {
             submitList(largeResults)
         }
 
-        // 이미지 소분류 결과
-        val smallResult = document.labels.firstOrNull { it.small_category != null }
-            ?.small_category
-        if (smallResult == null) {
-            val firstLargeCategoryIndex = largeResults.first().index_large_category
-            val wasteSpec = document.all_waste_specs.find { it.index_large_category == firstLargeCategoryIndex }
-            activityViewModel.selectedWasteSpec = wasteSpec
-        } else {
-            binding.smallCategoryName.text = smallResult.small_category_name
-            binding.smallCategoryProbability.text = "${(smallResult.probability * 100).roundToInt()}%"
+        // 이미지 소분류 결과 목록
+        val smallResults = classificationResult.groups.first().smallCategories
+            .onEach {
+                it.onClick = ::onChangedSmallCategorySelection
+                it.isSelected = (it.percent != 0)
+            }
 
-            val firstSmallCategoryIndex = smallResult.index_small_category
-            val wasteSpec = document.all_waste_specs.find { it.index_small_category == firstSmallCategoryIndex }
-            activityViewModel.selectedWasteSpec = wasteSpec
+        smallCatListAdapter.submitList(smallResults)
+
+        // 소분류 결과까지 나온 경우 selectedSpec 에 저장
+        val smallAiResult = smallResults.find { it.percent > 0 }
+            ?: return
+        activityViewModel.selectedWasteSpec = smallAiResult.spec
+    }
+
+    private fun onChangedLargeCategorySelection(result: AiResult) {
+        val smallCategories = activityViewModel.classificationResult!!.groups
+            .find { it.largeCategory.index == result.index }!!
+            .smallCategories
+            .onEach {
+                it.onClick = ::onChangedSmallCategorySelection
+            }
+        // 만약 선택된 소분류가 없는 경우 첫번째를 기본으로 선택해준다
+        if (smallCategories.none { it.isSelected }) {
+            smallCategories.first().isSelected = true
         }
+        activityViewModel.selectedWasteSpec = smallCategories.find { it.isSelected }?.spec
+
+        smallCatListAdapter.submitList(smallCategories)
+    }
+
+    private fun onChangedSmallCategorySelection(result: AiResult) {
+        activityViewModel.selectedWasteSpec = result.spec
     }
 
     private fun showClassificationResultEmpty() {
@@ -131,7 +160,7 @@ class WasteClassificationFragment : BaseDisposalFragment<FragmentWasteClassifica
     }
 
     private fun showSelectCategoryBottomSheet() {
-        val allWasteSpecs = viewModel.allWasteSpecs
+        val allWasteSpecs = viewModel.wasteSpecTable
         if (allWasteSpecs.isNotEmpty()) {
             val bottomSheet = WasteCategoryBottomSheetFragment(allWasteSpecs) {
                 moveNext(it)

@@ -20,7 +20,8 @@ data class SharingPostItem constructor(
     val comments_count: Int,
     val likes_count: Int,
 ) {
-    val addressAndDate: String = "$address_district $address_dong · $created_at"
+    val createdDateString: String? = created_at.split("T").firstOrNull()
+    val addressAndDate: String = "$address_district $address_dong\n$createdDateString"
 
     var onClick: ((postId: Int) -> Unit)? = null
 }

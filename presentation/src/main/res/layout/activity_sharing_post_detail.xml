@@ -31,7 +31,7 @@
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
                     android:src="@drawable/placeholder_1440"
-                    app:imageUrl="@{postDetail.post.imageUrl}"
+                    app:imageUrl="@{postDetail.image_url}"
                     app:layout_collapseMode="parallax"/>
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>

@@ -10,7 +10,7 @@
 
     <fragment
         android:id="@+id/sharingPostListFragment"
-        android:name="com.aivle.presentation.sharing.SharingPostListFragment"
+        android:name="com.aivle.presentation.sharing.tab.SharingPostListFragment"
         android:label="SharingPostListFragment"
         tools:layout="@layout/fragment_sharing_post_list">
         <argument

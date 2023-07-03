@@ -8,16 +8,19 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.aivle.domain.model.sharingPost.SharingPostCreate
 import com.aivle.presentation.R
 import com.aivle.presentation.databinding.FragmentCreateSharingPostBinding
 import com.aivle.presentation.disposal.base.BaseDisposalFragment
 import com.aivle.presentation.util.ext.repeatOnStarted
 import com.aivle.presentation.util.model.FuniBuniDate
 import com.aivle.presentation_design.interactive.ui.BottomUpDialog
+import com.aivle.presentation.sharing.postCreate.CreateSharingPostViewModel.Event
+import com.aivle.presentation.sharing.postDetail.SharingPostDetailActivity
+import com.aivle.presentation.util.ext.showToast
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import dagger.hilt.android.AndroidEntryPoint
@@ -76,11 +79,11 @@ class CreateSharingPostFragment
     }
 
     private fun initView() {
-        val result = activityViewModel.classificationResult ?: return
+        val classificationResult = activityViewModel.classificationResult ?: return
         val wasteSpec = activityViewModel.selectedWasteSpec ?: return
 
         Glide.with(requireContext())
-            .load(result.image_url)
+            .load(classificationResult.imageUrl)
             .centerCrop()
             .error(R.drawable.placeholder_1440)
             .diskCacheStrategy(DiskCacheStrategy.ALL)
@@ -103,7 +106,16 @@ class CreateSharingPostFragment
     }
 
     private fun handleViewModelEvent() = repeatOnStarted {
-
+        viewModel.eventFlow.collect { event -> when (event) {
+            is Event.None -> {
+            }
+            is Event.CreatePost.Success -> {
+                movePostDetail(event.newPostId)
+            }
+            is Event.Failure -> {
+                showToast(event.message)
+            }
+        } }
     }
 
     private fun showDatePickerDialog() {
@@ -144,11 +156,32 @@ class CreateSharingPostFragment
     }
 
     private fun createSharingPost() {
-        viewModel.createSharingPost()
+        val result = activityViewModel.classificationResult ?: return
+        val wasteSpec = activityViewModel.selectedWasteSpec ?: return
+        val address = activityViewModel.address ?: return
+
+        val newPost = SharingPostCreate(
+            binding.edtPostTitle.text.toString(),
+            binding.edtPostContent.text.toString(),
+            sharingExpiredDate.toServerFormat(),
+            result.imageUrl,
+            wasteSpec.top_category,
+            wasteSpec.large_category,
+            wasteSpec.small_category,
+            address.city,
+            address.district,
+            address.dong,
+        )
+        viewModel.createSharingPost(newPost)
     }
 
     private fun goBackFragment() {
         findNavController().popBackStack(R.id.applyChoiceFragment, false)
+    }
+
+    private fun movePostDetail(postId: Int) {
+        requireActivity().finish()
+        startActivity(SharingPostDetailActivity.getIntent(requireContext(), postId))
     }
 
     inner class MyTextWatcher : TextWatcher {

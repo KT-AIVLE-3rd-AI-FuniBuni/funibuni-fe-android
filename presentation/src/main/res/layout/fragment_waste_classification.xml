@@ -7,178 +7,200 @@
         android:layout_height="match_parent"
         android:paddingHorizontal="24dp"
         android:clipToPadding="false"
+        android:clipChildren="false"
         android:background="@color/background_color_disposal">
 
-        <!-- Waste Image CardView -->
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/waste_image_container"
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            app:cardMaxElevation="6dp"
-            app:cardElevation="20dp"
-            app:cardCornerRadius="@dimen/app_radius"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <!-- Waste Image -->
-                <ImageView
-                    android:id="@+id/waste_image"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:scaleType="centerCrop"
-                    tools:src="@drawable/placeholder_1440"
-                    app:layout_constraintDimensionRatio="5:3"
-                    app:layout_constraintTop_toTopOf="parent"/>
-
-                <!-- Divider -->
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/divider_light_gray"
-                    app:layout_constraintBottom_toBottomOf="@id/waste_image"/>
-
-                <!-- CardView Footer -->
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="62dp"
-                    app:layout_constraintTop_toBottomOf="@id/waste_image">
-
-                    <TextView
-                        android:id="@+id/waste_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="24dp"
-                        android:textSize="22sp"
-                        android:textColor="@color/black"
-                        android:textStyle="bold"
-                        tools:text="의자(회전의자)"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"/>
-
-                    <TextView
-                        android:id="@+id/waste_name_sub_label"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:textSize="16sp"
-                        android:textColor="@color/black"
-                        android:text="가(이) 맞나요?"
-                        android:visibility="gone"
-                        app:layout_constraintStart_toEndOf="@id/waste_name"
-                        app:layout_constraintBottom_toBottomOf="@id/waste_name"/>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <!-- 대분류 -->
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/large_category_container"
-            android:layout_width="match_parent"
-            android:layout_height="244dp"
-            android:layout_marginTop="18dp"
-            android:animateLayoutChanges="true"
-            app:cardMaxElevation="6dp"
-            app:cardElevation="20dp"
-            app:cardCornerRadius="@dimen/app_radius"
-            app:layout_constraintTop_toBottomOf="@id/waste_image_container">
+            android:layout_height="0dp"
+            android:clipToPadding="false"
+            android:clipChildren="false"
+            android:overScrollMode="never"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/barrier_button">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:paddingHorizontal="24dp"
-                android:orientation="vertical">
-
-                <!-- 대분류 Label -->
-                <TextView
-                    android:id="@+id/large_category_label"
-                    android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:gravity="center_vertical"
-                    android:text="대분류"
-                    android:textColor="@color/black"
-                    android:textSize="20sp"/>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/large_category_result_list"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:overScrollMode="never"
-                    tools:listitem="@layout/item_result_large_category"
-                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"/>
-
-                <!-- 더보기 텍스트 버튼 -->
-
-            </LinearLayout>
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <!-- 소분류 -->
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/small_category_container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="18dp"
-            android:visibility="visible"
-            app:cardMaxElevation="6dp"
-            app:cardElevation="20dp"
-            app:cardCornerRadius="@dimen/app_radius"
-            app:layout_constraintTop_toBottomOf="@id/large_category_container">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingVertical="18dp"
-                android:paddingHorizontal="24dp">
+                android:clipToPadding="false"
+                android:clipChildren="false">
 
-                <TextView
-                    android:id="@+id/small_category_title"
+                <!-- Waste Image CardView -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/waste_image_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="12dp"
-                    android:gravity="center_vertical"
-                    android:text="소분류"
-                    android:textColor="@color/black"
-                    android:textSize="20sp"/>
+                    app:cardMaxElevation="6dp"
+                    app:cardElevation="20dp"
+                    app:cardCornerRadius="@dimen/app_radius">
 
-                <TextView
-                    android:id="@+id/small_category_name"
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <!-- Waste Image -->
+                        <ImageView
+                            android:id="@+id/waste_image"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:scaleType="centerCrop"
+                            tools:src="@drawable/placeholder_1440"
+                            app:layout_constraintDimensionRatio="5:3"
+                            app:layout_constraintTop_toTopOf="parent"/>
+
+                        <!-- Divider -->
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/divider_light_gray"
+                            app:layout_constraintBottom_toBottomOf="@id/waste_image"/>
+
+                        <!-- CardView Footer -->
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="62dp"
+                            app:layout_constraintTop_toBottomOf="@id/waste_image">
+
+                            <TextView
+                                android:id="@+id/waste_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="24dp"
+                                android:textSize="22sp"
+                                android:textColor="@color/black"
+                                android:textStyle="bold"
+                                tools:text="의자(회전의자)"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"/>
+
+                            <TextView
+                                android:id="@+id/waste_name_sub_label"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:textSize="16sp"
+                                android:textColor="@color/black"
+                                android:text="가(이) 맞나요?"
+                                android:visibility="gone"
+                                app:layout_constraintStart_toEndOf="@id/waste_name"
+                                app:layout_constraintBottom_toBottomOf="@id/waste_name"/>
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- 대분류 -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/large_category_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="244dp"
+                    android:layout_marginTop="18dp"
+                    android:animateLayoutChanges="true"
+                    android:clipToPadding="false"
+                    app:cardMaxElevation="6dp"
+                    app:cardElevation="20dp"
+                    app:cardCornerRadius="@dimen/app_radius">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:paddingHorizontal="24dp"
+                        android:orientation="vertical"
+                        android:clipToPadding="false">
+
+                        <!-- 대분류 Label -->
+                        <TextView
+                            android:id="@+id/large_category_label"
+                            android:layout_width="match_parent"
+                            android:layout_height="56dp"
+                            android:gravity="center_vertical"
+                            android:text="대분류"
+                            android:textColor="@color/black"
+                            android:textSize="18sp"
+                            android:textStyle="bold"/>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/large_category_result_list"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:overScrollMode="never"
+                            android:clipToPadding="false"
+                            tools:listitem="@layout/item_result_large_category"
+                            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"/>
+
+                        <!-- 더보기 텍스트 버튼 -->
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- 소분류 -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/small_category_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    tools:text="1인용 침대"
-                    android:textSize="20sp"
-                    android:textColor="@color/black"/>
+                    android:layout_marginTop="18dp"
+                    android:layout_marginBottom="24dp"
+                    android:visibility="visible"
+                    app:cardMaxElevation="6dp"
+                    app:cardElevation="20dp"
+                    app:cardCornerRadius="@dimen/app_radius">
 
-                <TextView
-                    android:id="@+id/small_category_probability"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    tools:text="60%"
-                    android:textSize="14sp"
-                    android:textColor="@color/black"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:paddingVertical="18dp">
+
+                        <TextView
+                            android:id="@+id/small_category_title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingHorizontal="24dp"
+                            android:paddingBottom="12dp"
+                            android:gravity="center_vertical"
+                            android:text="소분류"
+                            android:textColor="@color/black"
+                            android:textSize="18sp"
+                            android:textStyle="bold"/>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/small_category_list"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:overScrollMode="never"
+                            tools:listitem="@layout/item_result_small_category"
+                            tools:itemCount="3"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
 
             </LinearLayout>
 
-        </com.google.android.material.card.MaterialCardView>
+        </androidx.core.widget.NestedScrollView>
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="btn_reselect, btn_next"
+            app:barrierDirection="top"
+            app:barrierMargin="-18dp"/>
 
         <!-- Test Button -->
         <com.aivle.presentation_design.interactive.ui.InteractiveTextButton
             android:id="@+id/btn_reselect"
             android:layout_width="0dp"
             android:layout_height="56dp"
-            android:layout_marginBottom="24dp"
+            android:layout_marginBottom="18dp"
             android:text="다시 고르기"
             app:buttonType="light"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -191,7 +213,7 @@
             android:layout_width="0dp"
             android:layout_height="56dp"
             android:layout_marginStart="12dp"
-            android:layout_marginBottom="24dp"
+            android:layout_marginBottom="18dp"
             android:text="다음으로"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/btn_reselect"

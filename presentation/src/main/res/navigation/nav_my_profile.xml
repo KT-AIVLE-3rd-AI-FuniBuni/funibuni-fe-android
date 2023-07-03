@@ -10,7 +10,7 @@
 
     <fragment
         android:id="@+id/myProfileFragment"
-        android:name="com.aivle.presentation.myprofile.MyProfileFragment"
+        android:name="com.aivle.presentation.myprofile.tab.MyProfileFragment"
         android:label="MyProfileFragment"
         tools:layout="@layout/fragment_my_profile">
         <argument

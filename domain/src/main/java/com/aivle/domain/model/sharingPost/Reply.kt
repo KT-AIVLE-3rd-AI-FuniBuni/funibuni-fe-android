@@ -8,4 +8,6 @@ data class Reply(
     val comment_id: Int,
     val reply: String,
     val created_at: String,
-)
+) {
+    val created_at_string: String? = created_at.split("T").firstOrNull()
+}

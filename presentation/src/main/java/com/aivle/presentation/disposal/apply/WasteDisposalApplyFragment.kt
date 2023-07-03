@@ -40,7 +40,6 @@ class WasteDisposalApplyFragment : BaseDisposalFragment<FragmentWasteDisposalApp
     }
 
     private fun bindData() {
-        val classificationResult = activityViewModel.classificationResult ?: return
         val wasteSpec = activityViewModel.selectedWasteSpec ?: return
 
         with (binding) {
@@ -85,10 +84,11 @@ class WasteDisposalApplyFragment : BaseDisposalFragment<FragmentWasteDisposalApp
         val memo = binding.edtMemo.text.toString()
             .ifBlank { "요청 사항 없음" }
 
-        val document = activityViewModel.classificationResult ?: return
+
+        val classificationResult = activityViewModel.classificationResult ?: return
         val wasteSpec = activityViewModel.selectedWasteSpec ?: return
 
-        viewModel.applyWasteDisposal(document, wasteSpec, datetimeString, disposalDetailLocation, memo)
+        viewModel.applyWasteDisposal(classificationResult, wasteSpec, datetimeString, disposalDetailLocation, memo)
     }
 
     private fun moveApplyDetailFragment(applyId: Int) {

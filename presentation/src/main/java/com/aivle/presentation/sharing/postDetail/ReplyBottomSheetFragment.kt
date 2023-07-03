@@ -15,6 +15,7 @@ import com.aivle.domain.model.sharingPost.Reply
 import com.aivle.presentation.util.ext.repeatOnStarted
 import com.aivle.presentation.databinding.BottomSheetReplyBinding
 import com.aivle.presentation.sharing.postDetail.ReplyBottomSheetViewModel.Event
+import com.aivle.presentation.util.ext.showToast
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -77,7 +78,7 @@ class ReplyBottomSheetFragment private constructor(
         initView()
         handleEvent()
 
-        viewModel.loadReplies(comment.commentId)
+        viewModel.loadReplies(comment.comment_id)
     }
 
     private fun initView() {
@@ -89,8 +90,9 @@ class ReplyBottomSheetFragment private constructor(
             InputCommentBottomSheetFragment { reply ->
                 val oldList = replyListAdapter.currentList
                 val oldLastReply = oldList.last()
-                val newList = oldList + listOf(Reply(oldLastReply.replyId + 1, oldLastReply.commentId, oldLastReply.user, reply, "방금 전"))
-                replyListAdapter.submitList(newList)
+                showToast("바꿔야한다~~")
+                // val newList = oldList + listOf(Reply(oldLastReply.reply_id + 1, oldLastReply.comment_id, oldLastReply.user, reply, "방금 전"))
+                // replyListAdapter.submitList(newList)
             }.show(parentFragmentManager, "reply-comment-bottom-sheet")
         }
         binding.comment = comment
@@ -106,10 +108,6 @@ class ReplyBottomSheetFragment private constructor(
                 showToast(event.message)
             }
         }}
-    }
-
-    private fun showToast(message: String?) {
-        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
 
     class Builder(private val comment: Comment) {

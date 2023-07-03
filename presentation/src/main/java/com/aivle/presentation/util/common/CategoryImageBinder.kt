@@ -21,6 +21,12 @@ object CategoryImageBinder {
         10 to DrawableResIds(R.drawable.icon_stone_bed, R.drawable.icon_stone_bed_gray, R.drawable.icon_stone_bed_circle, R.drawable.icon_stone_bed_circle_gray),
     )
 
+    private val medalIcons: Map<Int, Int> = mapOf(
+        0 to R.drawable.medal_gold,
+        1 to R.drawable.medal_silver,
+        2 to R.drawable.medal_bronze,
+    )
+
     fun normal(indexLargeCategory: Int): Int {
         return categoryMap[indexLargeCategory]?.normal ?: NO_ID
     }
@@ -35,6 +41,10 @@ object CategoryImageBinder {
 
     fun circleGray(indexLargeCategory: Int): Int {
         return categoryMap[indexLargeCategory]?.circleGray ?: NO_ID
+    }
+
+    fun medal(rank: Int): Int {
+        return medalIcons[rank] ?: NO_ID
     }
 
     data class DrawableResIds(

@@ -13,6 +13,7 @@ import com.aivle.presentation.base.BaseActivity
 import com.aivle.presentation.util.ext.repeatOnStarted
 import com.aivle.presentation.databinding.ActivitySharingPostDetailBinding
 import com.aivle.presentation.sharing.postDetail.SharingPostDetailViewModel.Event
+import com.aivle.presentation.util.ext.showToast
 import dagger.hilt.android.AndroidEntryPoint
 
 private const val TAG = "SharingPostDetailActivity"
@@ -38,9 +39,8 @@ class SharingPostDetailActivity : BaseActivity<ActivitySharingPostDetailBinding>
             .init(window, binding.appBar)
             .onBackPressed { finish() }
 
-        binding.content.commentListView.adapter = CommentListAdapter().also {
-            commentListAdapter = it
-        }
+        commentListAdapter = CommentListAdapter()
+        binding.content.commentListView.adapter = commentListAdapter
     }
 
     private fun handleEvent() = repeatOnStarted {
@@ -56,6 +56,7 @@ class SharingPostDetailActivity : BaseActivity<ActivitySharingPostDetailBinding>
     }
 
     private fun showPostDetail(postDetail: SharingPostDetail) {
+        Log.d(TAG, "showPostDetail(): $postDetail")
         binding.postDetail = postDetail
         val comments = postDetail.comments.onEach {
             it.onClick = ::showReplyBottomSheet
@@ -75,10 +76,6 @@ class SharingPostDetailActivity : BaseActivity<ActivitySharingPostDetailBinding>
     private fun loadSharingPostDetail() {
         val postId = intent.getIntExtra(EXTRA_POST_ID, -1)
         viewModel.loadSharingPostDetail(postId)
-    }
-
-    private fun showToast(message: String?) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
     companion object {

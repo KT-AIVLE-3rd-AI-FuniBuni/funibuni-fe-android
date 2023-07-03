@@ -22,16 +22,7 @@ class ReplyBottomSheetViewModel @Inject constructor(
 
     fun loadReplies(commentId: Int) {
         viewModelScope.launch {
-            GetReplyListUseCase(commentId)
-                .catch { _eventFlow.emit(Event.LoadReplies.Failure(it.message)) }
-                .collect { response -> when (response) {
-                    is DataResponse.Success -> {
-                        _eventFlow.emit(Event.LoadReplies.Success(response.data))
-                    }
-                    is DataResponse.Failure -> {
-                        _eventFlow.emit(Event.LoadReplies.Failure(response.message))
-                    }
-                }}
+
         }
     }
 

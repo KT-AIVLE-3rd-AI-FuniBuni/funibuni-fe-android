@@ -1,4 +1,4 @@
-package com.aivle.presentation.sharing
+package com.aivle.presentation.sharing.tab
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,11 +9,13 @@ import com.aivle.domain.model.sharingPost.SharingPostItem
 import com.aivle.presentation.databinding.ItemSharingPostBinding
 
 private val DiffCallback = object : DiffUtil.ItemCallback<SharingPostItem>() {
-    override fun areItemsTheSame(oldItem: SharingPostItem, newItem: SharingPostItem): Boolean = oldItem.postId == newItem.postId
+    override fun areItemsTheSame(oldItem: SharingPostItem, newItem: SharingPostItem): Boolean = oldItem.post_id == newItem.post_id
     override fun areContentsTheSame(oldItem: SharingPostItem, newItem: SharingPostItem): Boolean = oldItem == newItem
 }
 
-class SharingPostListAdapter : ListAdapter<SharingPostItem, SharingPostListItemViewHolder>(DiffCallback) {
+class SharingPostListAdapter : ListAdapter<SharingPostItem, SharingPostListItemViewHolder>(
+    DiffCallback
+) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SharingPostListItemViewHolder {
         return createSharingPostListItemViewHolder(parent)
@@ -29,7 +31,7 @@ class SharingPostListItemViewHolder(private val binding: ItemSharingPostBinding)
     init {
         binding.root.setOnClickListener {
             binding.post?.let { post ->
-                post.onClick!!.invoke(post.postId)
+                post.onClick!!.invoke(post.post_id)
             }
         }
     }

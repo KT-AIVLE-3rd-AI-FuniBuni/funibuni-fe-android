@@ -7,6 +7,7 @@ import com.aivle.domain.model.user.User
 import com.aivle.domain.repository.UserRepository
 import com.aivle.domain.response.DataResponse
 import com.aivle.domain.response.NothingResponse
+import com.aivle.domain.usecase.user.UserInfo
 import com.skydoves.sandwich.suspendOnFailure
 import com.skydoves.sandwich.suspendOnSuccess
 import kotlinx.coroutines.flow.Flow
@@ -17,7 +18,7 @@ class UserRepositoryImpl @Inject constructor(
     @FuniBuniApiQualifier private val api: UserApi
 ) : UserRepository {
 
-    override suspend fun getUserInfo(): Flow<DataResponse<User>> = flow {
+    override suspend fun getUserInfo(): Flow<DataResponse<UserInfo>> = flow {
         api.getUserInfo()
             .suspendOnSuccess {
                 emit(DataResponse.Success(data.toModel()))
@@ -27,13 +28,13 @@ class UserRepositoryImpl @Inject constructor(
             }
     }
 
-    override suspend fun updateUserInfo(user: User): Flow<NothingResponse> = flow {
+    override suspend fun updateUserInfo(user: User): Flow<DataResponse<User>> = flow {
         api.updateUserInfo(user)
             .suspendOnSuccess {
-                emit(NothingResponse.Success)
+                emit(DataResponse.Success(data.toModel()))
             }
             .suspendOnFailure {
-                emit(NothingResponse.Failure.Error(this))
+                emit(DataResponse.Failure.Error(this))
             }
     }
 }
