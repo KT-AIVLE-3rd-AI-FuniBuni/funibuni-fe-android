@@ -5,12 +5,12 @@ import android.util.Log
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 
-fun Activity.showToast(message: String?) {
-    Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+fun Activity.showToast(message: String?, duration: Int = Toast.LENGTH_SHORT) {
+    Toast.makeText(this, message, duration).show()
     Log.w(this::class.simpleName, "showToast(): $message")
 }
 
-fun Fragment.showToast(message: String?) {
-    Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+fun Fragment.showToast(message: String?, duration: Int = Toast.LENGTH_SHORT) {
+    Toast.makeText(requireContext(), message, duration).show()
     Log.w(this::class.simpleName, "showToast(): $message")
 }

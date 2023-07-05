@@ -20,6 +20,7 @@ import com.aivle.presentation.util.model.FuniBuniDate
 import com.aivle.presentation_design.interactive.ui.BottomUpDialog
 import com.aivle.presentation.sharing.postCreate.CreateSharingPostViewModel.Event
 import com.aivle.presentation.sharing.postDetail.SharingPostDetailActivity
+import com.aivle.presentation.util.common.CategoryImageBinder
 import com.aivle.presentation.util.ext.showToast
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -88,6 +89,10 @@ class CreateSharingPostFragment
             .error(R.drawable.placeholder_1440)
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .into(binding.wasteImage)
+
+        val largeCategoryIcon = CategoryImageBinder.circle(wasteSpec.index_large_category)
+        binding.wasteCategoryIcon.setImageResource(largeCategoryIcon)
+        binding.wasteCategoryName.text = "${wasteSpec.large_category} (${wasteSpec.small_category})"
 
         val afterWeek = FuniBuniDate.today() + 7
         updateSharingPeriod(afterWeek)

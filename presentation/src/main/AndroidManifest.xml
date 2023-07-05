@@ -23,6 +23,7 @@
         <activity android:name=".myprofile.postList.MySharingPostListActivity"/>
         <activity android:name=".myprofile.applyList.WasteDisposalApplyListActivity"/>
         <activity android:name=".searchWasteSpec.SearchWasteSpecActivity"/>
+        <activity android:name=".myprofile.applyDetail.WasteDisposalApplyDetailActivity"/>
 
     </application>
 </manifest>

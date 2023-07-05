@@ -3,6 +3,7 @@ package com.aivle.data.repository
 import com.aivle.data.api.MyBuniApi
 import com.aivle.data.di.api.FuniBuniApiQualifier
 import com.aivle.data.mapper.toModel
+import com.aivle.domain.model.mybuni.MyBuni
 import com.aivle.domain.model.sharingPost.SharingPostItem
 import com.aivle.domain.model.waste.WasteDisposalApplyItem
 import com.aivle.domain.repository.MyBuniRepository
@@ -16,6 +17,17 @@ import javax.inject.Inject
 class MyBuniRepositoryImpl @Inject constructor(
     @FuniBuniApiQualifier private val api: MyBuniApi
 ) : MyBuniRepository {
+
+    override suspend fun getMyBuni(): Flow<DataResponse<MyBuni>> = flow {
+        api.getMyBuniInfo()
+            .suspendOnSuccess {
+                val myBuni = data.toModel()
+                emit(DataResponse.Success(myBuni))
+            }
+            .suspendOnFailure {
+                emit(DataResponse.Failure.Error(this))
+            }
+    }
 
     override suspend fun getWasteDisposalApplies(): Flow<DataResponse<List<WasteDisposalApplyItem>>> = flow {
         api.getWasteDisposalApplies()

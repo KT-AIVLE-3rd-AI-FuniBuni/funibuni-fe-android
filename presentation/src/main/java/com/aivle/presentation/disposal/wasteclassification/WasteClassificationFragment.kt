@@ -3,6 +3,7 @@ package com.aivle.presentation.disposal.wasteclassification
 import android.app.ProgressDialog
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -76,6 +77,7 @@ class WasteClassificationFragment : BaseDisposalFragment<FragmentWasteClassifica
                 is Event.None -> {
                 }
                 is Event.ImageClassification.Loading -> {
+                    loadingDialog(true)
                 }
                 is Event.ImageClassification.Result -> {
                     showClassificationResult(event.result)
@@ -93,11 +95,17 @@ class WasteClassificationFragment : BaseDisposalFragment<FragmentWasteClassifica
     }
 
     private fun loadingDialog(isShow: Boolean) {
-        if (isShow) {
-            loadingDialog.show()
-        } else {
-            loadingDialog.hide()
-        }
+        binding.loadingView1.isVisible = isShow
+        binding.loadingView2.isVisible = isShow
+        binding.loadingView3.isVisible = isShow
+    }
+
+    private fun showClassificationResultEmpty() {
+        binding.noDetectMessage1.isVisible = true
+        binding.largeCategoryResultList.isVisible = false
+        binding.smallCategoryList.isVisible = false
+
+        showToast("물체가 탐지되지 않았습니다. 사진을 재촬영하거나 직접 분류 선택을 해주세요.", Toast.LENGTH_LONG)
     }
 
     private fun showClassificationResult(classificationResult: ClassificationResult) {
@@ -106,6 +114,7 @@ class WasteClassificationFragment : BaseDisposalFragment<FragmentWasteClassifica
         val firstLargeCategoryName = classificationResult.groups.firstOrNull()?.largeCategory?.categoryName
             ?: return
         binding.wasteName.text = firstLargeCategoryName
+        binding.wasteName.isVisible = true
         binding.wasteNameSubLabel.isVisible = true
 
         // 이미지 대분류 결과 목록
@@ -115,6 +124,7 @@ class WasteClassificationFragment : BaseDisposalFragment<FragmentWasteClassifica
                 result.isSelected = (index == 0)
             }
 
+        binding.largeCategoryResultList.isVisible = true
         binding.largeCategoryResultList.layoutManager = GridLayoutManager(requireContext(), largeResults.size)
         binding.largeCategoryResultList.adapter = LargeCategoryResultListAdapter().apply {
             submitList(largeResults)
@@ -127,6 +137,7 @@ class WasteClassificationFragment : BaseDisposalFragment<FragmentWasteClassifica
                 it.isSelected = (it.percent != 0)
             }
 
+        binding.smallCategoryList.isVisible = true
         smallCatListAdapter.submitList(smallResults)
 
         // 소분류 결과까지 나온 경우 selectedSpec 에 저장
@@ -155,9 +166,7 @@ class WasteClassificationFragment : BaseDisposalFragment<FragmentWasteClassifica
         activityViewModel.selectedWasteSpec = result.spec
     }
 
-    private fun showClassificationResultEmpty() {
-        showToast("사진에서 이미지를 검출하지 못했습니다ㅜㅜ")
-    }
+
 
     private fun showSelectCategoryBottomSheet() {
         val allWasteSpecs = viewModel.wasteSpecTable

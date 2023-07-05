@@ -34,6 +34,8 @@ class WasteClassificationViewModel @Inject constructor(
 
     fun classifyWasteImage(imageUri: String) {
         viewModelScope.launch {
+            _eventFlow.emit(Event.ImageClassification.Loading)
+
             ClassifyWasteImageUseCase(imageUri)
                 .catch { _eventFlow.emit(Event.Failure(it.message)) }
                 .collect { response -> when (response) {

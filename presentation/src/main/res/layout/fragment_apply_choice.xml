@@ -31,7 +31,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:padding="90dp"
-                    android:src="@drawable/bunny_icon_gray_240"
                     android:background="@color/placeholder_background_gray"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toTopOf="@id/disposal_label"/>

@@ -3,15 +3,18 @@ package com.aivle.presentation.myprofile.tab
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
-import com.aivle.domain.usecase.user.UserInfo
+import com.aivle.domain.model.user.User
+import com.aivle.domain.model.waste.WasteDisposalApplyItem
 import com.aivle.presentation.R
 import com.aivle.presentation.base.BaseFragment
 import com.aivle.presentation.databinding.FragmentMyProfileBinding
+import com.aivle.presentation.myprofile.applyDetail.WasteDisposalApplyDetailActivity
 import com.aivle.presentation.myprofile.applyList.WasteDisposalApplyListActivity
+import com.aivle.presentation.myprofile.applyList.WasteDisposalApplyListAdapter
 import com.aivle.presentation.myprofile.detail.MyProfileDetailActivity
 import com.aivle.presentation.myprofile.postList.MySharingPostListActivity
-import com.aivle.presentation.util.ext.repeatOnStarted
 import com.aivle.presentation.myprofile.tab.MyProfileViewModel.Event
+import com.aivle.presentation.util.ext.repeatOnStarted
 import com.aivle.presentation.util.ext.showToast
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -19,6 +22,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class MyProfileFragment : BaseFragment<FragmentMyProfileBinding>(R.layout.fragment_my_profile) {
 
     private val viewModel: MyProfileViewModel by viewModels()
+
+    private lateinit var listAdapter: WasteDisposalApplyListAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -45,6 +50,9 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding>(R.layout.fragme
         binding.btnActivities.setOnClickListener {
             startMySharingPostListActivity(MySharingPostListActivity.ACTIVITIES)
         }
+
+        listAdapter = WasteDisposalApplyListAdapter()
+        binding.recentList.adapter = listAdapter
     }
 
     private fun handleViewModelEvent() = repeatOnStarted {
@@ -52,9 +60,11 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding>(R.layout.fragme
             is Event.None -> {
             }
             is Event.LoadMyBuni.Success -> {
-                val userInfo = event.data
-                showUserInfo(userInfo)
-                showRecentList()
+                val user = event.data.user
+                val wasteApplies = event.data.waste_applies
+
+                showUserInfo(user)
+                showRecentWasteApplies(wasteApplies)
             }
             is Event.Failure -> {
                 showToast(event.message)
@@ -62,12 +72,15 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding>(R.layout.fragme
         }}
     }
 
-    private fun showUserInfo(userInfo: UserInfo) {
-        binding.name.text = userInfo.user.nickname
+    private fun showUserInfo(user: User) {
+        binding.name.text = user.nickname
     }
 
-    private fun showRecentList() {
-
+    private fun showRecentWasteApplies(applies: List<WasteDisposalApplyItem>) {
+        applies.forEach {
+            it.onClick = ::startWasteDisposalApplyDetailActivity
+        }
+        listAdapter.submitList(applies)
     }
 
     private fun startWasteDisposalApplyListActivity() {
@@ -82,6 +95,11 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding>(R.layout.fragme
 
     private fun startMySharingPostListActivity(postType: Int) {
         val intent = MySharingPostListActivity.getIntent(requireContext(), postType)
+        startActivity(intent)
+    }
+
+    private fun startWasteDisposalApplyDetailActivity(wasteDisposalApplyId: Int) {
+        val intent = WasteDisposalApplyDetailActivity.getIntent(requireContext(), wasteDisposalApplyId)
         startActivity(intent)
     }
 }

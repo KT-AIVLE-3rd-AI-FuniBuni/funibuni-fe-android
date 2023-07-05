@@ -161,7 +161,7 @@
             <ImageView
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
-                android:src="@drawable/bunny_icon_480"
+                android:src="@drawable/funibuni_logo_300"
                 android:adjustViewBounds="true"/>
 
         </LinearLayout>
@@ -181,7 +181,7 @@
             <ImageView
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
-                android:src="@drawable/bunny_icon_480"
+                android:src="@drawable/funibuni_logo_300"
                 android:adjustViewBounds="true"/>
 
             <TextView

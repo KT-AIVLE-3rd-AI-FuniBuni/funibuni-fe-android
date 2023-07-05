@@ -47,5 +47,14 @@
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
+        <com.aivle.presentation_design.interactive.ui.InteractiveFab
+            android:id="@+id/fab_new_post"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="24dp"
+            android:layout_gravity="bottom|end"
+            android:src="@drawable/icon_add_white_72"
+            app:rippleColor="@color/white"/>
+
     </FrameLayout>
 </layout>
