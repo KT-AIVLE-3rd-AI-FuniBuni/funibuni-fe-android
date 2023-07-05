@@ -10,4 +10,6 @@ data class Reply(
     val created_at: String,
 ) {
     val created_at_string: String? = created_at.split("T").firstOrNull()
+
+    var onLongClick: ((replyId: Int) -> Unit)? = null
 }

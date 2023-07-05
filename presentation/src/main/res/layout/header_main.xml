@@ -5,9 +5,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:background="@color/white"
+        android:background="@color/theme_color"
         tools:showIn="@layout/activity_main">
 
         <!-- Address Dropdown Button -->
@@ -30,7 +31,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textStyle="bold"
                 tools:text="○○구"/>
 
@@ -39,6 +40,7 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_marginStart="4dp"
+                app:tint="@color/white"
                 android:src="@drawable/arrow_drop_down_48"
                 app:altSrc="@drawable/arrow_drop_up_48"
                 app:overlay="true"/>
@@ -47,10 +49,11 @@
 
         <!-- Bunny Icon -->
         <ImageView
+            android:id="@+id/app_logo"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_marginEnd="18dp"
-            android:src="@drawable/funibuni_logo_300"
+            android:src="@drawable/funibuni_logo_white_half"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>

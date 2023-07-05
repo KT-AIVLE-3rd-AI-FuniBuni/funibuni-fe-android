@@ -19,6 +19,9 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:overScrollMode="never"
+            android:requiresFadingEdge="vertical"
+            android:fadingEdgeLength="24dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="@id/barrier_bottom">
 
@@ -32,8 +35,8 @@
                     android:layout_height="160dp">
 
                     <com.google.android.material.imageview.ShapeableImageView
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
                         android:layout_gravity="center"
                         android:layout_marginTop="10dp"
                         android:src="@drawable/profile_icon_360"/>
@@ -109,15 +112,80 @@
 
                 <View style="@style/MyProfileDetail_Divider"/>
 
+                <!-- 퍼니버니 홈페이지 링크 -->
+                <com.aivle.presentation_design.interactive.ui.InteractiveLinearLayout
+                    style="@style/MyProfileDetail_LinearLayout_Large"
+                    android:id="@+id/btn_funibuni_link">
+
+                    <TextView style="@style/MyProfileDetail_TextViewLeft_Large"
+                        android:text="퍼니버니 홈페이지"/>
+
+
+                    <ImageView style="@style/MyProfileDetail_ArrowIcon"/>
+
+                </com.aivle.presentation_design.interactive.ui.InteractiveLinearLayout>
+
+                <!-- 대형폐기물 배출 품목 분류표 -->
+                <com.aivle.presentation_design.interactive.ui.InteractiveLinearLayout
+                    style="@style/MyProfileDetail_LinearLayout_Large"
+                    android:id="@+id/btn_waste_spec">
+
+                    <TextView style="@style/MyProfileDetail_TextViewLeft_Large"
+                        android:text="대형폐기물 배출 품목 분류표"/>
+
+
+                    <ImageView style="@style/MyProfileDetail_ArrowIcon"/>
+
+                </com.aivle.presentation_design.interactive.ui.InteractiveLinearLayout>
+
+                <!-- 무상 수거 품목 확인하기 -->
+                <com.aivle.presentation_design.interactive.ui.InteractiveLinearLayout
+                    style="@style/MyProfileDetail_LinearLayout_Large"
+                    android:id="@+id/btn_free_disposal">
+
+                    <TextView style="@style/MyProfileDetail_TextViewLeft_Large"
+                        android:text="무상 수거 품목 확인하기"/>
+
+
+                    <ImageView style="@style/MyProfileDetail_ArrowIcon"/>
+
+                </com.aivle.presentation_design.interactive.ui.InteractiveLinearLayout>
+
+                <View style="@style/MyProfileDetail_Divider"/>
+
+                <!-- 개인정보처리방침 및 이용약관 (Privacy Policy & Terms of Service) -->
+                <com.aivle.presentation_design.interactive.ui.InteractiveLinearLayout
+                    style="@style/MyProfileDetail_LinearLayout_Large"
+                    android:id="@+id/btn_privacy_and_terms">
+
+                    <TextView style="@style/MyProfileDetail_TextViewLeft_Large"
+                        android:text="개인정보처리방침 및 이용약관"/>
+
+                    <ImageView style="@style/MyProfileDetail_ArrowIcon"/>
+
+                </com.aivle.presentation_design.interactive.ui.InteractiveLinearLayout>
+
+                <!-- 오픈소스 라이선스 -->
+                <com.aivle.presentation_design.interactive.ui.InteractiveLinearLayout
+                    style="@style/MyProfileDetail_LinearLayout_Large"
+                    android:id="@+id/btn_open_source_license">
+
+                    <TextView style="@style/MyProfileDetail_TextViewLeft_Large"
+                        android:text="오픈소스 라이선스"/>
+
+
+                    <ImageView style="@style/MyProfileDetail_ArrowIcon"/>
+
+                </com.aivle.presentation_design.interactive.ui.InteractiveLinearLayout>
+
                 <!-- 로그아웃 -->
                 <com.aivle.presentation_design.interactive.ui.InteractiveLinearLayout
                     style="@style/MyProfileDetail_LinearLayout_Large"
                     android:id="@+id/btn_sign_out">
 
-                    <TextView style="@style/MyProfileDetail_TextViewLeft"
+                    <TextView style="@style/MyProfileDetail_TextViewLeft_Large"
                         android:text="로그아웃"/>
 
-                    <View style="@style/MyProfileDetail_MiddleSpace"/>
 
                     <ImageView style="@style/MyProfileDetail_ArrowIcon"/>
 
@@ -128,10 +196,9 @@
                     style="@style/MyProfileDetail_LinearLayout_Large"
                     android:id="@+id/btn_withdrawal">
 
-                    <TextView style="@style/MyProfileDetail_TextViewLeft"
+                    <TextView style="@style/MyProfileDetail_TextViewLeft_Large"
                         android:text="회원탈퇴"/>
 
-                    <View style="@style/MyProfileDetail_MiddleSpace"/>
 
                     <ImageView style="@style/MyProfileDetail_ArrowIcon"/>
 

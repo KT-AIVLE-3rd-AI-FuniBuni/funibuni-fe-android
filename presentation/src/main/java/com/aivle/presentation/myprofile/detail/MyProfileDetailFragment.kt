@@ -27,21 +27,38 @@ class MyProfileDetailFragment : BaseFragment<FragmentMyProfileDetailBinding>(R.l
     }
 
     private fun initView() {
-        binding.btnSignOut.setOnClickListener {
-            BottomUpDialog.Builder(requireActivity())
-                .title("로그아웃 하시겠습니까?")
-                .positiveButton { activityViewModel.signOut() }
-                .show()
-        }
-        binding.btnWithdrawal.setOnClickListener {
-            BottomUpDialog.Builder(requireActivity())
-                .title("정말로 회원탈퇴를 하시겠습니까?")
-                .subtitle("지금 탈퇴하시면 그동안의 기록이 모두 사라지게 됩니다.")
-                .positiveButton { activityViewModel.withdrawal() }
-                .show()
-        }
-        binding.btnEditProfile.setOnClickListener {
-            findNavController().navigate(R.id.action_myProfileDetailFragment_to_updateMyProfileFragment)
+        with (binding) {
+            btnSignOut.setOnClickListener {
+                BottomUpDialog.Builder(requireActivity())
+                    .title("로그아웃 하시겠습니까?")
+                    .positiveButton { activityViewModel.signOut() }
+                    .show()
+            }
+            btnWithdrawal.setOnClickListener {
+                BottomUpDialog.Builder(requireActivity())
+                    .title("정말로 회원탈퇴를 하시겠습니까?")
+                    .subtitle("지금 탈퇴하시면 그동안의 기록이 모두 사라지게 됩니다.")
+                    .positiveButton { activityViewModel.withdrawal() }
+                    .show()
+            }
+            btnFunibuniLink.setOnClickListener {
+
+            }
+            btnWasteSpec.setOnClickListener {
+
+            }
+            btnFreeDisposal.setOnClickListener {
+
+            }
+            btnPrivacyAndTerms.setOnClickListener {
+
+            }
+            btnOpenSourceLicense.setOnClickListener {
+
+            }
+            btnEditProfile.setOnClickListener {
+                findNavController().navigate(R.id.action_myProfileDetailFragment_to_updateMyProfileFragment)
+            }
         }
     }
 

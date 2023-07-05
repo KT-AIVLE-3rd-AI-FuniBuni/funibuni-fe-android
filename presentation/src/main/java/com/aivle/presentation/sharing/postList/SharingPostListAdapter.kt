@@ -30,9 +30,8 @@ class SharingPostListItemViewHolder(private val binding: ItemSharingPostBinding)
 
     init {
         binding.root.setOnClickListener {
-            binding.postItem?.let { post ->
-                post.onClick!!.invoke(post.post_id)
-            }
+            val postItem = binding.postItem ?: return@setOnClickListener
+            postItem.onClick?.invoke(postItem.post_id)
         }
     }
 

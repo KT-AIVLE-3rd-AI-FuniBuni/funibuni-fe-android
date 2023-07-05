@@ -2,16 +2,20 @@ package com.aivle.presentation.sharing.postDetail
 
 import android.animation.ValueAnimator
 import android.graphics.Color
+import android.util.Log
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import android.view.Window
 import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.core.view.*
+import com.aivle.presentation.databinding.ActivitySharingPostDetailBinding
 import com.aivle.presentation.databinding.HeaderSharingPostDetailBinding
 import com.google.android.material.appbar.AppBarLayout
 
+private const val TAG = "SharingPostDetailHeaderAdapter"
+
 class SharingPostDetailHeaderAdapter constructor(
-    private val binding: HeaderSharingPostDetailBinding,
+    private val binding: ActivitySharingPostDetailBinding,
 ) : AppBarLayout.OnOffsetChangedListener {
 
     var isShowingTitleBar = false
@@ -19,6 +23,12 @@ class SharingPostDetailHeaderAdapter constructor(
 
     var systemBarHeight = 0
         private set
+
+    var navigationBarHeight = 0
+        private set
+
+    private val bindingHeader: HeaderSharingPostDetailBinding
+        get() = binding.header
 
     private var offset = 0
     private var userOffset = 0
@@ -36,12 +46,20 @@ class SharingPostDetailHeaderAdapter constructor(
         window.statusBarColor = Color.TRANSPARENT
 
         WindowCompat.setDecorFitsSystemWindows(window, false)
-        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { _, windowInsets ->
-            val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
-            systemBarHeight = insets.top
+        ViewCompat.setOnApplyWindowInsetsListener(bindingHeader.root) { _, windowInsets ->
+            val systemBarInsets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
+            val navigationBarInsets = windowInsets.getInsets(WindowInsetsCompat.Type.navigationBars())
+            systemBarHeight = systemBarInsets.top
+            navigationBarHeight = navigationBarInsets.bottom
+//            Log.d(TAG, "init(): systemBarHeight=$systemBarHeight")
+//            Log.d(TAG, "init(): systemBarInsets=$systemBarInsets")
+//            Log.d(TAG, "init(): navigationBarHeight=$navigationBarHeight")
+//            Log.d(TAG, "init(): navigationBarInsets=$navigationBarInsets")
 
-            binding.statusBarGuideline.setGuidelineBegin(systemBarHeight)
-            binding.root.updateLayoutParams<ViewGroup.MarginLayoutParams> { bottomMargin = insets.bottom }
+            // 헤더를 statusBar 높이 만큼 내리기
+            bindingHeader.statusBarGuideline.setGuidelineBegin(systemBarHeight)
+            // 하단 마진 주기
+            binding.root.updateLayoutParams<ViewGroup.MarginLayoutParams> { bottomMargin = systemBarInsets.bottom }
 
             WindowInsetsCompat.CONSUMED
         }
@@ -50,7 +68,7 @@ class SharingPostDetailHeaderAdapter constructor(
     }
 
     fun onBackPressed(onClicked: () -> Unit) = apply {
-        binding.btnBack.setOnClickListener { onClicked.invoke() }
+        bindingHeader.btnBack.setOnClickListener { onClicked.invoke() }
     }
 
     override fun onOffsetChanged(appBarLayout: AppBarLayout, verticalOffset: Int) {
@@ -64,11 +82,11 @@ class SharingPostDetailHeaderAdapter constructor(
     private fun animateTitleBar(isShow: Boolean) {
         isShowingTitleBar = isShow
 
-        binding.backgroundWhite.animate().setInterpolator(AccelerateDecelerateInterpolator())
+        bindingHeader.backgroundWhite.animate().setInterpolator(AccelerateDecelerateInterpolator())
             .setDuration(150L)
             .alpha(if (isShow) 1f else 0f)
             .start()
-//        binding.tvShopName.animate().setInterpolator(AccelerateDecelerateInterpolator())
+//        bindingHeader.tvShopName.animate().setInterpolator(AccelerateDecelerateInterpolator())
 //            .setDuration(150L)
 //            .alpha(if (isShow) 1f else 0f)
 //            .start()
@@ -82,8 +100,8 @@ class SharingPostDetailHeaderAdapter constructor(
             duration = 150L
             addUpdateListener {
                 val color = it.animatedValue as Int
-                binding.btnBack.drawable.setTint(color)
-                binding.btnTheMore.drawable.setTint(color)
+                bindingHeader.btnBack.drawable.setTint(color)
+                bindingHeader.btnTheMore.drawable.setTint(color)
             }
         }.start()
 
@@ -91,11 +109,11 @@ class SharingPostDetailHeaderAdapter constructor(
     }
 
     private fun initOffset() {
-        binding.root.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
+        bindingHeader.root.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
             override fun onGlobalLayout() {
-                if (binding.btnBack.bottom > 0) {
-                    offset = binding.btnBack.bottom
-                    binding.root.viewTreeObserver.removeOnGlobalLayoutListener(this)
+                if (bindingHeader.btnBack.bottom > 0) {
+                    offset = bindingHeader.btnBack.bottom
+                    bindingHeader.root.viewTreeObserver.removeOnGlobalLayoutListener(this)
                 }
             }
         })

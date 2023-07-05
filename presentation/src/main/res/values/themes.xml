@@ -125,6 +125,14 @@
         <item name="android:textColor">@color/gray600</item>
         <item name="android:textSize">18sp</item>
     </style>
+    <!-- MyProfileDetail_TextViewLeft_Large -->
+    <style name="MyProfileDetail_TextViewLeft_Large">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textColor">@color/gray600</item>
+        <item name="android:textSize">18sp</item>
+    </style>
     <!-- MyProfileDetail_TextViewRight -->
     <style name="MyProfileDetail_TextViewRight">
         <item name="android:layout_width">0dp</item>

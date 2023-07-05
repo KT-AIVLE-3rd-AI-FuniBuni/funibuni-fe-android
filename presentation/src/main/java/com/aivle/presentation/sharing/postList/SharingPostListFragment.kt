@@ -1,6 +1,8 @@
 package com.aivle.presentation.sharing.postList
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
@@ -14,6 +16,9 @@ import com.aivle.presentation.sharing.postList.SharingPostListViewModel.Event
 import com.aivle.presentation.sharing.postDetail.SharingPostDetailActivity
 import com.aivle.presentation.util.ext.showToast
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
 class SharingPostListFragment : BaseFragment<FragmentSharingPostListBinding>(R.layout.fragment_sharing_post_list) {
@@ -34,6 +39,13 @@ class SharingPostListFragment : BaseFragment<FragmentSharingPostListBinding>(R.l
     }
 
     private fun initView() {
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            activityViwModel.address?.let {
+                viewModel.loadSharingPosts(it.district)
+                binding.swipeRefreshLayout.isRefreshing = false
+            }
+        }
+
         listAdapter = SharingPostListAdapter()
         binding.postList.adapter = listAdapter
     }
@@ -41,18 +53,25 @@ class SharingPostListFragment : BaseFragment<FragmentSharingPostListBinding>(R.l
     private fun handleEvent() = repeatOnStarted {
         viewModel.eventFlow.collect { event ->
             binding.noContent.isVisible = event !is Event.LoadPosts.Success
+
             when (event) {
                 is Event.None -> {}
                 is Event.LoadPosts.Empty -> {
                 }
                 is Event.LoadPosts.Success -> {
-                    val posts = event.posts.onEach { it.onClick = ::onClickPost }
+                    val posts = event.posts.onEach {
+                        it.onClick = ::onClickPost
+                    }
                     listAdapter.submitList(posts)
                 }
                 is Event.LoadPosts.Failure -> {
                     showToast(event.message)
                 }
-            }}
+            }
+//            withContext(Dispatchers.Main) {
+//                binding.swipeRefreshLayout.isRefreshing = false
+//            }
+        }
     }
 
     private fun onClickPost(postId: Int) {

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="theme_color">#31D7C3</color>
+    <color name="theme_color">#64D7BC</color>
+    <color name="theme_color_old">#31D7C3</color>
     <color name="theme_color_light">@color/app_color_spot_3</color>
     <color name="theme_color_dark">@color/app_color_spot_2</color>
 

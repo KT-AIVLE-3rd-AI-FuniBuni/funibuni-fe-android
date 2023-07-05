@@ -9,6 +9,16 @@
         android:paddingHorizontal="32dp"
         android:paddingVertical="28dp">
 
+        <ImageView
+            android:id="@+id/funibuni_icon"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginBottom="28dp"
+            android:src="@drawable/funibuni_logo"
+            app:layout_constraintBottom_toTopOf="@id/logo_container"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
         <!-- Logo Container -->
         <LinearLayout
             android:id="@+id/logo_container"
@@ -22,24 +32,24 @@
             app:layout_constraintEnd_toEndOf="parent">
 
             <ImageView
-                android:layout_width="120dp"
+                android:layout_width="140dp"
                 android:layout_height="wrap_content"
-                android:src="@drawable/text_logo"
+                android:src="@drawable/funibuni_logo_text"
                 android:adjustViewBounds="true"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="28dp"
+                android:layout_marginTop="52dp"
                 android:text="대형폐기물 간편 배출 AI 서비스"
-                android:textSize="20sp"
+                android:textSize="24sp"
                 android:textColor="@color/black"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="퍼니버니"
-                android:textSize="20sp"
+                android:textSize="24sp"
                 android:textColor="@color/black"/>
 
         </LinearLayout>
@@ -49,6 +59,7 @@
             android:layout_width="match_parent"
             android:layout_height="52dp"
             android:text="시작하기"
+            android:textStyle="normal"
             android:visibility="gone"
             tools:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"/>

@@ -22,6 +22,7 @@
             android:windowSoftInputMode="adjustNothing"/>
         <activity android:name=".myprofile.postList.MySharingPostListActivity"/>
         <activity android:name=".myprofile.applyList.WasteDisposalApplyListActivity"/>
+        <activity android:name=".searchWasteSpec.SearchWasteSpecActivity"/>
 
     </application>
 </manifest>

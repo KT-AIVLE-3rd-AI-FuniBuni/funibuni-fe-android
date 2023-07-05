@@ -16,6 +16,7 @@ import com.aivle.presentation.util.ext.repeatOnStarted
 import com.aivle.presentation.databinding.BottomSheetReplyBinding
 import com.aivle.presentation.sharing.postDetail.ReplyBottomSheetViewModel.Event
 import com.aivle.presentation.util.ext.showToast
+import com.aivle.presentation_design.interactive.ui.BottomUpDialog
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -78,7 +79,7 @@ class ReplyBottomSheetFragment private constructor(
         initView()
         handleEvent()
 
-        viewModel.loadReplies(comment.comment_id)
+        viewModel.loadReplies(comment.post_id, comment.comment_id)
     }
 
     private fun initView() {
@@ -88,11 +89,7 @@ class ReplyBottomSheetFragment private constructor(
         }
         binding.btnInputReply.setOnClickListener {
             InputCommentBottomSheetFragment { reply ->
-                val oldList = replyListAdapter.currentList
-                val oldLastReply = oldList.last()
-                showToast("바꿔야한다~~")
-                // val newList = oldList + listOf(Reply(oldLastReply.reply_id + 1, oldLastReply.comment_id, oldLastReply.user, reply, "방금 전"))
-                // replyListAdapter.submitList(newList)
+                viewModel.addReply(comment.post_id, comment.comment_id, reply)
             }.show(parentFragmentManager, "reply-comment-bottom-sheet")
         }
         binding.comment = comment
@@ -102,12 +99,34 @@ class ReplyBottomSheetFragment private constructor(
         viewModel.eventFlow.collect { event -> when (event) {
             is Event.None -> {}
             is Event.LoadReplies.Success -> {
-                replyListAdapter.submitList(event.replies)
+                updateReplies(event.replies)
             }
-            is Event.LoadReplies.Failure -> {
+            is Event.AddReply.Success -> {
+                updateReplies(event.replies)
+            }
+            is Event.DeleteReply.Success -> {
+                updateReplies(event.replies)
+            }
+            is Event.Failure -> {
                 showToast(event.message)
             }
         }}
+    }
+
+    private fun updateReplies(replies: List<Reply>) {
+        replies.forEach {
+            it.onLongClick = ::showDeleteConfirmDialog
+        }
+        replyListAdapter.submitList(replies)
+    }
+
+    private fun showDeleteConfirmDialog(replyId: Int) {
+        BottomUpDialog.Builder(requireActivity())
+            .title("댓글을 삭제하시겠습니까?")
+            .positiveButton {
+                viewModel.deleteReply(comment.post_id, comment.comment_id, replyId)
+            }
+            .show()
     }
 
     class Builder(private val comment: Comment) {

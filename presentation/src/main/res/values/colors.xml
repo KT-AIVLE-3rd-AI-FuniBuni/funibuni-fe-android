@@ -14,4 +14,6 @@
 
     <color name="rank_background_1st">#A0E8F1</color>
     <color name="rank_background_others">#DCDFE3</color>
+
+    <color name="home_button_color">#F8F8F8</color>
 </resources>

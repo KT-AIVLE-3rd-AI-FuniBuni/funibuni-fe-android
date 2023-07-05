@@ -42,8 +42,6 @@ class DisposalTabFragment : BaseFragment<FragmentDisposalBinding>(R.layout.fragm
             Log.d(TAG, "PickVisualMedia: file?.path=${file?.path}")
             Log.d(TAG, "PickVisualMedia: file?.absolutePath=${file?.absolutePath}")
 
-            binding.ivWaste.setImageBitmap(bitmap)
-
             startDisposalActivity(file?.absolutePath)
         } else {
             showToast("No media selected")

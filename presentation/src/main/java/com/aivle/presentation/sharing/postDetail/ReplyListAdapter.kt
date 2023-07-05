@@ -26,6 +26,14 @@ class ReplyListAdapter : ListAdapter<Reply, ReplyViewHolder>(DiffCallback) {
 
 class ReplyViewHolder(private val binding: ItemReplyBinding) : RecyclerView.ViewHolder(binding.root) {
 
+    init {
+        binding.root.setOnLongClickListener {
+            val reply = binding.reply ?: return@setOnLongClickListener false
+            reply.onLongClick?.invoke(reply.reply_id)
+            true
+        }
+    }
+
     fun bind(reply: Reply) {
         binding.reply = reply
         binding.executePendingBindings()

@@ -16,7 +16,7 @@ data class WasteSpec(
     val type: String,
     val fee: Int,
 ) {
-    val feeString: String = DecimalFormat("#,###").format(fee) + "원"
+    val feeString: String get() = DecimalFormat("#,###").format(fee) + "원"
 
     var onClick1: ((WasteSpec) -> Unit)? = null
     var onClick2: ((WasteSpec) -> Unit)? = null

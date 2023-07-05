@@ -20,7 +20,7 @@ class MyBuniRepositoryImpl @Inject constructor(
     override suspend fun getWasteDisposalApplies(): Flow<DataResponse<List<WasteDisposalApplyItem>>> = flow {
         api.getWasteDisposalApplies()
             .suspendOnSuccess {
-                val applies = data.map { it.toModel() }
+                val applies = data.mapNotNull { it?.toModel() }
                 emit(DataResponse.Success(applies))
             }
             .suspendOnFailure {

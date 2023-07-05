@@ -27,8 +27,16 @@ class CommentListAdapter : ListAdapter<Comment, CommentViewHolder>(DiffCallback)
 class CommentViewHolder(private val binding: ItemCommentBinding) : RecyclerView.ViewHolder(binding.root) {
 
     init {
-        itemView.setOnClickListener {
+        binding.container.setOnClickListener {
             binding.comment?.let { it.onClick?.invoke(it) }
+        }
+        binding.container.setOnLongClickListener {
+            val comment = binding.comment ?: return@setOnLongClickListener false
+            comment.onLongClick?.invoke(comment.comment_id)
+            true
+        }
+        binding.btnTheMore.setOnClickListener {
+
         }
     }
 
