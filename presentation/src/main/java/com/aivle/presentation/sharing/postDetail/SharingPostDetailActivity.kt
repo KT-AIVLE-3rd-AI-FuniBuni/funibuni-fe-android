@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import androidx.activity.viewModels
 import androidx.core.view.updateLayoutParams
 import com.aivle.domain.model.sharingPost.Comment
@@ -75,6 +76,10 @@ class SharingPostDetailActivity : BaseActivity<ActivitySharingPostDetailBinding>
             .init(window, binding.appBar)
             .onBackPressed { finish() }
 
+        binding.header.btnTheMore.setOnClickListener {
+            showTheMoreMenu()
+        }
+
         binding.content.btnFavoritePost.setOnClickListener {
             val crossfade = binding.content.btnFavoritePost.crossfade
             if (crossfade == 0f) { // unlike -> like
@@ -100,6 +105,26 @@ class SharingPostDetailActivity : BaseActivity<ActivitySharingPostDetailBinding>
         }
     }
 
+    private fun showTheMoreMenu() {
+        val popupMenu = PopupMenu(this, binding.header.btnTheMore)
+        menuInflater.inflate(R.menu.menu_post_detail_the_more, popupMenu.menu)
+        popupMenu.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.menu_edit_post -> {
+
+                }
+                R.id.menu_delete_post -> {
+                    viewModel.deletePost()
+                }
+                R.id.menu_complete_sharing -> {
+                    viewModel.completeSharingPost()
+                }
+            }
+            false
+        }
+        popupMenu.show()
+    }
+
     private fun handleViewModelEvent() = repeatOnStarted {
         viewModel.eventFlow.collect { event -> when (event) {
             is Event.None -> {
@@ -115,6 +140,12 @@ class SharingPostDetailActivity : BaseActivity<ActivitySharingPostDetailBinding>
             }
             is Event.DeleteComment.Success -> {
                 updateComments(event.comments)
+            }
+            is Event.CompleteSharingPost.Success -> {
+
+            }
+            is Event.DeletePost.Success -> {
+
             }
         }}
     }

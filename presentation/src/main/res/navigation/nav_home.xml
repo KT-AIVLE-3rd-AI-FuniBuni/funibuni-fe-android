@@ -5,9 +5,6 @@
     android:id="@+id/nav_home"
     app:startDestination="@id/homeFragment">
 
-    <action android:id="@+id/action_global_homeFragment"
-        app:destination="@id/homeFragment"/>
-
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.aivle.presentation.home.HomeFragment"
@@ -17,19 +14,14 @@
             android:name="IsNavRootFragment"
             android:defaultValue="true"/>
         <action
-            android:id="@+id/action_homeFragment_to_disposalTabFragment"
-            app:destination="@id/disposalTabFragment" />
+            android:id="@+id/action_homeFragment_to_nav_disposal"
+            app:destination="@id/nav_disposal" />
         <action
-            android:id="@+id/action_homeFragment_to_sharingPostListFragment2"
-            app:destination="@id/sharingPostListFragment2" />
+            android:id="@+id/action_homeFragment_to_nav_sharing"
+            app:destination="@id/nav_sharing" />
     </fragment>
-    <fragment
-        android:id="@+id/disposalTabFragment"
-        android:name="com.aivle.presentation.disposal.disposalTab.DisposalTabFragment"
-        android:label="DisposalTabFragment" />
-    <fragment
-        android:id="@+id/sharingPostListFragment2"
-        android:name="com.aivle.presentation.sharing.postList.SharingPostListFragment"
-        android:label="SharingPostListFragment" />
+
+    <include app:graph="@navigation/nav_disposal" />
+    <include app:graph="@navigation/nav_sharing" />
 
 </navigation>

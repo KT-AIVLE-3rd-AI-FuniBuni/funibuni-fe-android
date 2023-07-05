@@ -57,6 +57,10 @@ data class FuniBuniDate(
         return String.format("%04d-%02d-%02dT%02d:%02d:%02d+09:00", year, month+1, day, 23, 59, 59)
     }
 
+    fun toServerFormat2(): String {
+        return String.format("%04d-%02d-%02dT%02d:%02d:%02d+09:00", year, month+1, day, hour, minute, second)
+    }
+
     companion object {
 
         fun today(): FuniBuniDate = getInstance(Calendar.getInstance().timeInMillis)

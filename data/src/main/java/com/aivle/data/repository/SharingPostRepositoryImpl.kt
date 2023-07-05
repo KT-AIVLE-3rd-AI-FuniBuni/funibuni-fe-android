@@ -40,7 +40,9 @@ class SharingPostRepositoryImpl @Inject constructor(
         Log.d(TAG, "getPosts($district)")
         api.getPosts(district)
             .suspendOnSuccess {
-                emit(DataResponse.Success(data.map { it.toModel() }))
+                val posts = data.map { it.toModel() }
+                    .sortedByDescending { it.created_at }
+                emit(DataResponse.Success(posts))
             }
             .suspendOnFailure {
                 emit(DataResponse.Failure.Error(this))

@@ -2,6 +2,12 @@
 <layout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="detail"
+            type="com.aivle.domain.model.waste.WasteDisposalApplyDetail" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -9,15 +15,179 @@
         <include layout="@layout/header"
             android:id="@+id/header"/>
 
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/nav_host_fragment"
-            android:name="androidx.navigation.fragment.NavHostFragment"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:defaultNavHost="true"
-            app:navGraph="@navigation/nav_disposal_apply_detail"
+            android:paddingHorizontal="18dp"
+            android:paddingBottom="18dp"
+            android:clipToPadding="false"
             app:layout_constraintTop_toBottomOf="@id/header"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:clipToPadding="false"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/barrier_bottom">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="24dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:gravity="center_vertical"
+                        android:text="폐기물 배출 신청 상세정보"
+                        android:textSize="24sp"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"/>
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/waste_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="240dp"
+                        android:layout_marginVertical="24dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/placeholder_1440"
+                        app:imageUrl="@{detail.image_url}"
+                        app:shapeAppearanceOverlay="@style/ShapeableImageView_CornerCommon"/>
+                    <!--app:imageUrl="@{detail.image_url}"-->
+
+                    <LinearLayout
+                        style="@style/WasteDisposalApplyDetailFragmentStyle_LinearLayout">
+
+                        <TextView
+                            style="@style/WasteDisposalApplyDetailFragmentStyle_Label"
+                            android:text="품목(대분류)"/>
+                        <TextView
+                            style="@style/WasteDisposalApplyDetailFragmentStyle_Content"
+                            android:text="@{detail.waste_spec.large_category}"
+                            tools:text="의자"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        style="@style/WasteDisposalApplyDetailFragmentStyle_LinearLayout">
+
+                        <TextView
+                            style="@style/WasteDisposalApplyDetailFragmentStyle_Label"
+                            android:text="품목(소분류)"/>
+                        <TextView
+                            style="@style/WasteDisposalApplyDetailFragmentStyle_Content"
+                            android:text="@{detail.waste_spec.small_category}"
+                            tools:text="회전 의자"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        style="@style/WasteDisposalApplyDetailFragmentStyle_LinearLayout">
+
+                        <TextView
+                            style="@style/WasteDisposalApplyDetailFragmentStyle_Label"
+                            android:text="수수료 금액"/>
+                        <TextView
+                            style="@style/WasteDisposalApplyDetailFragmentStyle_Content"
+                            android:text="@{detail.waste_spec.feeString}"
+                            tools:text="8,000원"/>
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginVertical="18dp"
+                        android:background="@color/divider_light_gray"/>
+
+                    <LinearLayout
+                        style="@style/WasteDisposalApplyDetailFragmentStyle_LinearLayout">
+
+                        <TextView
+                            style="@style/WasteDisposalApplyDetailFragmentStyle_Label"
+                            android:text="주소"/>
+                        <TextView
+                            style="@style/WasteDisposalApplyDetailFragmentStyle_Content"
+                            android:text="@{detail.address_road_detail_two_lines}"
+                            tools:text="서울 송파구 ○○○로 10-5\n101동 1201호"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        style="@style/WasteDisposalApplyDetailFragmentStyle_LinearLayout">
+
+                        <TextView
+                            style="@style/WasteDisposalApplyDetailFragmentStyle_Label"
+                            android:text="배출 상세위치"/>
+                        <TextView
+                            style="@style/WasteDisposalApplyDetailFragmentStyle_Content"
+                            android:text="@{detail.disposal_location}"
+                            tools:text="경비실 앞"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        style="@style/WasteDisposalApplyDetailFragmentStyle_LinearLayout">
+
+                        <TextView
+                            style="@style/WasteDisposalApplyDetailFragmentStyle_Label"
+                            android:text="배출 일시"/>
+                        <TextView
+                            style="@style/WasteDisposalApplyDetailFragmentStyle_Content"
+                            android:text="@{detail.disposal_datetime_formatting_two_lines}"
+                            tools:text="2023년 7월 14일\n오후 4시 30분"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        style="@style/WasteDisposalApplyDetailFragmentStyle_LinearLayout">
+
+                        <TextView
+                            style="@style/WasteDisposalApplyDetailFragmentStyle_Label"
+                            android:text="추가 요청사항"/>
+                        <TextView
+                            style="@style/WasteDisposalApplyDetailFragmentStyle_Content"
+                            tools:text="@{detail.memo}"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.core.widget.NestedScrollView>
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrier_bottom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="top"
+                app:barrierMargin="-18dp"
+                app:constraint_referenced_ids="btn_apply_cancel, btn_pay"/>
+
+            <com.aivle.presentation_design.interactive.ui.InteractiveTextButton
+                android:id="@+id/btn_apply_cancel"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:text="신청 취소"
+                app:buttonType="light"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/btn_pay"/>
+
+            <com.aivle.presentation_design.interactive.ui.InteractiveTextButton
+                android:id="@+id/btn_pay"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_marginStart="12dp"
+                android:text="결제하기"
+                app:buttonType="dark"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/btn_apply_cancel"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

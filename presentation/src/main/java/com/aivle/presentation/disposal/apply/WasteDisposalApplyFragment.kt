@@ -14,7 +14,10 @@ import com.aivle.presentation.databinding.FragmentWasteDisposalApplyBinding
 import com.aivle.presentation.disposal.base.BaseDisposalFragment
 import com.aivle.presentation.util.common.DatetimeUtil
 import com.aivle.presentation.disposal.apply.WasteDisposalApplyViewModel.Event
+import com.aivle.presentation.util.model.FuniBuniDate
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.Calendar
+import java.util.Date
 
 private const val TAG = "WasteDisposalApplyFragment"
 
@@ -22,6 +25,7 @@ private const val TAG = "WasteDisposalApplyFragment"
 class WasteDisposalApplyFragment : BaseDisposalFragment<FragmentWasteDisposalApplyBinding>(R.layout.fragment_waste_disposal_apply) {
 
     private val viewModel: WasteDisposalApplyViewModel by viewModels()
+    private var date: FuniBuniDate = FuniBuniDate.today()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -46,6 +50,10 @@ class WasteDisposalApplyFragment : BaseDisposalFragment<FragmentWasteDisposalApp
             largeCategoryName.text = wasteSpec.large_category
             smallCategoryName.text = wasteSpec.small_category
             disposalFee.text = wasteSpec.feeString
+        }
+        binding.calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
+            Log.d(TAG, "setOnDateChangeListener: $year, $month, $dayOfMonth")
+            date = FuniBuniDate(year, month, dayOfMonth)
         }
     }
 
@@ -75,24 +83,22 @@ class WasteDisposalApplyFragment : BaseDisposalFragment<FragmentWasteDisposalApp
     }
 
     private fun applyWasteDisposal() {
-        val date = binding.calendarView.date
-        val dateString = DatetimeUtil.dateString(date)
+        val dateString = date.toDateString()
         val (hour, minute) = binding.timeSelector.selectedTime.split(":")
+        val datetimeString = FuniBuniDate(date.year, date.month, date.day, hour.toInt(), minute.toInt()).toServerFormat2()
 
-        val datetimeString = DatetimeUtil.toServer(dateString, hour.toInt(), minute.toInt(), 0)
+
+//        val datetimeString = DatetimeUtil.toServer(dateString, hour.toInt(), minute.toInt(), 0)
         val disposalDetailLocation = binding.edtDisposalDetailLocation.text.toString()
         val memo = binding.edtMemo.text.toString()
             .ifBlank { "요청 사항 없음" }
 
-
         val classificationResult = activityViewModel.classificationResult ?: return
         val wasteSpec = activityViewModel.selectedWasteSpec ?: return
-
         viewModel.applyWasteDisposal(classificationResult, wasteSpec, datetimeString, disposalDetailLocation, memo)
     }
 
     private fun moveApplyDetailFragment(applyId: Int) {
-        Log.d(TAG, "moveApplyDetailFragment(): applyId=$applyId")
         findNavController().navigate(R.id.action_wasteDisposalApplyFragment_to_wasteDisposalApplyDetailFragment, bundleOf(
             "wasteDisposalApplyId" to applyId
         ))

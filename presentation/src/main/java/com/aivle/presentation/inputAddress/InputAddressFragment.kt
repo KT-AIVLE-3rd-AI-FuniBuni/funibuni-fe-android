@@ -12,6 +12,7 @@ import androidx.core.app.ActivityCompat
 import com.aivle.presentation.R
 import com.aivle.presentation.base.BaseFragment
 import com.aivle.presentation.databinding.FragmentInputAddressBinding
+import com.aivle.presentation.util.ext.showToast
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.gun0912.tedpermission.PermissionListener
 import com.gun0912.tedpermission.normal.TedPermission
@@ -90,9 +91,5 @@ class InputAddressFragment : BaseFragment<FragmentInputAddressBinding>(R.layout.
 
 
         Log.d(TAG, "getLastLocation(): longitude=${lastLocation.longitude}, latitude=${lastLocation.latitude}")
-    }
-
-    private fun showToast(message: String?) {
-        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
 }

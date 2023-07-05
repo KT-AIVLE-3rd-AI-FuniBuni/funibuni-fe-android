@@ -5,9 +5,6 @@
     android:id="@+id/nav_sharing"
     app:startDestination="@id/sharingPostListFragment">
 
-    <action android:id="@+id/action_global_sharingPostListFragment"
-        app:destination="@id/sharingPostListFragment"/>
-
     <fragment
         android:id="@+id/sharingPostListFragment"
         android:name="com.aivle.presentation.sharing.postList.SharingPostListFragment"
@@ -16,6 +13,10 @@
         <argument
             android:name="IsNavRootFragment"
             android:defaultValue="true"/>
+        <action
+            android:id="@+id/action_sharingPostListFragment_to_nav_disposal"
+            app:destination="@id/nav_disposal" />
     </fragment>
+    <include app:graph="@navigation/nav_disposal" />
 
 </navigation>

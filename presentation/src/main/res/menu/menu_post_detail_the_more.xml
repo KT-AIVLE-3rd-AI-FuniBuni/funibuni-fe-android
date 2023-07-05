@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_edit_post"
+        android:title="수정"/>
+    <item
+        android:id="@+id/menu_delete_post"
+        android:title="삭제"/>
+    <item
+        android:id="@+id/menu_complete_sharing"
+        android:title="나눔완료"/>
+</menu>

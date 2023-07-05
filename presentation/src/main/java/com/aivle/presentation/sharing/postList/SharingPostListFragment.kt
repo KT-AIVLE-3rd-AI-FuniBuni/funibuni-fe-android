@@ -7,6 +7,7 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.aivle.presentation.R
 import com.aivle.presentation.base.BaseFragment
 import com.aivle.presentation.util.ext.repeatOnStarted
@@ -15,6 +16,7 @@ import com.aivle.presentation.main.MainViewModel
 import com.aivle.presentation.sharing.postList.SharingPostListViewModel.Event
 import com.aivle.presentation.sharing.postDetail.SharingPostDetailActivity
 import com.aivle.presentation.util.ext.showToast
+import com.aivle.presentation_design.interactive.ui.BottomUpDialog
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -48,6 +50,10 @@ class SharingPostListFragment : BaseFragment<FragmentSharingPostListBinding>(R.l
 
         listAdapter = SharingPostListAdapter()
         binding.postList.adapter = listAdapter
+
+        binding.fabNewPost.setOnClickListener {
+            showDialog()
+        }
     }
 
     private fun handleEvent() = repeatOnStarted {
@@ -78,5 +84,15 @@ class SharingPostListFragment : BaseFragment<FragmentSharingPostListBinding>(R.l
         startActivity(
             SharingPostDetailActivity.getIntent(requireActivity(), postId)
         )
+    }
+
+    private fun showDialog() {
+        BottomUpDialog.Builder(requireActivity())
+            .title("나눔 게시물 등록을 위해 [버리기] 탭으로 이동합니다")
+            .subtitle("나눔 게시판은 퍼니버니 AI와 함께 이미지 분류를 통해 진행됩니다")
+            .confirmedButton {
+                //findNavController().navigate(R.id.action_sharingPostListFragment_to_nav_disposal)
+            }
+            .show()
     }
 }

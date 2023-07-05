@@ -79,7 +79,7 @@ interface SharingPostApi {
     suspend fun deleteComment(
         @Path("post_id") post_id: Int,
         @Path("comment_id") comment_id: Int,
-    ): ApiResponse<Map<String, Int>>
+    ): ApiResponse<Map<String, String>>
 
     @POST("posts/{post_id}/comments/{comment_id}/report")
     suspend fun reportComment(

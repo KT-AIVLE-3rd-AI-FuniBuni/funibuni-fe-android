@@ -13,6 +13,7 @@ import com.aivle.presentation.R
 import com.aivle.presentation.util.ext.repeatOnStarted
 import com.aivle.presentation.databinding.FragmentSignInBinding
 import com.aivle.presentation.intro.sign.SignInViewModel.Event
+import com.aivle.presentation.util.ext.showToast
 import com.aivle.presentation_design.interactive.ui.FilterableMaterialAutoCompleteTextView
 import com.aivle.presentation_design.interactive.ui.MySnackBar
 import dagger.hilt.android.AndroidEntryPoint
@@ -161,10 +162,6 @@ class SignInFragment : BaseSignFragment<FragmentSignInBinding>(R.layout.fragment
             .setMessage(message)
             .setAnchorView(binding.btnAuth)
             .show()
-    }
-
-    private fun showToast(message: String?) {
-        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
 
     private fun handleActivityViewModelEvent() = repeatOnStarted {

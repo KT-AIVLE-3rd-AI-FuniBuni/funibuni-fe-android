@@ -33,6 +33,8 @@ class MyBuniRepositoryImpl @Inject constructor(
         api.getWasteDisposalApplies()
             .suspendOnSuccess {
                 val applies = data.mapNotNull { it?.toModel() }
+                    .sortedByDescending { it.created_at }
+
                 emit(DataResponse.Success(applies))
             }
             .suspendOnFailure {
@@ -44,6 +46,8 @@ class MyBuniRepositoryImpl @Inject constructor(
         api.getMySharingPosts()
             .suspendOnSuccess {
                 val postItems = data.map { it.toModel() }
+                    .sortedByDescending { it.created_at }
+
                 emit(DataResponse.Success(postItems))
             }
             .suspendOnFailure {
@@ -55,6 +59,8 @@ class MyBuniRepositoryImpl @Inject constructor(
         api.getMyFavoritePosts()
             .suspendOnSuccess {
                 val postItems = data.map { it.toModel() }
+                    .sortedByDescending { it.created_at }
+
                 emit(DataResponse.Success(postItems))
             }
             .suspendOnFailure {
@@ -66,6 +72,8 @@ class MyBuniRepositoryImpl @Inject constructor(
         api.getMyActivities()
             .suspendOnSuccess {
                 val postItems = data.map { it.toModel() }
+                    .sortedByDescending { it.created_at }
+
                 emit(DataResponse.Success(postItems))
             }
             .suspendOnFailure {

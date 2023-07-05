@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View"/>
         <variable
             name="postItem"
             type="com.aivle.domain.model.sharingPost.SharingPostItem" />
@@ -43,6 +44,25 @@
             tools:text="TV"
             app:layout_constraintTop_toTopOf="@id/thumbnail"
             app:layout_constraintStart_toEndOf="@id/thumbnail"/>
+
+        <!-- 나눔 완료 태그 -->
+        <TextView
+            android:id="@+id/sharing_completed_tag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:paddingVertical="3dp"
+            android:paddingHorizontal="10dp"
+            android:gravity="center"
+            android:textSize="12sp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:background="@drawable/bg_sharing_completed_tag"
+            android:text="나눔완료"
+            android:visibility="@{postItem.is_sharing ? View.VISIBLE : View.GONE}"
+            app:layout_constraintTop_toTopOf="@id/product_category"
+            app:layout_constraintBottom_toBottomOf="@id/product_category"
+            app:layout_constraintStart_toEndOf="@id/product_category"/>
 
         <!-- Title -->
         <TextView

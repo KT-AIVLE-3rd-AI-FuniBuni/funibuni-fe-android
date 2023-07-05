@@ -3,37 +3,86 @@ package com.aivle.presentation.myprofile.applyDetail
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import androidx.core.os.bundleOf
-import androidx.navigation.fragment.NavHostFragment
+import androidx.activity.viewModels
+import com.aivle.domain.model.waste.WasteDisposalApplyDetail
 import com.aivle.presentation.R
 import com.aivle.presentation.base.BaseActivity
 import com.aivle.presentation.databinding.ActivityWasteDisposalApplyDetailBinding
+import com.aivle.presentation.myprofile.applyDetail.WasteDisposalApplyDetailViewModel.Event
+import com.aivle.presentation.util.ext.repeatOnStarted
+import com.aivle.presentation.util.ext.showToast
+import com.aivle.presentation_design.interactive.ui.BottomUpDialog
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class WasteDisposalApplyDetailActivity : BaseActivity<ActivityWasteDisposalApplyDetailBinding>(R.layout.activity_waste_disposal_apply_detail) {
 
+    private val viewModel: WasteDisposalApplyDetailViewModel by viewModels()
+
+    private val wasteDisposalApplyId: Int?
+        get() = intent.getIntExtra("wasteDisposalApplyId", -1).takeIf { it != -1 }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setupNavigation()
+        initView()
+        handleViewModelEvent()
+
+        wasteDisposalApplyId?.let { applyId ->
+            viewModel.loadApplyDetail(applyId)
+        }
     }
 
-    private fun setupNavigation() {
-        val navController = (supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment)
-            .navController
-
-        navController.addOnDestinationChangedListener { _, _, args ->
-            args?.getString("title")?.let { title ->
-                binding.header.title.text = title
+    private fun initView() {
+        binding.header.title.text = "배출 신청 상세정보"
+        binding.btnApplyCancel.setOnClickListener {
+            wasteDisposalApplyId?.let { applyId ->
+                viewModel.cancelWasteDisposalApply(applyId)
             }
         }
-
-        val wasteDisposalApplyId = intent.getIntExtra(WASTE_DISPOSAL_APPLY_ID, -1)
-        if (wasteDisposalApplyId != -1) {
-            val bundle = bundleOf(WASTE_DISPOSAL_APPLY_ID to wasteDisposalApplyId)
-            navController.navigate(R.id.wasteDisposalApplyDetailFragment3, bundle)
+        binding.btnPay.setOnClickListener {
+            showUnsupportedDialog()
         }
+    }
+
+    private fun handleViewModelEvent() = repeatOnStarted {
+        viewModel.eventFlow.collect { event -> when (event) {
+            is Event.None -> {
+            }
+            is Event.LoadApplyDetail.Success -> {
+                showApplyDetail(event.detail)
+            }
+            is Event.CancelApply.Success -> {
+                finish()
+            }
+            is Event.Failure -> {
+                showToast(event.message)
+            }
+        }}
+    }
+
+    private fun showApplyDetail(detail: WasteDisposalApplyDetail) {
+        binding.detail = detail
+    }
+
+    private fun showUnsupportedDialog() {
+        BottomUpDialog.Builder(this)
+            .title("아직 지원되지 않는 기능입니다")
+            .confirmedButton()
+            .show()
+    }
+
+    private fun showApplyCancellationDialog() {
+        BottomUpDialog.Builder(this)
+            .title("배출 신청을 정말 취소하시겠습니까?")
+            .positiveButton {
+                wasteDisposalApplyId?.let { applyId ->
+                    viewModel.cancelWasteDisposalApply(applyId)
+                }
+            }
+            .show()
     }
 
     companion object {

@@ -7,7 +7,9 @@ import com.aivle.domain.model.sharingPost.SharingPostDetail
 import com.aivle.domain.response.DataResponse
 import com.aivle.domain.response.NothingResponse
 import com.aivle.domain.usecase.sharingPost.AddCommentUseCase
+import com.aivle.domain.usecase.sharingPost.CompleteSharingPostUseCase
 import com.aivle.domain.usecase.sharingPost.DeleteCommentUseCase
+import com.aivle.domain.usecase.sharingPost.DeletePostUseCase
 import com.aivle.domain.usecase.sharingPost.GetSharingPostUseCase
 import com.aivle.domain.usecase.sharingPost.LikePostUseCase
 import com.aivle.domain.usecase.sharingPost.UnlikePostUseCase
@@ -26,6 +28,8 @@ class SharingPostDetailViewModel @Inject constructor(
     private val deleteCommentUseCase: DeleteCommentUseCase,
     private val likePostUseCase: LikePostUseCase,
     private val unlikePostUseCase: UnlikePostUseCase,
+    private val completeSharingPostUseCase: CompleteSharingPostUseCase,
+    private val deletePostUseCase: DeletePostUseCase,
 ) : ViewModel() {
 
     private val _eventFlow: MutableStateFlow<Event> = MutableStateFlow(Event.None)
@@ -98,6 +102,7 @@ class SharingPostDetailViewModel @Inject constructor(
             }}
     }
 
+    /** 좋아요 */
     fun likePost() = launchDefault {
         val postId = postId ?: return@launchDefault
 
@@ -112,6 +117,7 @@ class SharingPostDetailViewModel @Inject constructor(
             }}
     }
 
+    /** 좋아요 취소 */
     fun unlikePost() = launchDefault {
         val postId = postId ?: return@launchDefault
 
@@ -122,6 +128,37 @@ class SharingPostDetailViewModel @Inject constructor(
                 }
                 is NothingResponse.Failure -> {
                     _eventFlow.emit(Event.Failure(response.message))
+                }
+            }}
+    }
+    /** 나눔 완료 */
+    fun completeSharingPost() = launchDefault {
+        val postId = postId ?: return@launchDefault
+
+        completeSharingPostUseCase(postId)
+            .catch { _eventFlow.emit(Event.Failure(it.message)) }
+            .collect { response -> when (response) {
+                is NothingResponse.Failure -> {
+                    _eventFlow.emit(Event.Failure(response.message))
+                }
+                is NothingResponse.Success -> {
+                    _eventFlow.emit(Event.CompleteSharingPost.Success)
+                }
+            }}
+    }
+
+    /** 게시물 삭제 */
+    fun deletePost() = launchDefault {
+        val postId = postId ?: return@launchDefault
+
+        deletePostUseCase(postId)
+            .catch { _eventFlow.emit(Event.Failure(it.message)) }
+            .collect { response -> when (response) {
+                is NothingResponse.Failure -> {
+                    _eventFlow.emit(Event.Failure(response.message))
+                }
+                is NothingResponse.Success -> {
+                    _eventFlow.emit(Event.DeletePost.Success)
                 }
             }}
     }
@@ -136,6 +173,12 @@ class SharingPostDetailViewModel @Inject constructor(
         }
         sealed class DeleteComment : Event() {
             data class Success(val comments: List<Comment>) : DeleteComment()
+        }
+        sealed class CompleteSharingPost : Event() {
+            object Success : CompleteSharingPost()
+        }
+        sealed class DeletePost : Event() {
+            object Success : DeletePost()
         }
         data class Failure(val message: String?) : Event()
     }
