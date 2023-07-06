@@ -13,10 +13,10 @@
         <argument
             android:name="IsNavRootFragment"
             android:defaultValue="true"/>
-        <action
-            android:id="@+id/action_sharingPostListFragment_to_nav_disposal"
-            app:destination="@id/nav_disposal" />
+<!--        <action-->
+<!--            android:id="@+id/action_sharingPostListFragment_to_nav_disposal"-->
+<!--            app:destination="@id/nav_disposal" />-->
     </fragment>
-    <include app:graph="@navigation/nav_disposal" />
+<!--    <include app:graph="@navigation/nav_disposal" />-->
 
 </navigation>

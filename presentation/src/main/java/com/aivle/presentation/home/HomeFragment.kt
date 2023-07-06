@@ -25,10 +25,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             startSearchWasteSpec()
         }
         binding.btnDisposal.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_nav_disposal)
+//            findNavController().navigate(R.id.action_homeFragment_to_nav_disposal)
         }
         binding.btnSharing.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_nav_sharing)
+//            findNavController().navigate(R.id.action_homeFragment_to_nav_sharing)
         }
     }
 
