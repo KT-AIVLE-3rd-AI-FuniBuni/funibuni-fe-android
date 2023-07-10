@@ -51,6 +51,7 @@ class SharingPostDetailViewModel @Inject constructor(
                 is DataResponse.Success -> {
                     postDetail = response.data
                     _eventFlow.emit(Event.LoadPost.Success(postDetail!!))
+                    _eventFlow.emit(Event.None)
                 }
                 is DataResponse.Failure -> {
                     _eventFlow.emit(Event.Failure(response.message))

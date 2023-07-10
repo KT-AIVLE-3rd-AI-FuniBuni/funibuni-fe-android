@@ -18,6 +18,7 @@ import com.aivle.domain.response.NothingResponse
 import com.aivle.domain.response.SignInResponse
 import com.aivle.domain.response.SignInWithTokenResponse
 import com.aivle.domain.response.SignUpResponse
+import com.loggi.core_util.extensions.log
 import com.skydoves.sandwich.suspendOnError
 import com.skydoves.sandwich.suspendOnException
 import com.skydoves.sandwich.suspendOnFailure
@@ -105,7 +106,7 @@ class SignRepositoryImpl @Inject constructor(
     }
 
     private suspend fun saveAuthTokens(authToken: AuthTokenEntity) {
-        Log.d(TAG, "saveAuthTokens(): $authToken")
+        log("saveAuthTokens(): $authToken")
         datastore.saveAuthTokens(authToken.refresh_token!!, authToken.access_token!!)
     }
 
@@ -114,7 +115,7 @@ class SignRepositoryImpl @Inject constructor(
     }
 
     private suspend fun saveAddress(address: Address) {
-        Log.d(TAG, "saveAddress(): $address")
+        log("saveAddress(): $address")
         addressDatastore.setAddress(address)
     }
 }

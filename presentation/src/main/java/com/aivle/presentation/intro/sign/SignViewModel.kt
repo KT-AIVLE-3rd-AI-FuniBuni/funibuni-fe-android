@@ -1,12 +1,12 @@
 package com.aivle.presentation.intro.sign
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.aivle.domain.model.kakao.KakaoAddressDocument
 import com.aivle.domain.model.sign.SignUpUser
 import com.aivle.domain.response.SignUpResponse
 import com.aivle.domain.usecase.sign.SignUpUseCase
+import com.loggi.core_util.extensions.log
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,7 +16,6 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-private const val TAG = "SignViewModel"
 
 @HiltViewModel
 class SignViewModel @Inject constructor(
@@ -56,7 +55,7 @@ class SignViewModel @Inject constructor(
     }
 
     fun signUp(addressDetail: String) {
-        Log.d(TAG, "signUp(): phoneNumber=$phoneNumber, userName=$userName, address=$address, addressDetail=$addressDetail")
+        log("signUp(): phoneNumber=$phoneNumber, userName=$userName, address=$address, addressDetail=$addressDetail")
         viewModelScope.launch {
             val signUpUser = SignUpUser(phoneNumber, userName, address!!, addressDetail)
 

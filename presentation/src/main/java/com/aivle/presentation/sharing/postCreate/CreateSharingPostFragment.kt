@@ -4,7 +4,6 @@ import android.app.DatePickerDialog
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,18 +14,17 @@ import com.aivle.domain.model.sharingPost.SharingPostCreate
 import com.aivle.presentation.R
 import com.aivle.presentation.databinding.FragmentCreateSharingPostBinding
 import com.aivle.presentation.disposal.base.BaseDisposalFragment
-import com.aivle.presentation.util.ext.repeatOnStarted
-import com.aivle.presentation.util.model.FuniBuniDate
-import com.aivle.presentation_design.interactive.ui.BottomUpDialog
 import com.aivle.presentation.sharing.postCreate.CreateSharingPostViewModel.Event
 import com.aivle.presentation.sharing.postDetail.SharingPostDetailActivity
 import com.aivle.presentation.util.common.CategoryImageBinder
+import com.aivle.presentation.util.ext.repeatOnStarted
 import com.aivle.presentation.util.ext.showToast
+import com.aivle.presentation.util.model.FuniBuniDate
+import com.aivle.presentation_design.interactive.ui.BottomUpDialog
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.loggi.core_util.extensions.log
 import dagger.hilt.android.AndroidEntryPoint
-
-private const val TAG = "CreateSharingPostFragment"
 
 @AndroidEntryPoint
 class CreateSharingPostFragment
@@ -36,7 +34,7 @@ class CreateSharingPostFragment
 
     private val backPressedCallback = object : OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
-            Log.d(TAG, "handleOnBackPressed()")
+            log("handleOnBackPressed()")
             showBackConfirmDialog()
         }
     }

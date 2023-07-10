@@ -27,8 +27,6 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-private const val TAG = "CameraManager"
-
 class CameraManager(
     private val fragment: Fragment,
     private val listener: CameraListener,
@@ -41,7 +39,6 @@ class CameraManager(
     private var currentPhotoPath: String? = null
 
     override fun onCreate(owner: LifecycleOwner) {
-        Log.d(TAG, "onCreate()")
         cameraLauncher = fragment.registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
                 listener.onImageCapture(imageBitmap, currentPhotoPath)
@@ -50,7 +47,6 @@ class CameraManager(
     }
 
     override fun onDestroy(owner: LifecycleOwner) {
-        Log.d(TAG, "onDestroy()")
         currentPhotoPath?.let { path ->
             // deleteImageFile(path)
         }
@@ -83,20 +79,16 @@ class CameraManager(
     }
 
     private fun dispatchTakePictureIntent() {
-        Log.d(TAG, "dispatchTakePictureIntent()")
         val photoFile = createImageFile()
             ?: return
-        Log.d(TAG, "dispatchTakePictureIntent(): photoFile=$photoFile")
         val photoURI = FileProvider.getUriForFile(
             fragment.requireContext(),
             "${fragment.requireContext().applicationContext.packageName}.fileprovider",
             photoFile,
         )
-        Log.d(TAG, "dispatchTakePictureIntent(): photoURI=$photoURI")
         val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE).apply {
             putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
         }
-        Log.d(TAG, "dispatchTakePictureIntent(): photoURI=$photoURI")
         cameraLauncher?.launch(takePictureIntent)
     }
 

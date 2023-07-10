@@ -37,6 +37,8 @@ class MyProfileDetailActivity : BaseActivity<ActivityMyProfileDetailBinding>(R.l
         navController.addOnDestinationChangedListener { _, _, args ->
             binding.title.text = args?.getString("title")
         }
+
+        setResult(RESULT_OK)
     }
 
     private fun initView() {
@@ -70,7 +72,6 @@ class MyProfileDetailActivity : BaseActivity<ActivityMyProfileDetailBinding>(R.l
 
     private fun signOut() {
         startIntroActivity()
-        showToast("Sign out completed.")
     }
 
     private fun withdrawal() {

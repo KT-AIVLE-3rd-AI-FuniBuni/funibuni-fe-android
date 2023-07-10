@@ -58,7 +58,6 @@ class LargeCategoryResultListAdapter
     }
 
     private fun updateSelectionItems(newSelectedPosition: Int) {
-        Log.d(TAG, "updateSelectionItem(): $newSelectedPosition")
         selectedPosition = newSelectedPosition
         currentList.forEachIndexed { index, item -> item.isSelected = index == newSelectedPosition }
         notifyItemRangeChanged(0, itemCount, CHANGED_SELECTION)

@@ -1,7 +1,9 @@
 package com.aivle.presentation.myprofile.tab
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import com.aivle.domain.model.user.User
 import com.aivle.domain.model.waste.WasteDisposalApplyItem
@@ -24,6 +26,12 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding>(R.layout.fragme
     private val viewModel: MyProfileViewModel by viewModels()
 
     private lateinit var listAdapter: WasteDisposalApplyListAdapter
+
+    private val activityLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+        if (it.resultCode == Activity.RESULT_OK) {
+            viewModel.loadMyBuni()
+        }
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -85,21 +93,21 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding>(R.layout.fragme
 
     private fun startWasteDisposalApplyListActivity() {
         val intent = WasteDisposalApplyListActivity.getIntent(requireContext())
-        startActivity(intent)
+        activityLauncher.launch(intent)
     }
 
     private fun startMyProfileDetailActivity() {
         val intent = MyProfileDetailActivity.getIntent(requireContext())
-        startActivity(intent)
+        activityLauncher.launch(intent)
     }
 
     private fun startMySharingPostListActivity(postType: Int) {
         val intent = MySharingPostListActivity.getIntent(requireContext(), postType)
-        startActivity(intent)
+        activityLauncher.launch(intent)
     }
 
     private fun startWasteDisposalApplyDetailActivity(wasteDisposalApplyId: Int) {
         val intent = WasteDisposalApplyDetailActivity.getIntent(requireContext(), wasteDisposalApplyId)
-        startActivity(intent)
+        activityLauncher.launch(intent)
     }
 }

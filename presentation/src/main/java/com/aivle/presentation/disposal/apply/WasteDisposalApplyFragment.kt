@@ -15,6 +15,7 @@ import com.aivle.presentation.disposal.base.BaseDisposalFragment
 import com.aivle.presentation.util.common.DatetimeUtil
 import com.aivle.presentation.disposal.apply.WasteDisposalApplyViewModel.Event
 import com.aivle.presentation.util.model.FuniBuniDate
+import com.loggi.core_util.extensions.log
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.Calendar
 import java.util.Date
@@ -52,7 +53,7 @@ class WasteDisposalApplyFragment : BaseDisposalFragment<FragmentWasteDisposalApp
             disposalFee.text = wasteSpec.feeString
         }
         binding.calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
-            Log.d(TAG, "setOnDateChangeListener: $year, $month, $dayOfMonth")
+            log("setOnDateChangeListener: $year, $month, $dayOfMonth")
             date = FuniBuniDate(year, month, dayOfMonth)
         }
     }

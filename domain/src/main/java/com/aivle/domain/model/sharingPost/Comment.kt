@@ -11,7 +11,9 @@ data class Comment constructor(
     val created_at: String,
 ) {
     var onClick: ((comment: Comment) -> Unit)? = null
-    var onLongClick: ((commentId: Int) -> Unit)? = null
+    var onLongClick: ((comment: Comment) -> Unit)? = null
+    var onClickEditComment: ((comment: Comment) -> Unit)? = null
+    var onClickDeleteComment: ((comment: Comment) -> Unit)? = null
 
     val created_at_string: String? = created_at.split("T").firstOrNull()
 }

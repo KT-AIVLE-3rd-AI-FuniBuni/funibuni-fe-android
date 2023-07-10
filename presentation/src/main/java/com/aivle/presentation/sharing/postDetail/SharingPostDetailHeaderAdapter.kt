@@ -51,10 +51,6 @@ class SharingPostDetailHeaderAdapter constructor(
             val navigationBarInsets = windowInsets.getInsets(WindowInsetsCompat.Type.navigationBars())
             systemBarHeight = systemBarInsets.top
             navigationBarHeight = navigationBarInsets.bottom
-//            Log.d(TAG, "init(): systemBarHeight=$systemBarHeight")
-//            Log.d(TAG, "init(): systemBarInsets=$systemBarInsets")
-//            Log.d(TAG, "init(): navigationBarHeight=$navigationBarHeight")
-//            Log.d(TAG, "init(): navigationBarInsets=$navigationBarInsets")
 
             // 헤더를 statusBar 높이 만큼 내리기
             bindingHeader.statusBarGuideline.setGuidelineBegin(systemBarHeight)

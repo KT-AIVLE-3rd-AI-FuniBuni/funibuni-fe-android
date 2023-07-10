@@ -20,16 +20,14 @@ AI 기반 대형폐기물 처리 원터치 서비스 **FuniBuni** 안드로이�
 
 ## Skills
 
-| Category     | Skills                                                     |
-|--------------|------------------------------------------------------------|
-| Architecture | Multi Module, Clean Architecture, MVVM, Repository Pattern |
-| DI           | Dagger Hilt                                                |
-| Network      | Retrofit2, ApiResponse                                     |
-| DB           | Room, DataStore                                            |
-| Async        | Coroutines Flow                                            |
-| Jetpack(AAC) | ViewModel, DataBinding, LiveData, Lifecycles, Navigation   |
-| Image        | Glide                                                      |
-| Camera       | CameraX                                                    |
-| AI           | TensorFlow Lite, ML Kit                                    |
-| AR           | AR Core                                                    |
-| Others       | -                                                          |
+| Category       | Skills                                                     |
+|----------------|------------------------------------------------------------|
+| Architecture   | Multi Module, Clean Architecture, MVVM, Repository Pattern |
+| Jetpack(AAC)   | ViewModel, DataBinding, LiveData, Lifecycles, Navigation   |
+| DI             | Dagger Hilt                                                |
+| Network        | Retrofit2, ApiResponse                                     |
+| DB             | Room, Datastore                                            |
+| Async          | Coroutines Flow                                            |
+| Image          | Glide                                                      |
+| Authentication | Firebase                                                   |
+| Others         | -                                                          |

@@ -24,6 +24,7 @@
         <activity android:name=".myprofile.applyList.WasteDisposalApplyListActivity"/>
         <activity android:name=".searchWasteSpec.SearchWasteSpecActivity"/>
         <activity android:name=".myprofile.applyDetail.WasteDisposalApplyDetailActivity"/>
-
+        <activity android:name=".sharing.postEdit.EditSharingPostActivity"/>
+        <activity android:name=".myprofile.privacyAndTerms.PrivacyAndTermsActivity"/>
     </application>
 </manifest>

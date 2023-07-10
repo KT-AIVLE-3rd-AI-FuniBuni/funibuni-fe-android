@@ -15,9 +15,6 @@ import com.aivle.presentation.intro.intro.IntroViewModel.Event
 import com.aivle.presentation.intro.sign.SignActivity
 import com.aivle.presentation.main.MainActivity
 
-import com.google.firebase.FirebaseApp
-import com.google.firebase.appcheck.FirebaseAppCheck
-import com.google.firebase.appcheck.safetynet.SafetyNetAppCheckProviderFactory
 import dagger.hilt.android.AndroidEntryPoint
 
 private const val TAG = "IntroActivity"
@@ -36,8 +33,9 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>(R.layout.activity_intro
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        //FirebasePhoneAuthManager.initializeFirebaseApp(this)
+
         initView()
-        initFirebaseApp()
         observeViewModel()
 
         viewModel.checkRefreshTokenIfExistsSignIn()
@@ -50,15 +48,6 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>(R.layout.activity_intro
         binding.btnStart.setOnClickListener {
              startSignActivity()
         }
-    }
-
-    private fun initFirebaseApp() {
-        // Firebase initialize
-        FirebaseApp.initializeApp(this)
-        val firebaseAppCheck = FirebaseAppCheck.getInstance()
-        firebaseAppCheck.installAppCheckProviderFactory(
-            SafetyNetAppCheckProviderFactory.getInstance() // TODO
-        )
     }
 
     private fun observeViewModel() = repeatOnStarted {

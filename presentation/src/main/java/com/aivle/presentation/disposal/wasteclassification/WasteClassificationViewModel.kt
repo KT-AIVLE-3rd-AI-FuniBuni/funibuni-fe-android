@@ -1,6 +1,5 @@
 package com.aivle.presentation.disposal.wasteclassification
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.aivle.domain.model.waste.WasteClassificationDocument
@@ -17,8 +16,6 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-
-private const val TAG = "WasteClassificationViewModel"
 
 @HiltViewModel
 class WasteClassificationViewModel @Inject constructor(
@@ -54,7 +51,6 @@ class WasteClassificationViewModel @Inject constructor(
     }
 
     private suspend fun transform(document: WasteClassificationDocument) {
-        Log.d(TAG, "foo(): $document")
         val wasteSpecTable = document.all_waste_specs
         val labels = document.labels
         if (labels.isEmpty()) {

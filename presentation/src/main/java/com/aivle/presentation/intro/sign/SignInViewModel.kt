@@ -7,8 +7,9 @@ import androidx.lifecycle.viewModelScope
 import com.aivle.domain.model.sign.SignInUser
 import com.aivle.domain.response.SignInResponse
 import com.aivle.domain.usecase.sign.SignInUseCase
-import com.aivle.presentation.intro.firebase.FirebasePhoneAuth
+import com.aivle.presentation.intro.firebase.FirebasePhoneAuthManager
 import com.google.firebase.FirebaseException
+import com.loggi.core_util.extensions.log
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -20,7 +21,7 @@ private const val TAG = "SignInViewModel"
 
 @HiltViewModel
 class SignInViewModel @Inject constructor(
-    private val phoneAuth: FirebasePhoneAuth,
+    private val phoneAuthManager: FirebasePhoneAuthManager,
     private val SignInUseCase: SignInUseCase,
 ) : ViewModel() {
 
@@ -31,19 +32,18 @@ class SignInViewModel @Inject constructor(
         private set
 
     init {
-        phoneAuth.init()
-            .setOnPhoneAuthCallback(OnMyPhoneAuthCallback())
+        phoneAuthManager.setOnPhoneAuthCallback(OnMyPhoneAuthCallback())
     }
 
     fun send(activity: Activity, phoneNumber: String) {
-        phoneAuth.send(activity, phoneNumber.toFirebasePhoneFormat())
+        phoneAuthManager.send(activity, phoneNumber.toFirebasePhoneFormat())
         viewModelScope.launch {
             _eventFlow.emit(Event.RequestSms.FirstTry.Loading)
         }
     }
 
     fun resend(activity: Activity, phoneNumber: String) {
-        phoneAuth.resend(activity, phoneNumber.toFirebasePhoneFormat())
+        phoneAuthManager.resend(activity, phoneNumber.toFirebasePhoneFormat())
         viewModelScope.launch {
             _eventFlow.emit(Event.RequestSms.Retry.Loading)
         }
@@ -51,7 +51,7 @@ class SignInViewModel @Inject constructor(
 
     fun authenticateAndSignIn(activity: Activity, smsCode: String) {
         viewModelScope.launch {
-            phoneAuth.authenticate(activity, smsCode)
+            phoneAuthManager.authenticate(activity, smsCode)
         }
     }
 
@@ -96,9 +96,9 @@ class SignInViewModel @Inject constructor(
         data class ShowToast(val message: String?) : Event()
     }
 
-    private inner class OnMyPhoneAuthCallback : FirebasePhoneAuth.OnPhoneAuthCallback {
+    private inner class OnMyPhoneAuthCallback : FirebasePhoneAuthManager.OnPhoneAuthCallback {
         override fun onVerificationCompleted(smsCode: String) {
-            Log.d(TAG, "onVerificationCompleted(): smsCode=$smsCode")
+            log("onVerificationCompleted(): smsCode=$smsCode")
 
             viewModelScope.launch {
                 _eventFlow.emit(Event.RequestSms.OnVerificationCompleted(smsCode))
@@ -106,7 +106,7 @@ class SignInViewModel @Inject constructor(
         }
 
         override fun onVerificationFailed(e: FirebaseException) {
-            Log.d(TAG, "onVerificationFailed(): e=$e")
+            log("onVerificationFailed(): e=$e")
             authenticatingPhoneNumber = ""
 
             viewModelScope.launch {
@@ -115,7 +115,7 @@ class SignInViewModel @Inject constructor(
         }
 
         override fun onStarted(phoneNumber: String) {
-            Log.d(TAG, "onStarted(): $phoneNumber")
+            log("onStarted(): $phoneNumber")
             authenticatingPhoneNumber = phoneNumber.toFuniBuniPhoneFormat()
 
             viewModelScope.launch {
@@ -124,7 +124,7 @@ class SignInViewModel @Inject constructor(
         }
 
         override fun onReStarted(phoneNumber: String) {
-            Log.d(TAG, "onReStarted(): $phoneNumber")
+            log("onReStarted(): $phoneNumber")
             authenticatingPhoneNumber = phoneNumber.toFuniBuniPhoneFormat()
 
             viewModelScope.launch {
@@ -133,7 +133,7 @@ class SignInViewModel @Inject constructor(
         }
 
         override fun onTimer(elapsedTimeSec: Int, remainingTimeString: String) {
-            Log.d(TAG, "onTimer($elapsedTimeSec): $remainingTimeString")
+            log("onTimer($elapsedTimeSec): $remainingTimeString")
 
             viewModelScope.launch {
                 _eventFlow.emit(Event.RequestSms.UpdateTimer(remainingTimeString))
@@ -141,7 +141,7 @@ class SignInViewModel @Inject constructor(
         }
 
         override fun onTimeout() {
-            Log.d(TAG, "onTimeout()")
+            log("onTimeout()")
             authenticatingPhoneNumber = ""
 
             viewModelScope.launch {
@@ -150,7 +150,7 @@ class SignInViewModel @Inject constructor(
         }
 
         override fun onPhoneAuthSucceed() {
-            Log.d(TAG, "onPhoneAuthSucceed()")
+            log("onPhoneAuthSucceed()")
 
             viewModelScope.launch {
                 val signInUser = SignInUser(authenticatingPhoneNumber)
@@ -171,7 +171,7 @@ class SignInViewModel @Inject constructor(
         }
 
         override fun onPhoneAuthFailed() {
-            Log.d(TAG, "onPhoneAuthFailed()")
+            log("onPhoneAuthFailed()")
 
             viewModelScope.launch {
                 _eventFlow.emit(Event.RequestSms.IncorrectCode)

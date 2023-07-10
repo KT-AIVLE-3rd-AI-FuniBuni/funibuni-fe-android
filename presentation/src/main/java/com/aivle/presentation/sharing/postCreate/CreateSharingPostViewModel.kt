@@ -1,19 +1,16 @@
 package com.aivle.presentation.sharing.postCreate
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.aivle.domain.model.sharingPost.SharingPostCreate
-import com.aivle.domain.model.sharingPost.SharingPostItem
 import com.aivle.domain.response.DataResponse
 import com.aivle.domain.usecase.sharingPost.CreateSharingPostUseCase
 import com.aivle.presentation.util.ext.launchDefault
+import com.loggi.core_util.extensions.log
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import javax.inject.Inject
-
-private const val TAG = "CreateSharingPostViewModel"
 
 @HiltViewModel
 class CreateSharingPostViewModel @Inject constructor(
@@ -24,7 +21,7 @@ class CreateSharingPostViewModel @Inject constructor(
     val eventFlow: StateFlow<Event> get() = _eventFlow
 
     fun createSharingPost(newPost: SharingPostCreate) = launchDefault {
-        Log.d(TAG, "createSharingPost(): $newPost")
+        log("createSharingPost(): $newPost")
         createSharingPostUseCase(newPost)
             .catch {
                 _eventFlow.emit(Event.Failure(it.message))

@@ -11,5 +11,7 @@ data class Reply(
 ) {
     val created_at_string: String? = created_at.split("T").firstOrNull()
 
-    var onLongClick: ((replyId: Int) -> Unit)? = null
+    var onLongClick: ((reply: Reply) -> Unit)? = null
+    var onClickEditReply: ((reply: Reply) -> Unit)? = null
+    var onClickDeleteReply: ((reply: Reply) -> Unit)? = null
 }

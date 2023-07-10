@@ -1,6 +1,5 @@
 package com.aivle.presentation_design.interactive.ui
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.view.Gravity
@@ -18,22 +17,20 @@ class InteractiveTextButton @JvmOverloads constructor(
 
         context.obtainStyledAttributes(attrs, R.styleable.InteractiveTextButton).use { typedArray ->
             val type = typedArray.getInteger(R.styleable.InteractiveTextButton_buttonType, 0)
-             when (type) {
+            when (type) {
                 0 -> { // type: dark
-                    background = AppCompatResources.getDrawable(context, R.drawable.bg_text_button)
-                    setTextColor(AppCompatResources.getColorStateList(context, R.color.selector_text_button_dark_text))
-
+                    background = AppCompatResources.getDrawable(context, R.drawable.bg_ripple_text_button_dark)
+                    setTextColor(AppCompatResources.getColorStateList(context, R.color.selector_text_button_dark_text_color))
                 }
                 1 -> { // type: light
-                    background = AppCompatResources.getDrawable(context, R.drawable.bg_text_button_light)
-                    setTextColor(context.getColor(R.color.theme_color_dark))
+                    background = AppCompatResources.getDrawable(context, R.drawable.bg_ripple_text_button_light)
+                    setTextColor(AppCompatResources.getColorStateList(context, R.color.selector_text_button_light_text_color))
                 }
                 else -> throw IllegalArgumentException("type=$type")
             }
 
             gravity = Gravity.CENTER
             textSize = 20f
-            // setTypeface(typeface, Typeface.BOLD)
         }
     }
 
@@ -44,9 +41,5 @@ class InteractiveTextButton @JvmOverloads constructor(
             InteractiveHelper.onTouchEvent(this, event)
             return super.onTouchEvent(event)
         }
-    }
-
-    private fun updateView(isEnabled: Boolean) {
-
     }
 }

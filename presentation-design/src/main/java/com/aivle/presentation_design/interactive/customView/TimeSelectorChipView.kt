@@ -53,7 +53,6 @@ class TimeSelectorChipView @JvmOverloads constructor(
 
     override fun onCheckedChanged(buttonView: CompoundButton?, isChecked: Boolean) {
         if (isChecked) {
-            Log.d(TAG, "onCheckedChanged(): buttonView=$buttonView, isChecked=$isChecked")
             chips.filter { it.isChecked && it != buttonView }
                 .forEach { it.isChecked = false }
         }

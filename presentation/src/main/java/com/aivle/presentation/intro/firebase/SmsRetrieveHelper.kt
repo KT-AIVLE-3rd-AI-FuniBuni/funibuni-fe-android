@@ -11,6 +11,7 @@ import com.google.android.gms.auth.api.phone.SmsRetriever
 import com.google.android.gms.auth.api.phone.SmsRetrieverClient
 import com.google.android.gms.common.api.CommonStatusCodes
 import com.google.android.gms.common.api.Status
+import com.loggi.core_util.extensions.log
 
 class SmsRetrieveHelper(private val activity: Activity) {
     companion object {
@@ -29,12 +30,12 @@ class SmsRetrieveHelper(private val activity: Activity) {
 
     private val smsVerificationReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
-            Log.d(TAG, "onReceive(): $intent")
-            Log.d(TAG, "onReceive(): ${intent.action}")
+            log("onReceive(): $intent")
+            log("onReceive(): ${intent.action}")
             if (intent.action == SmsRetriever.SMS_RETRIEVED_ACTION) {
                 val extras = intent.extras
                 val smsRetrieverStatus = extras?.get(SmsRetriever.EXTRA_STATUS) as Status
-                Log.d(TAG, "onReceive(): $extras, $smsRetrieverStatus, ${smsRetrieverStatus.statusCode}")
+                log("onReceive(): $extras, $smsRetrieverStatus, ${smsRetrieverStatus.statusCode}")
 
                 when (smsRetrieverStatus.statusCode) {
                     CommonStatusCodes.SUCCESS -> {
@@ -110,7 +111,7 @@ class SmsRetrieveHelper(private val activity: Activity) {
     }
 
     fun handleActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        Log.d(TAG, "handleActivityResult(): $requestCode, $resultCode, $data")
+        log("handleActivityResult(): $requestCode, $resultCode, $data")
         when (requestCode) {
             CREDENTIAL_PICKER_EMAIL_REQUEST ->
                 // Obtain the email from the result
@@ -138,7 +139,7 @@ class SmsRetrieveHelper(private val activity: Activity) {
                     // Extract one-time code from the message and complete verification
                     // `message` contains the entire text of the SMS message, so you will need
                     // to parse the string.
-                    Log.d(TAG, "handleActivityResult(): message=$message, parse(message)=${parseOneTimeCode(message)}")
+                    log("handleActivityResult(): message=$message, parse(message)=${parseOneTimeCode(message)}")
                     if (message != null) {
                         callback?.onSmsRetrieved(message, parseOneTimeCode(message))
                     }
@@ -146,7 +147,7 @@ class SmsRetrieveHelper(private val activity: Activity) {
                     // send one time code to the server
                 } else {
                     // Consent denied. User can type OTC manually.
-                    Log.d(TAG, "handleActivityResult(): Consent denied. User can type OTC manually.")
+                    log("handleActivityResult(): Consent denied. User can type OTC manually.")
                 }
         }
     }
@@ -173,13 +174,13 @@ class SmsRetrieveHelper(private val activity: Activity) {
     }
 
     private fun logCredentials(credential: Credential?) {
-        Log.d(TAG, "credential.id=${credential?.id}")
-        Log.d(TAG, "credential.idTokens=${credential?.idTokens}")
-        Log.d(TAG, "credential.name=${credential?.name}")
-        Log.d(TAG, "credential.familyName=${credential?.familyName}")
-        Log.d(TAG, "credential.givenName=${credential?.givenName}")
-        Log.d(TAG, "credential.password=${credential?.password}")
-        Log.d(TAG, "credential.profilePictureUri=${credential?.profilePictureUri}")
-        Log.d(TAG, "credential.accountType=${credential?.accountType}")
+        log("credential.id=${credential?.id}")
+        log("credential.idTokens=${credential?.idTokens}")
+        log("credential.name=${credential?.name}")
+        log("credential.familyName=${credential?.familyName}")
+        log("credential.givenName=${credential?.givenName}")
+        log("credential.password=${credential?.password}")
+        log("credential.profilePictureUri=${credential?.profilePictureUri}")
+        log("credential.accountType=${credential?.accountType}")
     }
 }

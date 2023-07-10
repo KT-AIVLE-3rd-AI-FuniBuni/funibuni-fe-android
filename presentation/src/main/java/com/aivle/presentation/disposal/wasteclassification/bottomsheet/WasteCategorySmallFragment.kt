@@ -1,15 +1,13 @@
 package com.aivle.presentation.disposal.wasteclassification.bottomsheet
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.activity.OnBackPressedCallback
 import com.aivle.domain.model.waste.WasteSpec
 import com.aivle.presentation.R
 import com.aivle.presentation.base.BaseFragment
 import com.aivle.presentation.databinding.BottomSheetWasteCategorySmallBinding
-
-private const val TAG = "WasteCategorySmallFragment"
+import com.loggi.core_util.extensions.log
 
 class WasteCategorySmallFragment(
     private val parent: OnChildFragmentListener,
@@ -17,17 +15,6 @@ class WasteCategorySmallFragment(
     WasteCategoryBottomSheetFragment.OnLargeCategorySelectedListener {
 
     private lateinit var listAdapter: WasteCategorySmallListAdapter
-    private val backPressedCallback = object : OnBackPressedCallback(true) {
-        override fun handleOnBackPressed() {
-            //dismiss()
-        }
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        //requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, backPressedCallback)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -36,7 +23,7 @@ class WasteCategorySmallFragment(
     }
 
     override fun onSelected(wasteSpecs: List<WasteSpec>) {
-        Log.d(TAG, "onSelected(): wasteSpecs=$wasteSpecs")
+        log("onSelected(): wasteSpecs=$wasteSpecs")
         binding.largeCategoryName.text = "대분류: ${wasteSpecs.first().large_category}"
         listAdapter.submitList(wasteSpecs.onEach {
             it.onClick2 = ::onClickSmallCategory

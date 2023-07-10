@@ -2,30 +2,33 @@ package com.aivle.presentation.sharing.postDetail
 
 import android.annotation.SuppressLint
 import android.app.Dialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
 import com.aivle.domain.model.sharingPost.Comment
 import com.aivle.domain.model.sharingPost.Reply
-import com.aivle.presentation.util.ext.repeatOnStarted
 import com.aivle.presentation.databinding.BottomSheetReplyBinding
 import com.aivle.presentation.sharing.postDetail.ReplyBottomSheetViewModel.Event
+import com.aivle.presentation.util.ext.repeatOnStarted
 import com.aivle.presentation.util.ext.showToast
 import com.aivle.presentation_design.interactive.ui.BottomUpDialog
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.loggi.core_util.extensions.log
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ReplyBottomSheetFragment private constructor(
     private val comment: Comment,
     private val offset: Int = 0,
+    private val onReplyCountChanged: ((isChanged: Boolean) -> Unit)? = null,
 ) : BottomSheetDialogFragment() {
 
     private lateinit var binding: BottomSheetReplyBinding
@@ -82,8 +85,22 @@ class ReplyBottomSheetFragment private constructor(
         viewModel.loadReplies(comment.post_id, comment.comment_id)
     }
 
+    override fun onDismiss(dialog: DialogInterface) {
+        super.onDismiss(dialog)
+
+        val isReplyCountChanged = comment.reply_count != replyListAdapter.itemCount
+        onReplyCountChanged?.invoke(isReplyCountChanged)
+    }
+
     private fun initView() {
         binding.btnClose.setOnClickListener { dismiss() }
+
+        binding.swipeRefresh.setOnRefreshListener {
+            if (binding.swipeRefresh.isRefreshing) {
+                viewModel.loadReplies(comment.post_id, comment.comment_id)
+            }
+        }
+
         binding.replyListView.adapter = ReplyListAdapter().also {
             replyListAdapter = it
         }
@@ -93,12 +110,14 @@ class ReplyBottomSheetFragment private constructor(
             }.show(parentFragmentManager, "reply-comment-bottom-sheet")
         }
         binding.comment = comment
+        binding.commentLayout.btnTheMore.isVisible = false
     }
 
     private fun handleEvent() = repeatOnStarted {
         viewModel.eventFlow.collect { event -> when (event) {
             is Event.None -> {}
             is Event.LoadReplies.Success -> {
+                log("Event.LoadReplies.Success: ${event.replies.count()}")
                 updateReplies(event.replies)
             }
             is Event.AddReply.Success -> {
@@ -114,17 +133,21 @@ class ReplyBottomSheetFragment private constructor(
     }
 
     private fun updateReplies(replies: List<Reply>) {
+        if (binding.swipeRefresh.isRefreshing) {
+            binding.swipeRefresh.isRefreshing = false
+        }
         replies.forEach {
             it.onLongClick = ::showDeleteConfirmDialog
+            it.onClickDeleteReply = ::showDeleteConfirmDialog
         }
         replyListAdapter.submitList(replies)
     }
 
-    private fun showDeleteConfirmDialog(replyId: Int) {
+    private fun showDeleteConfirmDialog(reply: Reply) {
         BottomUpDialog.Builder(requireActivity())
             .title("댓글을 삭제하시겠습니까?")
             .positiveButton {
-                viewModel.deleteReply(comment.post_id, comment.comment_id, replyId)
+                viewModel.deleteReply(comment.post_id, comment.comment_id, reply.reply_id)
             }
             .show()
     }
@@ -132,19 +155,20 @@ class ReplyBottomSheetFragment private constructor(
     class Builder(private val comment: Comment) {
 
         private var topOffset: Int = 0
+        private var listener: ((isChanged: Boolean) -> Unit)? = null
 
         fun topOffset(offset: Int) = apply {
             this.topOffset = offset
         }
 
+        fun replyCountChangedListener(listener: (isChanged: Boolean) -> Unit) = apply {
+            this.listener = listener
+        }
+
         fun show(fragmentManager: FragmentManager) {
             ReplyBottomSheetFragment(
-                comment, topOffset
+                comment, topOffset, listener
             ).show(fragmentManager, TAG)
         }
-    }
-
-    companion object {
-        const val TAG = "reply-bottom-sheet"
     }
 }

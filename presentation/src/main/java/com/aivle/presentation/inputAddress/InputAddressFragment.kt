@@ -16,6 +16,8 @@ import com.aivle.presentation.util.ext.showToast
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.gun0912.tedpermission.PermissionListener
 import com.gun0912.tedpermission.normal.TedPermission
+import com.loggi.core_util.extensions.log
+import com.loggi.core_util.extensions.logw
 import dagger.hilt.android.AndroidEntryPoint
 
 private const val TAG = "InputAddressFragment"
@@ -38,13 +40,11 @@ class InputAddressFragment : BaseFragment<FragmentInputAddressBinding>(R.layout.
     private fun checkPermission() {
         val listener = object : PermissionListener {
             override fun onPermissionGranted() {
-                showToast("onPermissionGranted()")
                 getLastLocation()
             }
 
             override fun onPermissionDenied(deniedPermissions: MutableList<String>?) {
                 showToast("onPermissionGranted(): $deniedPermissions")
-                Log.e(TAG, "onPermissionDenied(): $deniedPermissions")
             }
         }
 
@@ -63,13 +63,13 @@ class InputAddressFragment : BaseFragment<FragmentInputAddressBinding>(R.layout.
                 Manifest.permission.ACCESS_COARSE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED
         ) {
-            Log.w(TAG, "PERMISSION_DENIED")
+            logw("PERMISSION_DENIED")
             return
         }
         fusedLocationClient.lastLocation
             .addOnSuccessListener {
-                Log.d(TAG, "location=${it}")
-                Log.d(TAG, "longitude=${it.longitude}, latitude=${it.latitude}, accuracy=${it.accuracy}, time=${it.time}")
+                log("location=${it}")
+                log("longitude=${it.longitude}, latitude=${it.latitude}, accuracy=${it.accuracy}, time=${it.time}")
             }
     }
 
@@ -82,7 +82,7 @@ class InputAddressFragment : BaseFragment<FragmentInputAddressBinding>(R.layout.
                 Manifest.permission.ACCESS_COARSE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED
         ) {
-            Log.w(TAG, "PERMISSION_DENIED")
+            logw("PERMISSION_DENIED")
             return
         }
         val locationManager = requireContext().getSystemService(Context.LOCATION_SERVICE) as LocationManager
@@ -90,6 +90,6 @@ class InputAddressFragment : BaseFragment<FragmentInputAddressBinding>(R.layout.
             ?: return
 
 
-        Log.d(TAG, "getLastLocation(): longitude=${lastLocation.longitude}, latitude=${lastLocation.latitude}")
+        log("getLastLocation(): longitude=${lastLocation.longitude}, latitude=${lastLocation.latitude}")
     }
 }

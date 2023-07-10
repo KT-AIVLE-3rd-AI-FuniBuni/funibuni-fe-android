@@ -13,7 +13,7 @@
         <argument
             android:name="IsNavRootFragment"
             android:defaultValue="true"/>
-<!--        <action-->
+        <!--        <action-->
 <!--            android:id="@+id/action_homeFragment_to_nav_disposal"-->
 <!--            app:destination="@id/nav_disposal" />-->
 <!--        <action-->

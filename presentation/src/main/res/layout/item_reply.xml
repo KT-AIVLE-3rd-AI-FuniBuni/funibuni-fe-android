@@ -66,10 +66,12 @@
         <ImageView
             style="?actionButtonStyle"
             android:id="@+id/btn_the_more"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
             android:layout_marginEnd="8dp"
+            android:padding="4dp"
             android:src="@drawable/the_more_thin_24"
+            app:tint="@color/selector_enabled_black_and_gray"
             app:layout_constraintTop_toTopOf="@id/profile_icon"
             app:layout_constraintBottom_toBottomOf="@id/profile_icon"
             app:layout_constraintEnd_toEndOf="parent"/>

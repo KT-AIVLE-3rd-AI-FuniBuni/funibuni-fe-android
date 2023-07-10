@@ -82,5 +82,13 @@ data class FuniBuniDate(
             val diffInMillis = otherCalendar.timeInMillis - todayCalendar.timeInMillis
             return TimeUnit.MILLISECONDS.toDays(diffInMillis).toInt()
         }
+
+        fun parse(datetime: String): FuniBuniDate {
+            val (date, time) = datetime.split("T")
+            val (year, month, day) = date.split("-").map { it.toInt() }
+            val (hour, minute, second) = time.take(8).split(":").map { it.toInt() }
+
+            return FuniBuniDate(year, month - 1, day, hour, minute, second)
+        }
     }
 }

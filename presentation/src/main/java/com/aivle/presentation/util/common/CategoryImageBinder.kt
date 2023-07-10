@@ -39,6 +39,24 @@ object CategoryImageBinder {
         return categoryMap[indexLargeCategory]?.circle ?: NO_ID
     }
 
+    fun circle(largeCategory: String): Int {
+        val index = when (largeCategory) {
+            "의자" -> 0
+            "TV" -> 1
+            "자전거" -> 2
+            "선풍기" -> 3
+            "소파(안락의자)" -> 4
+            "책상(유리별도)" -> 5
+            "서랍장" -> 6
+            "항아리" -> 7
+            "화분" -> 8
+            "침대(목재)" -> 9
+            "침대(돌,옥,황토)" -> 10
+            else -> 0
+        }
+        return categoryMap[index]?.circle ?: NO_ID
+    }
+
     fun circleGray(indexLargeCategory: Int): Int {
         return categoryMap[indexLargeCategory]?.circleGray ?: NO_ID
     }

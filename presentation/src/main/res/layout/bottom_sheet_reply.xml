@@ -68,22 +68,38 @@
             android:background="@color/divider_mid_gray"
             app:layout_constraintTop_toBottomOf="@id/top_top_guideline"/>
 
-        <!-- Comment -->
-        <include layout="@layout/item_comment_in_reply"
-            android:id="@+id/comment_layout"
-            bind:comment="@{comment}"/>
-
-        <!-- Reply ListView -->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/reply_list_view"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_refresh"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginStart="44dp"
-            tools:listitem="@layout/item_reply"
-            tools:itemCount="3"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintTop_toBottomOf="@id/comment_layout"
-            app:layout_constraintBottom_toTopOf="@id/input_reply_divider"/>
+            app:layout_constraintTop_toBottomOf="@id/top_bottom_divider"
+            app:layout_constraintBottom_toBottomOf="@id/input_reply_divider">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <!-- Comment -->
+                <include layout="@layout/item_comment_in_reply"
+                    android:id="@+id/comment_layout"
+                    bind:comment="@{comment}"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <!-- Reply ListView -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/reply_list_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="44dp"
+                    tools:listitem="@layout/item_reply"
+                    tools:itemCount="3"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintTop_toBottomOf="@id/comment_layout"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
         <!-- Input Reply Divider -->
         <View

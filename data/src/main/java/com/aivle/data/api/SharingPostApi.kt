@@ -6,6 +6,7 @@ import com.aivle.data.entity.sharingPost.SharingPostCreateEntity
 import com.aivle.data.entity.sharingPost.SharingPostDetailEntity
 import com.aivle.data.entity.sharingPost.SharingPostItemEntity
 import com.skydoves.sandwich.ApiResponse
+import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
@@ -35,12 +36,12 @@ interface SharingPostApi {
     suspend fun updatePost(
         @Path("post_id") post_id: Int,
         @Body post: SharingPostDetailEntity,
-    ): ApiResponse<Map<String, String>>
+    ): ApiResponse<Unit>
 
     @DELETE("posts/{post_id}")
     suspend fun deletePost(
         @Path("post_id") post_id: Int
-    ): ApiResponse<Map<String, Int>>
+    ): Call<Unit> // 204 No Content
 
     @PUT("posts/{post_id}/sharing")
     suspend fun completeSharingPost(
@@ -79,7 +80,7 @@ interface SharingPostApi {
     suspend fun deleteComment(
         @Path("post_id") post_id: Int,
         @Path("comment_id") comment_id: Int,
-    ): ApiResponse<Map<String, String>>
+    ): ApiResponse<Unit>
 
     @POST("posts/{post_id}/comments/{comment_id}/report")
     suspend fun reportComment(
@@ -113,7 +114,7 @@ interface SharingPostApi {
         @Path("post_id") post_id: Int,
         @Path("comment_id") comment_id: Int,
         @Path("reply_id") reply_id: Int,
-    ): ApiResponse<Map<String, Int>>
+    ): Call<Unit> // 204 No Content
 
     @POST("posts/{post_id}/comments/{comment_id}/replies/{reply_id}/report")
     suspend fun reportReply(

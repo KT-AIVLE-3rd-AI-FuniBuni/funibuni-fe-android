@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
@@ -14,16 +13,15 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.aivle.presentation.R
 import com.aivle.presentation.base.BaseActivity
-import com.aivle.presentation.util.ext.repeatOnStarted
-import com.aivle.presentation.util.ext.showToast
-import com.aivle.presentation.util.common.KeyboardHeightProvider
 import com.aivle.presentation.databinding.ActivitySignBinding
 import com.aivle.presentation.intro.firebase.SmsRetrieveHelper
 import com.aivle.presentation.intro.sign.SignViewModel.SignUpEvent
+import com.aivle.presentation.util.common.KeyboardHeightProvider
+import com.aivle.presentation.util.ext.repeatOnStarted
+import com.aivle.presentation.util.ext.showToast
 import com.aivle.presentation_design.interactive.ui.BottomUpDialog
+import com.loggi.core_util.extensions.log
 import dagger.hilt.android.AndroidEntryPoint
-
-private const val TAG = "SignActivity"
 
 @AndroidEntryPoint
 class SignActivity : BaseActivity<ActivitySignBinding>(R.layout.activity_sign) {
@@ -148,12 +146,12 @@ class SignActivity : BaseActivity<ActivitySignBinding>(R.layout.activity_sign) {
         }
 
         override fun onPickedPhone(phoneNumber: String) {
-            Log.d(TAG, "onPickedPhone(): phoneNumber=$phoneNumber")
+            log("onPickedPhone(): phoneNumber=$phoneNumber")
             viewModel.sendPhoneNumber(phoneNumber)
         }
 
         override fun onSmsRetrieved(message: String, smsCode: String?) {
-            Log.d(TAG, "onSmsRetrieved(): message=$message, smsCode=$smsCode")
+            log("onSmsRetrieved(): message=$message, smsCode=$smsCode")
             if (smsCode != null) {
                 viewModel.sendSmsCode(smsCode)
             }

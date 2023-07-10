@@ -76,7 +76,6 @@ class FilterableInputEditText : TextInputEditText {
 
     private fun setFiltersByInputType(inputType: Int) {
         // 필터 순서 중요!!
-        Log.i(TAG, "setFiltersByInputType(): inputType=$inputType")
         when (inputType) {
             InputType.TYPE_TEXT_VARIATION_PERSON_NAME -> {}
             InputType.TYPE_TEXT_VARIATION_WEB_EMAIL_ADDRESS ->

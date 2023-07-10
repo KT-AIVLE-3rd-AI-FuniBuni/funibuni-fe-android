@@ -1,20 +1,17 @@
 package com.aivle.presentation.disposal.applyDetail
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.aivle.domain.model.waste.WasteDisposalApplyDetail
-import com.aivle.domain.repository.WasteRepository
 import com.aivle.domain.response.DataResponse
 import com.aivle.domain.response.NothingResponse
 import com.aivle.domain.usecase.waste.CancelWasteDisposalApplyUseCase
 import com.aivle.domain.usecase.waste.GetWasteDisposalApplyDetailUseCase
 import com.aivle.presentation.util.ext.launchDefault
+import com.loggi.core_util.extensions.log
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 private const val TAG = "WasteDisposalApplyDetailViewModel"
@@ -33,7 +30,7 @@ class WasteDisposalApplyDetailViewModel @Inject constructor(
             .catch { _eventFlow.emit(Event.Failure(it.message)) }
             .collect { response -> when (response) {
                 is DataResponse.Success -> {
-                    Log.d(TAG, "loadApplyDetail(DataResponse.Success): ${response.data}")
+                    log("loadApplyDetail(DataResponse.Success): ${response.data}")
                     _eventFlow.emit(Event.LoadApplyDetail.Success(response.data))
                 }
                 is DataResponse.Failure -> {

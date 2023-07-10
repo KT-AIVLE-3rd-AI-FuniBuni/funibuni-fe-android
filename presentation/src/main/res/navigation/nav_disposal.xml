@@ -9,7 +9,7 @@
         android:id="@+id/disposalFragment"
         android:name="com.aivle.presentation.disposal.disposalTab.DisposalTabFragment"
         android:label="DisposalFragment"
-        tools:layout="@layout/fragment_disposal">
+        tools:layout="@layout/fragment_disposal_v1">
         <argument
             android:name="IsNavRootFragment"
             android:defaultValue="true"/>

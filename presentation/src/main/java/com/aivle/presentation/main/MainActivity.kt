@@ -4,10 +4,8 @@ import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import androidx.activity.viewModels
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.view.isVisible
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -16,16 +14,13 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupWithNavController
 import com.aivle.domain.model.address.Address
-import com.aivle.domain.model.util.DatetimeUtil
 import com.aivle.presentation.R
 import com.aivle.presentation.base.BaseActivity
-import com.aivle.presentation.util.ext.repeatOnStarted
 import com.aivle.presentation.databinding.ActivityMainBinding
 import com.aivle.presentation.main.MainViewModel.Event
-import com.aivle.presentation.util.model.FuniBuniDate
+import com.aivle.presentation.util.ext.repeatOnStarted
+import com.loggi.core_util.extensions.log
 import dagger.hilt.android.AndroidEntryPoint
-import java.text.SimpleDateFormat
-import java.util.Locale
 
 private const val TAG = "MainActivity"
 
@@ -39,26 +34,26 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val today = FuniBuniDate.today()
-        val other = FuniBuniDate(2023, 6, 3, 23)
-        Log.d(TAG, "onCreate(): $today")
-        Log.d(TAG, "onCreate(): $other")
-        Log.d(TAG, "onCreate(): ${other - today}")
-
         initNavigation()
         initView()
         handleViewModelEvent()
 
         viewModel.loadAddress()
+        viewModel.loadUserInfo()
+    }
+
+    fun navigate(menuItemId: Int) {
+        val bottomNav = binding.bottomNav
+        val menuItem = bottomNav.menu.findItem(menuItemId)
+        menuItem.isChecked = true
+        bottomNav.selectedItemId = menuItem.itemId
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        Log.d(TAG, "onOptionsItemSelected(): $item")
         return item.onNavDestinationSelected(navController) || super.onOptionsItemSelected(item)
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        Log.d(TAG, "onSupportNavigateUp()")
         return navController.navigateUp(appBarConfiguration)
     }
 
@@ -67,7 +62,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             .navController
 
         navController.addOnDestinationChangedListener { _, dest, args ->
-            Log.d(TAG, "onDestinationChanged: ${dest.label}")
             if (dest.label == "HomeFragment") {
                 updateHeader(isDark = true)
             } else {
@@ -81,10 +75,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         appBarConfiguration = AppBarConfiguration(
             setOf(R.id.homeFragment, R.id.disposalFragment, R.id.sharingPostListFragment, R.id.myProfileFragment)
         )
-
-//        val appBarConfiguration = AppBarConfiguration(navController.graph)
-//        val a = appBarConfiguration.topLevelDestinations
-
     }
 
     private fun updateHeader(isDark: Boolean) {
@@ -119,7 +109,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     }
 
     private fun setHeader(address: Address) {
-        Log.d(TAG, "setHeader(): $address")
         binding.header.address.text = "${address.city} ${address.district}"
         binding.header.addressToggle.isVisible = true
     }

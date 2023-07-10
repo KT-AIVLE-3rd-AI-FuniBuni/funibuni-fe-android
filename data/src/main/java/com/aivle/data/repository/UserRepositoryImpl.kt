@@ -3,6 +3,7 @@ package com.aivle.data.repository
 import com.aivle.data.api.UserApi
 import com.aivle.data.di.api.FuniBuniApiQualifier
 import com.aivle.data.mapper.toModel
+import com.aivle.domain.model.address.Address
 import com.aivle.domain.model.user.User
 import com.aivle.domain.repository.UserRepository
 import com.aivle.domain.response.DataResponse
@@ -29,9 +30,20 @@ class UserRepositoryImpl @Inject constructor(
     }
 
     override suspend fun updateUserInfo(user: User): Flow<DataResponse<User>> = flow {
-        api.updateUserInfo(user)
+        val body = mapOf("nickname" to user.nickname!!)
+        api.updateUserInfo(body)
             .suspendOnSuccess {
                 emit(DataResponse.Success(data.toModel()))
+            }
+            .suspendOnFailure {
+                emit(DataResponse.Failure.Error(this))
+            }
+    }
+
+    override suspend fun getAddresses(): Flow<DataResponse<List<Address>>> = flow {
+        api.getAddresses()
+            .suspendOnSuccess {
+                emit(DataResponse.Success(data.map { it.toModel() }))
             }
             .suspendOnFailure {
                 emit(DataResponse.Failure.Error(this))

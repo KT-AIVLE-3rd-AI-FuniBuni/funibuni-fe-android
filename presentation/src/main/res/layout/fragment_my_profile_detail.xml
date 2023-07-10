@@ -159,7 +159,7 @@
                     android:id="@+id/btn_privacy_and_terms">
 
                     <TextView style="@style/MyProfileDetail_TextViewLeft_Large"
-                        android:text="개인정보처리방침 및 이용약관"/>
+                        android:text="개인정보 처리방침"/>
 
                     <ImageView style="@style/MyProfileDetail_ArrowIcon"/>
 

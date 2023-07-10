@@ -1,11 +1,26 @@
 package com.aivle.presentation.intro.sign
 
+import android.graphics.Color
+import android.graphics.Typeface
 import android.os.Bundle
 import android.text.Editable
+import android.text.SpannableString
+import android.text.Spanned
 import android.text.TextWatcher
+import android.text.method.LinkMovementMethod
+import android.text.style.ClickableSpan
+import android.text.style.ForegroundColorSpan
+import android.text.style.StyleSpan
 import android.util.Log
 import android.view.View
-import android.widget.Toast
+import android.view.ViewGroup
+import android.view.ViewGroup.LayoutParams.MATCH_PARENT
+import android.view.ViewGroup.MarginLayoutParams
+import android.view.WindowManager
+import android.webkit.WebView
+import android.webkit.WebViewClient
+import android.widget.FrameLayout
+import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.widget.Guideline
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
@@ -13,12 +28,11 @@ import com.aivle.presentation.R
 import com.aivle.presentation.util.ext.repeatOnStarted
 import com.aivle.presentation.databinding.FragmentSignInBinding
 import com.aivle.presentation.intro.sign.SignInViewModel.Event
+import com.aivle.presentation.util.ext.dpToPixels
 import com.aivle.presentation.util.ext.showToast
 import com.aivle.presentation_design.interactive.ui.FilterableMaterialAutoCompleteTextView
 import com.aivle.presentation_design.interactive.ui.MySnackBar
 import dagger.hilt.android.AndroidEntryPoint
-
-private const val TAG = "SignInFragment"
 
 @AndroidEntryPoint
 class SignInFragment : BaseSignFragment<FragmentSignInBinding>(R.layout.fragment_sign_in) {
@@ -30,20 +44,69 @@ class SignInFragment : BaseSignFragment<FragmentSignInBinding>(R.layout.fragment
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d(TAG, "onViewCreated()")
 
+        initGuideMessageTextView()
         initView()
-        handleUiEvent()
+        handleViewModelEvent()
         handleActivityViewModelEvent()
     }
 
-    private fun initView() {
+    private fun initGuideMessageTextView() {
+        // 가이드 메시지 애니메이션
         binding.guideMessage1.animateFadeInWithAfter {
-            binding.guideMessage2.animateFadeInWithAfter {
+            binding.guideMessage2.animateFadeIn()
+            binding.guidePrivacyPolicy.animateFadeInWithAfter {
                 binding.edtLayoutPhoneNumber.animateFadeIn()
             }
         }
 
+        // 개인정보처리방침 문구 링크 적용
+        val privacyGuideText = "퍼니버니는 휴대폰 번호로 가입해요. 번호는 개인정보처리방침에 따라 안전하게 보관되며 어디에도 공개되지 않아요."
+        val clickableText = "개인정보처리방침"
+        val boldText = "안전하게 보관"
+
+        val spannableString = SpannableString(privacyGuideText)
+        val clickableSpan = object : ClickableSpan() {
+            override fun onClick(widget: View) {
+                showPrivacyPolicyDialog()
+            }
+        }
+        val boldSpan = StyleSpan(Typeface.BOLD)
+
+        var startIndex = privacyGuideText.indexOf(clickableText)
+        var endIndex = startIndex + clickableText.length
+        spannableString.setSpan(clickableSpan, startIndex, endIndex, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        spannableString.setSpan(ForegroundColorSpan(Color.BLUE), startIndex, endIndex, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+
+        startIndex = privacyGuideText.indexOf(boldText)
+        endIndex = startIndex + boldText.length
+        spannableString.setSpan(boldSpan, startIndex, endIndex, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+
+        binding.guidePrivacyPolicy.text = spannableString
+        binding.guidePrivacyPolicy.movementMethod = LinkMovementMethod.getInstance()
+    }
+
+    private fun showPrivacyPolicyDialog() {
+        // 다이얼로그 커스텀뷰
+        val dialogView = layoutInflater.inflate(R.layout.dialog_privacy_policy, null)
+        val webView = dialogView.findViewById<WebView>(R.id.web_view)
+        webView.webViewClient = WebViewClient()
+        webView.loadUrl("file:///android_asset/funibuni_privacy_and_terms.html")
+
+        // 다이얼로그 생성
+        AlertDialog.Builder(requireContext())
+            .setTitle("개인정보 처리방침")
+            .setView(dialogView)
+            .setPositiveButton("확인", null)
+            .show()
+
+        // 다이얼로그 높이 지정
+        dialogView.layoutParams = FrameLayout.LayoutParams(
+            MATCH_PARENT, 400.dpToPixels(requireContext())
+        )
+    }
+
+    private fun initView() {
         binding.edtPhoneNumber.addTextChangedListener(EditTextWatcher(binding.edtPhoneNumber))
         binding.edtPhoneAuthCode.addTextChangedListener(EditTextWatcher(binding.edtPhoneAuthCode))
 
@@ -68,7 +131,7 @@ class SignInFragment : BaseSignFragment<FragmentSignInBinding>(R.layout.fragment
         }
     }
 
-    private fun handleUiEvent() = repeatOnStarted {
+    private fun handleViewModelEvent() = repeatOnStarted {
         viewModel.eventFlow.collect { event -> when (event) {
             is Event.RequestSms.FirstTry.Loading -> {
                 binding.btnAuth.text = "인증하기"
@@ -154,7 +217,6 @@ class SignInFragment : BaseSignFragment<FragmentSignInBinding>(R.layout.fragment
 
     private fun enablePhoneAuthButton(isEnabled: Boolean) {
         binding.btnAuth.isEnabled = isEnabled
-//        binding.btnAuth.isEnabled = true // TODO: 지우기
     }
 
     private fun showSnackBar(message: String) {
@@ -167,12 +229,10 @@ class SignInFragment : BaseSignFragment<FragmentSignInBinding>(R.layout.fragment
     private fun handleActivityViewModelEvent() = repeatOnStarted {
         signViewModel.dataEventFlow.collect { event -> when (event) {
             is SignViewModel.Event.PhoneNumber -> {
-                Log.d(TAG, "SignViewModel.Event.PhoneNumber")
                 val phoneNumber = event.value
                 binding.edtPhoneNumber.setText(phoneNumber)
             }
             is SignViewModel.Event.SmsCode -> {
-                Log.d(TAG, "SignViewModel.Event.SmsCode")
                 val smsCode = event.value
                 setSmsCode(smsCode)
             }
@@ -195,7 +255,6 @@ class SignInFragment : BaseSignFragment<FragmentSignInBinding>(R.layout.fragment
             }
             enablePhoneAuthButton(isEnabled)
 
-            Log.d(TAG, "onTextChanged(): ${editText.id == binding.edtPhoneAuthCode.id}, ${editText.error}\"")
             if (editText.id == binding.edtPhoneAuthCode.id && editText.isShowingError()) {
                 editText.error = null
             }
