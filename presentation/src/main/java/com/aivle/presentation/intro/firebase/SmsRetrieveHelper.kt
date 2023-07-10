@@ -1,9 +1,12 @@
 package com.aivle.presentation.intro.firebase
 
 import android.app.Activity
-import android.content.*
+import android.content.ActivityNotFoundException
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.os.Build
-import android.util.Log
 import com.google.android.gms.auth.api.credentials.Credential
 import com.google.android.gms.auth.api.credentials.Credentials
 import com.google.android.gms.auth.api.credentials.HintRequest
@@ -14,9 +17,8 @@ import com.google.android.gms.common.api.Status
 import com.loggi.core_util.extensions.log
 
 class SmsRetrieveHelper(private val activity: Activity) {
-    companion object {
-        private const val TAG = "SmsRetrieveHelper"
 
+    companion object {
         const val CREDENTIAL_PICKER_PHONE_REQUEST = 1
         const val CREDENTIAL_PICKER_EMAIL_REQUEST = 2
         const val SMS_CONSENT_REQUEST = 3

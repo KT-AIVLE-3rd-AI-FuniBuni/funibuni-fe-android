@@ -9,12 +9,10 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.aivle.domain.model.waste.SmallCategoryResult
 import com.aivle.presentation.R
 import com.aivle.presentation.databinding.ItemResultSmallCategoryBinding
 import com.aivle.presentation.util.model.AiResult
 
-private const val TAG = "SmallCategoryResultListAdapter"
 private const val CHANGED_SELECTION = "changed-selection"
 private val DiffCallback = object : DiffUtil.ItemCallback<AiResult>() {
     override fun areItemsTheSame(oldItem: AiResult, newItem: AiResult): Boolean = oldItem === newItem

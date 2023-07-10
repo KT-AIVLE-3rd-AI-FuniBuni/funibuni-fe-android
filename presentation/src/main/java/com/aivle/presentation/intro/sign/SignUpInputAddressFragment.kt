@@ -26,8 +26,6 @@ import com.gun0912.tedpermission.normal.TedPermission
 import com.loggi.core_util.extensions.log
 import dagger.hilt.android.AndroidEntryPoint
 
-private const val TAG = "InputAddressFragment"
-
 @AndroidEntryPoint
 class SignUpInputAddressFragment : BaseSignFragment<FragmentSignUpInputAddressBinding>(R.layout.fragment_sign_up_input_address) {
 

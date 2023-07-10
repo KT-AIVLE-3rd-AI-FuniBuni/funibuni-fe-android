@@ -19,8 +19,6 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-private const val TAG = "WasteCategoryBottomSheetFragment"
-
 interface OnChildFragmentListener {
     fun onSelected(childNumber: Int, index: Int)
 }

@@ -18,7 +18,6 @@ import java.util.concurrent.TimeUnit
 @InstallIn(SingletonComponent::class)
 object KakaoApiModule {
 
-    private const val TAG = "KakaoApiModule"
     private const val BASE_URL = "https://dapi.kakao.com/v2/local/"
     private const val TIME_OUT = 10L
     private const val AUTHORIZATION = "Authorization"

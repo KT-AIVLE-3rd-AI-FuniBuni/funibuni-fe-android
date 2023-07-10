@@ -168,7 +168,7 @@ class ReplyBottomSheetFragment private constructor(
         fun show(fragmentManager: FragmentManager) {
             ReplyBottomSheetFragment(
                 comment, topOffset, listener
-            ).show(fragmentManager, TAG)
+            ).show(fragmentManager, "tag")
         }
     }
 }

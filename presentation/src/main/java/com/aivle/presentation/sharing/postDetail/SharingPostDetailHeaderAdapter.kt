@@ -2,17 +2,18 @@ package com.aivle.presentation.sharing.postDetail
 
 import android.animation.ValueAnimator
 import android.graphics.Color
-import android.util.Log
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import android.view.Window
 import android.view.animation.AccelerateDecelerateInterpolator
-import androidx.core.view.*
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
+import androidx.core.view.updateLayoutParams
 import com.aivle.presentation.databinding.ActivitySharingPostDetailBinding
 import com.aivle.presentation.databinding.HeaderSharingPostDetailBinding
 import com.google.android.material.appbar.AppBarLayout
-
-private const val TAG = "SharingPostDetailHeaderAdapter"
 
 class SharingPostDetailHeaderAdapter constructor(
     private val binding: ActivitySharingPostDetailBinding,

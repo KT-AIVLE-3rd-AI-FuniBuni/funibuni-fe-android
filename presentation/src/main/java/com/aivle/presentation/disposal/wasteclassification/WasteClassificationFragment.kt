@@ -10,18 +10,16 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.aivle.domain.model.waste.WasteSpec
 import com.aivle.presentation.R
+import com.aivle.presentation.databinding.FragmentWasteClassificationBinding
+import com.aivle.presentation.disposal.base.BaseDisposalFragment
+import com.aivle.presentation.disposal.wasteclassification.WasteClassificationViewModel.Event
+import com.aivle.presentation.disposal.wasteclassification.bottomsheet.WasteCategoryBottomSheetFragment
+import com.aivle.presentation.util.common.BitmapUtil
 import com.aivle.presentation.util.ext.repeatOnStarted
 import com.aivle.presentation.util.ext.showToast
-import com.aivle.presentation.util.common.BitmapUtil
-import com.aivle.presentation.databinding.FragmentWasteClassificationBinding
-import com.aivle.presentation.disposal.wasteclassification.WasteClassificationViewModel.Event
-import com.aivle.presentation.disposal.base.BaseDisposalFragment
-import com.aivle.presentation.disposal.wasteclassification.bottomsheet.WasteCategoryBottomSheetFragment
 import com.aivle.presentation.util.model.AiResult
 import com.aivle.presentation.util.model.ClassificationResult
 import dagger.hilt.android.AndroidEntryPoint
-
-private const val TAG = "WasteClassificationFragment"
 
 @AndroidEntryPoint
 class WasteClassificationFragment : BaseDisposalFragment<FragmentWasteClassificationBinding>(

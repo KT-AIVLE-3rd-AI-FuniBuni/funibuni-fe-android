@@ -17,8 +17,6 @@ import java.util.concurrent.TimeUnit
 @InstallIn(SingletonComponent::class)
 object FuniBuniSignApiModule {
 
-    private const val TAG = "FuniBuniSignApiModule"
-
     @FuniBuniSignApiQualifier
     @Provides
     fun provideRetrofit(

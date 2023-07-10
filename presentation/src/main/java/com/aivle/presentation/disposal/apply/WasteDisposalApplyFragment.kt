@@ -1,26 +1,20 @@
 package com.aivle.presentation.disposal.apply
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.aivle.domain.model.address.Address
 import com.aivle.presentation.R
+import com.aivle.presentation.databinding.FragmentWasteDisposalApplyBinding
+import com.aivle.presentation.disposal.apply.WasteDisposalApplyViewModel.Event
+import com.aivle.presentation.disposal.base.BaseDisposalFragment
 import com.aivle.presentation.util.ext.repeatOnStarted
 import com.aivle.presentation.util.ext.showToast
-import com.aivle.presentation.databinding.FragmentWasteDisposalApplyBinding
-import com.aivle.presentation.disposal.base.BaseDisposalFragment
-import com.aivle.presentation.util.common.DatetimeUtil
-import com.aivle.presentation.disposal.apply.WasteDisposalApplyViewModel.Event
 import com.aivle.presentation.util.model.FuniBuniDate
 import com.loggi.core_util.extensions.log
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.Calendar
-import java.util.Date
-
-private const val TAG = "WasteDisposalApplyFragment"
 
 @AndroidEntryPoint
 class WasteDisposalApplyFragment : BaseDisposalFragment<FragmentWasteDisposalApplyBinding>(R.layout.fragment_waste_disposal_apply) {

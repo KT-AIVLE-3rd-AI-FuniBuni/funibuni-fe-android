@@ -1,6 +1,5 @@
 package com.aivle.data.repository
 
-import android.util.Log
 import com.aivle.data.api.SignApi
 import com.aivle.data.api.SignWithTokenApi
 import com.aivle.data.datastore.AddressDatastore
@@ -24,11 +23,8 @@ import com.skydoves.sandwich.suspendOnException
 import com.skydoves.sandwich.suspendOnFailure
 import com.skydoves.sandwich.suspendOnSuccess
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
-
-private const val TAG = "SignRepositoryImpl"
 
 class SignRepositoryImpl @Inject constructor(
     @FuniBuniSignApiQualifier

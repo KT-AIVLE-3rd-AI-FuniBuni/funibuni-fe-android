@@ -49,8 +49,6 @@ class PreferencesDatastoreImpl @Inject constructor(
     }
 
     companion object {
-        private const val TAG = "PreferencesDatastoreImpl"
-
         private val ADDRESS = stringPreferencesKey("address")
         private val REFRESH_TOKEN = stringPreferencesKey("refresh_token")
         private val ACCESS_TOKEN = stringPreferencesKey("access_token")

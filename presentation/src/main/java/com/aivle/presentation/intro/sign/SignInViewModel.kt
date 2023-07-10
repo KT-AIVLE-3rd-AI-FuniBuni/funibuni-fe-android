@@ -1,7 +1,6 @@
 package com.aivle.presentation.intro.sign
 
 import android.app.Activity
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.aivle.domain.model.sign.SignInUser
@@ -16,8 +15,6 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-
-private const val TAG = "SignInViewModel"
 
 @HiltViewModel
 class SignInViewModel @Inject constructor(

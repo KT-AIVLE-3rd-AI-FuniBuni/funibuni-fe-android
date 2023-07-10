@@ -2,7 +2,6 @@ package com.aivle.presentation.intro.firebase
 
 import android.app.Activity
 import android.content.Context
-import android.util.Log
 import com.google.firebase.FirebaseApp
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
@@ -24,7 +23,6 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import kotlin.concurrent.timer
 
-private const val TAG = "FirebasePhoneAuth"
 private const val TIME_OUT = 120L
 
 class FirebasePhoneAuthManager @Inject constructor(

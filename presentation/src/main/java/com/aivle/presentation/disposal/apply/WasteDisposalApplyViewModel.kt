@@ -1,10 +1,8 @@
 package com.aivle.presentation.disposal.apply
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.aivle.domain.model.address.Address
-import com.aivle.domain.model.waste.WasteClassificationDocument
 import com.aivle.domain.model.waste.WasteDisposalApply
 import com.aivle.domain.model.waste.WasteSpec
 import com.aivle.domain.response.DataResponse
@@ -17,8 +15,6 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-
-private const val TAG = "WasteDisposalApplyViewModel"
 
 @HiltViewModel
 class WasteDisposalApplyViewModel @Inject constructor(

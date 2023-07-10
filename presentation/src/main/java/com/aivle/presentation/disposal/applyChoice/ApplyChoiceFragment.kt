@@ -9,8 +9,6 @@ import com.aivle.presentation.databinding.FragmentApplyChoiceBinding
 import com.aivle.presentation.disposal.base.BaseDisposalFragment
 import java.text.DecimalFormat
 
-private const val TAG = "ApplyChoiceFragment"
-
 class ApplyChoiceFragment : BaseDisposalFragment<FragmentApplyChoiceBinding>(R.layout.fragment_apply_choice) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

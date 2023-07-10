@@ -21,8 +21,6 @@ import kotlinx.coroutines.flow.flow
 import java.net.ProtocolException
 import javax.inject.Inject
 
-private const val TAG = "SharingPostRepositoryImpl"
-
 class SharingPostRepositoryImpl @Inject constructor(
     @FuniBuniApiQualifier private val api: SharingPostApi
 ) : SharingPostRepository {

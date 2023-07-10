@@ -11,8 +11,6 @@ import com.aivle.presentation.util.common.CategoryImageBinder
 import com.aivle.presentation.databinding.ItemWasteCategoryBinding
 import com.aivle.presentation.databinding.ItemWasteCategoryGroupBinding
 
-private const val TAG = "WasteCategoryListAdapter"
-
 private val DiffCallback = object : DiffUtil.ItemCallback<WasteSpec>() {
     override fun areItemsTheSame(oldItem: WasteSpec, newItem: WasteSpec): Boolean = oldItem.waste_spec_id == newItem.waste_spec_id
     override fun areContentsTheSame(oldItem: WasteSpec, newItem: WasteSpec): Boolean = oldItem.waste_spec_id == newItem.waste_spec_id

@@ -16,8 +16,6 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import javax.inject.Inject
 
-private const val TAG = "MyProfileDetailViewModel"
-
 @HiltViewModel
 class MyProfileDetailViewModel @Inject constructor(
     private val getMyProfileDetailUseCase: GetMyProfileDetailUseCase,

@@ -3,7 +3,6 @@ package com.aivle.presentation.disposal
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.aivle.domain.model.address.Address
-import com.aivle.domain.model.waste.WasteClassificationDocument
 import com.aivle.domain.model.waste.WasteSpec
 import com.aivle.domain.usecase.address.GetAddressFromLocalUseCase
 import com.aivle.presentation.util.ext.launchDefault
@@ -13,8 +12,6 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-
-private const val TAG = "DisposalViewModel"
 
 @HiltViewModel
 class DisposalViewModel @Inject constructor(

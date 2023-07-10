@@ -4,19 +4,15 @@ import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.aivle.domain.model.waste.LargeCategoryResult
-import com.aivle.presentation.util.common.CategoryImageBinder
 import com.aivle.presentation.databinding.ItemResultLargeCategoryBinding
+import com.aivle.presentation.util.common.CategoryImageBinder
 import com.aivle.presentation.util.model.AiResult
-import kotlin.math.roundToInt
 
-private const val TAG = "LargeCategoryResultListAdapter"
 private const val CHANGED_SELECTION = "changed-selection"
 private val DiffCallback = object : DiffUtil.ItemCallback<AiResult>() {
     override fun areItemsTheSame(oldItem: AiResult, newItem: AiResult): Boolean = oldItem.index == newItem.index

@@ -5,9 +5,7 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.location.LocationManager
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import com.aivle.presentation.R
 import com.aivle.presentation.base.BaseFragment
@@ -19,8 +17,6 @@ import com.gun0912.tedpermission.normal.TedPermission
 import com.loggi.core_util.extensions.log
 import com.loggi.core_util.extensions.logw
 import dagger.hilt.android.AndroidEntryPoint
-
-private const val TAG = "InputAddressFragment"
 
 @AndroidEntryPoint
 class InputAddressFragment : BaseFragment<FragmentInputAddressBinding>(R.layout.fragment_input_address) {

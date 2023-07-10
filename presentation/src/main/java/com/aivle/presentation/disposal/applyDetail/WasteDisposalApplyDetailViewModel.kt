@@ -14,8 +14,6 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import javax.inject.Inject
 
-private const val TAG = "WasteDisposalApplyDetailViewModel"
-
 @HiltViewModel
 class WasteDisposalApplyDetailViewModel @Inject constructor(
     private val getWasteDisposalApplyDetailUseCase: GetWasteDisposalApplyDetailUseCase,

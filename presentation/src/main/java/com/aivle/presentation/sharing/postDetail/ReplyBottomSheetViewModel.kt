@@ -1,8 +1,6 @@
 package com.aivle.presentation.sharing.postDetail
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.aivle.domain.model.sharingPost.Reply
 import com.aivle.domain.response.DataResponse
 import com.aivle.domain.response.NothingResponse
@@ -15,10 +13,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
 import javax.inject.Inject
-
-private const val TAG = "ReplyBottomSheetViewModel"
 
 @HiltViewModel
 class ReplyBottomSheetViewModel @Inject constructor(

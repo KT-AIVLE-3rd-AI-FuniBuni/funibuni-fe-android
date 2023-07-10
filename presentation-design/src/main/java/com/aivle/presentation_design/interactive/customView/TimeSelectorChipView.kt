@@ -1,20 +1,15 @@
 package com.aivle.presentation_design.interactive.customView
 
 import android.content.Context
-import android.content.res.ColorStateList
 import android.util.AttributeSet
 import android.util.DisplayMetrics
-import android.util.Log
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.CompoundButton
 import android.widget.HorizontalScrollView
 import android.widget.LinearLayout
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.core.view.marginBottom
 import com.aivle.presentation_design.R
 import com.google.android.material.chip.Chip
-
-private const val TAG = "TimeSelectorChipView"
 
 class TimeSelectorChipView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0, defStyleRes: Int = 0

@@ -8,16 +8,13 @@ import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import com.aivle.presentation.R
 import com.aivle.presentation.base.BaseActivity
-import com.aivle.presentation.util.ext.repeatOnStarted
-import com.aivle.presentation.util.ext.showToast
 import com.aivle.presentation.databinding.ActivityIntroBinding
 import com.aivle.presentation.intro.intro.IntroViewModel.Event
 import com.aivle.presentation.intro.sign.SignActivity
 import com.aivle.presentation.main.MainActivity
-
+import com.aivle.presentation.util.ext.repeatOnStarted
+import com.aivle.presentation.util.ext.showToast
 import dagger.hilt.android.AndroidEntryPoint
-
-private const val TAG = "IntroActivity"
 
 @AndroidEntryPoint
 class IntroActivity : BaseActivity<ActivityIntroBinding>(R.layout.activity_intro) {

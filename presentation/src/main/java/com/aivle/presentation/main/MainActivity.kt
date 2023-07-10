@@ -19,10 +19,7 @@ import com.aivle.presentation.base.BaseActivity
 import com.aivle.presentation.databinding.ActivityMainBinding
 import com.aivle.presentation.main.MainViewModel.Event
 import com.aivle.presentation.util.ext.repeatOnStarted
-import com.loggi.core_util.extensions.log
 import dagger.hilt.android.AndroidEntryPoint
-
-private const val TAG = "MainActivity"
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {

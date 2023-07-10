@@ -8,8 +8,6 @@ import com.aivle.presentation.R
 import com.aivle.presentation.databinding.FragmentSignUpInputNameBinding
 import dagger.hilt.android.AndroidEntryPoint
 
-private const val TAG = "SignUpInputNameFragment"
-
 @AndroidEntryPoint
 class SignUpInputNameFragment : BaseSignFragment<FragmentSignUpInputNameBinding>(R.layout.fragment_sign_up_input_name) {
 

@@ -21,8 +21,6 @@ import okhttp3.RequestBody
 import java.io.File
 import javax.inject.Inject
 
-private const val TAG = "WasteRepositoryImpl"
-
 class WasteRepositoryImpl @Inject constructor(
     @FuniBuniApiQualifier private val api: WasteApi
 ) : WasteRepository {

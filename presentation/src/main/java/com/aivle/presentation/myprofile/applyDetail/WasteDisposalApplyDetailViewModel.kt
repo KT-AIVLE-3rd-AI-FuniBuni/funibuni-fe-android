@@ -1,6 +1,5 @@
 package com.aivle.presentation.myprofile.applyDetail
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.aivle.domain.model.waste.WasteDisposalApplyDetail
 import com.aivle.domain.response.DataResponse
@@ -13,8 +12,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import javax.inject.Inject
-
-private const val TAG = "WasteDisposalApplyDetailViewModel"
 
 @HiltViewModel
 class WasteDisposalApplyDetailViewModel @Inject constructor(

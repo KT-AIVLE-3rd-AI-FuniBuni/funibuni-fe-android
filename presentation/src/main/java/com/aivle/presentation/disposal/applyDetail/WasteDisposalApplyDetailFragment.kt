@@ -1,23 +1,19 @@
 package com.aivle.presentation.disposal.applyDetail
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.aivle.domain.model.waste.WasteDisposalApplyDetail
 import com.aivle.presentation.R
 import com.aivle.presentation.base.BaseFragment
 import com.aivle.presentation.databinding.FragmentWasteDisposalApplyDetailBinding
-import com.aivle.presentation.util.ext.repeatOnStarted
 import com.aivle.presentation.disposal.applyDetail.WasteDisposalApplyDetailViewModel.Event
+import com.aivle.presentation.util.ext.repeatOnStarted
 import com.aivle.presentation.util.ext.showToast
 import com.aivle.presentation_design.interactive.ui.BottomUpDialog
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import dagger.hilt.android.AndroidEntryPoint
-
-private const val TAG = "WasteDisposalApplyDetailFragment"
 
 @AndroidEntryPoint
 class WasteDisposalApplyDetailFragment

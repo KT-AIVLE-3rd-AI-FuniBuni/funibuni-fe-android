@@ -1,18 +1,13 @@
 package com.aivle.presentation.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import androidx.collection.forEach
-import androidx.navigation.fragment.findNavController
 import com.aivle.presentation.R
 import com.aivle.presentation.base.BaseFragment
 import com.aivle.presentation.databinding.FragmentHomeBinding
 import com.aivle.presentation.main.MainActivity
 import com.aivle.presentation.searchWasteSpec.SearchWasteSpecActivity
 import com.aivle.presentation.util.ext.showToast
-
-private const val TAG = "HomeFragment"
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 

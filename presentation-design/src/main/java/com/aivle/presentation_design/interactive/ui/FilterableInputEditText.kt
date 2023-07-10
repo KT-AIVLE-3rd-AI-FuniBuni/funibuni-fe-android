@@ -5,11 +5,8 @@ import android.text.InputFilter
 import android.text.InputType
 import android.text.Spanned
 import android.util.AttributeSet
-import android.util.Log
 import android.view.KeyEvent
 import com.google.android.material.textfield.TextInputEditText
-
-private const val TAG = "FilterableInputEditText"
 
 class FilterableInputEditText : TextInputEditText {
 
