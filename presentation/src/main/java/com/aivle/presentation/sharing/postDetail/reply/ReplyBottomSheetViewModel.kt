@@ -1,4 +1,4 @@
-package com.aivle.presentation.sharing.postDetail
+package com.aivle.presentation.sharing.postDetail.reply
 
 import androidx.lifecycle.ViewModel
 import com.aivle.domain.model.sharingPost.Reply

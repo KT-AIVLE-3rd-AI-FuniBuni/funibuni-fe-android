@@ -45,7 +45,7 @@
                 <!-- Guide Message 1 -->
                 <TextView
                     android:id="@+id/guide_message_1"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="이제 마지막 입니다 :)"
                     android:textSize="22sp"
@@ -54,10 +54,13 @@
                 <!-- Guide Message 2 -->
                 <TextView
                     android:id="@+id/guide_message_2"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="대형폐기물을 배출할 주소를 설정해주세요"
                     android:textSize="22sp"
+                    android:autoSizeTextType="uniform"
+                    android:autoSizeMaxTextSize="22sp"
+                    android:maxLines="1"
                     android:textColor="@color/black"/>
 
             </LinearLayout>
@@ -83,15 +86,15 @@
                     android:id="@+id/edt_address"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:paddingBottom="1dp"
-                    android:paddingStart="44dp"
-                    android:inputType="text"
-                    android:imeOptions="actionSearch"
+                    android:background="@drawable/selector_text_input_address"
                     android:hint="지번, 도로명, 건물명으로 검색"
-                    android:textSize="16sp"
-                    android:textColorHint="@color/gray600"
+                    android:imeOptions="actionSearch"
+                    android:inputType="text"
                     android:maxLines="1"
-                    android:background="@drawable/selector_text_input_address"/>
+                    android:paddingStart="44dp"
+                    android:paddingBottom="1dp"
+                    android:textColorHint="@color/gray600"
+                    android:textSize="16sp" />
 
                 <ImageView
                     android:layout_width="16dp"

@@ -1,20 +1,20 @@
 {
   "project_info": {
-    "project_number": "485637022569",
-    "project_id": "kt-funibuni",
-    "storage_bucket": "kt-funibuni.appspot.com"
+    "project_number": "1087566762076",
+    "project_id": "kt-funibuni-cad7f",
+    "storage_bucket": "kt-funibuni-cad7f.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:485637022569:android:3b6bef39e5618f6fb8d3f8",
+        "mobilesdk_app_id": "1:1087566762076:android:faab351c2a106156725699",
         "android_client_info": {
           "package_name": "com.aivle.funibuni"
         }
       },
       "oauth_client": [
         {
-          "client_id": "485637022569-b8v2f9kjmpik7ikstgg1oh14epal6d2s.apps.googleusercontent.com",
+          "client_id": "1087566762076-jb32ogujve6vhbfa7n7kk4gdb2fadout.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.aivle.funibuni",
@@ -22,20 +22,20 @@
           }
         },
         {
-          "client_id": "485637022569-7u2vqj23v3m235953o7u5fnvajkl1jq1.apps.googleusercontent.com",
+          "client_id": "1087566762076-2einnck40df75vuirqksfh1hah118vuk.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAMBnCE9kAkqUhXELr8jeac1Co2zFt5dtE"
+          "current_key": "AIzaSyBao-rAQZKcSazSXhCnbkmzmxHnpTW2n54"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "485637022569-7u2vqj23v3m235953o7u5fnvajkl1jq1.apps.googleusercontent.com",
+              "client_id": "1087566762076-2einnck40df75vuirqksfh1hah118vuk.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

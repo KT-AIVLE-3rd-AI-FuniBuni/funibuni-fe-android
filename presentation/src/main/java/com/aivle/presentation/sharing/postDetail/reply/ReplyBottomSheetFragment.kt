@@ -1,4 +1,4 @@
-package com.aivle.presentation.sharing.postDetail
+package com.aivle.presentation.sharing.postDetail.reply
 
 import android.annotation.SuppressLint
 import android.app.Dialog
@@ -14,7 +14,7 @@ import androidx.fragment.app.viewModels
 import com.aivle.domain.model.sharingPost.Comment
 import com.aivle.domain.model.sharingPost.Reply
 import com.aivle.presentation.databinding.BottomSheetReplyBinding
-import com.aivle.presentation.sharing.postDetail.ReplyBottomSheetViewModel.Event
+import com.aivle.presentation.sharing.postDetail.reply.ReplyBottomSheetViewModel.Event
 import com.aivle.presentation.util.ext.repeatOnStarted
 import com.aivle.presentation.util.ext.showToast
 import com.aivle.presentation_design.interactive.ui.BottomUpDialog
@@ -110,7 +110,7 @@ class ReplyBottomSheetFragment private constructor(
             }.show(parentFragmentManager, "reply-comment-bottom-sheet")
         }
         binding.comment = comment
-        binding.commentLayout.btnTheMore.isVisible = false
+        binding.commentLayout.btnTheMore.visibility = View.INVISIBLE
     }
 
     private fun handleEvent() = repeatOnStarted {

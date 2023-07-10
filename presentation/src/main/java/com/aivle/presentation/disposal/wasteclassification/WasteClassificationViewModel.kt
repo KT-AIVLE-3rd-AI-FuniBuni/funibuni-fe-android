@@ -114,7 +114,6 @@ class WasteClassificationViewModel @Inject constructor(
             object Loading: Event()
             object Empty : ImageClassification()
             data class Result(val result: ClassificationResult) : ImageClassification()
-
         }
         data class WasteSpecTable(val specs: List<WasteSpec>) : Event()
         data class Failure(val message: String?) : Event()

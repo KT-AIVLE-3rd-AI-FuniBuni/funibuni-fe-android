@@ -62,16 +62,12 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <com.google.android.material.button.MaterialButton
+        <com.aivle.presentation_design.interactive.ui.InteractiveTextButtonForSign
             android:id="@+id/btn_next"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:gravity="center"
             android:text="다음으로"
-            android:textSize="18sp"
-            android:textColor="@color/white"
             android:textStyle="bold"
-            android:background="@drawable/bg_ripple"
             android:enabled="false"
             app:layout_constraintBottom_toBottomOf="@id/bottom_button_guideline"/>
 

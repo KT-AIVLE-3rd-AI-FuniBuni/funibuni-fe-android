@@ -54,6 +54,15 @@
 
         </LinearLayout>
 
+<!--        <com.google.android.material.progressindicator.CircularProgressIndicator-->
+<!--            android:id="@+id/progress"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginBottom="24dp"-->
+<!--            app:layout_constraintBottom_toTopOf="@id/btn_start"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"/>-->
+
         <com.aivle.presentation_design.interactive.ui.InteractiveTextButton
             android:id="@+id/btn_start"
             android:layout_width="match_parent"

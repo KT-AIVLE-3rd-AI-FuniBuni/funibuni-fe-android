@@ -4,6 +4,7 @@
     <color name="theme_color_old">#31D7C3</color>
     <color name="theme_color_light">@color/app_color_spot_3</color>
     <color name="theme_color_dark">@color/app_color_spot_2</color>
+    <color name="theme_color_very_dark">@color/teal700</color>
 
     <color name="theme_color_a30">#4D31D7C3</color>
     <color name="theme_ripple_color">#C3FCF2</color>

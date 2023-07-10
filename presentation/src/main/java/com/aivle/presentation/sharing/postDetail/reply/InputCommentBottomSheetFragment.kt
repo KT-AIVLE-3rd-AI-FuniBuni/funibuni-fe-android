@@ -1,4 +1,4 @@
-package com.aivle.presentation.sharing.postDetail
+package com.aivle.presentation.sharing.postDetail.reply
 
 import android.app.Dialog
 import android.os.Bundle

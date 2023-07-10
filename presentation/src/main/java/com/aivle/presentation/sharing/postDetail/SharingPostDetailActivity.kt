@@ -17,6 +17,7 @@ import com.aivle.presentation.R
 import com.aivle.presentation.base.BaseActivity
 import com.aivle.presentation.databinding.ActivitySharingPostDetailBinding
 import com.aivle.presentation.sharing.postDetail.SharingPostDetailViewModel.Event
+import com.aivle.presentation.sharing.postDetail.reply.ReplyBottomSheetFragment
 import com.aivle.presentation.sharing.postEdit.EditSharingPostActivity
 import com.aivle.presentation.util.common.Constants
 import com.aivle.presentation.util.common.KeyboardHeightProvider
@@ -115,7 +116,7 @@ class SharingPostDetailActivity : BaseActivity<ActivitySharingPostDetailBinding>
         binding.content.btnFavoritePost.setOnClickListener {
             val crossfade = binding.content.btnFavoritePost.crossfade
             if (crossfade == 0f) { // unlike -> like
-                binding.content.btnFavoritePost.crossfade = 1f
+                binding.content.btnFavoritePost.crossfade = 100f
                 viewModel.likePost()
             } else { // like -> unlike
                 binding.content.btnFavoritePost.crossfade = 0f

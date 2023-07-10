@@ -7,4 +7,5 @@
         </attr>
         <attr name="touch_scale" format="float"/>
     </declare-styleable>
+
 </resources>

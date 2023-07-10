@@ -28,32 +28,44 @@ class SignInViewModel @Inject constructor(
     var authenticatingPhoneNumber: String = ""
         private set
 
+    var isAuthCompleted: Boolean = false
+        private set
+
     init {
         phoneAuthManager.setOnPhoneAuthCallback(OnMyPhoneAuthCallback())
     }
 
+    fun initFirebase(activity: Activity) {
+        phoneAuthManager.init(activity)
+    }
+
     fun send(activity: Activity, phoneNumber: String) {
-        phoneAuthManager.send(activity, phoneNumber.toFirebasePhoneFormat())
         viewModelScope.launch {
             _eventFlow.emit(Event.RequestSms.FirstTry.Loading)
         }
+        phoneAuthManager.send(activity, phoneNumber.toFirebasePhoneFormat())
     }
 
     fun resend(activity: Activity, phoneNumber: String) {
-        phoneAuthManager.resend(activity, phoneNumber.toFirebasePhoneFormat())
         viewModelScope.launch {
             _eventFlow.emit(Event.RequestSms.Retry.Loading)
         }
+        phoneAuthManager.resend(activity, phoneNumber.toFirebasePhoneFormat())
     }
 
     fun authenticateAndSignIn(activity: Activity, smsCode: String) {
         viewModelScope.launch {
-            phoneAuthManager.authenticate(activity, smsCode)
+            _eventFlow.emit(Event.RequestSms.AuthSmsCodeLoading)
         }
+        phoneAuthManager.authenticate(activity, smsCode)
     }
 
     fun isSameAuthenticatingPhoneNumber(phoneNumber: String): Boolean {
         return phoneNumber == authenticatingPhoneNumber.replace("-", " ")
+    }
+
+    fun releaseFirebase() {
+        phoneAuthManager.release()
     }
 
     private fun String.toFirebasePhoneFormat(): String {
@@ -68,6 +80,7 @@ class SignInViewModel @Inject constructor(
         object None : Event()
 
         sealed class RequestSms : Event() {
+
             sealed class FirstTry : RequestSms() {
                 object Loading : FirstTry()
                 object Started : FirstTry()
@@ -76,10 +89,14 @@ class SignInViewModel @Inject constructor(
                 object Loading : Retry()
                 object Started : Retry()
             }
+
             data class OnVerificationCompleted(val smsCode: String) : Event()
             data class OnVerificationFailed(val message: String?) : Event()
+
+            object AuthSmsCodeLoading : RequestSms()
             object IncorrectCode : RequestSms()
             object Timeout : RequestSms()
+
             data class UpdateTimer(val remainingTime: String) : RequestSms()
             data class Exception(val message: String?) : RequestSms()
         }
@@ -148,6 +165,7 @@ class SignInViewModel @Inject constructor(
 
         override fun onPhoneAuthSucceed() {
             log("onPhoneAuthSucceed()")
+            isAuthCompleted = true
 
             viewModelScope.launch {
                 val signInUser = SignInUser(authenticatingPhoneNumber)

@@ -40,7 +40,7 @@ class FirebasePhoneAuthManager @Inject constructor(
         fun onPhoneAuthFailed()
     }
 
-    private val auth: FirebaseAuth = FirebaseAuth.getInstance()
+    private lateinit var auth: FirebaseAuth
 
     private var storedVerificationId : String? = null
     private var resendingToken: PhoneAuthProvider.ForceResendingToken? = null
@@ -55,9 +55,8 @@ class FirebasePhoneAuthManager @Inject constructor(
     }
 
     fun init(activity: Activity) = apply {
-//        FirebaseApp.initializeApp(activity)
-//        auth = FirebaseAuth.getInstance()
-        //initializeFirebaseApp(activity)
+        // FirebaseApp.initializeApp(activity)
+        auth = FirebaseAuth.getInstance()
     }
 
     fun setOnPhoneAuthCallback(callback: OnPhoneAuthCallback) {
@@ -90,6 +89,12 @@ class FirebasePhoneAuthManager @Inject constructor(
 
         val credential = PhoneAuthProvider.getCredential(storedVerificationId!!, smsCode)
         signInWithPhoneAuthCredential(activity, credential)
+    }
+
+    fun release() {
+        userCallback = null
+        timer.stop()
+        auth.signOut()
     }
 
     private fun phoneAuthOptionsBuilder(activity: Activity, phoneNumber: String): PhoneAuthOptions.Builder =

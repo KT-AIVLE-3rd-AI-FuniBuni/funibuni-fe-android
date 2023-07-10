@@ -45,11 +45,12 @@ class LargeCategoryResultListAdapter
     }
 
     override fun submitList(list: List<AiResult>?) {
-        // 첫 번쨰 아이템을 기본 선택 값으로 설정
-        selectedPosition = 0
-        list?.forEachIndexed { index, result ->
-            result.isSelected = (index == 0)
+        var position = list?.indexOfFirst { it.isSelected }
+        if (position == null) {
+            position = 0
+            list?.firstOrNull()?.isSelected = true
         }
+        selectedPosition = position
         super.submitList(list)
     }
 
