@@ -4,6 +4,7 @@ import android.app.Activity
 import android.os.Bundle
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import com.aivle.domain.model.user.User
 import com.aivle.domain.model.waste.WasteDisposalApplyItem
@@ -15,7 +16,6 @@ import com.aivle.presentation.myprofile.applyList.WasteDisposalApplyListActivity
 import com.aivle.presentation.myprofile.applyList.WasteDisposalApplyListAdapter
 import com.aivle.presentation.myprofile.detail.MyProfileDetailActivity
 import com.aivle.presentation.myprofile.postList.MySharingPostListActivity
-import com.aivle.presentation.myprofile.tab.MyProfileViewModel.Event
 import com.aivle.presentation.util.ext.repeatOnStarted
 import com.aivle.presentation.util.ext.showToast
 import dagger.hilt.android.AndroidEntryPoint
@@ -37,7 +37,7 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding>(R.layout.fragme
         super.onViewCreated(view, savedInstanceState)
 
         initView()
-        handleViewModelEvent()
+        observeUiState()
 
         viewModel.loadMyBuni()
     }
@@ -60,24 +60,15 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding>(R.layout.fragme
         }
 
         listAdapter = WasteDisposalApplyListAdapter()
-        binding.recentList.adapter = listAdapter
+        binding.recentListView.adapter = listAdapter
     }
 
-    private fun handleViewModelEvent() = repeatOnStarted {
-        viewModel.eventFlow.collect { event -> when (event) {
-            is Event.None -> {
-            }
-            is Event.LoadMyBuni.Success -> {
-                val user = event.data.user
-                val wasteApplies = event.data.waste_applies
-
-                showUserInfo(user)
-                showRecentWasteApplies(wasteApplies)
-            }
-            is Event.Failure -> {
-                showToast(event.message)
-            }
-        }}
+    private fun observeUiState() = repeatOnStarted {
+        viewModel.uiStateFlow.collect { (isLoading, message, data) ->
+            data?.user?.let(::showUserInfo)
+            data?.waste_applies?.let(::showRecentWasteApplies)
+            message?.let(::showToast)
+        }
     }
 
     private fun showUserInfo(user: User) {
@@ -85,6 +76,8 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding>(R.layout.fragme
     }
 
     private fun showRecentWasteApplies(applies: List<WasteDisposalApplyItem>) {
+        binding.noContentView.isVisible = applies.isEmpty()
+
         applies.forEach {
             it.onClick = ::startWasteDisposalApplyDetailActivity
         }
