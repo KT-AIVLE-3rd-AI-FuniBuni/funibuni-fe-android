@@ -56,12 +56,12 @@ interface SharingPostApi {
     @POST("posts/{post_id}/like")
     suspend fun likePost(
         @Path("post_id") post_id: Int
-    ): ApiResponse<Map<String, Int>>
+    ): ApiResponse<Unit>
 
     @DELETE("posts/{post_id}/like")
     suspend fun unlikePost(
         @Path("post_id") post_id: Int
-    ): ApiResponse<Map<String, String>>
+    ): ApiResponse<Unit>
 
     @POST("posts/{post_id}/comments")
     suspend fun addComment(

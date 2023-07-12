@@ -22,9 +22,9 @@ fun SharingPostItemEntity.toModel() =
 
 /* SharingPostDetail */
 fun SharingPostDetailEntity.toModel(): SharingPostDetail =
-    SharingPostDetail(post_id, user.toModel(), address_city, address_district, address_dong, image_url, product_top_category, product_mid_category, product_low_category, title, content, is_sharing, comments_count, likes_count, comments.map { it.toModel() }, created_at, expired_date)
+    SharingPostDetail(post_id, user.toModel(), address_city, address_district, address_dong, image_url, product_top_category, product_mid_category, product_low_category, title, content, is_sharing, comments_count, is_like, likes_count, comments.map { it.toModel() }, created_at, expired_date)
 fun SharingPostDetail.toEntity() =
-    SharingPostDetailEntity(post_id, user.toEntity(), address_city, address_district, address_dong, image_url, product_top_category, product_mid_category, product_low_category, title, content, is_sharing, comments_count, likes_count, comments.map { it.toEntity() }, created_at, expired_date)
+    SharingPostDetailEntity(post_id, user.toEntity(), address_city, address_district, address_dong, image_url, product_top_category, product_mid_category, product_low_category, title, content, is_sharing, comments_count, is_like, likes_count, comments.map { it.toEntity() }, created_at, expired_date)
 
 /* Comment */
 fun CommentEntity.toModel(): Comment = Comment(comment_id, post_id, user.toModel(), comment, reply_count, created_at)

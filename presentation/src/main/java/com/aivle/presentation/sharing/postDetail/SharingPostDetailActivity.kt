@@ -116,7 +116,7 @@ class SharingPostDetailActivity : BaseActivity<ActivitySharingPostDetailBinding>
         binding.content.btnFavoritePost.setOnClickListener {
             val crossfade = binding.content.btnFavoritePost.crossfade
             if (crossfade == 0f) { // unlike -> like
-                binding.content.btnFavoritePost.crossfade = 100f
+                binding.content.btnFavoritePost.crossfade = 1f
                 viewModel.likePost()
             } else { // like -> unlike
                 binding.content.btnFavoritePost.crossfade = 0f

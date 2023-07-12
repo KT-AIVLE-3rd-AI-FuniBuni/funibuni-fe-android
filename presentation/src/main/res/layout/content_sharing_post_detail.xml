@@ -68,6 +68,7 @@
                     app:layout_constraintBottom_toTopOf="@id/user_profile_divider"
                     app:layout_constraintStart_toStartOf="@id/user_nickname"/>
 
+                <!-- Favorite Post -->
                 <androidx.constraintlayout.utils.widget.ImageFilterView
                     android:id="@+id/btn_favorite_post"
                     android:layout_width="48dp"
@@ -76,7 +77,8 @@
                     android:src="@drawable/icon_heart_96"
                     app:altSrc="@drawable/icon_heart_fill_96"
                     app:overlay="false"
-                    app:crossfade="0"
+                    app:crossfade="@{postDetail.is_like ? 1f : 0f}"
+                    tools:crossfade="1"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toTopOf="@id/user_profile_divider"
                     app:layout_constraintEnd_toEndOf="parent"/>
@@ -120,9 +122,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
-                    android:textSize="16sp"
+                    android:textSize="17sp"
                     android:textColor="@color/black"
                     android:text="@{postDetail.content}"
+                    android:lineSpacingExtra="4dp"
                     tools:text="@string/small_text"
                     app:layout_constraintTop_toBottomOf="@id/product_category"/>
 

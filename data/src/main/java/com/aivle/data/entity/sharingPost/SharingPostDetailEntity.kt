@@ -16,6 +16,7 @@ data class SharingPostDetailEntity constructor(
     val content: String,
     val is_sharing: Boolean,
     val comments_count: Int,
+    val is_like: Boolean,
     val likes_count: Int,
     val comments: List<CommentEntity>,
     val created_at: String,
