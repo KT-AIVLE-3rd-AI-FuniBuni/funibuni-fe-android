@@ -7,14 +7,14 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import com.aivle.domain.model.sharingPost.SharingPostItem
 import com.aivle.presentation.R
 import com.aivle.presentation.base.BaseFragment
-import com.aivle.presentation.util.ext.repeatOnStarted
 import com.aivle.presentation.databinding.FragmentSharingPostListBinding
 import com.aivle.presentation.main.MainActivity
 import com.aivle.presentation.main.MainViewModel
-import com.aivle.presentation.sharing.postList.SharingPostListViewModel.Event
 import com.aivle.presentation.sharing.postDetail.SharingPostDetailActivity
+import com.aivle.presentation.util.ext.repeatOnStarted
 import com.aivle.presentation.util.ext.showToast
 import com.aivle.presentation_design.interactive.ui.BottomUpDialog
 import dagger.hilt.android.AndroidEntryPoint
@@ -62,27 +62,18 @@ class SharingPostListFragment : BaseFragment<FragmentSharingPostListBinding>(R.l
     }
 
     private fun handleEvent() = repeatOnStarted {
-        viewModel.eventFlow.collect { event ->
-            binding.noContent.isVisible = event !is Event.LoadPosts.Success
+        viewModel.uiStateFlow.collect { uiState ->
+            showPosts(uiState.data)
 
-            when (event) {
-                is Event.None -> {}
-                is Event.LoadPosts.Empty -> {
-                }
-                is Event.LoadPosts.Success -> {
-                    val posts = event.posts.onEach {
-                        it.onClick = ::showPostDetail
-                    }
-                    listAdapter.submitList(posts)
-                }
-                is Event.LoadPosts.Failure -> {
-                    showToast(event.message)
-                }
-            }
-//            withContext(Dispatchers.Main) {
-//                binding.swipeRefreshLayout.isRefreshing = false
-//            }
+            uiState.toastMessage?.let(::showToast)
         }
+    }
+
+    private fun showPosts(posts: List<SharingPostItem>) {
+        binding.noContent.isVisible = posts.isEmpty()
+        listAdapter.submitList(posts.onEach {
+            it.onClick = ::showPostDetail
+        })
     }
 
     private fun showPostDetail(postId: Int) {

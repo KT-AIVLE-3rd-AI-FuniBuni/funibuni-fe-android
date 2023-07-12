@@ -20,14 +20,15 @@
             <ImageView
                 android:layout_width="120dp"
                 android:layout_height="120dp"
-                android:src="@drawable/funibuni_logo_300"/>
+                android:src="@drawable/funibuni_logo_gray_512"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="36dp"
                 android:text="게시물이 존재하지 않습니다"
-                android:textSize="20sp"/>
+                android:textSize="20sp"
+                android:textColor="@color/gray_scale_text"/>
 
         </LinearLayout>
 
@@ -40,6 +41,8 @@
                 android:id="@+id/post_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@color/white"
+                tools:background="@android:color/transparent"
                 tools:listitem="@layout/item_sharing_post"
                 tools:itemCount="10"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
