@@ -236,7 +236,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="24dp"
                             android:text="최근에 배출 신청한 목록이 없어요"
-                            android:textColor="@color/gray_scale_text"
+                            android:textColor="@color/gray_scale_text_mid"
                             android:textSize="16sp"/>
 
                     </LinearLayout>

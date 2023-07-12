@@ -27,8 +27,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="36dp"
                 android:text="게시물이 존재하지 않습니다"
-                android:textSize="20sp"
-                android:textColor="@color/gray_scale_text"/>
+                android:textSize="18sp"
+                android:textColor="@color/gray_scale_text_mid"/>
 
         </LinearLayout>
 

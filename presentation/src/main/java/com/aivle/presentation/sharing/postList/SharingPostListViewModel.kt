@@ -25,14 +25,14 @@ class SharingPostListViewModel @Inject constructor(
     fun loadSharingPosts(district: String) = launchDefault {
         getSharingPostListUseCase(district)
             .catch { t ->
-                _uiStateFlow.update { it.copy(isLoading = false, toastMessage = t.message) }
+                _uiStateFlow.update { it.copy(isLoading = false, message = t.message) }
             }
             .collect { response -> when (response) {
                 is DataResponse.Success -> {
-                    _uiStateFlow.update { it.copy(isLoading = false, toastMessage = null, data = response.data) }
+                    _uiStateFlow.update { it.copy(isLoading = false, message = null, data = response.data) }
                 }
                 is DataResponse.Failure -> {
-                    _uiStateFlow.update { it.copy(isLoading = false, toastMessage = null) }
+                    _uiStateFlow.update { it.copy(isLoading = false, message = null) }
                 }
             }}
     }

@@ -2,7 +2,7 @@ package com.aivle.presentation.myprofile.applyList
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.aivle.domain.model.waste.WasteDisposalApplyItem
@@ -24,30 +24,29 @@ class WasteDisposalApplyListFragment : BaseFragment<FragmentWasteDisposalApplyLi
         super.onViewCreated(view, savedInstanceState)
 
         initView()
-        handleViewModelEvent()
+        observeUiState()
 
         viewModel.loadWasteDisposalApplies()
     }
 
     private fun initView() {
+        binding.noContentView.container.isVisible = false
+        binding.noContentView.message.text = "배출 신청 목록이 없어요"
+
         listAdapter = WasteDisposalApplyListAdapter()
         binding.applyList.adapter = listAdapter
     }
 
-    private fun handleViewModelEvent() = repeatOnStarted {
-        viewModel.eventFlow.collect { event -> when (event) {
-            is WasteDisposalApplyListViewModel.Event.None -> {
-            }
-            is WasteDisposalApplyListViewModel.Event.Failure -> {
-                showToast(event.message)
-            }
-            is WasteDisposalApplyListViewModel.Event.LoadApplyList.Success -> {
-                showApplyItems(event.applies)
-            }
-        }}
+    private fun observeUiState() = repeatOnStarted {
+        viewModel.uiStateFlow.collect { (isLoading, message, data) ->
+            message?.let(::showToast)
+            showApplyItems(data)
+        }
     }
 
     private fun showApplyItems(applyItems: List<WasteDisposalApplyItem>) {
+        binding.noContentView.container.isVisible = applyItems.isEmpty()
+        binding.applyList.isVisible = applyItems.isNotEmpty()
         applyItems.forEach {
             it.onClick = ::moveApplyDetail
         }

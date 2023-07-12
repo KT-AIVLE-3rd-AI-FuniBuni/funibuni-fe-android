@@ -4,13 +4,19 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/background_color">
+
+        <include layout="@layout/no_content_full"
+            android:id="@+id/no_content_view"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/apply_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:itemCount="5"
+            android:background="@color/white"
+            tools:background="@color/transparent"
+            tools:itemCount="3"
             tools:listitem="@layout/item_waste_disposal_apply"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 

@@ -4,13 +4,13 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.core.view.isVisible
 import com.aivle.domain.model.sharingPost.SharingPostItem
 import com.aivle.presentation.R
 import com.aivle.presentation.base.BaseActivity
 import com.aivle.presentation.databinding.ActivityMySharingPostListBinding
-import com.aivle.presentation.util.ext.repeatOnStarted
-import com.aivle.presentation.myprofile.postList.MySharingPostListViewModel.Event
 import com.aivle.presentation.sharing.postDetail.SharingPostDetailActivity
+import com.aivle.presentation.util.ext.repeatOnStarted
 import com.aivle.presentation.util.ext.showToast
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -47,25 +47,27 @@ class MySharingPostListActivity : BaseActivity<ActivityMySharingPostListBinding>
         binding.header.btnBack.setOnClickListener {
             finish()
         }
+        binding.noContentMessage.text = when (postType) {
+            SHARING_POSTS -> "회원님의 나눔 게시글 목록이 없어요"
+            FAVORITE_POSTS -> "회원님의 관심 목록으로 등록된 게시물이 없어요"
+            ACTIVITIES -> "회원님의 활동 내역이 없어요"
+            else -> ""
+        }
 
         listAdapter = MySharingPostListAdapter()
         binding.postList.adapter = listAdapter
     }
 
     private fun handleViewModelEvent() = repeatOnStarted {
-        viewModel.eventFlow.collect { event -> when (event) {
-            is Event.None -> {
-            }
-            is Event.Failure -> {
-                showToast(event.message)
-            }
-            is Event.LoadPostList.Success -> {
-                showPosts(event.posts)
-            }
-        }}
+        viewModel.uiStateFlow.collect { (isLoading, toast, posts) ->
+            toast?.let(::showToast)
+            showPosts(posts)
+        }
     }
 
     private fun showPosts(posts: List<SharingPostItem>) {
+        binding.noContentView.isVisible = posts.isEmpty()
+        binding.postList.isVisible = posts.isNotEmpty()
         posts.forEach {
             it.onClick = ::startSharingPostDetail
         }

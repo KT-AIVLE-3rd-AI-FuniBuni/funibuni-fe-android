@@ -6,11 +6,14 @@ import com.aivle.domain.response.DataResponse
 import com.aivle.domain.usecase.myProfile.GetMyActivityListUseCase
 import com.aivle.domain.usecase.myProfile.GetMyFavoritePostListUseCase
 import com.aivle.domain.usecase.myProfile.GetMySharingPostListUseCase
+import com.aivle.presentation.util.common.ListUiState
 import com.aivle.presentation.util.ext.launchDefault
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 @HiltViewModel
@@ -20,53 +23,32 @@ class MySharingPostListViewModel @Inject constructor(
     private val getMyActivityListUseCase: GetMyActivityListUseCase,
 ) : ViewModel() {
 
-    private val _eventFlow: MutableStateFlow<Event> = MutableStateFlow(Event.None)
-    val eventFlow: StateFlow<Event> get() = _eventFlow
+    private val _uiStateFlow = MutableStateFlow<ListUiState<SharingPostItem>>(ListUiState())
+    val uiStateFlow = _uiStateFlow.asStateFlow()
 
     fun loadMySharingPosts() = launchDefault {
-        getMySharingPostListUseCase()
-            .catch { _eventFlow.emit(Event.Failure(it.message)) }
-            .collect { response -> when (response) {
-                is DataResponse.Success -> {
-                    _eventFlow.emit(Event.LoadPostList.Success(response.data))
-                }
-                is DataResponse.Failure -> {
-                    _eventFlow.emit(Event.Failure(response.message))
-                }
-            }}
+        getMySharingPostListUseCase().handle()
     }
 
     fun loadMyFavoritePosts() = launchDefault {
-        getMyFavoritePostListUseCase()
-            .catch { _eventFlow.emit(Event.Failure(it.message)) }
-            .collect { response -> when (response) {
-                is DataResponse.Success -> {
-                    _eventFlow.emit(Event.LoadPostList.Success(response.data))
-                }
-                is DataResponse.Failure -> {
-                    _eventFlow.emit(Event.Failure(response.message))
-                }
-            }}
+        getMyFavoritePostListUseCase().handle()
+
     }
 
     fun loadMyActivities() = launchDefault {
-        getMyActivityListUseCase()
-            .catch { _eventFlow.emit(Event.Failure(it.message)) }
-            .collect { response -> when (response) {
-                is DataResponse.Success -> {
-                    _eventFlow.emit(Event.LoadPostList.Success(response.data))
-                }
-                is DataResponse.Failure -> {
-                    _eventFlow.emit(Event.Failure(response.message))
-                }
-            }}
+        getMyActivityListUseCase().handle()
     }
 
-    sealed class Event {
-        object None : Event()
-        sealed class LoadPostList : Event() {
-            data class Success(val posts: List<SharingPostItem>) : LoadPostList()
-        }
-        data class Failure(val message: String?) : Event()
+    private suspend fun Flow<DataResponse<List<SharingPostItem>>>.handle() {
+        catch {
+            _uiStateFlow.update { value -> value.copy(isLoading = false, message = it.message) }
+        }.collect { response ->  when (response) {
+            is DataResponse.Failure -> {
+                _uiStateFlow.update { it.copy(isLoading = false, message = response.message) }
+            }
+            is DataResponse.Success -> {
+                _uiStateFlow.update { it.copy(isLoading = false, message = null, data = response.data) }
+            }
+        }}
     }
 }

@@ -4,11 +4,13 @@ import androidx.lifecycle.ViewModel
 import com.aivle.domain.model.waste.WasteDisposalApplyItem
 import com.aivle.domain.response.DataResponse
 import com.aivle.domain.usecase.myProfile.GetWasteDisposalApplyListUseCase
+import com.aivle.presentation.util.common.ListUiState
 import com.aivle.presentation.util.ext.launchDefault
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 @HiltViewModel
@@ -16,27 +18,21 @@ class WasteDisposalApplyListViewModel @Inject constructor(
     private val getWasteDisposalApplyListUseCase: GetWasteDisposalApplyListUseCase,
 ) : ViewModel() {
 
-    private val _eventFlow: MutableStateFlow<Event> = MutableStateFlow(Event.None)
-    val eventFlow: StateFlow<Event> get() = _eventFlow
+    private val _uiStateFlow = MutableStateFlow<ListUiState<WasteDisposalApplyItem>>(ListUiState())
+    val uiStateFlow = _uiStateFlow.asStateFlow()
 
     fun loadWasteDisposalApplies() = launchDefault {
         getWasteDisposalApplyListUseCase()
-            .catch { _eventFlow.emit(Event.Failure(it.message)) }
+            .catch {
+                _uiStateFlow.update { value -> value.copy(isLoading = false, message = it.message) }
+            }
             .collect { response -> when (response) {
-                is DataResponse.Success -> {
-                    _eventFlow.emit(Event.LoadApplyList.Success(response.data))
-                }
                 is DataResponse.Failure -> {
-                    _eventFlow.emit(Event.Failure(response.message))
+                    _uiStateFlow.update { it.copy(isLoading = false, message = response.message) }
+                }
+                is DataResponse.Success -> {
+                    _uiStateFlow.update { it.copy(isLoading = false, message = null, response.data) }
                 }
             }}
-    }
-
-    sealed class Event {
-        object None : Event()
-        sealed class LoadApplyList : Event() {
-            data class Success(val applies: List<WasteDisposalApplyItem>) : LoadApplyList()
-        }
-        data class Failure(val message: String?) : Event()
     }
 }

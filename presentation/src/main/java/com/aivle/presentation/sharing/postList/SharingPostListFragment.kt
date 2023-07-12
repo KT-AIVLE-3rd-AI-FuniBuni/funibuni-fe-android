@@ -65,7 +65,7 @@ class SharingPostListFragment : BaseFragment<FragmentSharingPostListBinding>(R.l
         viewModel.uiStateFlow.collect { uiState ->
             showPosts(uiState.data)
 
-            uiState.toastMessage?.let(::showToast)
+            uiState.message?.let(::showToast)
         }
     }
 

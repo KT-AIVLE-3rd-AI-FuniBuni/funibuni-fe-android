@@ -5,15 +5,55 @@
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white">
+        android:background="@color/background_color">
 
         <include layout="@layout/header"
             android:id="@+id/header"/>
+
+        <!-- No Content View -->
+        <LinearLayout
+            android:id="@+id/no_content_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/header"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:src="@drawable/funibuni_logo_gray_512"/>
+
+            <TextView
+                android:id="@+id/no_content_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="36dp"
+                android:text="항목이 존재하지 않습니다"
+                tools:text="항목이 존재하지 않습니다"
+                android:textSize="18sp"
+                android:textColor="@color/gray_scale_text_mid"/>
+
+            <TextView
+                android:id="@+id/no_content_sub_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                tools:visibility="visible"
+                tools:text="만들어주세요"
+                android:textSize="18sp"
+                android:textColor="@color/gray_scale_text_mid"/>
+
+        </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/post_list"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:background="@color/white"
+            tools:background="@color/transparent"
             tools:listitem="@layout/item_sharing_post"
             tools:itemCount="5"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
