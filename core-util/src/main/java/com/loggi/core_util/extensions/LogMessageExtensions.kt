@@ -18,18 +18,18 @@ fun Any.logd(message: String?, forced: Boolean = false) {
 
 fun Any.logi(message: String?, forced: Boolean = false) {
     if (DEBUG || forced) {
-        Log.d(javaClass.simpleName, message.toString())
+        Log.i(javaClass.simpleName, message.toString())
     }
 }
 
 fun Any.logw(message: String?, forced: Boolean = false) {
     if (DEBUG || forced) {
-        Log.d(javaClass.simpleName, message.toString())
+        Log.w(javaClass.simpleName, message.toString())
     }
 }
 
 fun Any.loge(message: String?, forced: Boolean = false) {
     if (DEBUG || forced) {
-        Log.d(javaClass.simpleName, message.toString())
+        Log.e(javaClass.simpleName, message.toString())
     }
 }
