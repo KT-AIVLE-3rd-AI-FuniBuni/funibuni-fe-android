@@ -50,6 +50,11 @@ AI 기반 대형생활폐기물 간편 배출 서비스 안드로이드 앱 **Fu
 ![퍼니버니_대형폐기물_배출신청](https://github.com/KT-AIVLE-3rd-AI-Team10/funibuni-fe-android/assets/33805423/9baf413f-1d6c-468e-bf03-c19afb2a9358)
 ![퍼니버니_나눔게시판](https://github.com/KT-AIVLE-3rd-AI-Team10/funibuni-fe-android/assets/33805423/8520303e-c041-48bd-b79d-fbe2a7465abd)
 
+## 앱 시연 영상
+
+[![퍼니버니_시연영상_유튜브썸네일2](https://github.com/KT-AIVLE-3rd-AI-Team10/funibuni-fe-android/assets/33805423/ce2ac69f-068d-4c97-8713-8cf2818f59b8)](https://youtu.be/N-wBxebZWTY)
+
+<p align="center" style="margin: 0">⬆️⬆️ 이미지를 클릭하면 유튜브로 연결됩니다 ⬆️⬆️</p>
 
 ## UI/UX
 
