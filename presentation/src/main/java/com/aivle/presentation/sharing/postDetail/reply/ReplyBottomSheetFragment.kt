@@ -8,7 +8,6 @@ import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
 import com.aivle.domain.model.sharingPost.Comment
@@ -17,7 +16,7 @@ import com.aivle.presentation.databinding.BottomSheetReplyBinding
 import com.aivle.presentation.sharing.postDetail.reply.ReplyBottomSheetViewModel.Event
 import com.aivle.presentation.util.ext.repeatOnStarted
 import com.aivle.presentation.util.ext.showToast
-import com.aivle.presentation_design.interactive.ui.BottomUpDialog
+import com.aivle.presentation_design.interactive.customView.BottomUpDialog
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment

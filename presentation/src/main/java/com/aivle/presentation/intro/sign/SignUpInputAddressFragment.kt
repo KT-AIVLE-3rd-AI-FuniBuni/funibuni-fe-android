@@ -18,7 +18,7 @@ import com.aivle.presentation.intro.sign.SignUpInputAddressViewModel.Event
 import com.aivle.presentation.util.ext.dpToPixels
 import com.aivle.presentation.util.ext.repeatOnStarted
 import com.aivle.presentation.util.ext.showToast
-import com.aivle.presentation_design.interactive.ui.BottomUpDialog
+import com.aivle.presentation_design.interactive.customView.BottomUpDialog
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.gun0912.tedpermission.PermissionListener

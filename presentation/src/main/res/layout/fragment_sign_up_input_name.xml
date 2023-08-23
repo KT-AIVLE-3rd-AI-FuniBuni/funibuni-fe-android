@@ -50,7 +50,7 @@
                 app:boxStrokeErrorColor="@android:color/holo_red_light"
                 app:layout_constraintTop_toBottomOf="@id/guide_message_2">
 
-                <com.aivle.presentation_design.interactive.ui.FilterableMaterialAutoCompleteTextView
+                <com.aivle.presentation_design.interactive.customView.FilterableMaterialAutoCompleteTextView
                     android:id="@+id/edt_user_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

@@ -8,7 +8,7 @@ import androidx.navigation.fragment.NavHostFragment
 import com.aivle.presentation.R
 import com.aivle.presentation.base.BaseActivity
 import com.aivle.presentation.databinding.ActivityDisposalBinding
-import com.aivle.presentation_design.interactive.ui.BottomUpDialog
+import com.aivle.presentation_design.interactive.customView.BottomUpDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

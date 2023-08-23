@@ -11,12 +11,11 @@ import com.aivle.presentation.R
 import com.aivle.presentation.base.BaseFragment
 import com.aivle.presentation.databinding.FragmentMyProfileDetailBinding
 import com.aivle.presentation.util.ext.repeatOnStarted
-import com.aivle.presentation_design.interactive.ui.BottomUpDialog
+import com.aivle.presentation_design.interactive.customView.BottomUpDialog
 import com.aivle.presentation.myprofile.detail.MyProfileDetailViewModel.Event
 import com.aivle.presentation.myprofile.privacyAndTerms.PrivacyAndTermsActivity
 import com.aivle.presentation.searchWasteSpec.SearchWasteSpecActivity
 import com.aivle.presentation.util.ext.showToast
-import com.google.android.gms.oss.licenses.OssLicensesActivity
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 
 class MyProfileDetailFragment : BaseFragment<FragmentMyProfileDetailBinding>(R.layout.fragment_my_profile_detail) {

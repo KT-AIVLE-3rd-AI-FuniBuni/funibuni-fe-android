@@ -13,14 +13,13 @@ import com.aivle.presentation.base.BaseActivity
 import com.aivle.presentation.databinding.ActivityEditSharingPostBinding
 import com.aivle.presentation.util.ext.repeatOnStarted
 import com.aivle.presentation.util.model.FuniBuniDate
-import com.aivle.presentation_design.interactive.ui.BottomUpDialog
+import com.aivle.presentation_design.interactive.customView.BottomUpDialog
 import com.aivle.presentation.sharing.postEdit.EditSharingPostViewModel.Event
 import com.aivle.presentation.util.common.CategoryImageBinder
 import com.aivle.presentation.util.ext.showToast
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import dagger.hilt.android.AndroidEntryPoint
-import okhttp3.internal.wait
 
 @AndroidEntryPoint
 class EditSharingPostActivity : BaseActivity<ActivityEditSharingPostBinding>(R.layout.activity_edit_sharing_post) {

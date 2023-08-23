@@ -11,9 +11,7 @@ import com.aivle.presentation.databinding.ActivityWasteDisposalApplyDetailBindin
 import com.aivle.presentation.myprofile.applyDetail.WasteDisposalApplyDetailViewModel.Event
 import com.aivle.presentation.util.ext.repeatOnStarted
 import com.aivle.presentation.util.ext.showToast
-import com.aivle.presentation_design.interactive.ui.BottomUpDialog
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.aivle.presentation_design.interactive.customView.BottomUpDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

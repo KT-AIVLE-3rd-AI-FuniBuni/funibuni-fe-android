@@ -10,7 +10,7 @@ import com.aivle.presentation.databinding.FragmentWasteDisposalApplyDetailBindin
 import com.aivle.presentation.disposal.applyDetail.WasteDisposalApplyDetailViewModel.Event
 import com.aivle.presentation.util.ext.repeatOnStarted
 import com.aivle.presentation.util.ext.showToast
-import com.aivle.presentation_design.interactive.ui.BottomUpDialog
+import com.aivle.presentation_design.interactive.customView.BottomUpDialog
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import dagger.hilt.android.AndroidEntryPoint

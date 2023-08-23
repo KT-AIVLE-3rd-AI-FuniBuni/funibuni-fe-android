@@ -16,7 +16,7 @@ import com.aivle.presentation.main.MainViewModel
 import com.aivle.presentation.sharing.postDetail.SharingPostDetailActivity
 import com.aivle.presentation.util.ext.repeatOnStarted
 import com.aivle.presentation.util.ext.showToast
-import com.aivle.presentation_design.interactive.ui.BottomUpDialog
+import com.aivle.presentation_design.interactive.customView.BottomUpDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

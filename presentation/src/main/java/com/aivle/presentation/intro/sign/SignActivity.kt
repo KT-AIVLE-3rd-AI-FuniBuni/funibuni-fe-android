@@ -19,7 +19,7 @@ import com.aivle.presentation.intro.sign.SignViewModel.SignUpEvent
 import com.aivle.presentation.util.common.KeyboardHeightProvider
 import com.aivle.presentation.util.ext.repeatOnStarted
 import com.aivle.presentation.util.ext.showToast
-import com.aivle.presentation_design.interactive.ui.BottomUpDialog
+import com.aivle.presentation_design.interactive.customView.BottomUpDialog
 import com.loggi.core_util.extensions.log
 import dagger.hilt.android.AndroidEntryPoint
 

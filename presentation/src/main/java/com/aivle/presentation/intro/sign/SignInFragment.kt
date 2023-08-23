@@ -20,8 +20,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.widget.Guideline
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.repeatOnLifecycle
 import com.aivle.presentation.R
 import com.aivle.presentation.util.ext.repeatOnStarted
 import com.aivle.presentation.databinding.FragmentSignInBinding
@@ -29,8 +27,8 @@ import com.aivle.presentation.intro.sign.SignInViewModel.Event
 import com.aivle.presentation.util.ext.dpToPixels
 import com.aivle.presentation.util.ext.repeatOnCreated
 import com.aivle.presentation.util.ext.showToast
-import com.aivle.presentation_design.interactive.ui.FilterableMaterialAutoCompleteTextView
-import com.aivle.presentation_design.interactive.ui.MySnackBar
+import com.aivle.presentation_design.interactive.customView.FilterableMaterialAutoCompleteTextView
+import com.aivle.presentation_design.interactive.customView.MySnackBar
 import com.aivle.presentation_design.interactive.ui.TextButtonStatus
 import com.loggi.core_util.extensions.log
 import dagger.hilt.android.AndroidEntryPoint

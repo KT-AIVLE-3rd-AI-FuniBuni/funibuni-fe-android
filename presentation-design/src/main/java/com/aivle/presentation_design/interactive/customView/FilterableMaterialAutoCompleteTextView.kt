@@ -1,4 +1,4 @@
-package com.aivle.presentation_design.interactive.ui
+package com.aivle.presentation_design.interactive.customView
 
 import android.content.Context
 import android.content.res.ColorStateList
@@ -8,7 +8,6 @@ import android.text.InputFilter
 import android.text.InputType
 import android.text.Spanned
 import android.util.AttributeSet
-import android.util.Log
 import android.view.KeyEvent
 import android.view.animation.CycleInterpolator
 import android.view.animation.TranslateAnimation

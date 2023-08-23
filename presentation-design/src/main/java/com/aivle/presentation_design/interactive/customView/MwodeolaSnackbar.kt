@@ -1,4 +1,4 @@
-package com.aivle.presentation_design.interactive.ui
+package com.aivle.presentation_design.interactive.customView
 
 import android.content.Context
 import android.view.View
