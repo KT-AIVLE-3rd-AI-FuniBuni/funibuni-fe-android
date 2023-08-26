@@ -2,9 +2,11 @@
 <layout>
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:paddingHorizontal="18dp"
+        android:paddingVertical="18dp"
         android:id="@+id/container"
         android:background="@drawable/bg_round_corner_12"
         style="@style/BottomUpDialogAnimation">
@@ -12,15 +14,12 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="22dp"
-            android:layout_marginStart="22dp"
-            android:layout_marginEnd="22dp"
             android:gravity="center_vertical"
             android:id="@+id/tv_title"
             android:text="title"
             android:textStyle="bold"
             android:textSize="19sp"
-            android:textColor="@color/black"
+            android:textColor="@color/gray900"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
@@ -41,41 +40,39 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:layout_marginBottom="22dp"
-            android:layout_marginStart="22dp"
-            android:layout_marginEnd="22dp"
             android:orientation="horizontal"
             app:layout_constraintTop_toBottomOf="@+id/tv_subtitle"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent">
 
-            <androidx.appcompat.widget.AppCompatButton
+            <TextView
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:layout_weight="1"
-                android:layout_marginEnd="8dp"
+                android:layout_marginEnd="10dp"
+                android:gravity="center"
                 android:id="@+id/btnNegative"
                 android:text="아니오"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 android:textColor="@color/gray700"
-                android:background="@drawable/bg_round_corner_12"
-                android:foreground="?attr/selectableItemBackground"
-                android:visibility="visible"
+                android:textStyle="normal"
+                android:background="@drawable/bg_ripple_text_button_light_r12"
                 app:backgroundTint="@color/gray200"
-                style="?attr/borderlessButtonStyle"/>
+                tools:visibility="visible"/>
 
-            <androidx.appcompat.widget.AppCompatButton
+            <TextView
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:id="@+id/btnPositive"
                 android:text="예"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 android:textColor="@color/white"
-                android:background="@drawable/bg_round_corner_12"
-                android:backgroundTint="@color/theme_color"
-                android:foreground="?attr/selectableItemBackground"/>
+                android:textStyle="normal"
+                android:background="@drawable/bg_ripple_text_button_dark_r12"
+                />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 

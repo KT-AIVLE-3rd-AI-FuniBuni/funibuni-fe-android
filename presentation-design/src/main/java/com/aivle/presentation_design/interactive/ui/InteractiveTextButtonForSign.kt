@@ -83,7 +83,7 @@ class InteractiveTextButtonForSign @JvmOverloads constructor(
         return if (!isEnabled) {
             true
         } else {
-            InteractiveHelper.onTouchEvent(this, event)
+            // InteractiveHelper.onTouchEvent(this, event)
             return super.onTouchEvent(event)
         }
     }
