@@ -5,8 +5,8 @@
 
     <data>
         <variable
-            name="wasteSpec"
-            type="com.aivle.domain.model.waste.WasteSpec" />
+            name="item"
+            type="com.aivle.presentation.searchWasteSpec.FilterableWasteSpec" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -31,7 +31,7 @@
                 android:gravity="center"
                 android:textColor="@color/black"
                 android:textSize="14sp"
-                android:text="@{wasteSpec.top_category}"
+                android:text="@{item.wasteSpec.top_category}"
                 tools:text="가구류"/>
 
             <TextView
@@ -41,7 +41,7 @@
                 android:gravity="center"
                 android:textColor="@color/black"
                 android:textSize="14sp"
-                android:text="@{wasteSpec.large_category}"
+                android:text="@{item.spannableString}"
                 tools:text="침대(목재)"/>
 
             <TextView
@@ -51,7 +51,7 @@
                 android:gravity="center"
                 android:textColor="@color/black"
                 android:textSize="14sp"
-                android:text="@{wasteSpec.small_category}"
+                android:text="@{item.wasteSpec.small_category}"
                 tools:text="1인용 매트리스(침대틀 별도)"/>
 
             <TextView
@@ -61,7 +61,7 @@
                 android:gravity="center"
                 android:textColor="@color/black"
                 android:textSize="14sp"
-                android:text="@{wasteSpec.feeString}"
+                android:text="@{item.wasteSpec.feeString}"
                 tools:text="5,000원"/>
 
         </LinearLayout>

@@ -27,6 +27,8 @@ class SearchWasteSpecViewModel @Inject constructor(
             .collect { response -> when (response) {
                 is DataResponse.Success -> {
                     wasteSpecTable = response.data
+                        .sortedWith(WasteSpecComparator())
+
                     _eventFlow.emit(Event.LoadedWasteSpecTable(wasteSpecTable!!))
                 }
                 is DataResponse.Failure -> {
@@ -52,11 +54,22 @@ class SearchWasteSpecViewModel @Inject constructor(
         _eventFlow.emit(Event.SearchWasteSpecResult(results))
     }
 
-
     sealed class Event {
         object None : Event()
         data class LoadedWasteSpecTable(val table: List<WasteSpec>) : Event()
         data class SearchWasteSpecResult(val results: List<WasteSpec>) : Event()
         data class Failure(val message: String?) : Event()
+    }
+
+    class WasteSpecComparator : Comparator<WasteSpec> {
+        override fun compare(o1: WasteSpec, o2: WasteSpec): Int {
+            return if (o1.top_category != o2.top_category) {
+                o1.top_category.compareTo(o2.top_category)
+            } else if (o1.large_category != o2.large_category){
+                o1.large_category.compareTo(o2.large_category)
+            } else {
+                o1.small_category.compareTo(o2.small_category)
+            }
+        }
     }
 }

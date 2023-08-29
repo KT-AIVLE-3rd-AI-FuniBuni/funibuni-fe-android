@@ -45,11 +45,13 @@ class SearchWasteSpecActivity : BaseActivity<ActivitySearchWasteSpecBinding>(R.l
         }
         listAdapter = WasteSpecListAdapter()
         binding.listView.adapter = listAdapter
+        binding.listView.itemAnimator = MyItemAnimator()
     }
 
     private fun search() {
         val keyword = binding.edtSearch.text.toString()
-        viewModel.search(keyword)
+        listAdapter.filter(keyword)
+        // viewModel.search(keyword)
     }
 
     private fun handleViewModelEvent() = repeatOnStarted {
@@ -60,10 +62,10 @@ class SearchWasteSpecActivity : BaseActivity<ActivitySearchWasteSpecBinding>(R.l
                 showToast(event.message)
             }
             is Event.LoadedWasteSpecTable -> {
-                listAdapter.submitList(event.table)
+                listAdapter.setData(event.table.map(::FilterableWasteSpec))
             }
             is Event.SearchWasteSpecResult -> {
-                listAdapter.submitList(event.results)
+                // listAdapter.submitList(event.results)
             }
         }}
     }
